@@ -4,9 +4,11 @@
   "description": "{{description}}",
   "private": true,
   "dependencies": {
-    "@midwayjs/web": "^2.3.0",
     "@midwayjs/decorator": "^2.3.0",
+    "@midwayjs/web": "^2.3.0",
+    "@waiting/egg-jwt": "^3.0.1",
     "egg": "^2.0.0",
+    "egg-redis": "^2.4.0",
     "egg-scripts": "^2.10.0",
     "midway": "^2.3.0"
   },
