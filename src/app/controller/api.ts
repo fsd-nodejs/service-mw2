@@ -1,6 +1,6 @@
 import { Inject, Controller, Post, Provide, Query } from '@midwayjs/decorator';
 import { Context } from 'egg';
-import { UserService } from '../service/user';
+import { UserService } from '@/app/service/user';
 
 @Provide()
 @Controller('/api')
