@@ -1,6 +1,6 @@
 {
   "extends": ["./node_modules/mwts/"],
-  "plugins": ["unicorn"],
+  "plugins": ["unicorn", "import"],
   "ignorePatterns": [
     "node_modules",
     "dist",
@@ -18,6 +18,28 @@
         "allowModules": ["typeorm", "ioredis", "@midwayjs/core"]
       }
     ],
-    "unicorn/filename-case": 2
+    "unicorn/filename-case": 2,
+    "import/order": [
+      1,
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "external",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always"
+      }
+    ]
   }
 }

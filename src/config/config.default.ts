@@ -44,5 +44,9 @@ export default (appInfo: EggAppInfo) => {
     ignore: ['/auth/login', '/ping'],
   } as JwtConfig;
 
+  config.admin = {
+    accessTokenExpiresIn: 20, // 签名过期时间也可写
+  };
+
   return config;
 };

@@ -14,7 +14,7 @@ import 'egg-jsonp';
 import 'egg-view';
 import 'midway-schedule';
 import 'egg-redis';
-import 'egg-jwt';
+import '@waiting/egg-jwt';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
