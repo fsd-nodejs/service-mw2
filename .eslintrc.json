@@ -1,6 +1,13 @@
 {
-  "extends": "./node_modules/mwts/",
-  "ignorePatterns": ["node_modules", "dist", "test", "jest.config.js", "typings"],
+  "extends": ["./node_modules/mwts/"],
+  "plugins": ["unicorn"],
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "test",
+    "jest.config.js",
+    "typings"
+  ],
   "env": {
     "jest": true
   },
@@ -10,6 +17,7 @@
       {
         "allowModules": ["typeorm", "ioredis", "@midwayjs/core"]
       }
-    ]
+    ],
+    "unicorn/filename-case": 2
   }
 }

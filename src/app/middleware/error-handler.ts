@@ -4,7 +4,6 @@ import { Context } from 'egg';
 export default () => {
   return async (ctx: Context, next: IMidwayWebNext) => {
     try {
-      console.log('进来了------');
       await next();
       if (ctx.status === 404) {
         ctx.body = { code: 404, mssage: 'Not Found' };
