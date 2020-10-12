@@ -2,8 +2,8 @@
   "files.exclude": {
     "logs": true,
     "run": true,
-    "package-lock.json": true,
-    "node_modules": false
+    "package-lock.json": false,
+    "node_modules": true
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

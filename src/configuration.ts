@@ -7,6 +7,9 @@ import { Application } from 'egg';
 
 @Configuration({
   importConfigs: ['./config/'],
+  imports: [
+    '@midwayjs/orm', // 加载 orm 组件
+  ],
 })
 export class ContainerConfiguration implements ILifeCycle {
   @App()

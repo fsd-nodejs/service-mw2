@@ -1,6 +1,5 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 import { JwtConfig } from '@waiting/egg-jwt';
-import { EggRedisOptions } from 'egg-redis';
 
 export type DefaultConfig = PowerPartial<EggAppConfig>;
 
@@ -34,7 +33,7 @@ export default (appInfo: EggAppInfo) => {
       password: process.env.REDIS_PASSWORD || '',
       db: +process.env.REDIS_DB || 0,
     },
-  } as EggRedisOptions;
+  };
 
   // jwt配置
   config.jwt = {
