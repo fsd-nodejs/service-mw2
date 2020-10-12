@@ -46,7 +46,7 @@ export class AuthController {
     // 调用 rotateCsrfSecret 刷新用户的 CSRF token
     // ctx.rotateCsrfSecret()
 
-    ctx.helper.success(ctx, {
+    ctx.helper.success({
       token,
       currentAuthority: 'admin',
       status: 'ok',
@@ -65,7 +65,7 @@ export class AuthController {
     await this.service.removeAdminUserTokenById(user.id);
     await this.service.cleanAdminUserById(user.id);
 
-    ctx.helper.success(ctx, {});
+    ctx.helper.success({});
   }
 
   /**
@@ -76,7 +76,6 @@ export class AuthController {
     const { user } = ctx;
 
     const currentUser = await this.service.getAdminUserById(user.id);
-
-    ctx.helper.success(ctx, currentUser);
+    ctx.helper.success(currentUser);
   }
 }

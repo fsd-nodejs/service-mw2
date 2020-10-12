@@ -10,7 +10,7 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_1602294995416_4568';
 
   // add your config here
-  config.middleware = [];
+  config.middleware = ['jwtAuth'];
 
   // 数据库配置
   config.orm = {
@@ -44,8 +44,14 @@ export default (appInfo: EggAppInfo) => {
     ignore: ['/auth/login', '/ping'],
   } as JwtConfig;
 
+  // jwt token 校验中间件
+  config.jwtAuth = {
+    enable: true,
+    ignore: ['/auth/login', '/ping'],
+  };
+
   config.admin = {
-    accessTokenExpiresIn: 20, // 签名过期时间也可写
+    accessTokenExpiresIn: 60 * 60 * 24 * 3, // 签名过期时间也可写
   };
 
   return config;
