@@ -9,7 +9,7 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_1602294995416_4568';
 
   // add your config here
-  config.middleware = ['errorHandler'];
+  config.middleware = [];
 
   // 所有的路径都走统一错误处理
   config.errorHandler = {
@@ -19,21 +19,18 @@ export default (appInfo: EggAppInfo) => {
   // redis配置
   config.redis = {
     client: {
-      port: process.env.REDIS_PORT || 6379, // Redis port
+      port: +process.env.REDIS_PORT || 6379, // Redis port
       host: process.env.REDIS_HOST || '127.0.0.1', // Redis host
       password: process.env.REDIS_PASSWORD || '',
-      db: process.env.REDIS_DB || 0,
+      db: +process.env.REDIS_DB || 0,
     },
   };
 
   // jwt配置
   config.jwt = {
     enable: true,
-    client: {
-      secret: '123456',
-    },
+    secret: '123456',
     ignore: ['/auth/login', '/ping'],
   };
-
   return config;
 };

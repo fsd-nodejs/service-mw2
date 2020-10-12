@@ -3,5 +3,13 @@
   "ignorePatterns": ["node_modules", "dist", "test", "jest.config.js", "typings"],
   "env": {
     "jest": true
+  },
+  "rules": {
+    "node/no-extraneous-import": [
+      "error",
+      {
+        "allowModules": ["typeorm", "ioredis", "@midwayjs/core"]
+      }
+    ]
   }
 }

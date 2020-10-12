@@ -3,6 +3,6 @@
     "logs": true,
     "run": true,
     "package-lock.json": true,
-    "node_modules": true
+    "node_modules": false
   }
 }
