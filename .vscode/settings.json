@@ -4,5 +4,8 @@
     "run": true,
     "package-lock.json": true,
     "node_modules": false
-  }
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 }
