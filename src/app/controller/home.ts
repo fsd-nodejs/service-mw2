@@ -1,8 +1,12 @@
-import { Controller, Get, Provide } from '@midwayjs/decorator';
+import { Controller, Get, Provide, Plugin } from '@midwayjs/decorator';
+import { Jwt } from '@waiting/egg-jwt';
 
 @Provide()
 @Controller('/')
 export class HomeController {
+  @Plugin()
+  jwt: Jwt;
+
   @Get('/')
   async home() {
     return 'Hello Midwayjs!';

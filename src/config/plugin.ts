@@ -9,7 +9,7 @@ export const redis = {
 // 启用jwt验证
 export const jwt = {
   enable: true,
-  package: 'egg-jwt',
+  package: '@waiting/egg-jwt',
 };
 
 export default {

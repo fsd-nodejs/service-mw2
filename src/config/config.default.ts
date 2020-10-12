@@ -1,4 +1,6 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
+import { JwtConfig } from '@waiting/egg-jwt';
+import { EggRedisOptions } from 'egg-redis';
 
 export type DefaultConfig = PowerPartial<EggAppConfig>;
 
@@ -11,9 +13,17 @@ export default (appInfo: EggAppInfo) => {
   // add your config here
   config.middleware = [];
 
-  // 所有的路径都走统一错误处理
-  config.errorHandler = {
-    match: '*',
+  // 数据库配置
+  config.orm = {
+    type: 'mysql',
+    host: process.env.MYSQL_HOST || '127.0.0.1',
+    port: process.env.MYSQL_HOST || 3306,
+    username: process.env.MYSQL_USER || '',
+    password: process.env.MYSQL_PASSWORD || '',
+    database: process.env.MYSQL_DATABASE || undefined,
+    synchronize: false,
+    logging: false,
+    timezone: '+08:00',
   };
 
   // redis配置
@@ -24,13 +34,16 @@ export default (appInfo: EggAppInfo) => {
       password: process.env.REDIS_PASSWORD || '',
       db: +process.env.REDIS_DB || 0,
     },
-  };
+  } as EggRedisOptions;
 
   // jwt配置
   config.jwt = {
     enable: true,
-    secret: '123456',
+    client: {
+      secret: '123456',
+    },
     ignore: ['/auth/login', '/ping'],
-  };
+  } as JwtConfig;
+
   return config;
 };
