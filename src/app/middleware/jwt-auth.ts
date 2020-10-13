@@ -8,7 +8,7 @@ import MyError from '@/app/util/my-error';
 export default () => {
   return async (ctx, next: IMidwayWebNext) => {
     try {
-      const [, token] = ctx.header.authorization.split(' ');
+      const [, token] = ctx.header.authorization?.split(' ');
       // 解密，获取payload
       const { payload } = ctx.app.jwt.decode(token);
 
