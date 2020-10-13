@@ -12,8 +12,8 @@ export class AuthService {
   @Config('jwt')
   jwtConfig: JwtConfig;
 
-  @Config('admin')
-  adminConfig;
+  @Config('jwtAuth')
+  jwtAuthConfig;
 
   @Inject()
   ctx: Context;
@@ -36,13 +36,13 @@ export class AuthService {
     const token: string = this.jwt.sign(
       { id: data.id },
       this.jwtConfig.client.secret,
-      { expiresIn: this.adminConfig.accessTokenExpiresIn }
+      { expiresIn: this.jwtAuthConfig.accessTokenExpiresIn }
     );
     await this.redis.set(
-      `admin:accessToken:${data.id}`,
+      `${this.jwtAuthConfig.redisScope}:accessToken:${data.id}`,
       token,
       'EX',
-      this.adminConfig.accessTokenExpiresIn
+      this.jwtAuthConfig.accessTokenExpiresIn
     );
     return token;
   }
@@ -53,7 +53,7 @@ export class AuthService {
    * @returns {String} Redis中的Token
    */
   public async getAdminUserTokenById(id: string) {
-    return this.redis.get(`admin:accessToken:${id}`);
+    return this.redis.get(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
   }
 
   /**
@@ -62,7 +62,7 @@ export class AuthService {
    * @returns {number} 变更的数量
    */
   public async removeAdminUserTokenById(id: string) {
-    return this.redis.del(`admin:accessToken:${id}`);
+    return this.redis.del(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
   }
 
   /**
@@ -85,7 +85,9 @@ export class AuthService {
    * @returns {AdminUserInfo} 管理员用户信息
    */
   public async getAdminUserById(id: string) {
-    const userinfo = (await this.redis.get(`admin:userinfo:${id}`)) as string;
+    const userinfo = (await this.redis.get(
+      `${this.jwtAuthConfig.redisScope}:userinfo:${id}`
+    )) as string;
     return JSON.parse(userinfo) as AdminUserInfo;
   }
 
@@ -107,10 +109,10 @@ export class AuthService {
     };
 
     return this.redis.set(
-      `admin:userinfo:${userinfo.id}`,
+      `${this.jwtAuthConfig.redisScope}:userinfo:${userinfo.id}`,
       JSON.stringify(userinfo),
       'EX',
-      this.adminConfig.accessTokenExpiresIn
+      this.jwtAuthConfig.accessTokenExpiresIn
     );
   }
 
@@ -120,7 +122,7 @@ export class AuthService {
    * @returns {number} 缓存处理结果
    */
   public async cleanAdminUserById(id: string) {
-    return this.redis.del(`admin:userinfo:${id}`);
+    return this.redis.del(`${this.jwtAuthConfig.redisScope}:userinfo:${id}`);
   }
 
   /**

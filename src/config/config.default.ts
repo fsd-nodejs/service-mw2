@@ -39,18 +39,15 @@ export default (appInfo: EggAppInfo) => {
   config.jwt = {
     enable: true,
     client: {
-      secret: '123456',
+      secret: '123456', // 默认密钥，生产环境一定要更改
     },
     ignore: ['/auth/login', '/ping'],
   } as JwtConfig;
 
-  // jwt token 校验中间件
+  // jwt token 校验中间件(需配合jwt使用)
   config.jwtAuth = {
-    enable: true,
     ignore: ['/auth/login', '/ping'],
-  };
-
-  config.admin = {
+    redisScope: 'admin', // redis的作用域前缀
     accessTokenExpiresIn: 60 * 60 * 24 * 3, // 签名过期时间也可写
   };
 
