@@ -138,7 +138,6 @@ export class AuthService {
 
     // 查询用户是否在数据库中
     const existAdmiUser = await getAdminUser(params.username);
-    console.log(existAdmiUser);
     // 用户不存在
     if (!existAdmiUser) {
       return null;
