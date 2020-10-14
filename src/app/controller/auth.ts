@@ -43,7 +43,7 @@ export class AuthController {
     // 缓存用户数据
     await this.service.cacheAdminUser(existAdmiUser);
 
-    // 调用 rotateCsrfSecret 刷新用户的 CSRF token
+    // TODO: 调用 rotateCsrfSecret 刷新用户的 CSRF token
     // ctx.rotateCsrfSecret()
 
     ctx.helper.success({
