@@ -13,7 +13,7 @@ import {
 import { Context } from '@midwayjs/web';
 
 import { AuthService } from '@/app/service/auth';
-import { AuthDTO } from '@/app/dto/auth';
+import { LoginDTO } from '@/app/dto/auth';
 import MyError from '@/app/util/my-error';
 
 @Provide()
@@ -27,7 +27,7 @@ export class AuthController {
    */
   @Post('/login')
   @Validate()
-  public async login(ctx: Context, @Body(ALL) params: AuthDTO): Promise<void> {
+  public async login(ctx: Context, @Body(ALL) params: LoginDTO): Promise<void> {
     // 后续可能有多种登录方式
     const existAdmiUser = await this.service.localHandler(params);
 
@@ -59,11 +59,11 @@ export class AuthController {
    */
   @Get('/logout')
   public async logout(ctx: Context): Promise<void> {
-    const { user } = ctx;
+    const { currentUser } = ctx;
 
     // 清理用户数据和token
-    await this.service.removeAdminUserTokenById(user.id);
-    await this.service.cleanAdminUserById(user.id);
+    await this.service.removeAdminUserTokenById(currentUser.id);
+    await this.service.cleanAdminUserById(currentUser.id);
 
     ctx.helper.success({});
   }
@@ -73,9 +73,6 @@ export class AuthController {
    */
   @Get('/currentUser')
   public async currentUser(ctx: Context): Promise<void> {
-    const { user } = ctx;
-
-    const currentUser = await this.service.getAdminUserById(user.id);
-    ctx.helper.success(currentUser);
+    ctx.helper.success(ctx.currentUser);
   }
 }
