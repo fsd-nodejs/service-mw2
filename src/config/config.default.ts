@@ -44,9 +44,9 @@ export default (appInfo: EggAppInfo) => {
     ignore: ['/auth/login', '/ping'],
   } as JwtConfig;
 
-  // jwt token 校验中间件(需配合jwt使用)
+  // jwt token 校验中间件(需配合jwt使用, ignore的配置与jwt一致)
   config.jwtAuth = {
-    ignore: ['/auth/login', '/ping'],
+    ignore: config.jwt.ignore,
     redisScope: 'admin', // redis的作用域前缀
     accessTokenExpiresIn: 60 * 60 * 24 * 3, // 签名过期时间也可写
   };
