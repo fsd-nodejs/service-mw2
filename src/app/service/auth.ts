@@ -138,11 +138,11 @@ export class AuthService {
 
     // 查询用户是否在数据库中
     const existAdmiUser = await getAdminUser(params.username);
+    console.log(existAdmiUser);
     // 用户不存在
     if (!existAdmiUser) {
       return null;
     }
-
     // 匹配密码
     const passhash = existAdmiUser.password;
     const equal = this.ctx.helper.bcompare(params.password, passhash);

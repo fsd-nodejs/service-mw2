@@ -11,7 +11,7 @@ import {
 })
 export default class AdminUserModel {
   @PrimaryGeneratedColumn({
-    type: 'integer',
+    type: 'bigint',
   })
   id: string;
 
