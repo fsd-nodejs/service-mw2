@@ -1,15 +1,12 @@
 import { EntityModel } from '@midwayjs/orm';
-import {
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, PrimaryGeneratedColumn } from 'typeorm';
+
+import { BaseModel } from './base';
 
 @EntityModel({
   name: 'admin_users',
 })
-export default class AdminUserModel {
+export default class AdminUserModel extends BaseModel {
   @PrimaryGeneratedColumn({
     type: 'bigint',
   })
@@ -50,16 +47,6 @@ export default class AdminUserModel {
     name: 'remember_token',
   })
   rememberToken: string;
-
-  @CreateDateColumn({
-    name: 'created_at',
-  })
-  createdAt: Date;
-
-  @UpdateDateColumn({
-    name: 'updated_at',
-  })
-  updatedAt: Date;
 }
 
 /**
