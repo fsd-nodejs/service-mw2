@@ -11,7 +11,7 @@ export default () => {
     // 解密，获取payload
     const { payload } = ctx.app.jwt.decode(token);
 
-    const { jwtAuth } = ctx.app.config.jwtAuth;
+    const { jwtAuth } = ctx.app.config;
 
     // redisToken不存在表示token已过期
     const redisToken = await ctx.app.redis.get(
