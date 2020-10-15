@@ -6,7 +6,6 @@ import { ILifeCycle } from '@midwayjs/core';
 import { Application } from 'egg';
 
 @Configuration({
-  importConfigs: ['./config/'],
   imports: [
     '@midwayjs/orm', // 加载 orm 组件
   ],
