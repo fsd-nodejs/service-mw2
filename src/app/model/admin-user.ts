@@ -67,30 +67,3 @@ export class AdminUserModel extends BaseModel {
   @ManyToMany(type => AdminPermissionModel, permission => permission.users)
   permissions: AdminPermissionModel[];
 }
-
-/**
- * 查询管理员用户信息参数
- */
-export interface GetAdminUserOpts {
-  id?: string;
-  name?: string; // 名称
-  username?: string; // 帐号
-  sorter?: string; // 排序
-  pageSize: number;
-  current: number;
-}
-
-/**
- * 管理员用户信息
- */
-export interface AdminUserInfo {
-  id?: string;
-  username?: string;
-  name?: string;
-  password?: string;
-  avatar?: string;
-  roles?: string[];
-  permissions?: string[];
-  createdAt?: Date;
-  updatedAt?: Date;
-}

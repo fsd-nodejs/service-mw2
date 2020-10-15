@@ -93,10 +93,10 @@ export class AuthService {
 
   /**
    * 缓存用户
-   * @param {AdminUserInfo} data 用户数据
+   * @param {AdminUserModel} data 用户数据
    * @returns {OK | null} 缓存处理结果
    */
-  async cacheAdminUser(data: any) {
+  async cacheAdminUser(data: AdminUserModel) {
     const { id, username, name, avatar, createdAt, updatedAt } = data;
 
     const userinfo = {
