@@ -5,7 +5,7 @@ import { Jwt, JwtConfig } from '@waiting/egg-jwt';
 import { Redis } from 'ioredis';
 import { Repository } from 'typeorm';
 
-import AdminUserModel, { AdminUserInfo } from '@/app/model/admin-user';
+import { AdminUserModel, AdminUserInfo } from '@/app/model/admin-user';
 
 @Provide()
 export class AuthService {
@@ -32,7 +32,7 @@ export class AuthService {
    * @param {AdminUser} data 保存的数据
    * @returns {String} 生成的Token字符串
    */
-  public async createAdminUserToken(data: AdminUserModel) {
+  async createAdminUserToken(data: AdminUserModel) {
     const token: string = this.jwt.sign(
       { id: data.id },
       this.jwtConfig.client.secret,
@@ -52,7 +52,7 @@ export class AuthService {
    * @param {String} id 管理员用户id
    * @returns {String} Redis中的Token
    */
-  public async getAdminUserTokenById(id: string) {
+  async getAdminUserTokenById(id: string) {
     return this.redis.get(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
   }
 
@@ -61,7 +61,7 @@ export class AuthService {
    * @param {String} id 管理员用户id
    * @returns {number} 变更的数量
    */
-  public async removeAdminUserTokenById(id: string) {
+  async removeAdminUserTokenById(id: string) {
     return this.redis.del(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
   }
 
@@ -70,7 +70,7 @@ export class AuthService {
    * @param {String} username 登录名
    * @returns {AdminUser | null} 承载用户的 Promise 对象
    */
-  public async getAdminUserByUserName(username: string) {
+  async getAdminUserByUserName(username: string) {
     const user = await this.adminUserModel.findOne({
       where: {
         username,
@@ -96,7 +96,7 @@ export class AuthService {
    * @param {AdminUserInfo} data 用户数据
    * @returns {OK | null} 缓存处理结果
    */
-  public async cacheAdminUser(data: AdminUserInfo) {
+  async cacheAdminUser(data: AdminUserInfo) {
     const { id, username, name, avatar, createdAt, updatedAt } = data;
 
     const userinfo = {
@@ -121,7 +121,7 @@ export class AuthService {
    * @param {String} id 用户id
    * @returns {number} 缓存处理结果
    */
-  public async cleanAdminUserById(id: string) {
+  async cleanAdminUserById(id: string) {
     return this.redis.del(`${this.jwtAuthConfig.redisScope}:userinfo:${id}`);
   }
 
@@ -130,7 +130,7 @@ export class AuthService {
    * @param {Object} params 包涵username、password等参数
    * @returns {Promise[adminUser] | null} 承载用户的Promise对象
    */
-  public async localHandler(params: { username: string; password: string }) {
+  async localHandler(params: { username: string; password: string }) {
     // 获取用户函数
     const getAdminUser = (username: string) => {
       return this.getAdminUserByUserName(username);

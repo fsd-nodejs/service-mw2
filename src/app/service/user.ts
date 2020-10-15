@@ -9,7 +9,6 @@ export class UserService {
   redis: Redis;
 
   async getUser(options: IUserOptions) {
-    console.log(this.redis);
     // const token = await this.redis.get('admin:accessToken:1');
     return {
       uid: options.uid,

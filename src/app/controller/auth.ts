@@ -27,7 +27,7 @@ export class AuthController {
    */
   @Post('/login')
   @Validate()
-  public async login(ctx: Context, @Body(ALL) params: LoginDTO): Promise<void> {
+  async login(ctx: Context, @Body(ALL) params: LoginDTO): Promise<void> {
     // 后续可能有多种登录方式
     const existAdmiUser = await this.service.localHandler(params);
 
@@ -58,7 +58,7 @@ export class AuthController {
    * 退出登录
    */
   @Get('/logout')
-  public async logout(ctx: Context): Promise<void> {
+  async logout(ctx: Context): Promise<void> {
     const { currentUser } = ctx;
 
     // 清理用户数据和token
@@ -72,7 +72,7 @@ export class AuthController {
    * 获取当前用户的信息
    */
   @Get('/currentUser')
-  public async currentUser(ctx: Context): Promise<void> {
+  async currentUser(ctx: Context): Promise<void> {
     ctx.helper.success(ctx.currentUser);
   }
 }

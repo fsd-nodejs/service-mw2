@@ -1,12 +1,19 @@
 import { EntityModel } from '@midwayjs/orm';
-import { Column, AfterLoad, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  AfterLoad,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 import { BaseModel } from './base';
+import { AdminRoleModel } from './admin-role';
 
 @EntityModel({
   name: 'admin_permissions',
 })
-export default class AdminPermissionModel extends BaseModel {
+export class AdminPermissionModel extends BaseModel {
   @PrimaryGeneratedColumn({
     type: 'integer',
   })
@@ -40,8 +47,25 @@ export default class AdminPermissionModel extends BaseModel {
   })
   httpPath: string;
 
+  @ManyToMany(type => AdminRoleModel)
+  @JoinTable()
+  roles: AdminRoleModel[];
+
   @AfterLoad()
   mixin() {
     this.httpMethod = this.httpMethod?.toString().split(',');
   }
+}
+
+/**
+ * 权限信息
+ */
+export interface AdminPermissionInfo {
+  id?: string;
+  name?: string;
+  slug?: string;
+  httpMethod?: string[]; // ["ANY", "DELETE", "POST", "GET", "PUT", "PATCH", "OPTIONS", "HEAD"]
+  httpPath?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

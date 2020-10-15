@@ -13,8 +13,9 @@ export class BaseModel {
   })
   updatedAt: Date;
 
+  // 对字段进行预处理
   @AfterLoad()
-  mixin() {
+  init() {
     this.id = String(this.id);
   }
 }

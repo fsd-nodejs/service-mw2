@@ -6,7 +6,7 @@ import { BaseModel } from './base';
 @EntityModel({
   name: 'admin_users',
 })
-export default class AdminUserModel extends BaseModel {
+export class AdminUserModel extends BaseModel {
   @PrimaryGeneratedColumn({
     type: 'bigint',
   })
