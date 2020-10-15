@@ -5,7 +5,7 @@ import { Jwt, JwtConfig } from '@waiting/egg-jwt';
 import { Redis } from 'ioredis';
 import { Repository } from 'typeorm';
 
-import { AdminUserModel, AdminUserInfo } from '@/app/model/admin-user';
+import { AdminUserModel } from '@/app/model/admin-user';
 
 @Provide()
 export class AuthService {
@@ -96,7 +96,7 @@ export class AuthService {
    * @param {AdminUserInfo} data 用户数据
    * @returns {OK | null} 缓存处理结果
    */
-  async cacheAdminUser(data: AdminUserInfo) {
+  async cacheAdminUser(data: any) {
     const { id, username, name, avatar, createdAt, updatedAt } = data;
 
     const userinfo = {

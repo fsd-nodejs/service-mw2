@@ -9,6 +9,7 @@ import {
 
 import { BaseModel } from './base';
 import { AdminRoleModel } from './admin-role';
+import { AdminUserModel } from './admin-user';
 
 @EntityModel({
   name: 'admin_permissions',
@@ -47,9 +48,33 @@ export class AdminPermissionModel extends BaseModel {
   })
   httpPath: string;
 
-  @ManyToMany(type => AdminRoleModel)
-  @JoinTable()
+  @ManyToMany(type => AdminRoleModel, role => role.permissions)
+  @JoinTable({
+    name: 'admin_role_permissions',
+    joinColumn: {
+      name: 'permission_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'role_id',
+      referencedColumnName: 'id',
+    },
+  })
   roles: AdminRoleModel[];
+
+  @ManyToMany(type => AdminUserModel, user => user.permissions)
+  @JoinTable({
+    name: 'admin_user_permissions',
+    joinColumn: {
+      name: 'permission_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id',
+    },
+  })
+  users: AdminUserModel[];
 
   @AfterLoad()
   mixin() {

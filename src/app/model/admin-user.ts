@@ -1,7 +1,9 @@
 import { EntityModel } from '@midwayjs/orm';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 
 import { BaseModel } from './base';
+import { AdminRoleModel } from './admin-role';
+import { AdminPermissionModel } from './admin-permission';
 
 @EntityModel({
   name: 'admin_users',
@@ -47,6 +49,23 @@ export class AdminUserModel extends BaseModel {
     name: 'remember_token',
   })
   rememberToken: string;
+
+  @ManyToMany(type => AdminRoleModel, role => role.users)
+  @JoinTable({
+    name: 'admin_role_users',
+    joinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'role_id',
+      referencedColumnName: 'id',
+    },
+  })
+  roles: AdminRoleModel[];
+
+  @ManyToMany(type => AdminPermissionModel, permission => permission.users)
+  permissions: AdminPermissionModel[];
 }
 
 /**

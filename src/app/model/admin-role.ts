@@ -1,8 +1,9 @@
 import { EntityModel } from '@midwayjs/orm';
-import { Column, PrimaryGeneratedColumn, JoinTable, ManyToMany } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 
 import { BaseModel } from './base';
 import { AdminPermissionModel } from './admin-permission';
+import { AdminUserModel } from './admin-user';
 
 @EntityModel({
   name: 'admin_roles',
@@ -26,7 +27,9 @@ export class AdminRoleModel extends BaseModel {
   })
   slug: string;
 
-  @ManyToMany(type => AdminPermissionModel)
-  @JoinTable()
+  @ManyToMany(type => AdminPermissionModel, permission => permission.roles)
   permissions: AdminPermissionModel[];
+
+  @ManyToMany(type => AdminUserModel, user => user.roles)
+  users: AdminUserModel[];
 }
