@@ -4,6 +4,7 @@ import { Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { BaseModel } from './base';
 import { AdminPermissionModel } from './admin-permission';
 import { AdminUserModel } from './admin-user';
+import { AdminMenuModel } from './admin-menu';
 
 @EntityModel({
   name: 'admin_roles',
@@ -32,4 +33,7 @@ export class AdminRoleModel extends BaseModel {
 
   @ManyToMany(type => AdminUserModel, user => user.roles)
   users: AdminUserModel[];
+
+  @ManyToMany(type => AdminMenuModel, menu => menu.roles)
+  menu: AdminUserModel[];
 }

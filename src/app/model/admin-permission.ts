@@ -4,12 +4,14 @@ import {
   AfterLoad,
   PrimaryGeneratedColumn,
   ManyToMany,
+  OneToMany,
   JoinTable,
 } from 'typeorm';
 
 import { BaseModel } from './base';
 import { AdminRoleModel } from './admin-role';
 import { AdminUserModel } from './admin-user';
+import { AdminMenuModel } from './admin-menu';
 
 @EntityModel({
   name: 'admin_permissions',
@@ -75,6 +77,9 @@ export class AdminPermissionModel extends BaseModel {
     },
   })
   users: AdminUserModel[];
+
+  @OneToMany(type => AdminMenuModel, menu => menu.permission)
+  menu: AdminMenuModel[];
 
   @AfterLoad()
   mixin() {
