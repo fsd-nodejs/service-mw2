@@ -57,3 +57,43 @@ $ npm stop
 - - [ ] 用户(管理员)
 - - [ ] 菜单
 - - [ ] 日志
+
+## 迁移API
+
+- home.ts
+- - [x] /
+- - [x] /ping
+
+- auth.ts
+- - [x] /auth/login
+- - [x] /auth/logout
+- - [x] /auth/currentUser
+
+- admin/menu.ts
+- - [x] /admin/menu/query
+- - [ ] /admin/menu/show
+- - [ ] /admin/menu/create
+- - [ ] /admin/menu/update
+- - [ ] /admin/menu/remove
+- - [ ] /admin/menu/order
+
+- admin/permission.ts
+- - [x] /admin/permission/query
+- - [ ] /admin/permission/show
+- - [ ] /admin/permission/create
+- - [ ] /admin/permission/update
+- - [ ] /admin/permission/remove
+
+- admin/role.ts
+- - [x] /admin/role/query
+- - [ ] /admin/role/show
+- - [ ] /admin/role/create
+- - [ ] /admin/role/update
+- - [ ] /admin/role/remove
+
+- admin/user.ts
+- - [x] /admin/user/query
+- - [ ] /admin/user/show
+- - [ ] /admin/user/create
+- - [ ] /admin/user/update
+- - [ ] /admin/user/remove

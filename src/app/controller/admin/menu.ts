@@ -9,7 +9,7 @@ import {
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
 
-import { AdminMenuService } from '@/APP/service/admin/menu';
+import { AdminMenuService } from '@/app/service/admin/menu';
 import { QueryDTO } from '@/app/dto/admin/menu';
 
 @Provide()

@@ -79,17 +79,17 @@ export class AuthService {
     return user;
   }
 
-  // /**
-  //  * 读取Redis缓存中的管理员用户信息
-  //  * @param {String} id
-  //  * @returns {AdminUserInfo} 管理员用户信息
-  //  */
-  // public async getAdminUserById(id: string) {
-  //   const userinfo = (await this.redis.get(
-  //     `${this.jwtAuthConfig.redisScope}:userinfo:${id}`
-  //   )) as string;
-  //   return JSON.parse(userinfo) as AdminUserInfo;
-  // }
+  /**
+   * 读取Redis缓存中的管理员用户信息
+   * @param {String} id
+   * @returns {AdminUserModel} 管理员用户信息
+   */
+  public async getAdminUserById(id: string) {
+    const userinfo = (await this.redis.get(
+      `${this.jwtAuthConfig.redisScope}:userinfo:${id}`
+    )) as string;
+    return JSON.parse(userinfo) as AdminUserModel;
+  }
 
   /**
    * 缓存用户

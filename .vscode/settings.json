@@ -3,7 +3,9 @@
     "logs": true,
     "run": true,
     "package-lock.json": true,
-    "node_modules": false
+    "node_modules": false,
+    "coverage": true,
+    "dist": true
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
