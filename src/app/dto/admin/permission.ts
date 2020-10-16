@@ -70,10 +70,10 @@ export class UpdateDTO {
   @Rule(RuleType.string().trim().max(10).required())
   id: string;
 
-  @Rule(RuleType.string().trim().max(50).required())
+  @Rule(RuleType.string().trim().max(50).optional())
   name: string;
 
-  @Rule(RuleType.string().trim().max(50).required())
+  @Rule(RuleType.string().trim().max(50).optional())
   slug: string;
 
   @Rule(
@@ -85,10 +85,10 @@ export class UpdateDTO {
           .label('httpMethod')
       )
       .unique()
-      .required()
+      .optional()
   )
   httpMethod: string[];
 
-  @Rule(RuleType.string().uri({ allowRelative: true }).required())
+  @Rule(RuleType.string().uri({ allowRelative: true }).optional())
   httpPath: string;
 }

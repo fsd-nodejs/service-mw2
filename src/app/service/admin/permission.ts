@@ -3,13 +3,17 @@ import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, Like } from 'typeorm';
 
 import { AdminPermissionModel } from '@/app/model/admin-permission';
-import { QueryDTO } from '@/app/dto/admin/permission';
+import { QueryDTO, CreateDTO, UpdateDTO } from '@/app/dto/admin/permission';
 
 @Provide()
 export class AdminPermissionService {
   @InjectEntityModel(AdminPermissionModel)
   adminPermissionModel: Repository<AdminPermissionModel>;
 
+  /**
+   * 分页查询权限列表
+   * @param {QueryDTO} queryParams
+   */
   async queryAdminPermission(queryParams: QueryDTO) {
     const { pageSize, current, sorter, ...params } = queryParams;
     const where: any = {};
@@ -59,5 +63,33 @@ export class AdminPermissionService {
       total,
       list,
     };
+  }
+
+  /**
+   * 通过ID获取单条权限数据
+   * @param {String} id
+   * @returns {AdminPermissionModel | null}
+   */
+  async getAdminPermissionById(id: string) {
+    return this.adminPermissionModel.findOne({
+      relations: ['roles', 'menu'],
+      where: {
+        id,
+      },
+    });
+  }
+
+  async createAdminPermission(params: CreateDTO) {
+    return this.adminPermissionModel.create(params);
+  }
+
+  async updateAdminPermission(params: UpdateDTO) {
+    const { id, ...values } = params;
+    return this.adminPermissionModel
+      .createQueryBuilder()
+      .update()
+      .set(values)
+      .where('id = :id', { id })
+      .execute();
   }
 }
