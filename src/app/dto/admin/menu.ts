@@ -30,7 +30,7 @@ export class CreateDTO {
   )
   uri: string;
 
-  @Rule(RuleType.array().items(RuleType.string().trim().max(10).optional()))
+  @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
   roles: string[];
 
   @Rule(RuleType.string().trim().max(10).optional())
