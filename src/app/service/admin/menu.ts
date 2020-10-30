@@ -3,7 +3,7 @@ import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository } from 'typeorm';
 
 import { AdminMenuModel } from '@/app/model/admin-menu';
-import { QueryDTO } from '@/app/dto/admin/menu';
+import { QueryDTO, ShowDTO } from '@/app/dto/admin/menu';
 
 @Provide()
 export class AdminMenuService {
@@ -27,5 +27,15 @@ export class AdminMenuService {
       total,
       list,
     };
+  }
+
+  async showAdminMenu(queryParams: ShowDTO) {
+    const row = await this.adminMenuModel.findOne({
+      where: {
+        id: queryParams.id,
+      },
+    });
+
+    return row;
   }
 }
