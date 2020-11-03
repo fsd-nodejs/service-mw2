@@ -1,5 +1,8 @@
 import { Rule, RuleType } from '@midwayjs/decorator';
 
+/**
+ * 菜单列表查询参数
+ */
 export class QueryDTO {
   @Rule(RuleType.number().min(1).max(100000).default(1).optional())
   current: number;
@@ -8,16 +11,25 @@ export class QueryDTO {
   pageSize: number;
 }
 
+/**
+ * 获取单条菜单参数
+ */
 export class ShowDTO {
   @Rule(RuleType.string().trim().max(10).required())
   id: string;
 }
 
+/**
+ * 删除菜单参数
+ */
 export class RemoveDTO {
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).min(1))
   ids: string[];
 }
 
+/**
+ * 创建菜单参数
+ */
 export class CreateDTO {
   @Rule(RuleType.string().trim().max(10).optional().default('0'))
   parentId: string;
@@ -37,7 +49,10 @@ export class CreateDTO {
   permissionId: string;
 }
 
-export class UpdateMenu {
+/**
+ * 更新菜单参数
+ */
+export class UpdateDTO {
   @Rule(RuleType.string().trim().max(10).required())
   id: string;
 
@@ -59,6 +74,9 @@ export class UpdateMenu {
   permissionId: string;
 }
 
+/**
+ * 菜单排序参数
+ */
 export class OrderMenu {
   @Rule(
     RuleType.array().items(

@@ -13,7 +13,7 @@ import {
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
 
-import { AdminPermissionService } from '@/APP/service/admin/permission';
+import { AdminPermissionService } from '@/app/service/admin/permission';
 import { QueryDTO, UpdateDTO } from '@/app/dto/admin/permission';
 import MyError from '@/app/util/my-error';
 

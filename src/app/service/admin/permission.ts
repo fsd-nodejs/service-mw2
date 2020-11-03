@@ -1,9 +1,12 @@
+import * as assert from 'assert';
+
 import { Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/orm';
-import { Repository, Like } from 'typeorm';
+import { Repository, Like, In } from 'typeorm';
 
 import { AdminPermissionModel } from '@/app/model/admin-permission';
 import { QueryDTO, CreateDTO, UpdateDTO } from '@/app/dto/admin/permission';
+import MyError from '@/app/util/my-error';
 
 @Provide()
 export class AdminPermissionService {
@@ -91,5 +94,23 @@ export class AdminPermissionService {
       .set(values)
       .where('id = :id', { id })
       .execute();
+  }
+
+  /**
+   * 检查权限是否存在于数据库，自动抛错
+   * @param {string[]} ids 权限id
+   */
+  async checkPermissionExists(ids: string[]) {
+    const count = await this.adminPermissionModel.count({
+      where: {
+        id: In(ids),
+      },
+    });
+
+    assert.deepStrictEqual(
+      count,
+      ids.length,
+      new MyError('权限不存在，请检查', 400)
+    );
   }
 }

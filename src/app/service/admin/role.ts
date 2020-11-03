@@ -1,9 +1,12 @@
+import * as assert from 'assert';
+
 import { Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/orm';
-import { Repository, Like } from 'typeorm';
+import { Repository, Like, In } from 'typeorm';
 
 import { AdminRoleModel } from '@/app/model/admin-role';
 import { QueryDTO } from '@/app/dto/admin/role';
+import MyError from '@/app/util/my-error';
 
 @Provide()
 export class AdminRoleService {
@@ -49,5 +52,23 @@ export class AdminRoleService {
       total,
       list,
     };
+  }
+
+  /**
+   * 检查角色是否存在于数据库，自动抛错
+   * @param {string[]} ids 角色id
+   */
+  async checkRoleExists(ids: string[]) {
+    const count = await this.adminRoleModel.count({
+      where: {
+        id: In(ids),
+      },
+    });
+
+    assert.deepStrictEqual(
+      count,
+      ids.length,
+      new MyError('角色不存在，请检查', 400)
+    );
   }
 }
