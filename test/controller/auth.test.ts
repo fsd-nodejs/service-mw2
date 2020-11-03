@@ -1,4 +1,3 @@
-import * as assert from 'power-assert';
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
 import { Framework } from '@midwayjs/web';
 
@@ -23,9 +22,9 @@ describe('test/controller/auth.test.ts', () => {
       .send({
         username: 'admin',
         password: '123456',
-      });
-    expect(response.status).toBe(400);
-    assert.deepStrictEqual(response.body.code, 400);
+      })
+      .expect(400);
+    expect(response.body.code).toBe(400);
   });
 
   it('should POST /auth/login by wrong input', async () => {
@@ -33,7 +32,7 @@ describe('test/controller/auth.test.ts', () => {
       .post('/auth/login')
       .type('form')
       .expect(422);
-    assert.deepStrictEqual(response.body.code, 422);
+    expect(response.body.code).toBe(422);
   });
 
   it('should POST /auth/login by correct username and password', async () => {
@@ -45,7 +44,7 @@ describe('test/controller/auth.test.ts', () => {
         password: 'admin',
       })
       .expect(200);
-    assert(response.body.data.token);
+    expect(response.body.data.token);
     currentUser = response.body.data;
   });
 
@@ -54,7 +53,7 @@ describe('test/controller/auth.test.ts', () => {
       .get('/auth/currentUser')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
-    assert.deepStrictEqual(response.body.code, 200);
+      expect(response.body.code).toBe(200);
   });
 
   it('should GET 404', async () => {
@@ -62,7 +61,7 @@ describe('test/controller/auth.test.ts', () => {
       .get('/auth/currentUsersss')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(404);
-    assert.deepStrictEqual(response.body.code, 404);
+      expect(response.body.code).toBe(404);
   });
 
   it('should GET /auth/logout', async () => {
@@ -70,7 +69,7 @@ describe('test/controller/auth.test.ts', () => {
       .get('/auth/logout')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
-    assert.deepStrictEqual(response.body.code, 200);
+    expect(response.body.code).toBe(200);
   });
 
   it('should GET /auth/currentUser was logouted', async () => {
@@ -78,6 +77,6 @@ describe('test/controller/auth.test.ts', () => {
       .get('/auth/currentUser')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(401);
-    assert.deepStrictEqual(response.body.code, 401);
+    expect(response.body.code).toBe(401);
   });
 });
