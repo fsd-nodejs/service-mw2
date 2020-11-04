@@ -10,6 +10,8 @@ see [midway docs][midway] for more detail.
 
 ### Development
 
+先将database目录下到sql文件迁移到数据库，修改默认的config配置文件
+
 ```bash
 $ npm i
 $ npm run dev
