@@ -53,7 +53,7 @@ describe('test/controller/auth.test.ts', () => {
       .get('/auth/currentUser')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
-      expect(response.body.code).toBe(200);
+    expect(response.body.code).toBe(200);
   });
 
   it('should GET 404', async () => {
@@ -61,7 +61,7 @@ describe('test/controller/auth.test.ts', () => {
       .get('/auth/currentUsersss')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(404);
-      expect(response.body.code).toBe(404);
+    expect(response.body.code).toBe(404);
   });
 
   it('should GET /auth/logout', async () => {
