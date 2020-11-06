@@ -9,14 +9,16 @@ import {
   ALL,
   Validate,
   Post,
+  Patch,
   Body,
+  Del,
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
 
 import { AdminMenuService } from '../../service/admin/menu';
 import { AdminRoleService } from '../../service/admin/role';
 import { AdminPermissionService } from '../../service/admin/permission';
-import { CreateDTO, QueryDTO, ShowDTO } from '../../dto/admin/menu';
+import { CreateDTO, QueryDTO, ShowDTO, UpdateDTO } from '../../dto/admin/menu';
 import MyError from '../../util/my-error';
 
 @Provide()
@@ -60,20 +62,33 @@ export class AdminMenuController {
     ctx.helper.success(result, null, 201);
   }
 
-  // @Post('/update')
-  // @Validate()
-  // async update(ctx: Context, @Body(ALL) params: UpdateDTO) {
-  //   // 检查菜单是否存在
-  //   await this.service.checkMenuExists([params.id]);
+  @Patch('/update')
+  @Validate()
+  async update(ctx: Context, @Body(ALL) params: UpdateDTO) {
+    // 检查菜单是否存在
+    await this.service.checkMenuExists([params.id]);
 
-  //   // 检查角色是否存在
-  //   await this.roleService.checkRoleExists(params.roles);
+    // 检查角色是否存在
+    await this.roleService.checkRoleExists(params.roles);
 
-  //   // 检查权限是否存在
-  //   await this.permissionService.checkPermissionExists([params.permissionId]);
+    // 检查权限是否存在
+    await this.permissionService.checkPermissionExists([params.permissionId]);
 
-  //   const result = await this.service.updateAdminMenu(params);
+    // TODO:更新菜单逻辑
+    // const result = await this.service.updateAdminMenu(params);
 
-  //   ctx.helper.success(null, null, 204);
-  // }
+    // ctx.helper.success(null, null, 204);
+  }
+
+  @Del('/remove')
+  @Validate()
+  async remove() {
+    // TODO:删除菜单逻辑
+  }
+
+  @Post('/order')
+  @Validate()
+  async order() {
+    // TODO:菜单排序
+  }
 }

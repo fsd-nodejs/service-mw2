@@ -9,6 +9,8 @@ import {
   ALL,
   Validate,
   Post,
+  Del,
+  Patch,
   Body,
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
@@ -30,12 +32,30 @@ export class AdminPermissionController {
     ctx.helper.success(result);
   }
 
-  @Post('/update')
+  @Get('/show')
+  @Validate()
+  async show() {
+    // TODO:查询单条权限逻辑
+  }
+
+  @Post('/create')
+  @Validate()
+  async create() {
+    // TODO:添加权限逻辑
+  }
+
+  @Patch('/update')
   @Validate()
   async update(ctx: Context, @Body(ALL) params: UpdateDTO) {
     const { affected } = await this.service.updateAdminPermission(params);
 
     assert(affected, new MyError('更新失败', 400));
     ctx.helper.success(null, null, 204);
+  }
+
+  @Del('/remove')
+  @Validate()
+  async remove() {
+    // TODO:删除权限逻辑
   }
 }
