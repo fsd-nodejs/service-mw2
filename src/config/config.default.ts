@@ -13,6 +13,12 @@ export default (appInfo: EggAppInfo) => {
   // add your config here
   config.middleware = ['jwtAuth'];
 
+  // 默认管理员
+  config.admin = {
+    username: 'admin',
+    password: 'admin',
+  };
+
   // 数据库配置
   config.orm = {
     type: 'mysql',

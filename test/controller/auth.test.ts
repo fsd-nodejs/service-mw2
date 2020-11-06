@@ -9,7 +9,7 @@ describe('test/controller/auth.test.ts', () => {
       .post('/auth/login')
       .type('form')
       .send({
-        username: 'admin',
+        username: app.config.admin.username,
         password: '123456',
       })
       .expect(400);
@@ -30,10 +30,7 @@ describe('test/controller/auth.test.ts', () => {
       .httpRequest()
       .post('/auth/login')
       .type('form')
-      .send({
-        username: 'admin',
-        password: 'admin',
-      })
+      .send(app.config.admin)
       .expect(200);
     expect(response.body.data.token);
     currentUser = response.body.data;
