@@ -1,5 +1,8 @@
 import { Rule, RuleType } from '@midwayjs/decorator';
 
+/**
+ * 查询角色列表参数
+ */
 export class QueryDTO {
   @Rule(RuleType.number().min(1).max(100000).default(1).optional())
   current: number;
@@ -26,16 +29,25 @@ export class QueryDTO {
   sorter: string;
 }
 
+/**
+ * 获取单条角色参数
+ */
 export class ShowDTO {
   @Rule(RuleType.string().trim().max(10).required())
   id: string;
 }
 
+/**
+ * 删除角色参数
+ */
 export class RemoveDTO {
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).min(1))
   ids: string[];
 }
 
+/**
+ * 创建角色参数
+ */
 export class CreateDTO {
   @Rule(RuleType.string().trim().max(50).required())
   name: string;
@@ -47,6 +59,9 @@ export class CreateDTO {
   permissions: string[];
 }
 
+/**
+ * 更新角色参数
+ */
 export class UpdateDTO {
   @Rule(RuleType.string().trim().max(10).required())
   id: string;

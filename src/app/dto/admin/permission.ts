@@ -1,7 +1,7 @@
 import { Rule, RuleType } from '@midwayjs/decorator';
 
 /**
- * 查询权限参数
+ * 查询权限列表参数
  */
 export class QueryDTO {
   @Rule(RuleType.number().min(1).max(100000).default(1).optional())
