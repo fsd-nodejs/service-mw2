@@ -120,10 +120,24 @@ export class AdminMenuService {
   }
 
   /**
+   * 删除多条菜单数据
+   * @param {string[]}ids 菜单id
+   */
+  async removeAdminMenuByIds(ids: string[]) {
+    return this.adminMenuModel
+      .createQueryBuilder()
+      .delete()
+      .where({
+        id: In(ids),
+      })
+      .execute();
+  }
+
+  /**
    * 检查菜单是否存在于数据库，自动抛错
    * @param {string[]} ids 菜单id
    */
-  public async checkMenuExists(ids: string[]) {
+  async checkMenuExists(ids: string[]) {
     const count = await this.adminMenuModel.count({
       where: {
         id: In(ids),

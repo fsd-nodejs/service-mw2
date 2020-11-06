@@ -18,7 +18,13 @@ import { Context } from '@midwayjs/web';
 import { AdminMenuService } from '../../service/admin/menu';
 import { AdminRoleService } from '../../service/admin/role';
 import { AdminPermissionService } from '../../service/admin/permission';
-import { CreateDTO, QueryDTO, ShowDTO, UpdateDTO } from '../../dto/admin/menu';
+import {
+  CreateDTO,
+  QueryDTO,
+  RemoveDTO,
+  ShowDTO,
+  UpdateDTO,
+} from '../../dto/admin/menu';
 import MyError from '../../util/my-error';
 
 @Provide()
@@ -74,7 +80,6 @@ export class AdminMenuController {
     // 检查权限是否存在
     await this.permissionService.checkPermissionExists([params.permissionId]);
 
-    // TODO:更新菜单逻辑
     const result = await this.service.updateAdminMenu(params);
 
     ctx.helper.success(result, null, 204);
@@ -82,8 +87,15 @@ export class AdminMenuController {
 
   @Del('/remove')
   @Validate()
-  async remove() {
-    // TODO:删除菜单逻辑
+  async remove(ctx: Context, @Body(ALL) params: RemoveDTO) {
+    // 检查菜单是否存在
+    await this.service.checkMenuExists(params.ids);
+
+    const total = await this.service.removeAdminMenuByIds(params.ids);
+
+    assert(total, new MyError('删除失败', 400));
+
+    ctx.helper.success(null, null, 204);
   }
 
   @Post('/order')

@@ -74,9 +74,9 @@ $ npm stop
 - admin/menu.ts
 - - [x] /admin/menu/query
 - - [x] /admin/menu/show
-- - [ ] /admin/menu/create
-- - [ ] /admin/menu/update
-- - [ ] /admin/menu/remove
+- - [x] /admin/menu/create
+- - [x] /admin/menu/update
+- - [x] /admin/menu/remove
 - - [ ] /admin/menu/order
 
 - admin/permission.ts
