@@ -58,7 +58,7 @@ export class AdminRoleService {
    * 检查角色是否存在于数据库，自动抛错
    * @param {string[]} ids 角色id
    */
-  async checkRoleExists(ids: string[]) {
+  async checkRoleExists(ids: string[] = []) {
     const count = await this.adminRoleModel.count({
       where: {
         id: In(ids),

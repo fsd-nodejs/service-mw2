@@ -72,7 +72,7 @@ export class AdminMenuService {
     menu = this.adminMenuModel.merge(menu, { ...params, roles: roles });
 
     const created = await this.adminMenuModel.save(menu);
-    return created.id;
+    return created;
   }
 
   /**
@@ -120,7 +120,7 @@ export class AdminMenuService {
   }
 
   /**
-   * 删除多条菜单数据
+   * 删除多条菜单数据(忽略关联表的数据)
    * @param {string[]}ids 菜单id
    */
   async removeAdminMenuByIds(ids: string[]) {
@@ -149,5 +149,23 @@ export class AdminMenuService {
       ids.length,
       new MyError('菜单不存在，请检查', 400)
     );
+  }
+
+  /**
+   * 批量更新菜单的排序和父级ID
+   * @param params 菜单参数
+   */
+  async orderAdminMenu(params: any[]) {
+    const queue = params.map(item => {
+      const { id, ...field } = item;
+      return this.adminMenuModel
+        .createQueryBuilder()
+        .update(field)
+        .where({
+          id,
+        })
+        .execute();
+    });
+    return Promise.all(queue);
   }
 }

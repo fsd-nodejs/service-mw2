@@ -20,6 +20,7 @@ import { AdminRoleService } from '../../service/admin/role';
 import { AdminPermissionService } from '../../service/admin/permission';
 import {
   CreateDTO,
+  OrderMenuDTO,
   QueryDTO,
   RemoveDTO,
   ShowDTO,
@@ -100,7 +101,19 @@ export class AdminMenuController {
 
   @Post('/order')
   @Validate()
-  async order() {
-    // TODO:菜单排序
+  async order(ctx: Context, @Body(ALL) params: OrderMenuDTO) {
+    const { orders } = params;
+
+    // 检查菜单是否存在
+    await this.service.checkMenuExists(orders.map(item => item.id));
+
+    const newMenu = orders.map((item, index) => ({
+      ...item,
+      order: index + 1,
+    }));
+
+    await this.service.orderAdminMenu(newMenu);
+
+    ctx.helper.success();
   }
 }

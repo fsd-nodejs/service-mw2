@@ -100,7 +100,7 @@ export class AdminPermissionService {
    * 检查权限是否存在于数据库，自动抛错
    * @param {string[]} ids 权限id
    */
-  async checkPermissionExists(ids: string[]) {
+  async checkPermissionExists(ids: string[] = []) {
     const count = await this.adminPermissionModel.count({
       where: {
         id: In(ids),

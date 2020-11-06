@@ -59,11 +59,11 @@ export class UpdateDTO {
   @Rule(RuleType.string().trim().max(10).optional().default('0'))
   parentId: string;
 
-  @Rule(RuleType.string().trim().max(50).required())
+  @Rule(RuleType.string().trim().max(50).optional())
   title: string;
 
   @Rule(
-    RuleType.string().trim().max(255).uri({ allowRelative: true }).required()
+    RuleType.string().trim().max(255).uri({ allowRelative: true }).optional()
   )
   uri: string;
 
@@ -77,14 +77,20 @@ export class UpdateDTO {
 /**
  * 菜单排序参数
  */
-export class OrderMenu {
+export class OrderMenuDTO {
   @Rule(
-    RuleType.array().items(
-      RuleType.object({
-        id: RuleType.string().trim().max(10).required(),
-        parentId: RuleType.string().trim().max(10).optional().default('0'),
-      })
-    )
+    RuleType.array()
+      .items(
+        RuleType.object({
+          id: RuleType.string().trim().max(10).required(),
+          parentId: RuleType.string().trim().max(10).optional().default('0'),
+        })
+      )
+      .min(1)
+      .required()
   )
-  orders: object[];
+  orders: {
+    id: string;
+    parentId: string;
+  }[];
 }
