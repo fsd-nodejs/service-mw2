@@ -75,9 +75,9 @@ export class AdminMenuController {
     await this.permissionService.checkPermissionExists([params.permissionId]);
 
     // TODO:更新菜单逻辑
-    // const result = await this.service.updateAdminMenu(params);
+    const result = await this.service.updateAdminMenu(params);
 
-    // ctx.helper.success(null, null, 204);
+    ctx.helper.success(result, null, 204);
   }
 
   @Del('/remove')

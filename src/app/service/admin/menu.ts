@@ -6,7 +6,7 @@ import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, In } from 'typeorm';
 
 import { AdminMenuModel } from '../../model/admin-menu';
-import { CreateDTO, QueryDTO } from '../../dto/admin/menu';
+import { CreateDTO, QueryDTO, UpdateDTO } from '../../dto/admin/menu';
 import { AdminRoleModel } from '../../model/admin-role';
 import MyError from '../../util/my-error';
 
@@ -48,9 +48,9 @@ export class AdminMenuService {
     const row = await this.adminMenuModel
       .createQueryBuilder()
       .select()
+      .leftJoinAndSelect('AdminMenuModel.roles', 'role')
       .where({ id: id })
       .getOne();
-
     return row;
   }
 
@@ -80,42 +80,44 @@ export class AdminMenuService {
    * @param {UpdateDTO} params 菜单参数
    * @returns {[number, AdminMenuModel[]]}
    */
-  // async updateAdminMenu(id: string, params: UpdateDTO) {
-  //   const { roles: newRoles } = params;
+  async updateAdminMenu(params: UpdateDTO) {
+    const { id, roles: newRoles, ...columns } = params;
 
-  //   const menu = await this.getAdminMenuById(id);
+    const menu = await this.getAdminMenuById(id);
 
-  //   // 如果有传递roles
-  //   if (newRoles) {
-  //     const oldRoles = menu.roles.map(item => item.id);
+    // 如果有传递roles
+    if (newRoles) {
+      const oldRoles = menu.roles.map(item => item.id);
+      // 对比角色变更差异
+      const [increase, decrease]: [any[], any[]] = this.ctx.helper.arrayDiff(
+        newRoles,
+        oldRoles
+      );
 
-  //     // 对比角色变更差异
-  //     const [increase, decrease]: [any[], any[]] = this.ctx.helper.arrayDiff(
-  //       newRoles,
-  //       oldRoles
-  //     );
+      // 更新角色关联数据
+      await Promise.all([
+        this.adminMenuModel
+          .createQueryBuilder()
+          .relation(AdminMenuModel, 'roles')
+          .of(menu)
+          .add(increase),
+        this.adminMenuModel
+          .createQueryBuilder()
+          .relation(AdminMenuModel, 'roles')
+          .of(menu)
+          .remove(decrease),
+      ]);
+    }
 
-  //     const increaseRoleMenu = increase.map(item => ({
-  //       roleId: item,
-  //       menuId: menu.id,
-  //     }));
-
-  //     await this.adminRoleMenuModel.bulkCreate(increaseRoleMenu);
-  //     await this.adminRoleMenuModel.destroy({
-  //       where: {
-  //         roleId: decrease,
-  //         menuId: menu.id,
-  //       },
-  //     });
-  //   }
-
-  //   return this.adminMenuModel.update(params, {
-  //     where: {
-  //       id,
-  //     },
-  //     limit: 1,
-  //   });
-  // }
+    return this.adminMenuModel
+      .createQueryBuilder()
+      .update(menu)
+      .set(columns)
+      .where({
+        id: menu.id,
+      })
+      .execute();
+  }
 
   /**
    * 检查菜单是否存在于数据库，自动抛错
