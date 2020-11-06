@@ -9,8 +9,8 @@ import {
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
 
-import { AdminUserService } from '@/APP/service/admin/user';
-import { QueryDTO } from '@/app/dto/admin/user';
+import { AdminUserService } from '../../service/admin/user';
+import { QueryDTO } from '../../dto/admin/user';
 
 @Provide()
 @Controller('/admin/user')

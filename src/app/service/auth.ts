@@ -5,7 +5,7 @@ import { Jwt, JwtConfig } from '@waiting/egg-jwt';
 import { Redis } from 'ioredis';
 import { Repository } from 'typeorm';
 
-import { AdminUserModel } from '@/app/model/admin-user';
+import { AdminUserModel } from '../model/admin-user';
 
 @Provide()
 export class AuthService {

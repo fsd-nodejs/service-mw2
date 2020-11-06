@@ -4,9 +4,9 @@ import { Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, Like, In } from 'typeorm';
 
-import { AdminPermissionModel } from '@/app/model/admin-permission';
-import { QueryDTO, CreateDTO, UpdateDTO } from '@/app/dto/admin/permission';
-import MyError from '@/app/util/my-error';
+import { AdminPermissionModel } from '../../model/admin-permission';
+import { QueryDTO, CreateDTO, UpdateDTO } from '../../dto/admin/permission';
+import MyError from '../../util/my-error';
 
 @Provide()
 export class AdminPermissionService {

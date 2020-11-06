@@ -13,9 +13,9 @@ import {
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
 
-import { AdminPermissionService } from '@/app/service/admin/permission';
-import { QueryDTO, UpdateDTO } from '@/app/dto/admin/permission';
-import MyError from '@/app/util/my-error';
+import { AdminPermissionService } from '../../service/admin/permission';
+import { QueryDTO, UpdateDTO } from '../../dto/admin/permission';
+import MyError from '../../util/my-error';
 
 @Provide()
 @Controller('/admin/permission')

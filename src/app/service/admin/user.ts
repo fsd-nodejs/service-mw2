@@ -2,8 +2,8 @@ import { Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, Like } from 'typeorm';
 
-import { AdminUserModel } from '@/app/model/admin-user';
-import { QueryDTO } from '@/app/dto/admin/user';
+import { AdminUserModel } from '../../model/admin-user';
+import { QueryDTO } from '../../dto/admin/user';
 
 @Provide()
 export class AdminUserService {

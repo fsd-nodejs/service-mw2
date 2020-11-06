@@ -1,7 +1,7 @@
 import { Provide, Plugin } from '@midwayjs/decorator';
 import { Redis } from 'ioredis';
 
-import { IUserOptions } from '@/interface';
+import { IUserOptions } from '../../interface';
 
 @Provide()
 export class UserService {

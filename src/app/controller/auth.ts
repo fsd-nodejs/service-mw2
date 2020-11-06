@@ -12,9 +12,9 @@ import {
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
 
-import { AuthService } from '@/app/service/auth';
-import { LoginDTO } from '@/app/dto/auth';
-import MyError from '@/app/util/my-error';
+import { AuthService } from '../service/auth';
+import { LoginDTO } from '../dto/auth';
+import MyError from '../util/my-error';
 
 @Provide()
 @Controller('/auth')

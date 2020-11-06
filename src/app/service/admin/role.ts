@@ -4,9 +4,9 @@ import { Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, Like, In } from 'typeorm';
 
-import { AdminRoleModel } from '@/app/model/admin-role';
-import { QueryDTO } from '@/app/dto/admin/role';
-import MyError from '@/app/util/my-error';
+import { AdminRoleModel } from '../../model/admin-role';
+import { QueryDTO } from '../../dto/admin/role';
+import MyError from '../../util/my-error';
 
 @Provide()
 export class AdminRoleService {

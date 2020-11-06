@@ -13,11 +13,11 @@ import {
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
 
-import { AdminMenuService } from '@/app/service/admin/menu';
-import { AdminRoleService } from '@/app/service/admin/role';
-import { AdminPermissionService } from '@/app/service/admin/permission';
-import { CreateDTO, QueryDTO, ShowDTO } from '@/app/dto/admin/menu';
-import MyError from '@/app/util/my-error';
+import { AdminMenuService } from '../../service/admin/menu';
+import { AdminRoleService } from '../../service/admin/role';
+import { AdminPermissionService } from '../../service/admin/permission';
+import { CreateDTO, QueryDTO, ShowDTO } from '../../dto/admin/menu';
+import MyError from '../../util/my-error';
 
 @Provide()
 @Controller('/admin/menu')
