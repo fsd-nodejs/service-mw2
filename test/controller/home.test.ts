@@ -1,27 +1,44 @@
-import { createApp, close, createHttpRequest } from '@midwayjs/mock';
-import { Framework } from '@midwayjs/web';
+
+import * as assert from 'power-assert'
+import { app } from '@midwayjs/mock/bootstrap'
+
 
 describe('test/controller/home.test.ts', () => {
-  let app;
+  let currentUser: any
   beforeAll(async () => {
-    // create app
-    app = await createApp<Framework>();
-  });
+    app.mockCsrf()
+    const response = await app.httpRequest()
+      .post('/auth/login')
+      .type('form')
+      .send(app.config.admin)
+      .expect(200)
+    currentUser = response.body.data
+  })
 
-  afterAll(async () => {
-    // close app
-    await close(app);
-  });
+  it('should assert', async () => {
+    const pkg = require('../../package.json')
+    assert(app.config.keys.startsWith(pkg.name))
+    // const ctx = app.mockContext({});
+    // await ctx.service.xx();
+  })
 
   it('should GET /', async () => {
-    // make request
-    const result = await createHttpRequest(app).get('/');
-    // use expect by jest
-    expect(result.status).toBe(401);
-    // expect(result.text).toBe('Hello Midwayjs!');
+    const response = await app.httpRequest()
+      .get('/')
+      .set('Authorization', `Bearer ${currentUser.token}`)
+      .expect(200)
 
-    // or use assert
-    // assert.deepStrictEqual(result.status, 200);
-    // assert.deepStrictEqual(result.text, 'Hello Midwayjs!');
-  });
-});
+    const msg: string = response.text
+    assert(msg && msg.includes('Hello midwayjs!'))
+  })
+
+  it('should GET /ping', async () => {
+    const ret = await app.httpRequest()
+      .get('/ping')
+      .expect(200)
+
+    const msg: string = ret.text
+    assert(msg && msg === 'OK')
+  })
+
+})
