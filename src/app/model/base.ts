@@ -1,4 +1,9 @@
-import { CreateDateColumn, UpdateDateColumn, AfterLoad } from 'typeorm';
+import {
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  AfterLoad,
+} from 'typeorm';
 
 /**
  * 基础的Model，对id字段默认会 转字符串处理
@@ -19,6 +24,12 @@ export class BaseModel {
     name: 'updated_at',
   })
   updatedAt: Date;
+
+  @DeleteDateColumn({
+    name: 'deleted_at',
+    select: false,
+  })
+  deletedAt: Date;
 
   // 对字段进行预处理
   @AfterLoad()

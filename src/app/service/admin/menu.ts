@@ -48,7 +48,11 @@ export class AdminMenuService {
     const row = await this.adminMenuModel
       .createQueryBuilder()
       .select()
-      .leftJoinAndSelect('AdminMenuModel.roles', 'role')
+      .leftJoinAndSelect(
+        'AdminMenuModel.roles',
+        'role',
+        'role.deletedAt IS NULL'
+      )
       .where({ id: id })
       .getOne();
     return row;
@@ -126,7 +130,7 @@ export class AdminMenuService {
   async removeAdminMenuByIds(ids: string[]) {
     return this.adminMenuModel
       .createQueryBuilder()
-      .delete()
+      .softDelete()
       .where({
         id: In(ids),
       })

@@ -42,6 +42,36 @@ $ npm stop
 - `admin:accessToken:${id}` 缓存管理员用户 Token 信息
 - `admin:userinfo:${id}` 缓存管理员基本信息
 
+## 数据库设计
+所有实体表均有deleted_at字段，用于软删除。
+
+进行软删除的时候，关系表的数据不做改动。
+
+后期根据需要，用脚本定期清理软删除的数据。
+
+### 查询注意事项
+- 实体查询，继承`BaseModel`的实体会自带软删除判断
+- 在做关系查询的时候，关系表需要手动加软删除判断，如下
+  ```typescript
+    /**
+     * 根据菜单id获取数据
+     * @param id 菜单id
+     */
+    async getAdminMenuById(id: string) {
+      const row = await this.adminMenuModel
+        .createQueryBuilder()
+        .select()
+        .leftJoinAndSelect(
+          'AdminMenuModel.roles',
+          'role',
+          'role.deletedAt IS NULL'
+        )
+        .where({ id: id })
+        .getOne();
+      return row;
+    }
+  ```
+
 ## TODO
 
 - 基础
