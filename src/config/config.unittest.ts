@@ -27,5 +27,5 @@ export const redis: EggRedisOptions = {
 };
 
 export const logger = {
-  disableConsoleAfterReady: 'true',
+  disableConsoleAfterReady: 'false',
 };
