@@ -16,7 +16,7 @@ import {
 import { Context } from '@midwayjs/web';
 
 import { AdminPermissionService } from '../../service/admin/permission';
-import { QueryDTO, UpdateDTO } from '../../dto/admin/permission';
+import { QueryDTO, UpdateDTO, ShowDTO } from '../../dto/admin/permission';
 import MyError from '../../util/my-error';
 
 @Provide()
@@ -34,8 +34,10 @@ export class AdminPermissionController {
 
   @Get('/show')
   @Validate()
-  async show() {
-    // TODO:查询单条权限逻辑
+  async show(ctx: Context, @Query(ALL) query: ShowDTO) {
+    const result = await this.service.getAdminPermissionById(query.id);
+    assert.ok(result, new MyError('权限不存在，请检查', 400));
+    ctx.helper.success(result);
   }
 
   @Post('/create')
