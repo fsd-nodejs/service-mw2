@@ -10,8 +10,12 @@ export class AdminUserService {
   @InjectEntityModel(AdminUserModel)
   adminUserModel: Repository<AdminUserModel>;
 
-  async queryAdminUser(queryParams: QueryDTO) {
-    const { pageSize, current, sorter, ...params } = queryParams;
+  /**
+   * 分页查询管理员列表
+   * @param {QueryDTO} params
+   */
+  async queryAdminUser(params: QueryDTO) {
+    const { pageSize, current, sorter, ...filter } = params;
     const where: any = {};
     const order: any = { id: 'DESC' };
 
@@ -22,18 +26,18 @@ export class AdminUserService {
     }
 
     // 模糊匹配id
-    if (params.id) {
-      where.id = Like(params.id);
+    if (filter.id) {
+      where.id = Like(filter.id);
     }
 
     // 模糊匹配名称
-    if (params.name) {
-      where.name = Like(`${params.name}%`);
+    if (filter.name) {
+      where.name = Like(`${filter.name}%`);
     }
 
     // 模糊匹配标识
-    if (params.username) {
-      where.username = Like(`${params.username}%`);
+    if (filter.username) {
+      where.username = Like(`${filter.username}%`);
     }
 
     const [list, total] = await this.adminUserModel.findAndCount({

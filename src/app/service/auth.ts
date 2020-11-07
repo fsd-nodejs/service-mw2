@@ -68,7 +68,7 @@ export class AuthService {
   /**
    * 根据登录名查找用户
    * @param {String} username 登录名
-   * @returns {AdminUser | null} 承载用户的 Promise 对象
+   * @returns {AdminUserModel | null} 承载用户的 Promise 对象
    */
   async getAdminUserByUserName(username: string) {
     const user = await this.adminUserModel.findOne({
@@ -128,7 +128,7 @@ export class AuthService {
   /**
    * 使用帐号密码，本地化登录
    * @param {Object} params 包涵username、password等参数
-   * @returns {Promise[adminUser] | null} 承载用户的Promise对象
+   * @returns {AdminUserModel | null} 承载用户的Promise对象
    */
   async localHandler(params: { username: string; password: string }) {
     // 获取用户函数

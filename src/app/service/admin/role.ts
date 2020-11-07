@@ -13,8 +13,12 @@ export class AdminRoleService {
   @InjectEntityModel(AdminRoleModel)
   adminRoleModel: Repository<AdminRoleModel>;
 
-  async queryAdminRole(queryParams: QueryDTO) {
-    const { pageSize, current, sorter, ...params } = queryParams;
+  /**
+   * 分页查询角色列表
+   * @param {QueryDTO} params
+   */
+  async queryAdminRole(params: QueryDTO) {
+    const { pageSize, current, sorter, ...filter } = params;
     const where: any = {};
     const order: any = { id: 'DESC' };
 
@@ -25,18 +29,18 @@ export class AdminRoleService {
     }
 
     // 模糊匹配id
-    if (params.id) {
-      where.id = Like(params.id);
+    if (filter.id) {
+      where.id = Like(filter.id);
     }
 
     // 模糊匹配名称
-    if (params.name) {
-      where.name = Like(`${params.name}%`);
+    if (filter.name) {
+      where.name = Like(`${filter.name}%`);
     }
 
     // 模糊匹配标识
-    if (params.slug) {
-      where.slug = Like(`${params.slug}%`);
+    if (filter.slug) {
+      where.slug = Like(`${filter.slug}%`);
     }
 
     const [list, total] = await this.adminRoleModel.findAndCount({

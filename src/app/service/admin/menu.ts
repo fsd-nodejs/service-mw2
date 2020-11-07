@@ -21,6 +21,10 @@ export class AdminMenuService {
   @InjectEntityModel(AdminRoleModel)
   adminRoleModel: Repository<AdminRoleModel>;
 
+  /**
+   * 分页查询菜单列表
+   * @param {QueryDTO} params 查询参数
+   */
   async queryAdminMenu(params: QueryDTO) {
     const { pageSize, current } = params;
     const order: any = { order: 'DESC' };
@@ -61,7 +65,6 @@ export class AdminMenuService {
   /**
    * 创建菜单
    * @param {CreateDTO} params 菜单参数
-   * @returns {id|undefined}
    */
   async createAdminMenu(params: CreateDTO) {
     let menu = new AdminMenuModel();
@@ -82,7 +85,6 @@ export class AdminMenuService {
   /**
    * 更新菜单
    * @param {UpdateDTO} params 菜单参数
-   * @returns {[number, AdminMenuModel[]]}
    */
   async updateAdminMenu(params: UpdateDTO) {
     const { id, roles: newRoles, ...columns } = params;
