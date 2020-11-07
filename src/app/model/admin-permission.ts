@@ -6,6 +6,8 @@ import {
   ManyToMany,
   OneToMany,
   JoinTable,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 
 import { BaseModel } from './base';
@@ -84,6 +86,12 @@ export class AdminPermissionModel extends BaseModel {
   @AfterLoad()
   mixin() {
     this.httpMethod = this.httpMethod?.toString().split(',');
+  }
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  before() {
+    this.httpMethod = (this.httpMethod.join(',') as unknown) as string[];
   }
 }
 

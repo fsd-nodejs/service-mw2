@@ -92,16 +92,29 @@ export class AdminPermissionService {
     return row;
   }
 
+  /**
+   * 创建权限
+   * @param {CreateDTO} params 权限参数
+   * @returns
+   */
   async createAdminPermission(params: CreateDTO) {
-    return this.adminPermissionModel.create(params);
+    let permission = new AdminPermissionModel();
+    permission = this.adminPermissionModel.merge(permission, params);
+
+    const created = await this.adminPermissionModel.save(permission);
+    return created;
   }
 
+  /**
+   * 更新权限
+   * @param {UpdateDTO} params 更新权限参数
+   */
   async updateAdminPermission(params: UpdateDTO) {
-    const { id, ...values } = params;
+    const { id, ...columns } = params;
     return this.adminPermissionModel
       .createQueryBuilder()
       .update()
-      .set(values)
+      .set(columns)
       .where('id = :id', { id })
       .execute();
   }

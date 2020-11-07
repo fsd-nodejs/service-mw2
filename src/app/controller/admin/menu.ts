@@ -81,9 +81,10 @@ export class AdminMenuController {
     // 检查权限是否存在
     await this.permissionService.checkPermissionExists([params.permissionId]);
 
-    const result = await this.service.updateAdminMenu(params);
+    const { affected } = await this.service.updateAdminMenu(params);
+    assert(affected, new MyError('更新失败', 400));
 
-    ctx.helper.success(result, null, 204);
+    ctx.helper.success(null, null, 204);
   }
 
   @Del('/remove')

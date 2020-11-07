@@ -15,8 +15,14 @@ import {
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
 
+import { AdminRoleService } from '../../service/admin/role';
 import { AdminPermissionService } from '../../service/admin/permission';
-import { QueryDTO, UpdateDTO, ShowDTO } from '../../dto/admin/permission';
+import {
+  QueryDTO,
+  CreateDTO,
+  UpdateDTO,
+  ShowDTO,
+} from '../../dto/admin/permission';
 import MyError from '../../util/my-error';
 
 @Provide()
@@ -24,6 +30,9 @@ import MyError from '../../util/my-error';
 export class AdminPermissionController {
   @Inject('adminPermissionService')
   service: AdminPermissionService;
+
+  @Inject('adminRoleService')
+  roleService: AdminRoleService;
 
   @Get('/query')
   @Validate()
@@ -42,16 +51,21 @@ export class AdminPermissionController {
 
   @Post('/create')
   @Validate()
-  async create() {
-    // TODO:添加权限逻辑
+  async create(ctx: Context, @Body(ALL) params: CreateDTO) {
+    const result = await this.service.createAdminPermission(params);
+
+    ctx.helper.success(result, null, 201);
   }
 
   @Patch('/update')
   @Validate()
   async update(ctx: Context, @Body(ALL) params: UpdateDTO) {
-    const { affected } = await this.service.updateAdminPermission(params);
+    // 检查权限是否存在
+    await this.service.checkPermissionExists([params.id]);
 
+    const { affected } = await this.service.updateAdminPermission(params);
     assert(affected, new MyError('更新失败', 400));
+
     ctx.helper.success(null, null, 204);
   }
 
