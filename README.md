@@ -112,9 +112,9 @@ $ npm stop
 - admin/permission.ts
 - - [x] /admin/permission/query
 - - [x] /admin/permission/show
-- - [ ] /admin/permission/create
-- - [ ] /admin/permission/update
-- - [ ] /admin/permission/remove
+- - [x] /admin/permission/create
+- - [x] /admin/permission/update
+- - [x] /admin/permission/remove
 
 - admin/role.ts
 - - [x] /admin/role/query

@@ -120,6 +120,20 @@ export class AdminPermissionService {
   }
 
   /**
+   * 批量删除多条权限数据(忽略关联表的数据)
+   * @param {string[]} ids 权限id
+   */
+  async removePermissionByIds(ids: string[]) {
+    return this.adminPermissionModel
+      .createQueryBuilder()
+      .softDelete()
+      .where({
+        id: In(ids),
+      })
+      .execute();
+  }
+
+  /**
    * 检查权限是否存在于数据库，自动抛错
    * @param {string[]} ids 权限id
    */

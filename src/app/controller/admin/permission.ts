@@ -22,6 +22,7 @@ import {
   CreateDTO,
   UpdateDTO,
   ShowDTO,
+  RemoveDTO,
 } from '../../dto/admin/permission';
 import MyError from '../../util/my-error';
 
@@ -64,14 +65,20 @@ export class AdminPermissionController {
     await this.service.checkPermissionExists([params.id]);
 
     const { affected } = await this.service.updateAdminPermission(params);
-    assert(affected, new MyError('更新失败', 400));
+    assert(affected, new MyError('更新失败，请检查', 400));
 
     ctx.helper.success(null, null, 204);
   }
 
   @Del('/remove')
   @Validate()
-  async remove() {
-    // TODO:删除权限逻辑
+  async remove(ctx: Context, @Body(ALL) params: RemoveDTO) {
+    await this.service.checkPermissionExists(params.ids);
+
+    const total = await this.service.removePermissionByIds(params.ids);
+
+    assert(total, new MyError('删除失败，请检查', 400));
+
+    ctx.helper.success(null, null, 204);
   }
 }
