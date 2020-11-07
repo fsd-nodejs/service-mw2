@@ -43,7 +43,7 @@ $ npm stop
 - `admin:userinfo:${id}` 缓存管理员基本信息
 
 ## 数据库设计
-所有实体表均有deleted_at字段，用于软删除。
+所有实体表均有deleted_at字段，用于软删除。如果要关闭软删除，将deletedAt字段注释即可
 
 进行软删除的时候，关系表的数据不做改动。
 
