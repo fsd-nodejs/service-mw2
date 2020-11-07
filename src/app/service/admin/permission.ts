@@ -74,12 +74,22 @@ export class AdminPermissionService {
    * @returns {AdminPermissionModel | null}
    */
   async getAdminPermissionById(id: string) {
-    return this.adminPermissionModel.findOne({
-      relations: ['roles', 'menu'],
-      where: {
-        id,
-      },
-    });
+    const row = await this.adminPermissionModel
+      .createQueryBuilder()
+      .select()
+      .leftJoinAndSelect(
+        'AdminPermissionModel.roles',
+        'role',
+        'role.deletedAt IS NULL'
+      )
+      .leftJoinAndSelect(
+        'AdminPermissionModel.menu',
+        'menu',
+        'menu.deletedAt IS NULL'
+      )
+      .where({ id: id })
+      .getOne();
+    return row;
   }
 
   async createAdminPermission(params: CreateDTO) {
