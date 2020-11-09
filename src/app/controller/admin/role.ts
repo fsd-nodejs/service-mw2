@@ -11,11 +11,18 @@ import {
   Post,
   Patch,
   Del,
+  Body,
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
 
 import { AdminRoleService } from '../../service/admin/role';
-import { QueryDTO, ShowDTO } from '../../dto/admin/role';
+import {
+  QueryDTO,
+  ShowDTO,
+  CreateDTO,
+  UpdateDTO,
+  RemoveDTO,
+} from '../../dto/admin/role';
 import MyError from '../../util/my-error';
 
 @Provide()
@@ -35,25 +42,39 @@ export class AdminRoleController {
   @Validate()
   async show(ctx: Context, @Query(ALL) query: ShowDTO) {
     const result = await this.service.getAdminRoleById(query.id);
-    assert.ok(result, new MyError('权限不存在，请检查', 400));
+    assert.ok(result, new MyError('角色不存在，请检查', 400));
     ctx.helper.success(result);
   }
 
   @Post('/create')
   @Validate()
-  async create() {
-    // TODO:创建角色逻辑
+  async create(ctx: Context, @Body(ALL) params: CreateDTO) {
+    const result = await this.service.createAdminRole(params);
+
+    ctx.helper.success(result, null, 201);
   }
 
   @Patch('/update')
   @Validate()
-  async update() {
-    // TODO:更新角色逻辑
+  async update(ctx: Context, @Body(ALL) params: UpdateDTO) {
+    // 检查角色是否存在
+    await this.service.checkRoleExists([params.id]);
+
+    const { affected } = await this.service.updateAdminRole(params);
+    assert(affected, new MyError('更新失败，请检查', 400));
+
+    ctx.helper.success(null, null, 204);
   }
 
   @Del('/remove')
   @Validate()
-  async remove() {
-    // TODO:删除角色逻辑
+  async remove(ctx: Context, @Body(ALL) params: RemoveDTO) {
+    // 检查角色是否存在
+    await this.service.checkRoleExists(params.ids);
+
+    const total = await this.service.removeAdminRoleByIds(params.ids);
+    assert(total, new MyError('删除失败，请检查', 400));
+
+    ctx.helper.success(null, null, 204);
   }
 }
