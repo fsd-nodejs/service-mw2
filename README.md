@@ -84,10 +84,10 @@ $ npm stop
 - - [ ] 接口响应统计中间件
 
 - 超级管理
-- - [ ] 权限
-- - [ ] 角色
-- - [ ] 管理员
-- - [ ] 菜单
+- - [x] 权限
+- - [x] 角色
+- - [x] 管理员
+- - [x] 菜单
 - - [ ] 日志
 
 ## 迁移API
@@ -118,14 +118,14 @@ $ npm stop
 
 - admin/role.ts
 - - [x] /admin/role/query
-- - [ ] /admin/role/show
-- - [ ] /admin/role/create
-- - [ ] /admin/role/update
-- - [ ] /admin/role/remove
+- - [x] /admin/role/show
+- - [x] /admin/role/create
+- - [x] /admin/role/update
+- - [x] /admin/role/remove
 
 - admin/user.ts
 - - [x] /admin/user/query
-- - [ ] /admin/user/show
-- - [ ] /admin/user/create
-- - [ ] /admin/user/update
-- - [ ] /admin/user/remove
+- - [x] /admin/user/show
+- - [x] /admin/user/create
+- - [x] /admin/user/update
+- - [x] /admin/user/remove
