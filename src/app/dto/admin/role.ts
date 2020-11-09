@@ -66,10 +66,10 @@ export class UpdateDTO {
   @Rule(RuleType.string().trim().max(10).required())
   id: string;
 
-  @Rule(RuleType.string().trim().max(50).required())
+  @Rule(RuleType.string().trim().max(50).optional())
   name: string;
 
-  @Rule(RuleType.string().trim().max(50).required())
+  @Rule(RuleType.string().trim().max(50).optional())
   slug: string;
 
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())

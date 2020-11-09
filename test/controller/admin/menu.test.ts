@@ -1,13 +1,17 @@
 import * as assert from 'power-assert';
-import { app } from '@midwayjs/mock/bootstrap';
+
+import { Framework } from '@midwayjs/web';
+import { createApp, close, createHttpRequest } from '@midwayjs/mock';
+import { Application } from 'egg';
 
 describe('test/controller/admin/menu.test.ts', () => {
+  let app: Application;
   let currentUser: any;
   let currentMenu: any;
   beforeAll(async () => {
-    app.mockCsrf();
-    const response = await app
-      .httpRequest()
+    app = await createApp<Framework>();
+
+    const response = await createHttpRequest(app)
       .post('/auth/login')
       .type('form')
       .send(app.config.admin)
@@ -15,10 +19,12 @@ describe('test/controller/admin/menu.test.ts', () => {
     currentUser = response.body.data;
   });
 
+  afterAll(async () => {
+    close(app);
+  });
+
   it('should get /admin/menu/query ', async () => {
-    app.mockCsrf();
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .get('/admin/menu/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
@@ -26,16 +32,13 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should get /admin/menu/show ', async () => {
-    app.mockCsrf();
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .get('/admin/menu/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
     assert(response.body.data.total);
     const { list } = response.body.data;
-    const response2 = await app
-      .httpRequest()
+    const response2 = await createHttpRequest(app)
       .get('/admin/menu/show')
       .query({
         id: list[0].id,
@@ -45,15 +48,13 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should post /admin/menu/create ', async () => {
-    app.mockCsrf();
     const params = {
       title: 'fakeTitle',
       uri: 'fakeUri',
       roles: ['1'],
       permissionId: '1',
     };
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .post('/admin/menu/create')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')
@@ -64,7 +65,6 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should patch /admin/menu/update ', async () => {
-    app.mockCsrf();
     const params = {
       id: currentMenu.id,
       title: 'fakeTitle2',
@@ -72,8 +72,7 @@ describe('test/controller/admin/menu.test.ts', () => {
       roles: [],
       permissionId: '2',
     };
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .patch('/admin/menu/update')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')
@@ -83,12 +82,10 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should delete /admin/menu/remove ', async () => {
-    app.mockCsrf();
     const params = {
       ids: [currentMenu.id],
     };
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .del('/admin/menu/remove')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')
@@ -98,9 +95,7 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should order /admin/menu/order ', async () => {
-    app.mockCsrf();
-    const response1 = await app
-      .httpRequest()
+    const response1 = await createHttpRequest(app)
       .get('/admin/menu/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
@@ -113,8 +108,7 @@ describe('test/controller/admin/menu.test.ts', () => {
       };
     });
 
-    const response2 = await app
-      .httpRequest()
+    const response2 = await createHttpRequest(app)
       .post('/admin/menu/order')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')

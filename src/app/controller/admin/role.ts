@@ -16,6 +16,7 @@ import {
 import { Context } from '@midwayjs/web';
 
 import { AdminRoleService } from '../../service/admin/role';
+import { AdminPermissionService } from '../../service/admin/permission';
 import {
   QueryDTO,
   ShowDTO,
@@ -30,6 +31,9 @@ import MyError from '../../util/my-error';
 export class AdminRoleController {
   @Inject('adminRoleService')
   service: AdminRoleService;
+
+  @Inject('adminPermissionService')
+  permissionService: AdminPermissionService;
 
   @Get('/query')
   @Validate()
@@ -49,6 +53,9 @@ export class AdminRoleController {
   @Post('/create')
   @Validate()
   async create(ctx: Context, @Body(ALL) params: CreateDTO) {
+    // 检查权限是否存在
+    await this.permissionService.checkPermissionExists(params.permissions);
+
     const result = await this.service.createAdminRole(params);
 
     ctx.helper.success(result, null, 201);
