@@ -48,8 +48,8 @@ export class AuthService {
   }
 
   /**
-   * 获取用户Redis Token
-   * @param {String} id 管理员用户id
+   * 获取管理员Redis Token
+   * @param {String} id 管理员id
    * @returns {String} Redis中的Token
    */
   async getAdminUserTokenById(id: string) {
@@ -57,8 +57,8 @@ export class AuthService {
   }
 
   /**
-   * 移除用户Redis Token
-   * @param {String} id 管理员用户id
+   * 移除管理员Redis Token
+   * @param {String} id 管理员id
    * @returns {number} 变更的数量
    */
   async removeAdminUserTokenById(id: string) {
@@ -66,9 +66,9 @@ export class AuthService {
   }
 
   /**
-   * 根据登录名查找用户
+   * 根据登录名查找管理员
    * @param {String} username 登录名
-   * @returns {AdminUserModel | null} 承载用户的 Promise 对象
+   * @returns {AdminUserModel | null} 承载管理员的 Promise 对象
    */
   async getAdminUserByUserName(username: string) {
     const user = await this.adminUserModel.findOne({
@@ -80,9 +80,9 @@ export class AuthService {
   }
 
   /**
-   * 读取Redis缓存中的管理员用户信息
+   * 读取Redis缓存中的管理员信息
    * @param {String} id
-   * @returns {AdminUserModel} 管理员用户信息
+   * @returns {AdminUserModel} 管理员信息
    */
   public async getAdminUserById(id: string) {
     const userinfo = (await this.redis.get(
@@ -92,8 +92,8 @@ export class AuthService {
   }
 
   /**
-   * 缓存用户
-   * @param {AdminUserModel} data 用户数据
+   * 缓存管理员
+   * @param {AdminUserModel} data 管理员数据
    * @returns {OK | null} 缓存处理结果
    */
   async cacheAdminUser(data: AdminUserModel) {
@@ -117,8 +117,8 @@ export class AuthService {
   }
 
   /**
-   * 清理用户缓存数据
-   * @param {String} id 用户id
+   * 清理管理员缓存数据
+   * @param {String} id 管理员id
    * @returns {number} 缓存处理结果
    */
   async cleanAdminUserById(id: string) {
@@ -128,17 +128,17 @@ export class AuthService {
   /**
    * 使用帐号密码，本地化登录
    * @param {Object} params 包涵username、password等参数
-   * @returns {AdminUserModel | null} 承载用户的Promise对象
+   * @returns {AdminUserModel | null} 承载管理员的Promise对象
    */
   async localHandler(params: { username: string; password: string }) {
-    // 获取用户函数
+    // 获取管理员函数
     const getAdminUser = (username: string) => {
       return this.getAdminUserByUserName(username);
     };
 
-    // 查询用户是否在数据库中
+    // 查询管理员是否在数据库中
     const existAdmiUser = await getAdminUser(params.username);
-    // 用户不存在
+    // 管理员不存在
     if (!existAdmiUser) {
       return null;
     }

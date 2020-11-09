@@ -1,7 +1,7 @@
 import { Rule, RuleType } from '@midwayjs/decorator';
 
 /**
- * 查询用户列表参数
+ * 查询管理员列表参数
  */
 export class QueryDTO {
   @Rule(RuleType.number().min(1).max(100000).default(1).optional())
@@ -30,7 +30,7 @@ export class QueryDTO {
 }
 
 /**
- * 获取单个用户参数
+ * 获取单个管理员参数
  */
 export class ShowDTO {
   @Rule(RuleType.string().trim().max(10).required())
@@ -38,7 +38,7 @@ export class ShowDTO {
 }
 
 /**
- * 删除用户参数
+ * 删除管理员参数
  */
 export class RemoveDTO {
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).min(1))
@@ -46,7 +46,7 @@ export class RemoveDTO {
 }
 
 /**
- * 创建用户参数
+ * 创建管理员参数
  */
 export class CreateDTO {
   @Rule(RuleType.string().trim().min(5).max(190).required())
@@ -69,7 +69,7 @@ export class CreateDTO {
 }
 
 /**
- * 更新用户参数
+ * 更新管理员参数
  */
 export class UpdateDTO {
   @Rule(RuleType.string().trim().max(10).required())

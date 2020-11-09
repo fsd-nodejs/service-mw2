@@ -31,7 +31,7 @@ export class AuthController {
     // 后续可能有多种登录方式
     const existAdmiUser = await this.service.localHandler(params);
 
-    // 判断用户是否存在
+    // 判断管理员是否存在
     assert(
       existAdmiUser !== null,
       new MyError('这些凭据与我们的记录不符', 400)
@@ -40,10 +40,10 @@ export class AuthController {
     // 生成Token
     const token = await this.service.createAdminUserToken(existAdmiUser);
 
-    // 缓存用户数据
+    // 缓存管理员数据
     await this.service.cacheAdminUser(existAdmiUser);
 
-    // TODO: 调用 rotateCsrfSecret 刷新用户的 CSRF token
+    // TODO: 调用 rotateCsrfSecret 刷新管理员的 CSRF token
     // ctx.rotateCsrfSecret()
 
     ctx.helper.success({
@@ -61,7 +61,7 @@ export class AuthController {
   async logout(ctx: Context): Promise<void> {
     const { currentUser } = ctx;
 
-    // 清理用户数据和token
+    // 清理管理员数据和token
     await this.service.removeAdminUserTokenById(currentUser.id);
     await this.service.cleanAdminUserById(currentUser.id);
 
@@ -69,7 +69,7 @@ export class AuthController {
   }
 
   /**
-   * 获取当前用户的信息
+   * 获取当前管理员的信息
    */
   @Get('/currentUser')
   async currentUser(ctx: Context): Promise<void> {

@@ -77,6 +77,11 @@ export class AdminUserService {
         'role',
         'role.deletedAt IS NULL'
       )
+      .leftJoinAndSelect(
+        'AdminUserModel.permissions',
+        'permission',
+        'permission.deletedAt IS NULL'
+      )
       .where({ id: id })
       .getOne();
     return row;
@@ -90,18 +95,20 @@ export class AdminUserService {
     let user = new AdminUserModel();
 
     // 预处理角色参数
-    const roles = params.roles.map(item => {
-      const role = new AdminRoleModel();
-      role.id = item;
-      return role;
-    });
+    const roles =
+      params.roles?.map(item => {
+        const role = new AdminRoleModel();
+        role.id = item;
+        return role;
+      }) || [];
 
     // 预处理权限参数
-    const permissions = params.permissions.map(item => {
-      const role = new AdminPermissionModel();
-      role.id = item;
-      return role;
-    });
+    const permissions =
+      params.permissions?.map(item => {
+        const role = new AdminPermissionModel();
+        role.id = item;
+        return role;
+      }) || [];
 
     user = this.adminUserModel.merge(user, {
       ...params,
@@ -201,7 +208,7 @@ export class AdminUserService {
    * 检查管理员是否存在于数据库，自动抛错
    * @param {string[]} ids 管理员id
    */
-  async checkMenuExists(ids: string[]) {
+  async checkUserExists(ids: string[]) {
     const count = await this.adminUserModel.count({
       where: {
         id: In(ids),

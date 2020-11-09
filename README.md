@@ -35,11 +35,11 @@ $ npm stop
 
 
 ## Redis 划分
-借助 jwt 插件做签名校验，用户的 token 中会包含 id 字段。
+借助 jwt 插件做签名校验，管理员的 token 中会包含 id 字段。
 
 ### 所有 admin 相关的缓存数据都放在 `admin:xxxx` 下面
 
-- `admin:accessToken:${id}` 缓存管理员用户 Token 信息
+- `admin:accessToken:${id}` 缓存管理员 Token 信息
 - `admin:userinfo:${id}` 缓存管理员基本信息
 
 ## 数据库设计
@@ -86,7 +86,7 @@ $ npm stop
 - 超级管理
 - - [ ] 权限
 - - [ ] 角色
-- - [ ] 用户(管理员)
+- - [ ] 管理员
 - - [ ] 菜单
 - - [ ] 日志
 
