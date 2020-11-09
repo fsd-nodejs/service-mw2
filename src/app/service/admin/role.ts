@@ -1,15 +1,21 @@
 import * as assert from 'assert';
 
-import { Provide } from '@midwayjs/decorator';
+import { Provide, Inject } from '@midwayjs/decorator';
+import { Context } from '@midwayjs/web';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, Like, In } from 'typeorm';
 
+import { AdminPermissionModel } from '@/app/model/admin-permission';
+
 import { AdminRoleModel } from '../../model/admin-role';
-import { QueryDTO } from '../../dto/admin/role';
+import { QueryDTO, CreateDTO, UpdateDTO } from '../../dto/admin/role';
 import MyError from '../../util/my-error';
 
 @Provide()
 export class AdminRoleService {
+  @Inject()
+  ctx: Context;
+
   @InjectEntityModel(AdminRoleModel)
   adminRoleModel: Repository<AdminRoleModel>;
 
@@ -59,7 +65,7 @@ export class AdminRoleService {
   }
 
   /**
-   * 通过ID获取单条权限数据
+   * 通过ID获取单条角色数据
    * @param {String} id
    */
   async getAdminRoleById(id: string) {
@@ -79,6 +85,81 @@ export class AdminRoleService {
       .where({ id: id })
       .getOne();
     return row;
+  }
+
+  /**
+   * 创建角色
+   * @param {CreateDTO} params 角色参数
+   */
+  async createAdminRole(params: CreateDTO) {
+    let role = new AdminRoleModel();
+
+    const permissions = params.permissions.map(item => {
+      const permission = new AdminPermissionModel();
+      permission.id = item;
+      return permission;
+    });
+
+    role = this.adminRoleModel.merge(role, {
+      ...params,
+      permissions: permissions,
+    });
+
+    const created = await this.adminRoleModel.save(role);
+    return created;
+  }
+
+  /**
+   * 更新角色
+   * @param {UpdateDTO} params
+   */
+  async updateAdminRole(params: UpdateDTO) {
+    const { id, permissions: newPermissions, ...column } = params;
+    const role = await this.getAdminRoleById(id);
+
+    // 如果有传递permissions
+    if (newPermissions) {
+      const oldPermissions = role.permissions.map(item => item.id);
+
+      const [increase, decrease] = this.ctx.helper.arrayDiff(
+        newPermissions,
+        oldPermissions
+      );
+
+      await Promise.all([
+        this.adminRoleModel
+          .createQueryBuilder()
+          .relation(AdminRoleModel, 'permissions')
+          .of(role)
+          .add(increase),
+        this.adminRoleModel
+          .createQueryBuilder()
+          .relation(AdminRoleModel, 'permissions')
+          .of(role)
+          .remove(decrease),
+      ]);
+    }
+
+    return this.adminRoleModel
+      .createQueryBuilder()
+      .update(role)
+      .set(column)
+      .where({ id: id })
+      .execute();
+  }
+
+  /**
+   * 删除多条角色数据(忽略关联表的数据)
+   * @param {string[]}ids 角色id
+   */
+  async removeAdminRoleByIds(ids: string[]) {
+    return this.adminRoleModel
+      .createQueryBuilder()
+      .softDelete()
+      .where({
+        id: In(ids),
+      })
+      .execute();
   }
 
   /**

@@ -18,9 +18,6 @@ export class AdminMenuService {
   @InjectEntityModel(AdminMenuModel)
   adminMenuModel: Repository<AdminMenuModel>;
 
-  @InjectEntityModel(AdminRoleModel)
-  adminRoleModel: Repository<AdminRoleModel>;
-
   /**
    * 分页查询菜单列表
    * @param {QueryDTO} params 查询参数
