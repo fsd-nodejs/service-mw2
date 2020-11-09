@@ -1,7 +1,7 @@
 import {
   CreateDateColumn,
   UpdateDateColumn,
-  DeleteDateColumn,
+  // DeleteDateColumn, // 软删除需要引入
   AfterLoad,
 } from 'typeorm';
 
@@ -25,11 +25,12 @@ export class BaseModel {
   })
   updatedAt: Date;
 
-  @DeleteDateColumn({
-    name: 'deleted_at',
-    select: false,
-  })
-  deletedAt: Date;
+  // 软删除默认需要配置的字段
+  // @DeleteDateColumn({
+  //   name: 'deleted_at',
+  //   select: false,
+  // })
+  // deletedAt: Date;
 
   // 对字段进行预处理
   @AfterLoad()

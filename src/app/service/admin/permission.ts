@@ -78,14 +78,10 @@ export class AdminPermissionService {
       .select()
       .leftJoinAndSelect(
         'AdminPermissionModel.roles',
-        'role',
-        'role.deletedAt IS NULL'
+        'role'
+        // 'role.deletedAt IS NULL' 软删除关联查询需要的例子
       )
-      .leftJoinAndSelect(
-        'AdminPermissionModel.menu',
-        'menu',
-        'menu.deletedAt IS NULL'
-      )
+      .leftJoinAndSelect('AdminPermissionModel.menu', 'menu')
       .where({ id: id })
       .getOne();
     return row;
@@ -122,13 +118,16 @@ export class AdminPermissionService {
    * @param {string[]} ids 权限id
    */
   async removePermissionByIds(ids: string[]) {
-    return this.adminPermissionModel
-      .createQueryBuilder()
-      .softDelete()
-      .where({
-        id: In(ids),
-      })
-      .execute();
+    return (
+      this.adminPermissionModel
+        .createQueryBuilder()
+        // .softDelete() // 软删除例子
+        .delete()
+        .where({
+          id: In(ids),
+        })
+        .execute()
+    );
   }
 
   /**

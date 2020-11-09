@@ -72,16 +72,8 @@ export class AdminRoleService {
     const row = await this.adminRoleModel
       .createQueryBuilder()
       .select()
-      .leftJoinAndSelect(
-        'AdminRoleModel.permissions',
-        'permission',
-        'permission.deletedAt IS NULL'
-      )
-      .leftJoinAndSelect(
-        'AdminRoleModel.menu',
-        'menu',
-        'menu.deletedAt IS NULL'
-      )
+      .leftJoinAndSelect('AdminRoleModel.permissions', 'permission')
+      .leftJoinAndSelect('AdminRoleModel.menu', 'menu')
       .where({ id: id })
       .getOne();
     return row;
@@ -156,7 +148,7 @@ export class AdminRoleService {
   async removeAdminRoleByIds(ids: string[]) {
     return this.adminRoleModel
       .createQueryBuilder()
-      .softDelete()
+      .delete()
       .where({
         id: In(ids),
       })
