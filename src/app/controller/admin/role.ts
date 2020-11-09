@@ -1,3 +1,5 @@
+import * as assert from 'assert';
+
 import {
   Controller,
   Get,
@@ -13,7 +15,8 @@ import {
 import { Context } from '@midwayjs/web';
 
 import { AdminRoleService } from '../../service/admin/role';
-import { QueryDTO } from '../../dto/admin/role';
+import { QueryDTO, ShowDTO } from '../../dto/admin/role';
+import MyError from '../../util/my-error';
 
 @Provide()
 @Controller('/admin/role')
@@ -30,8 +33,10 @@ export class AdminRoleController {
 
   @Get('/show')
   @Validate()
-  async show() {
-    // TODO:查询单个角色
+  async show(ctx: Context, @Query(ALL) query: ShowDTO) {
+    const result = await this.service.getAdminRoleById(query.id);
+    assert.ok(result, new MyError('权限不存在，请检查', 400));
+    ctx.helper.success(result);
   }
 
   @Post('/create')

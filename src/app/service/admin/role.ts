@@ -59,6 +59,29 @@ export class AdminRoleService {
   }
 
   /**
+   * 通过ID获取单条权限数据
+   * @param {String} id
+   */
+  async getAdminRoleById(id: string) {
+    const row = await this.adminRoleModel
+      .createQueryBuilder()
+      .select()
+      .leftJoinAndSelect(
+        'AdminRoleModel.permissions',
+        'permission',
+        'permission.deletedAt IS NULL'
+      )
+      .leftJoinAndSelect(
+        'AdminRoleModel.menu',
+        'menu',
+        'menu.deletedAt IS NULL'
+      )
+      .where({ id: id })
+      .getOne();
+    return row;
+  }
+
+  /**
    * 检查角色是否存在于数据库，自动抛错
    * @param {string[]} ids 角色id
    */
