@@ -1,11 +1,21 @@
-import { app } from '@midwayjs/mock/bootstrap';
+import { Framework } from '@midwayjs/web';
+import { createApp, close, createHttpRequest } from '@midwayjs/mock';
+import { Application } from 'egg';
 
 describe('test/controller/auth.test.ts', () => {
+  let app: Application;
   let currentUser;
 
+  beforeAll(async () => {
+    app = await createApp<Framework>();
+  });
+
+  afterAll(async () => {
+    close(app);
+  });
+
   it('should POST /auth/login by wrong username and password', async () => {
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .post('/auth/login')
       .type('form')
       .send({
@@ -17,8 +27,7 @@ describe('test/controller/auth.test.ts', () => {
   });
 
   it('should POST /auth/login by wrong input', async () => {
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .post('/auth/login')
       .type('form')
       .expect(422);
@@ -26,8 +35,7 @@ describe('test/controller/auth.test.ts', () => {
   });
 
   it('should POST /auth/login by correct username and password', async () => {
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .post('/auth/login')
       .type('form')
       .send(app.config.admin)
@@ -37,8 +45,7 @@ describe('test/controller/auth.test.ts', () => {
   });
 
   it('should GET /auth/currentUser', async () => {
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .get('/auth/currentUser')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
@@ -46,8 +53,7 @@ describe('test/controller/auth.test.ts', () => {
   });
 
   it('should GET 404', async () => {
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .get('/auth/currentUsersss')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(404);
@@ -55,8 +61,7 @@ describe('test/controller/auth.test.ts', () => {
   });
 
   it('should GET /auth/logout', async () => {
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .get('/auth/logout')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
@@ -64,8 +69,7 @@ describe('test/controller/auth.test.ts', () => {
   });
 
   it('should GET /auth/currentUser was logouted', async () => {
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .get('/auth/currentUser')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(401);
