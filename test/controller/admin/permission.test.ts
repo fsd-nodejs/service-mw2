@@ -20,7 +20,7 @@ describe('test/controller/admin/permission.test.ts', () => {
   });
 
   afterAll(async () => {
-    close(app);
+    await close(app);
   });
 
   it('should get /admin/permission/query ', async () => {

@@ -1,7 +1,7 @@
 import * as assert from 'power-assert';
 
 import { Framework } from '@midwayjs/web';
-import { createApp, close, createHttpRequest } from '@midwayjs/mock';
+import { createApp, close } from '@midwayjs/mock';
 import { Application } from 'egg';
 import { AuthService } from '../../src/app/service/auth';
 
@@ -12,7 +12,7 @@ describe('test/service/authService.test.ts', () => {
   });
 
   afterAll(async () => {
-    close(app);
+    await close(app);
   });
 
   it('#getAdminUserByUserName >should get exists user', async () => {

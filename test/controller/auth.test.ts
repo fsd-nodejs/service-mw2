@@ -11,7 +11,7 @@ describe('test/controller/auth.test.ts', () => {
   });
 
   afterAll(async () => {
-    close(app);
+    await close(app);
   });
 
   it('should POST /auth/login by wrong username and password', async () => {

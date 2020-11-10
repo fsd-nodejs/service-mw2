@@ -20,7 +20,7 @@ describe('test/controller/admin/role.test.ts', () => {
   });
 
   afterAll(async () => {
-    close(app);
+    await close(app);
   });
 
   it('should get /admin/role/query ', async () => {

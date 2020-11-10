@@ -1,12 +1,15 @@
 import * as assert from 'power-assert';
-import { app } from '@midwayjs/mock/bootstrap';
+
+import { Framework } from '@midwayjs/web';
+import { createApp, close, createHttpRequest } from '@midwayjs/mock';
+import { Application } from 'egg';
 
 describe('test/controller/home.test.ts', () => {
+  let app: Application;
   let currentUser: any;
   beforeAll(async () => {
-    app.mockCsrf();
-    const response = await app
-      .httpRequest()
+    app = await createApp<Framework>();
+    const response = await createHttpRequest(app)
       .post('/auth/login')
       .type('form')
       .send(app.config.admin)
@@ -14,9 +17,12 @@ describe('test/controller/home.test.ts', () => {
     currentUser = response.body.data;
   });
 
+  afterAll(async () => {
+    await close(app);
+  });
+
   it('should GET /', async () => {
-    const response = await app
-      .httpRequest()
+    const response = await createHttpRequest(app)
       .get('/')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
@@ -26,7 +32,7 @@ describe('test/controller/home.test.ts', () => {
   });
 
   it('should GET /ping', async () => {
-    const ret = await app.httpRequest().get('/ping').expect(200);
+    const ret = await createHttpRequest(app).get('/ping').expect(200);
 
     const msg: string = ret.text;
     assert(msg && msg === 'OK');

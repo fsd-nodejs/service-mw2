@@ -20,7 +20,7 @@ describe('test/controller/admin/user.test.ts', () => {
   });
 
   afterAll(async () => {
-    close(app);
+    await close(app);
   });
 
   it('should get /admin/user/query ', async () => {
@@ -30,7 +30,7 @@ describe('test/controller/admin/user.test.ts', () => {
         sorter: 'id_DESC',
         id: '1',
         name: 'Admin',
-        username: 'admin'
+        username: 'admin',
       })
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
@@ -59,7 +59,7 @@ describe('test/controller/admin/user.test.ts', () => {
       username: 'fakeUserName',
       password: '123456',
       roles: ['1'],
-      permissions: ['1']
+      permissions: ['1'],
     };
     const response = await createHttpRequest(app)
       .post('/admin/user/create')
