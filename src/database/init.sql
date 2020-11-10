@@ -199,7 +199,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_users`;
 CREATE TABLE `admin_users` (
-  `id` bigint unsigned NOT NULL,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,

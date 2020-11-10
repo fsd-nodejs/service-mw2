@@ -85,6 +85,11 @@ export class AdminUserController {
 
     // 检查权限是否存在
     await this.permissionService.checkPermissionExists(permissions);
+
+    const { affected } = await this.service.updateAdminUser(params);
+    assert(affected, new MyError('更新失败，请检查', 400));
+
+    ctx.helper.success(null, null, 204);
   }
 
   @Del('/remove')

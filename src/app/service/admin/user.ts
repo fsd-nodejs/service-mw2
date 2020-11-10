@@ -121,10 +121,18 @@ export class AdminUserService {
       id,
       roles: newRoles,
       permissions: newPermissions,
+      password,
       ...columns
     } = params;
 
     const user = await this.getAdminUserById(id);
+
+    // 处理密码更新
+    let newPassword = user.password;
+    if (password) {
+      password !== user.password &&
+        (newPassword = this.ctx.helper.bhash(password));
+    }
 
     // 如果有传递roles
     if (newRoles) {
@@ -177,7 +185,7 @@ export class AdminUserService {
     return this.adminUserModel
       .createQueryBuilder()
       .update(user)
-      .set(columns)
+      .set({ ...columns, password: newPassword })
       .where({ id: id })
       .execute();
   }
