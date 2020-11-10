@@ -1,17 +1,16 @@
 import { EntityModel } from '@midwayjs/orm';
-import {
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+
+import { BaseModel } from './base';
+import { AdminRoleModel } from './admin-role';
+import { AdminPermissionModel } from './admin-permission';
 
 @EntityModel({
   name: 'admin_users',
 })
-export default class AdminUserModel {
+export class AdminUserModel extends BaseModel {
   @PrimaryGeneratedColumn({
-    type: 'integer',
+    type: 'bigint',
   })
   id: string;
 
@@ -51,40 +50,20 @@ export default class AdminUserModel {
   })
   rememberToken: string;
 
-  @CreateDateColumn({
-    name: 'created_at',
+  @ManyToMany(type => AdminRoleModel, role => role.users)
+  @JoinTable({
+    name: 'admin_role_users',
+    joinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'role_id',
+      referencedColumnName: 'id',
+    },
   })
-  createdAt!: Date;
+  roles: AdminRoleModel[];
 
-  @UpdateDateColumn({
-    name: 'updated_at',
-  })
-  updatedAt!: Date;
-}
-
-/**
- * 查询管理员用户信息参数
- */
-export interface GetAdminUserOpts {
-  id?: string;
-  name?: string; // 名称
-  username?: string; // 帐号
-  sorter?: string; // 排序
-  pageSize: number;
-  current: number;
-}
-
-/**
- * 管理员用户信息
- */
-export interface AdminUserInfo {
-  id?: string;
-  username?: string;
-  name?: string;
-  password?: string;
-  avatar?: string;
-  roles?: string[];
-  permissions?: string[];
-  createdAt?: Date;
-  updatedAt?: Date;
+  @ManyToMany(type => AdminPermissionModel, permission => permission.users)
+  permissions: AdminPermissionModel[];
 }

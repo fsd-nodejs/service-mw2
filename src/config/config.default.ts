@@ -1,5 +1,6 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 import { JwtConfig } from '@waiting/egg-jwt';
+import { ConnectionOptions } from 'typeorm';
 
 export type DefaultConfig = PowerPartial<EggAppConfig>;
 
@@ -12,6 +13,12 @@ export default (appInfo: EggAppInfo) => {
   // add your config here
   config.middleware = ['jwtAuth'];
 
+  // 默认管理员
+  config.admin = {
+    username: 'admin',
+    password: 'admin',
+  };
+
   // 数据库配置
   config.orm = {
     type: 'mysql',
@@ -21,9 +28,9 @@ export default (appInfo: EggAppInfo) => {
     password: process.env.MYSQL_PASSWORD || '',
     database: process.env.MYSQL_DATABASE || undefined,
     synchronize: false,
-    logging: false,
+    logging: true,
     timezone: '+08:00',
-  };
+  } as ConnectionOptions;
 
   // redis配置
   config.redis = {

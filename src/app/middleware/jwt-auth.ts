@@ -2,12 +2,12 @@ import * as assert from 'assert';
 
 import { IMidwayWebNext } from '@midwayjs/web';
 
-import MyError from '@/app/util/my-error';
+import MyError from '../util/my-error';
 
 // jwt auth
 export default () => {
   return async (ctx, next: IMidwayWebNext) => {
-    const [, token] = ctx.header.authorization?.split(' ');
+    const [, token] = ctx.header.authorization.split(' ');
     // 解密，获取payload
     const { payload } = ctx.app.jwt.decode(token);
 
