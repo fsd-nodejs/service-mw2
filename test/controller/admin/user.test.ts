@@ -26,6 +26,12 @@ describe('test/controller/admin/user.test.ts', () => {
   it('should get /admin/user/query ', async () => {
     const response = await createHttpRequest(app)
       .get('/admin/user/query')
+      .query({
+        sorter: 'id_DESC',
+        id: '1',
+        name: 'Admin',
+        username: 'admin'
+      })
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
     assert(response.body.data.total);
@@ -52,6 +58,8 @@ describe('test/controller/admin/user.test.ts', () => {
       name: 'fakeName',
       username: 'fakeUserName',
       password: '123456',
+      roles: ['1'],
+      permissions: ['1']
     };
     const response = await createHttpRequest(app)
       .post('/admin/user/create')
@@ -68,9 +76,9 @@ describe('test/controller/admin/user.test.ts', () => {
       id: currentAdminUser.id,
       name: 'fakeName2',
       username: 'fakeUserName2',
-      password: '123456',
-      roles: [],
-      permissions: [],
+      password: '1234567',
+      roles: ['1'],
+      permissions: ['1'],
     };
     const response = await createHttpRequest(app)
       .patch('/admin/user/update')

@@ -26,6 +26,18 @@ describe('test/controller/auth.test.ts', () => {
     expect(response.body.code).toBe(400);
   });
 
+  it('should POST /auth/login by wrong username', async () => {
+    const response = await createHttpRequest(app)
+      .post('/auth/login')
+      .type('form')
+      .send({
+        username: 'fakename',
+        password: '123456',
+      })
+      .expect(400);
+    expect(response.body.code).toBe(400);
+  });
+
   it('should POST /auth/login by wrong input', async () => {
     const response = await createHttpRequest(app)
       .post('/auth/login')

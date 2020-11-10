@@ -26,6 +26,12 @@ describe('test/controller/admin/role.test.ts', () => {
   it('should get /admin/role/query ', async () => {
     const response = await createHttpRequest(app)
       .get('/admin/role/query')
+      .query({
+        sorter: 'id_DESC',
+        id: '1',
+        name: 'Admin',
+        slug: 'admin'
+      })
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
     assert(response.body.data.total);
@@ -51,6 +57,7 @@ describe('test/controller/admin/role.test.ts', () => {
     const params = {
       name: 'fakeName',
       slug: 'fakeSlug',
+      permissions: ['2', '3']
     };
     const response = await createHttpRequest(app)
       .post('/admin/role/create')
@@ -66,6 +73,7 @@ describe('test/controller/admin/role.test.ts', () => {
     const params = {
       id: currentRole.id,
       slug: 'fakeSlug2',
+      permissions: ['2']
     };
     const response = await createHttpRequest(app)
       .patch('/admin/role/update')

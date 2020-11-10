@@ -69,7 +69,7 @@ describe('test/controller/admin/menu.test.ts', () => {
       id: currentMenu.id,
       title: 'fakeTitle2',
       uri: 'fakeUri2',
-      roles: [],
+      roles: ['1'],
       permissionId: '2',
     };
     const response = await createHttpRequest(app)

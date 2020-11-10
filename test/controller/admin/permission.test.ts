@@ -26,6 +26,14 @@ describe('test/controller/admin/permission.test.ts', () => {
   it('should get /admin/permission/query ', async () => {
     const response = await createHttpRequest(app)
       .get('/admin/permission/query')
+      .query({
+        sorter: 'id_DESC',
+        id: '2',
+        name: 'Dash',
+        slug: 'dash',
+        httpPath: '/',
+        httpMethod: 'GET'
+      })
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
     assert(response.body.data.total);

@@ -42,7 +42,7 @@
     "dev": "cross-env ets && cross-env NODE_ENV=local midway-bin dev --ts",
     "debug": "cross-env NODE_ENV=local midway-bin debug --ts",
     "test": "midway-bin test --ts",
-    "cov": "midway-bin cov --ts",
+    "cov": "midway-bin cov",
     "lint": "mwts check",
     "lint:fix": "mwts fix",
     "ci": "npm run cov",
