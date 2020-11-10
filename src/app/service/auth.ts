@@ -48,13 +48,13 @@ export class AuthService {
   }
 
   /**
-   * 获取管理员Redis Token
+   * 获取管理员Redis Token（弃用）
    * @param {String} id 管理员id
    * @returns {String} Redis中的Token
    */
-  async getAdminUserTokenById(id: string) {
-    return this.redis.get(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
-  }
+  // async getAdminUserTokenById(id: string) {
+  //   return this.redis.get(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
+  // }
 
   /**
    * 移除管理员Redis Token
