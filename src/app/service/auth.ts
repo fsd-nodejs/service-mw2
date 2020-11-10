@@ -80,16 +80,16 @@ export class AuthService {
   }
 
   /**
-   * 读取Redis缓存中的管理员信息
+   * 读取Redis缓存中的管理员信息(弃用)
    * @param {String} id
    * @returns {AdminUserModel} 管理员信息
    */
-  public async getAdminUserById(id: string) {
-    const userinfo = (await this.redis.get(
-      `${this.jwtAuthConfig.redisScope}:userinfo:${id}`
-    )) as string;
-    return JSON.parse(userinfo) as AdminUserModel;
-  }
+  // public async getAdminUserById(id: string) {
+  //   const userinfo = (await this.redis.get(
+  //     `${this.jwtAuthConfig.redisScope}:userinfo:${id}`
+  //   )) as string;
+  //   return JSON.parse(userinfo) as AdminUserModel;
+  // }
 
   /**
    * 缓存管理员
