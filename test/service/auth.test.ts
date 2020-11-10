@@ -9,12 +9,6 @@ describe('test/service/authService.test.ts', () => {
   let app: Application;
   beforeAll(async () => {
     app = await createApp<Framework>();
-
-    const response = await createHttpRequest(app)
-      .post('/auth/login')
-      .type('form')
-      .send(app.config.admin)
-      .expect(200);
   });
 
   afterAll(async () => {
