@@ -14,7 +14,9 @@ export class ContainerConfiguration implements ILifeCycle {
   @App()
   app: Application;
 
+  // 启动前处理
   async onReady(): Promise<void> {}
 
-  async onStop(): Promise<void> {}
+  // 可以在这里做些停止后处理
+  // async onStop(): Promise<void> {}
 }

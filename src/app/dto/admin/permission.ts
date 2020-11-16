@@ -23,7 +23,7 @@ export class QueryDTO {
   httpPath?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  httpMethod?: string | string[];
+  httpMethod?: string;
 
   @Rule(
     RuleType.string()
