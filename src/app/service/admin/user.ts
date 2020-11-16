@@ -87,20 +87,22 @@ export class AdminUserService {
     let user = new AdminUserModel();
 
     // 预处理角色参数
-    const roles =
-      params.roles?.map(item => {
-        const role = new AdminRoleModel();
-        role.id = item;
-        return role;
-      }) || [];
+    const roles = params.roles
+      ? params.roles.map(item => {
+          const role = new AdminRoleModel();
+          role.id = item;
+          return role;
+        })
+      : [];
 
     // 预处理权限参数
-    const permissions =
-      params.permissions?.map(item => {
-        const role = new AdminPermissionModel();
-        role.id = item;
-        return role;
-      }) || [];
+    const permissions = params.permissions
+      ? params.permissions.map(item => {
+          const role = new AdminPermissionModel();
+          role.id = item;
+          return role;
+        })
+      : [];
 
     user = this.adminUserModel.merge(user, {
       ...params,
