@@ -52,9 +52,9 @@ export class AuthService {
    * @param {String} id 管理员id
    * @returns {String} Redis中的Token
    */
-  // async getAdminUserTokenById(id: string) {
-  //   return this.redis.get(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
-  // }
+  async getAdminUserTokenById(id: string) {
+    return this.redis.get(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
+  }
 
   /**
    * 移除管理员Redis Token
@@ -84,12 +84,12 @@ export class AuthService {
    * @param {String} id
    * @returns {AdminUserModel} 管理员信息
    */
-  // public async getAdminUserById(id: string) {
-  //   const userinfo = (await this.redis.get(
-  //     `${this.jwtAuthConfig.redisScope}:userinfo:${id}`
-  //   )) as string;
-  //   return JSON.parse(userinfo) as AdminUserModel;
-  // }
+  public async getAdminUserById(id: string) {
+    const userinfo = (await this.redis.get(
+      `${this.jwtAuthConfig.redisScope}:userinfo:${id}`
+    )) as string;
+    return JSON.parse(userinfo) as AdminUserModel;
+  }
 
   /**
    * 缓存管理员

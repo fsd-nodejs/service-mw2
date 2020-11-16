@@ -5,19 +5,19 @@ import { Rule, RuleType } from '@midwayjs/decorator';
  */
 export class QueryDTO {
   @Rule(RuleType.number().min(1).max(100000).default(1).optional())
-  current: number;
+  current?: number;
 
   @Rule(RuleType.number().min(1).max(1000).default(10).optional())
-  pageSize: number;
+  pageSize?: number;
 
   @Rule(RuleType.string().trim().max(10).optional())
-  id: string;
+  id?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  name: string;
+  name?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  username: string;
+  username?: string;
 
   @Rule(
     RuleType.string()
@@ -26,7 +26,7 @@ export class QueryDTO {
       .regex(/^[a-zA-Z]*(_ASC|_DESC)$/)
       .optional()
   )
-  sorter: string;
+  sorter?: string;
 }
 
 /**
@@ -56,16 +56,16 @@ export class CreateDTO {
   name: string;
 
   @Rule(RuleType.string().trim().max(255).optional())
-  avatar: string;
+  avatar?: string;
 
   @Rule(RuleType.string().trim().min(5).max(60).required())
   password: string;
 
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
-  roles: string[];
+  roles?: string[];
 
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
-  permissions: string[];
+  permissions?: string[];
 }
 
 /**
@@ -82,14 +82,14 @@ export class UpdateDTO {
   name: string;
 
   @Rule(RuleType.string().trim().max(255).optional())
-  avatar: string;
+  avatar?: string;
 
   @Rule(RuleType.string().trim().min(5).max(60).optional())
-  password: string;
+  password?: string;
 
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
-  roles: string[];
+  roles?: string[];
 
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
-  permissions: string[];
+  permissions?: string[];
 }

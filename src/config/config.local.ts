@@ -3,7 +3,7 @@ import { EggRedisOptions } from 'egg-redis';
 // 数据库配置
 export const orm = {
   type: 'mysql',
-  host: '192.168.12.130',
+  host: '192.168.10.40',
   port: 3306,
   username: 'homestead',
   password: 'secret',
@@ -16,7 +16,7 @@ export const orm = {
 export const redis: EggRedisOptions = {
   client: {
     port: 6379, // Redis port
-    host: '192.168.12.130', // Redis host
+    host: '192.168.10.40', // Redis host
     password: '',
     db: 0,
   },

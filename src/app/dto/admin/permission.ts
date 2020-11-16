@@ -5,25 +5,25 @@ import { Rule, RuleType } from '@midwayjs/decorator';
  */
 export class QueryDTO {
   @Rule(RuleType.number().min(1).max(100000).default(1).optional())
-  current: number;
+  current?: number;
 
   @Rule(RuleType.number().min(1).max(1000).default(10).optional())
-  pageSize: number;
+  pageSize?: number;
 
   @Rule(RuleType.string().trim().max(10).optional())
-  id: string;
+  id?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  name: string;
+  name?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  slug: string;
+  slug?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  httpPath: string;
+  httpPath?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  httpMethod: string;
+  httpMethod?: string | string[];
 
   @Rule(
     RuleType.string()
@@ -32,7 +32,7 @@ export class QueryDTO {
       .regex(/^[a-zA-Z]*(_ASC|_DESC)$/)
       .optional()
   )
-  sorter: string;
+  sorter?: string;
 }
 
 /**

@@ -117,7 +117,7 @@ export class AdminPermissionService {
    * 批量删除多条权限数据(忽略关联表的数据)
    * @param {string[]} ids 权限id
    */
-  async removePermissionByIds(ids: string[]) {
+  async removeAdminPermissionByIds(ids: string[]) {
     return (
       this.adminPermissionModel
         .createQueryBuilder()
