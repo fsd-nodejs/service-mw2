@@ -69,17 +69,17 @@ module.exports = {
   },
 
   /**
-   * 处理失败响应
+   * 处理失败响应(未使用，暂时注释)
    * @param ctx
    * @param code
    * @param message
    */
-  error(code: number, message: string) {
-    this.ctx.body = {
-      code,
-      message,
-      data: null,
-    };
-    this.ctx.status = code;
-  },
+  // error(code: number, message: string) {
+  //   this.ctx.body = {
+  //     code,
+  //     message,
+  //     data: null,
+  //   };
+  //   this.ctx.status = code;
+  // },
 };
