@@ -87,8 +87,8 @@ describe('test/service/user.test.ts', () => {
       'adminUserService'
     );
     const params = {
-      name: 'fakeName',
-      username: 'fakeUserName',
+      name: 'fakeName3',
+      username: 'fakeUserName3',
       password: ctx.helper.bhash('123456'),
       roles: ['1'],
       permissions: ['1'],
@@ -133,8 +133,8 @@ describe('test/service/user.test.ts', () => {
     const { id } = currentUser;
     const { affected } = await userService.updateAdminUser({
       id,
-      name: 'fakeName2',
-      username: 'fakeUserName2',
+      name: 'fakeName4',
+      username: 'fakeUserName4',
       password: '123456',
       roles: [],
       permissions: [],
