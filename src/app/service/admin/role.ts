@@ -86,12 +86,13 @@ export class AdminRoleService {
   async createAdminRole(params: CreateDTO) {
     let role = new AdminRoleModel();
 
-    const permissions =
-      params.permissions?.map(item => {
-        const permission = new AdminPermissionModel();
-        permission.id = item;
-        return permission;
-      }) || [];
+    const permissions = params.permissions
+      ? params.permissions.map(item => {
+          const permission = new AdminPermissionModel();
+          permission.id = item;
+          return permission;
+        })
+      : [];
 
     role = this.adminRoleModel.merge(role, {
       ...params,
