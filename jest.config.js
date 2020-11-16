@@ -6,6 +6,7 @@ module.exports = {
   testPathIgnorePatterns: ['<rootDir>/test/fixtures'],
   coveragePathIgnorePatterns: ['<rootDir>/test/'],
   moduleNameMapper: {
-    "^@/(.*)$": '<rootDir>/src/$1'
-  }
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  collectCoverageFrom: ['**/src/**/*.{js,ts}'],
 };

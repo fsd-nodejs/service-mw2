@@ -5,10 +5,10 @@ import { Rule, RuleType } from '@midwayjs/decorator';
  */
 export class QueryDTO {
   @Rule(RuleType.number().min(1).max(100000).default(1).optional())
-  current: number;
+  current?: number;
 
   @Rule(RuleType.number().min(1).max(1000).default(10).optional())
-  pageSize: number;
+  pageSize?: number;
 }
 
 /**
@@ -32,7 +32,7 @@ export class RemoveDTO {
  */
 export class CreateDTO {
   @Rule(RuleType.string().trim().max(10).optional().default('0'))
-  parentId: string;
+  parentId?: string;
 
   @Rule(RuleType.string().trim().max(50).required())
   title: string;
@@ -43,10 +43,10 @@ export class CreateDTO {
   uri: string;
 
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
-  roles: string[];
+  roles?: string[];
 
   @Rule(RuleType.string().trim().max(10).optional())
-  permissionId: string;
+  permissionId?: string;
 }
 
 /**
@@ -57,21 +57,21 @@ export class UpdateDTO {
   id: string;
 
   @Rule(RuleType.string().trim().max(10).optional().default('0'))
-  parentId: string;
+  parentId?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  title: string;
+  title?: string;
 
   @Rule(
     RuleType.string().trim().max(255).uri({ allowRelative: true }).optional()
   )
-  uri: string;
+  uri?: string;
 
   @Rule(RuleType.array().items(RuleType.string().trim().max(10).optional()))
-  roles: string[];
+  roles?: string[];
 
   @Rule(RuleType.string().trim().max(10).optional())
-  permissionId: string;
+  permissionId?: string;
 }
 
 /**

@@ -76,7 +76,7 @@ export class AdminPermissionController {
     // 检查权限是否存在
     await this.service.checkPermissionExists(params.ids);
 
-    const total = await this.service.removePermissionByIds(params.ids);
+    const total = await this.service.removeAdminPermissionByIds(params.ids);
     assert(total, new MyError('删除失败，请检查', 400));
 
     ctx.helper.success(null, null, 204);
