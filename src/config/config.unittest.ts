@@ -1,14 +1,15 @@
 import { EggRedisOptions } from 'egg-redis';
+import { ConnectionOptions } from 'typeorm';
 
 export const security = {
   csrf: false,
 };
 
 // 数据库配置
-export const orm = {
+export const orm: ConnectionOptions = {
   type: 'mysql',
   host: process.env.MYSQL_HOST || '192.168.10.40',
-  port: process.env.MYSQL_HOST || 3306,
+  port: +process.env.MYSQL_HOST || 3306,
   username: process.env.MYSQL_USER || 'homestead',
   password: process.env.MYSQL_PASSWORD || 'secret',
   database: process.env.MYSQL_DATABASE || 'shop_development',

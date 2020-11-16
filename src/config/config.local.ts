@@ -1,7 +1,8 @@
 import { EggRedisOptions } from 'egg-redis';
+import { ConnectionOptions } from 'typeorm';
 
 // 数据库配置
-export const orm = {
+export const orm: ConnectionOptions = {
   type: 'mysql',
   host: '192.168.10.40',
   port: 3306,
