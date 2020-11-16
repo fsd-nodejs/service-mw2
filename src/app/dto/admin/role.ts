@@ -56,7 +56,7 @@ export class CreateDTO {
   slug: string;
 
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
-  permissions: string[];
+  permissions?: string[];
 }
 
 /**
@@ -67,11 +67,11 @@ export class UpdateDTO {
   id: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  name: string;
+  name?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  slug: string;
+  slug?: string;
 
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
-  permissions: string[];
+  permissions?: string[];
 }

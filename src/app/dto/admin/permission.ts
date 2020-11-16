@@ -86,10 +86,10 @@ export class UpdateDTO {
   id: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  name: string;
+  name?: string;
 
   @Rule(RuleType.string().trim().max(50).optional())
-  slug: string;
+  slug?: string;
 
   @Rule(
     RuleType.array()
@@ -102,8 +102,8 @@ export class UpdateDTO {
       .unique()
       .optional()
   )
-  httpMethod: string[];
+  httpMethod?: string[];
 
   @Rule(RuleType.string().uri({ allowRelative: true }).optional())
-  httpPath: string;
+  httpPath?: string;
 }
