@@ -85,7 +85,9 @@ export class AdminPermissionModel extends BaseModel {
 
   @AfterLoad()
   mixin() {
-    this.httpMethod = this.httpMethod?.toString().split(',');
+    this.httpMethod = this.httpMethod
+      ? this.httpMethod.toString().split(',')
+      : [];
   }
 
   @BeforeInsert()
