@@ -2,12 +2,14 @@
 import 'tsconfig-paths/register';
 
 import { Configuration, App } from '@midwayjs/decorator';
+import * as swagger from '@midwayjs/swagger';
 import { ILifeCycle } from '@midwayjs/core';
 import { Application } from 'egg';
 
 @Configuration({
   imports: [
     '@midwayjs/orm', // 加载 orm 组件
+    swagger, // 加载swagger组件
   ],
 })
 export class ContainerConfiguration implements ILifeCycle {

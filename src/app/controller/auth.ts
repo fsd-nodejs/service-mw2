@@ -11,13 +11,17 @@ import {
   ALL,
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/web';
+import { CreateApiDoc } from '@midwayjs/swagger';
 
 import { AuthService } from '../service/auth';
 import { LoginDTO } from '../dto/auth';
 import MyError from '../util/my-error';
 
 @Provide()
-@Controller('/auth')
+@Controller('/auth', {
+  tagName: '管理员登录授权',
+  description: '包含管理员授权登录、获取信息等接口 ',
+})
 export class AuthController {
   @Inject('authService')
   service: AuthService;
@@ -25,6 +29,10 @@ export class AuthController {
   /**
    * 登录，目前使用帐号+密码模式
    */
+  @(CreateApiDoc()
+    .summary('管理员登录')
+    .description('使用帐号密码登录')
+    .build())
   @Post('/login')
   @Validate()
   async login(ctx: Context, @Body(ALL) params: LoginDTO): Promise<void> {
