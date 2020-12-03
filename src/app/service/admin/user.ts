@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 
 import { Provide, Inject } from '@midwayjs/decorator';
-import { Context } from '@midwayjs/web';
+import { Context } from 'egg';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, Like, In } from 'typeorm';
 
