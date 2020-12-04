@@ -1,6 +1,6 @@
 import { Controller, Get, Provide, Plugin } from '@midwayjs/decorator';
 import { Jwt } from '@waiting/egg-jwt';
-import { Context } from '@midwayjs/web';
+import { Context } from 'egg';
 
 @Provide()
 @Controller('/')
