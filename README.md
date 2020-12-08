@@ -6,6 +6,24 @@ Midway 2.x 样板工程
 [![GitHub Actions status](https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg)](https://github.com/fsd-nodejs/service-mw2)
 [![codebeat badge](https://codebeat.co/badges/ed780b5a-d9e8-41a8-8bc9-8bcb3263c6ce)](https://codebeat.co/projects/github-com-fsd-nodejs-service-mw2-master)
 
+## TODO
+
+- 基础
+- - [x] Admin登录
+- - [ ] 普通用户登录-账户密码
+- - [ ] OAuth 2.0
+- - [ ] 日志监控
+- - [ ] 本地上传文件服务
+- - [x] 鉴权中间件
+- - [ ] 接口响应统计中间件
+
+- 超级管理
+- - [x] 权限
+- - [x] 角色
+- - [x] 管理员
+- - [x] 菜单
+- - [ ] 日志(操作日志，记录管理用户的实际操作)
+
 ## QuickStart
 
 <!-- add docs here for user -->
@@ -80,23 +98,18 @@ $ npm stop
     }
   ```
 
-## TODO
+## 接口响应统计中间件(设计)
+做接口响应数据统计的出发点，有两点
+- 帮助排查线上接口响应问题
+- 监控系统实时状态
 
-- 基础
-- - [x] Admin登录
-- - [ ] 普通用户登录-账户密码
-- - [ ] OAuth 2.0
-- - [ ] 日志监控
-- - [ ] 本地上传文件服务
-- - [x] 鉴权中间件
-- - [ ] 接口响应统计中间件
+虽然框架本身已经有日志功能，但是很多场景下，我们可能需要看下各个接口服务的响应状态
+是在正常服务，还是已经出现问题。在有监控的帮助下，可以快速帮我们定位日志排查问题。
+是对应统计实时数据而言，这里我们会使用 RTS 的技术方案，会用到 RabbitMQ 和 Redis 
+RabbitMQ 作用在于把统计的计算异步化，从而不影响正常的业务请求处理（消费者的逻辑代码，前期可以和业务代码写在一个工程里面。等业务量上来后，可以考虑拆分出去，独立部署）
+大致流程如下，手绘的，工具简陋，姑且看一下。
+![IMG_5365 HEIC](https://user-images.githubusercontent.com/10667077/101478900-55a4cb00-398c-11eb-97c3-4a41195c572d.JPG)
 
-- 超级管理
-- - [x] 权限
-- - [x] 角色
-- - [x] 管理员
-- - [x] 菜单
-- - [ ] 日志(操作日志，记录管理用户的实际操作)
 
 ## 迁移API
 
