@@ -48,7 +48,7 @@ export default (appInfo: EggAppInfo) => {
     client: {
       secret: '123456', // 默认密钥，生产环境一定要更改
     },
-    ignore: ['/auth/login', '/ping'],
+    ignore: ['/auth/login', '/ping', '/swagger-u*'],
   } as JwtConfig;
 
   // jwt token 校验中间件(需配合jwt使用, ignore的配置与jwt一致)
