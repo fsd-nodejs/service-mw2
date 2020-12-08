@@ -37,7 +37,7 @@ export class AuthController {
   @Validate()
   async login(ctx: Context, @Body(ALL) params: LoginDTO): Promise<void> {
     // 后续可能有多种登录方式
-    const existAdmiUser = await this.service.localHandler(params);
+    let existAdmiUser = await this.service.localHandler(params);
 
     // 判断管理员是否存在
     assert(
@@ -48,6 +48,12 @@ export class AuthController {
     // 生成Token
     const token = await this.service.createAdminUserToken(existAdmiUser);
 
+    // 查询用户权限(用于中间件鉴权逻辑)
+    const permissions = await this.service.getAdminUserGrantById(
+      existAdmiUser.id
+    );
+
+    existAdmiUser = Object.assign(existAdmiUser, { permissions });
     // 缓存管理员数据
     await this.service.cacheAdminUser(existAdmiUser);
 

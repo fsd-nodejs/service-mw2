@@ -3,7 +3,7 @@ import { Context } from '@midwayjs/web';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Jwt, JwtConfig } from '@waiting/egg-jwt';
 import { Redis } from 'ioredis';
-import { Repository } from 'typeorm';
+import { Repository, getConnection } from 'typeorm';
 
 import { AdminUserModel } from '../model/admin-user';
 
@@ -97,7 +97,15 @@ export class AuthService {
    * @returns {OK | null} 缓存处理结果
    */
   async cacheAdminUser(data: AdminUserModel) {
-    const { id, username, name, avatar, createdAt, updatedAt } = data;
+    const {
+      id,
+      username,
+      name,
+      avatar,
+      createdAt,
+      updatedAt,
+      permissions,
+    } = data;
 
     const userinfo = {
       id,
@@ -106,6 +114,7 @@ export class AuthService {
       avatar,
       createdAt,
       updatedAt,
+      permissions,
     };
 
     return this.redis.set(
@@ -142,6 +151,7 @@ export class AuthService {
     if (!existAdmiUser) {
       return null;
     }
+
     // 匹配密码
     const passhash = existAdmiUser.password;
     const equal = this.ctx.helper.bcompare(params.password, passhash);
@@ -151,5 +161,41 @@ export class AuthService {
 
     // 通过验证
     return existAdmiUser;
+  }
+  /**
+   * 通过id获取用户的权限
+   * @param {string} id 用户id
+   */
+  async getAdminUserGrantById(id: string) {
+    const conn = getConnection('default');
+    const userPsermissions = await conn
+      .createQueryBuilder()
+      .select('permission_id AS permissionId')
+      .from('admin_user_permissions', 'permission')
+      .where({
+        user_id: id,
+      })
+      .execute();
+
+    const rolePermissions = await conn
+      .createQueryBuilder()
+      .select('permission.permission_id AS permissionId')
+      .from('admin_role_users', 'role')
+      .leftJoin(
+        'admin_role_permissions',
+        'permission',
+        'permission.role_id = role.role_id'
+      )
+      .where({
+        user_id: id,
+      })
+      .execute();
+    const permissions = Array.from(
+      new Set([
+        ...userPsermissions.map(item => item.permissionId),
+        ...rolePermissions.map(item => item.permissionId),
+      ])
+    );
+    return permissions;
   }
 }

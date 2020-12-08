@@ -11,7 +11,7 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_1602294995416_4568';
 
   // add your config here
-  config.middleware = ['jwtAuth'];
+  config.middleware = ['jwtAuth', 'checkPermission'];
 
   // 默认管理员
   config.admin = {

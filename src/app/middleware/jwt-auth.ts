@@ -1,3 +1,6 @@
+/**
+ * 用户token的校验，会将当前用户的信息放入ctx.currentUser中
+ */
 import * as assert from 'assert';
 
 import { IMidwayWebNext } from '@midwayjs/web';
