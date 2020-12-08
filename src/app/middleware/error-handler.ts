@@ -1,4 +1,5 @@
-import { IMidwayWebNext, Context } from '@midwayjs/web';
+import { IMidwayWebNext } from '@midwayjs/web';
+import { Context } from 'egg';
 
 export default () => {
   return async (ctx: Context, next: IMidwayWebNext) => {

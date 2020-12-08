@@ -10,8 +10,8 @@ import {
   Body,
   ALL,
 } from '@midwayjs/decorator';
-import { Context } from '@midwayjs/web';
 import { CreateApiDoc } from '@midwayjs/swagger';
+import { Context } from 'egg';
 
 import { AuthService } from '../service/auth';
 import { LoginDTO } from '../dto/auth';

@@ -13,7 +13,7 @@ import {
   Patch,
   Body,
 } from '@midwayjs/decorator';
-import { Context } from '@midwayjs/web';
+import { Context } from 'egg';
 
 import { AdminRoleService } from '../../service/admin/role';
 import { AdminPermissionService } from '../../service/admin/permission';
