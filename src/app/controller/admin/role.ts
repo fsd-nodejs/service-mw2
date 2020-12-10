@@ -38,14 +38,20 @@ export class AdminRoleController {
   @Inject('adminPermissionService')
   permissionService: AdminPermissionService;
 
-  @Get('/query')
+  @Get('/query', {
+    summary: '获取角色列表',
+    description: '分页接口，查询角色列表',
+  })
   @Validate()
   async query(ctx: Context, @Query(ALL) query: QueryDTO) {
     const result = await this.service.queryAdminRole(query);
     ctx.helper.success(result);
   }
 
-  @Get('/show')
+  @Get('/show', {
+    summary: '获取单个角色详情',
+    description: '获取角色的详细信息，包括其关联的对象',
+  })
   @Validate()
   async show(ctx: Context, @Query(ALL) query: ShowDTO) {
     const result = await this.service.getAdminRoleById(query.id);
@@ -53,10 +59,13 @@ export class AdminRoleController {
     ctx.helper.success(result);
   }
 
-  @Post('/create')
+  @Post('/create', {
+    summary: '创建角色',
+    description: '会校验关联的权限是否存在',
+  })
   @Validate()
   async create(ctx: Context, @Body(ALL) params: CreateDTO) {
-    // 检查权限是否存在
+    // 检查角色是否存在
     await this.permissionService.checkPermissionExists(params.permissions);
 
     const result = await this.service.createAdminRole(params);
@@ -64,7 +73,10 @@ export class AdminRoleController {
     ctx.helper.success(result, null, 201);
   }
 
-  @Patch('/update')
+  @Patch('/update', {
+    summary: '更新角色数据',
+    description: '可更新角色一个或多个字段',
+  })
   @Validate()
   async update(ctx: Context, @Body(ALL) params: UpdateDTO) {
     // 检查角色是否存在
@@ -76,7 +88,10 @@ export class AdminRoleController {
     ctx.helper.success(null, null, 204);
   }
 
-  @Del('/remove')
+  @Del('/remove', {
+    summary: '删除角色',
+    description: '关联关系表不会删除其中的内容，可以同时删除多个角色',
+  })
   @Validate()
   async remove(ctx: Context, @Body(ALL) params: RemoveDTO) {
     // 检查角色是否存在

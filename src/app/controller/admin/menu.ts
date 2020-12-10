@@ -14,7 +14,6 @@ import {
   Del,
 } from '@midwayjs/decorator';
 import { Context } from 'egg';
-import { CreateApiDoc } from '@midwayjs/swagger';
 
 import { AdminMenuService } from '../../service/admin/menu';
 import { AdminRoleService } from '../../service/admin/role';
@@ -44,18 +43,20 @@ export class AdminMenuController {
   @Inject('adminPermissionService')
   permissionService: AdminPermissionService;
 
-  @(CreateApiDoc()
-    .summary('获取菜单列表')
-    .description('分页接口，获取菜单的列表')
-    .build())
-  @Get('/query')
+  @Get('/query', {
+    summary: '获取菜单列表',
+    description: '分页接口，获取菜单的列表',
+  })
   @Validate()
   async query(ctx: Context, @Query(ALL) query: QueryDTO) {
     const result = await this.service.queryAdminMenu(query);
     ctx.helper.success(result);
   }
 
-  @Get('/show')
+  @Get('/show', {
+    summary: '获取单个菜单详情',
+    description: '获取菜单的详细信息，包括其关联的对象',
+  })
   @Validate()
   async show(ctx: Context, @Query(ALL) query: ShowDTO) {
     const result = await this.service.getAdminMenuById(query.id);
@@ -63,7 +64,10 @@ export class AdminMenuController {
     ctx.helper.success(result);
   }
 
-  @Post('/create')
+  @Post('/create', {
+    summary: '创建菜单',
+    description: '会校验要关联角色和权限是否存在',
+  })
   @Validate()
   async create(ctx: Context, @Body(ALL) params: CreateDTO) {
     // 检查角色是否存在
@@ -77,7 +81,10 @@ export class AdminMenuController {
     ctx.helper.success(result, null, 201);
   }
 
-  @Patch('/update')
+  @Patch('/update', {
+    summary: '更新菜单数据',
+    description: '可更新菜单一个或多个字段',
+  })
   @Validate()
   async update(ctx: Context, @Body(ALL) params: UpdateDTO) {
     // 检查菜单是否存在
@@ -95,7 +102,10 @@ export class AdminMenuController {
     ctx.helper.success(null, null, 204);
   }
 
-  @Del('/remove')
+  @Del('/remove', {
+    summary: '删除菜单',
+    description: '关联关系表不会删除其中的内容，可以同时删除多个菜单',
+  })
   @Validate()
   async remove(ctx: Context, @Body(ALL) params: RemoveDTO) {
     // 检查菜单是否存在
@@ -108,7 +118,11 @@ export class AdminMenuController {
     ctx.helper.success(null, null, 204);
   }
 
-  @Post('/order')
+  @Post('/order', {
+    summary: '对菜单进行排序',
+    description:
+      '需要全量的进行排序，数组下标索引即顺序，前端配合 antd-nestable 这个包使用',
+  })
   @Validate()
   async order(ctx: Context, @Body(ALL) params: OrderMenuDTO) {
     const { orders } = params;
