@@ -1,4 +1,5 @@
 import { Rule, RuleType } from '@midwayjs/decorator';
+import { CreateApiPropertyDoc } from '@midwayjs/swagger';
 
 /**
  * 查询管理员列表参数
@@ -72,24 +73,31 @@ export class CreateDTO {
  * 更新管理员参数
  */
 export class UpdateDTO {
+  @CreateApiPropertyDoc('管理员id')
   @Rule(RuleType.string().trim().max(10).required())
   id: string;
 
+  @CreateApiPropertyDoc('帐号，登录用的')
   @Rule(RuleType.string().trim().min(5).max(190).required())
   username: string;
 
+  @CreateApiPropertyDoc('名称')
   @Rule(RuleType.string().trim().min(5).max(255).required())
   name: string;
 
+  @CreateApiPropertyDoc('头像')
   @Rule(RuleType.string().trim().max(255).optional())
   avatar?: string;
 
+  @CreateApiPropertyDoc('密码(数据库入库前会进行加密)')
   @Rule(RuleType.string().trim().min(5).max(60).optional())
   password?: string;
 
+  @CreateApiPropertyDoc('关联的角色')
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
   roles?: string[];
 
+  @CreateApiPropertyDoc('关联的权限')
   @Rule(RuleType.array().items(RuleType.string().trim().max(10)).optional())
   permissions?: string[];
 }
