@@ -4,7 +4,10 @@ import { Jwt } from '@waiting/egg-jwt';
 import { Context } from 'egg';
 
 @Provide()
-@Controller('/')
+@Controller('/', {
+  tagName: '默认的接口',
+  description: '包含连通性接口、鉴权验证接口',
+})
 export class HomeController {
   @Plugin()
   jwt: Jwt;

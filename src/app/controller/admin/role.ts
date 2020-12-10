@@ -27,7 +27,10 @@ import {
 import MyError from '../../util/my-error';
 
 @Provide()
-@Controller('/admin/role')
+@Controller('/admin/role', {
+  tagName: '角色管理',
+  description: '包含角色的增、删、改、查',
+})
 export class AdminRoleController {
   @Inject('adminRoleService')
   service: AdminRoleService;
