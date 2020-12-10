@@ -36,8 +36,7 @@ export class AuthController {
     )
     .respond(200, 'success', 'json', {
       example: {
-        token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2MDc1NjYzMzIsImV4cCI6MTYwNzgyNTUzMn0.IPaFx4wGlI3FDyEpwveML1LZpkIPNebhH4PYVB1W8C4',
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9xxxx',
         currentAuthority: 'admin',
         status: 'ok',
         type: 'account',
