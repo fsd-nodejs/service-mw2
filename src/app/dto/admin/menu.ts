@@ -40,7 +40,7 @@ export class CreateDTO {
   @Rule(RuleType.string().trim().max(10).optional().default('0'))
   parentId?: string;
 
-  @CreateApiPropertyDoc('菜单标题')
+  @CreateApiPropertyDoc('标题')
   @Rule(RuleType.string().trim().max(50).required())
   title: string;
 
@@ -71,7 +71,7 @@ export class UpdateDTO {
   @Rule(RuleType.string().trim().max(10).optional().default('0'))
   parentId?: string;
 
-  @CreateApiPropertyDoc('菜单标题')
+  @CreateApiPropertyDoc('标题')
   @Rule(RuleType.string().trim().max(50).optional())
   title?: string;
 
