@@ -65,7 +65,7 @@ export class AdminMenuController {
   }
 
   @Post('/create', {
-    summary: '新建菜单',
+    summary: '创建菜单',
     description: '会校验要关联角色和权限是否存在',
   })
   @Validate()
