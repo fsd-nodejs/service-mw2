@@ -34,6 +34,15 @@ export class AuthController {
     .description(
       '使用帐号密码登录，拿到 token 后，前端需要将 token 放入 header 中，格式 token: Bearer ${token}'
     )
+    .respond(200, 'success', 'json', {
+      example: {
+        token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2MDc1NjYzMzIsImV4cCI6MTYwNzgyNTUzMn0.IPaFx4wGlI3FDyEpwveML1LZpkIPNebhH4PYVB1W8C4',
+        currentAuthority: 'admin',
+        status: 'ok',
+        type: 'account',
+      },
+    })
     .build())
   @Post('/login')
   @Validate()
@@ -67,7 +76,11 @@ export class AuthController {
   /**
    * 退出登录
    */
-  @(CreateApiDoc().summary('管理员退出登录').description('退出登录').build())
+  @(CreateApiDoc()
+    .summary('管理员退出登录')
+    .description('退出登录，退出成功 data 为{}')
+    .respond(200, 'success')
+    .build())
   @Get('/logout')
   async logout(ctx: Context): Promise<void> {
     const { currentUser } = ctx;
@@ -85,6 +98,16 @@ export class AuthController {
   @(CreateApiDoc()
     .summary('获取当前管理员的信息')
     .description('管理员相关的信息')
+    .respond(200, 'success', 'json', {
+      example: {
+        id: '1',
+        username: 'admin',
+        name: 'Administrator',
+        avatar: 'http://x.y.z',
+        createdAt: '2020-08-20T01:14:57.000Z',
+        updatedAt: '2020-08-20T01:14:57.000Z',
+      },
+    })
     .build())
   @Get('/currentUser')
   async currentUser(ctx: Context): Promise<void> {
