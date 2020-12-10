@@ -43,7 +43,7 @@ export class AdminUserController {
   permissionService: AdminPermissionService;
 
   @Get('/query', {
-    summary: '获取菜单列表',
+    summary: '获取管理员列表',
     description: '分页接口，查询管理员列表',
   })
   @Validate()
