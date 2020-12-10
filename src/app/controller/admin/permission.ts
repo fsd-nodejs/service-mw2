@@ -27,7 +27,10 @@ import {
 import MyError from '../../util/my-error';
 
 @Provide()
-@Controller('/admin/permission')
+@Controller('/admin/permission', {
+  tagName: '权限管理',
+  description: '包含权限的增、删、改、查',
+})
 export class AdminPermissionController {
   @Inject('adminPermissionService')
   service: AdminPermissionService;

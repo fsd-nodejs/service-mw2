@@ -28,7 +28,10 @@ import { AdminRoleService } from '../../service/admin/role';
 import { AdminPermissionService } from '../../service/admin/permission';
 
 @Provide()
-@Controller('/admin/user')
+@Controller('/admin/user', {
+  tagName: '管理员管理',
+  description: '包含管理员的增、删、改、查',
+})
 export class AdminUserController {
   @Inject('adminUserService')
   service: AdminUserService;

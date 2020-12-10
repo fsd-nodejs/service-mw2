@@ -1,12 +1,15 @@
 import { Rule, RuleType } from '@midwayjs/decorator';
+import { CreateApiPropertyDoc } from '@midwayjs/swagger';
 
 /**
  * 菜单列表查询参数
  */
 export class QueryDTO {
+  @CreateApiPropertyDoc('当前页')
   @Rule(RuleType.number().min(1).max(100000).default(1).optional())
   current?: number;
 
+  @CreateApiPropertyDoc('每页数量')
   @Rule(RuleType.number().min(1).max(1000).default(10).optional())
   pageSize?: number;
 }

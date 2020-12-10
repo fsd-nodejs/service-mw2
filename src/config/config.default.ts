@@ -58,5 +58,21 @@ export default (appInfo: EggAppInfo) => {
     accessTokenExpiresIn: 60 * 60 * 24 * 3, // 签名过期时间也可写
   };
 
+  config.swagger = {
+    title: 'service-mw2',
+    description: 'service-mw2 模版工程的接口定义',
+    version: '1.0.0',
+    termsOfService: 'https://github.com/fsd-nodejs/service-mw2',
+    contact: {
+      name: 'tkvern',
+      url: 'https://github.com/tkvern',
+      email: 'verncake@gmail.com',
+    },
+    license: {
+      name: 'MIT',
+      url: 'https://github.com/midwayjs/midway/blob/serverless/LICENSE',
+    },
+  };
+
   return config;
 };

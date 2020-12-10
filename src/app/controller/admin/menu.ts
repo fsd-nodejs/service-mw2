@@ -14,6 +14,7 @@ import {
   Del,
 } from '@midwayjs/decorator';
 import { Context } from 'egg';
+import { CreateApiDoc } from '@midwayjs/swagger';
 
 import { AdminMenuService } from '../../service/admin/menu';
 import { AdminRoleService } from '../../service/admin/role';
@@ -29,7 +30,10 @@ import {
 import MyError from '../../util/my-error';
 
 @Provide()
-@Controller('/admin/menu')
+@Controller('/admin/menu', {
+  tagName: '菜单管理',
+  description: '包含菜单的增、删、改、查、排序',
+})
 export class AdminMenuController {
   @Inject('adminMenuService')
   service: AdminMenuService;
@@ -40,6 +44,10 @@ export class AdminMenuController {
   @Inject('adminPermissionService')
   permissionService: AdminPermissionService;
 
+  @(CreateApiDoc()
+    .summary('获取菜单列表')
+    .description('分页接口，获取菜单的列表')
+    .build())
   @Get('/query')
   @Validate()
   async query(ctx: Context, @Query(ALL) query: QueryDTO) {
