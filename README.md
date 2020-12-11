@@ -6,6 +6,12 @@ Midway 2.x 样板工程
 [![GitHub Actions status](https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg)](https://github.com/fsd-nodejs/service-mw2)
 [![codebeat badge](https://codebeat.co/badges/ed780b5a-d9e8-41a8-8bc9-8bcb3263c6ce)](https://codebeat.co/projects/github-com-fsd-nodejs-service-mw2-master)
 
+拓展阅读:
+- 配套的前端工程请移步 https://github.com/fsd-nodejs/pc 查看这个项目
+- 全栈开发文档以及规范 https://github.com/fsd-nodejs/document 查看这个项目
+- [midway2.x 深度躺坑记(持续更新)
+](https://github.com/fsd-nodejs/service-mw2/wiki/midway2.x-%E6%B7%B1%E5%BA%A6%E8%BA%BA%E5%9D%91%E8%AE%B0(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0))
+
 ## 项目导览 & TODO
 在这个项目中，你会看到以下基于 midway 的实践案例 (上层使用 eggjs )
 
