@@ -10,7 +10,7 @@ import {
  *
  * 继承该Model的话，必须是有id字段的表
  *
- * 默认还会有crateAt、updatedAt
+ * 默认还会有createdAt、updatedAt
  */
 export class BaseModel {
   id: string;
