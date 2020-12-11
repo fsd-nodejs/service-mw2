@@ -5,8 +5,7 @@ import { Context } from 'egg';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, Like, In } from 'typeorm';
 
-import { AdminPermissionModel } from '@/app/model/admin-permission';
-
+import { AdminPermissionModel } from '../../model/admin-permission';
 import { AdminRoleModel } from '../../model/admin-role';
 import { QueryDTO, CreateDTO, UpdateDTO } from '../../dto/admin/role';
 import MyError from '../../util/my-error';
