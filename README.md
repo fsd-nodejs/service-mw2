@@ -120,7 +120,7 @@ $ npm stop
 
 ### 查询注意事项
 
-业务软删除单独写一个 BaseModel，其他实体基础该 Model 即可
+业务软删除单独写一个 BaseModel，其他实体继承该 Model 即可
 
 - 实体查询，继承 `BaseModel` 的实体会自带软删除判断，例子查看`src/app/model/base.ts`
 - 在做关系查询的时候，关系表需要手动加软删除判断 IS NULL，如下:
