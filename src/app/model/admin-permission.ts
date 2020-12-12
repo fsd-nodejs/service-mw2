@@ -43,7 +43,7 @@ export class AdminPermissionModel extends BaseModel {
     comment:
       '请求方式 ["ANY", "DELETE", "POST", "GET", "PUT", "PATCH", "OPTIONS", "HEAD"]',
   })
-  httpMethod: string[];
+  httpMethod: string;
 
   @Column({
     type: 'text',
