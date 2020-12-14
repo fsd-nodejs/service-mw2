@@ -58,8 +58,7 @@ jobs:
         apt-get install -y mysql-client
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         mysql --host mysql -uroot -ppassword shop < ./src/database/init.sql
-    - run: npm i -g npminstall && npminstall
-    - run: npm install codecov
+    - run: npm install && npm install codecov
     - run: npm run ci
       env:
         CI: true
