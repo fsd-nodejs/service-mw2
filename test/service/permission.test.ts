@@ -127,7 +127,7 @@ describe('test/service/permission.test.ts', () => {
     const { list } = await permissionService.queryAdminPermission(queryParams);
     const { total } = await permissionService.queryAdminPermission({
       ...queryParams,
-      httpMethod: list[0].httpMethod,
+      httpMethod: list[0].httpMethod[0],
     });
 
     assert(total);
