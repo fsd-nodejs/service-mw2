@@ -59,6 +59,7 @@ jobs:
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         mysql --host mysql -uroot -ppassword shop < ./src/database/init.sql
     - run: npm i -g npminstall && npminstall
+    - run: npm install codecov
     - run: npm run ci
       env:
         CI: true
@@ -71,7 +72,6 @@ jobs:
         # redis
         REDIS_HOST: redis
         REDIS_PORT: 6379
-    - run: npm install codecov
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1.0.2
 #       with:
