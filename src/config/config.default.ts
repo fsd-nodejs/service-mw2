@@ -48,6 +48,7 @@ export default (appInfo: EggAppInfo) => {
     client: {
       secret: '123456', // 默认密钥，生产环境一定要更改
     },
+    // rule https://github.com/eggjs/egg-path-matching
     ignore: ['/auth/login', '/ping', '/swagger-u*'],
   } as JwtConfig;
 
