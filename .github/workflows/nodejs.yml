@@ -58,7 +58,7 @@ jobs:
         apt-get install -y mysql-client
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         mysql --host mysql -uroot -ppassword shop < ./src/database/init.sql
-    - run: npm install && npm install codecov
+    - run: npm install
     - run: npm run ci
       env:
         CI: true
@@ -73,7 +73,7 @@ jobs:
         REDIS_PORT: 6379
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
-      with:
-        token: ${{secrets.CODECOV_TOKEN}}
-        file: ./coverage/coverage-final.json
+#       with:
+#         token: ${{secrets.CODECOV_TOKEN}}
+#         file: ./coverage/coverage-final.json
       
