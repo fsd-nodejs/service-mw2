@@ -106,8 +106,8 @@ describe('test/service/user.test.ts', () => {
       'adminUserService'
     );
     const params = {
-      name: 'fakeName4',
-      username: 'fakeUserName4',
+      name: 'fakeName5',
+      username: 'fakeUserName5',
       password: ctx.helper.bhash('123456'),
     };
     const user = await userService.createAdminUser(params);

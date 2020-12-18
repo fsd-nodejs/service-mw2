@@ -103,8 +103,8 @@ describe('test/service/role.test.ts', () => {
       'adminRoleService'
     );
     const params = {
-      name: 'fakeName2',
-      slug: 'fakeSlug2',
+      name: 'fakeName3',
+      slug: 'fakeSlug3',
     };
     const role = await roleService.createAdminRole(params);
 
