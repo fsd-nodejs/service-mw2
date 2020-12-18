@@ -96,22 +96,6 @@ describe('test/service/role.test.ts', () => {
     currentRole = role;
   });
 
-
-  it('#createAdminRole >should created role, no permission', async () => {
-    const ctx = app.mockContext();
-    const roleService = await ctx.requestContext.getAsync<AdminRoleService>(
-      'adminRoleService'
-    );
-    const params = {
-      name: 'fakeName3',
-      slug: 'fakeSlug3',
-    };
-    const role = await roleService.createAdminRole(params);
-
-    assert(role);
-    currentRole = role;
-  });
-
   it('#queryAdminRole >should get role list and sorter by id asc', async () => {
     const roleService = await app.applicationContext.getAsync<AdminRoleService>(
       'adminRoleService'
@@ -160,5 +144,19 @@ describe('test/service/role.test.ts', () => {
     const { id } = currentRole;
     const total = await roleService.removeAdminRoleByIds([id]);
     assert(total);
+  });
+
+  it('#createAdminRole >should created role, no permission', async () => {
+    const ctx = app.mockContext();
+    const roleService = await ctx.requestContext.getAsync<AdminRoleService>(
+      'adminRoleService'
+    );
+    const params = {
+      name: 'fakeName3',
+      slug: 'fakeSlug3',
+    };
+    const role = await roleService.createAdminRole(params);
+
+    assert(role);
   });
 });

@@ -99,23 +99,6 @@ describe('test/service/user.test.ts', () => {
     currentUser = user;
   });
 
-
-  it('#createAdminUser >should created user, no role, no permission', async () => {
-    const ctx = app.mockContext();
-    const userService = await ctx.requestContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
-    const params = {
-      name: 'fakeName5',
-      username: 'fakeUserName5',
-      password: ctx.helper.bhash('123456'),
-    };
-    const user = await userService.createAdminUser(params);
-
-    assert(user);
-    currentUser = user;
-  });
-
   it('#queryAdminUser >should get user list and sorter by id asc', async () => {
     const userService = await app.applicationContext.getAsync<AdminUserService>(
       'adminUserService'
@@ -166,5 +149,20 @@ describe('test/service/user.test.ts', () => {
     const { id } = currentUser;
     const total = await userService.removeAdminUserByIds([id]);
     assert(total);
+  });
+
+  it('#createAdminUser >should created user, no role, no permission', async () => {
+    const ctx = app.mockContext();
+    const userService = await ctx.requestContext.getAsync<AdminUserService>(
+      'adminUserService'
+    );
+    const params = {
+      name: 'fakeName5',
+      username: 'fakeUserName5',
+      password: ctx.helper.bhash('123456'),
+    };
+    const user = await userService.createAdminUser(params);
+
+    assert(user);
   });
 });
