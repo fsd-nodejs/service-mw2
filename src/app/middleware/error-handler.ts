@@ -2,7 +2,7 @@ import { IMidwayWebNext } from '@midwayjs/web';
 import { Context } from 'egg';
 
 export default () => {
-  return async (ctx: Context, next: IMidwayWebNext) => {
+  return async (ctx: Context, next: IMidwayWebNext): Promise<void> => {
     try {
       await next();
       if (ctx.status === 404) {
