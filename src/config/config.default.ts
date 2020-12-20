@@ -1,7 +1,7 @@
 import { EggAppInfo } from 'egg';
 import { ConnectionOptions } from 'typeorm';
 
-import { DefaultConfig } from './config.modal';
+import { DefaultConfig } from './config.types';
 
 export default (appInfo: EggAppInfo): DefaultConfig => {
   const config = {} as DefaultConfig;
