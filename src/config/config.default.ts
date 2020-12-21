@@ -1,10 +1,9 @@
-import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
-import { JwtConfig } from '@waiting/egg-jwt';
+import { EggAppInfo } from 'egg';
 import { ConnectionOptions } from 'typeorm';
 
-export type DefaultConfig = PowerPartial<EggAppConfig>;
+import { DefaultConfig } from './config.types';
 
-export default (appInfo: EggAppInfo) => {
+export default (appInfo: EggAppInfo): DefaultConfig => {
   const config = {} as DefaultConfig;
 
   // use for cookie sign key, should change to your own and keep security
@@ -50,7 +49,7 @@ export default (appInfo: EggAppInfo) => {
     },
     // rule https://github.com/eggjs/egg-path-matching
     ignore: ['/auth/login', '/ping', '/swagger-u*'],
-  } as JwtConfig;
+  };
 
   // jwt token 校验中间件(需配合jwt使用, ignore的配置与jwt一致)
   config.jwtAuth = {
