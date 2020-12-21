@@ -1,12 +1,13 @@
 import * as assert from 'assert';
 
 import { IMidwayWebNext } from '@midwayjs/web';
+import { Context } from 'egg';
 
 import MyError from '../util/my-error';
 
 // jwt auth
 export default () => {
-  return async (ctx, next: IMidwayWebNext) => {
+  return async (ctx: Context, next: IMidwayWebNext): Promise<void> => {
     const [, token] = ctx.header.authorization.split(' ');
     // 解密，获取payload
     const { payload } = ctx.app.jwt.decode(token);
