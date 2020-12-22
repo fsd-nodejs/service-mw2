@@ -1,5 +1,7 @@
 # FSD service
 
+如果该项目对你有用，欢迎 star 👏
+
 Midway 2.x 样板工程
 
 [![codecov](https://codecov.io/gh/fsd-nodejs/service-mw2/branch/master/graph/badge.svg)](https://codecov.io/gh/fsd-nodejs/service-mw2)
