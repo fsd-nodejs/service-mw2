@@ -43,7 +43,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x, 14.x]
         os: [ubuntu-latest]
 
     steps:
@@ -58,7 +58,7 @@ jobs:
         apt-get install -y mysql-client
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         mysql --host mysql -uroot -ppassword shop < ./src/database/init.sql
-    - run: npm i -g npminstall && npminstall
+    - run: npm install
     - run: npm run ci
       env:
         CI: true
@@ -72,8 +72,8 @@ jobs:
         REDIS_HOST: redis
         REDIS_PORT: 6379
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1.0.2
-      with:
-        token: ${{secrets.CODECOV_TOKEN}}
-        file: ./coverage/coverage-final.json
+      uses: codecov/codecov-action@v1
+#       with:
+#         token: ${{secrets.CODECOV_TOKEN}}
+#         file: ./coverage/coverage-final.json
       

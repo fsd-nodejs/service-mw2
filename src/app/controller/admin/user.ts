@@ -13,7 +13,7 @@ import {
   Validate,
   Body,
 } from '@midwayjs/decorator';
-import { Context } from '@midwayjs/web';
+import { Context } from 'egg';
 
 import { AdminUserService } from '../../service/admin/user';
 import {
@@ -28,7 +28,10 @@ import { AdminRoleService } from '../../service/admin/role';
 import { AdminPermissionService } from '../../service/admin/permission';
 
 @Provide()
-@Controller('/admin/user')
+@Controller('/admin/user', {
+  tagName: '管理员管理',
+  description: '包含管理员的增、删、改、查',
+})
 export class AdminUserController {
   @Inject('adminUserService')
   service: AdminUserService;
@@ -39,14 +42,20 @@ export class AdminUserController {
   @Inject('adminPermissionService')
   permissionService: AdminPermissionService;
 
-  @Get('/query')
+  @Get('/query', {
+    summary: '获取管理员列表',
+    description: '分页接口，查询管理员列表',
+  })
   @Validate()
   async query(ctx: Context, @Query(ALL) query: QueryDTO) {
     const result = await this.service.queryAdminUser(query);
     ctx.helper.success(result);
   }
 
-  @Get('/show')
+  @Get('/show', {
+    summary: '获取单个管理员详情',
+    description: '获取管理员的详细信息，包括其关联的对象',
+  })
   @Validate()
   async show(ctx: Context, @Query(ALL) query: ShowDTO) {
     const result = await this.service.getAdminUserById(query.id);
@@ -54,7 +63,10 @@ export class AdminUserController {
     ctx.helper.success(result);
   }
 
-  @Post('/create')
+  @Post('/create', {
+    summary: '创建管理员',
+    description: '会校验要关联的角色和权限是否存在',
+  })
   @Validate()
   async create(ctx: Context, @Body(ALL) params: CreateDTO) {
     const { roles, permissions } = params;
@@ -75,7 +87,10 @@ export class AdminUserController {
     ctx.helper.success(result, null, 201);
   }
 
-  @Patch('/update')
+  @Patch('/update', {
+    summary: '更新管理员数据',
+    description: '可更新管理员一个或多个字段',
+  })
   @Validate()
   async update(ctx: Context, @Body(ALL) params: UpdateDTO) {
     const { roles, permissions } = params;
@@ -92,7 +107,10 @@ export class AdminUserController {
     ctx.helper.success(null, null, 204);
   }
 
-  @Del('/remove')
+  @Del('/remove', {
+    summary: '删除管理员',
+    description: '关联关系表不会删除其中的内容，可以同时删除多个管理员',
+  })
   @Validate()
   async remove(ctx: Context, @Body(ALL) params: RemoveDTO) {
     // 检查管理员是否存在

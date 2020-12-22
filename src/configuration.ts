@@ -9,7 +9,11 @@ import { Application } from 'egg';
 @Configuration({
   imports: [
     '@midwayjs/orm', // 加载 orm 组件
-    swagger, // 加载swagger组件
+    // 加载swagger组件
+    {
+      component: swagger,
+      enabledEnvironment: ['local'],
+    },
   ],
 })
 export class ContainerConfiguration implements ILifeCycle {

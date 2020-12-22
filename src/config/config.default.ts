@@ -1,10 +1,9 @@
-import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
-import { JwtConfig } from '@waiting/egg-jwt';
+import { EggAppInfo } from 'egg';
 import { ConnectionOptions } from 'typeorm';
 
-export type DefaultConfig = PowerPartial<EggAppConfig>;
+import { DefaultConfig } from './config.types';
 
-export default (appInfo: EggAppInfo) => {
+export default (appInfo: EggAppInfo): DefaultConfig => {
   const config = {} as DefaultConfig;
 
   // use for cookie sign key, should change to your own and keep security
@@ -48,14 +47,31 @@ export default (appInfo: EggAppInfo) => {
     client: {
       secret: '123456', // 默认密钥，生产环境一定要更改
     },
+    // rule https://github.com/eggjs/egg-path-matching
     ignore: ['/auth/login', '/ping', '/swagger-u*'],
-  } as JwtConfig;
+  };
 
   // jwt token 校验中间件(需配合jwt使用, ignore的配置与jwt一致)
   config.jwtAuth = {
     ignore: config.jwt.ignore,
     redisScope: 'admin', // redis的作用域前缀
     accessTokenExpiresIn: 60 * 60 * 24 * 3, // 签名过期时间也可写
+  };
+
+  config.swagger = {
+    title: 'service-mw2',
+    description: 'service-mw2 模版工程的接口定义',
+    version: '1.0.0',
+    termsOfService: 'https://github.com/fsd-nodejs/service-mw2',
+    contact: {
+      name: 'tkvern',
+      url: 'https://github.com/tkvern',
+      email: 'verncake@gmail.com',
+    },
+    license: {
+      name: 'MIT',
+      url: 'https://github.com/midwayjs/midway/blob/serverless/LICENSE',
+    },
   };
 
   return config;

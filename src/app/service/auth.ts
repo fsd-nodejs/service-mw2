@@ -1,5 +1,5 @@
 import { Provide, Plugin, Inject, Config } from '@midwayjs/decorator';
-import { Context } from '@midwayjs/web';
+import { Context } from 'egg';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Jwt, JwtConfig } from '@waiting/egg-jwt';
 import { Redis } from 'ioredis';

@@ -13,7 +13,7 @@ import {
   Patch,
   Body,
 } from '@midwayjs/decorator';
-import { Context } from '@midwayjs/web';
+import { Context } from 'egg';
 
 import { AdminRoleService } from '../../service/admin/role';
 import { AdminPermissionService } from '../../service/admin/permission';
@@ -27,7 +27,10 @@ import {
 import MyError from '../../util/my-error';
 
 @Provide()
-@Controller('/admin/permission')
+@Controller('/admin/permission', {
+  tagName: '权限管理',
+  description: '包含权限的增、删、改、查',
+})
 export class AdminPermissionController {
   @Inject('adminPermissionService')
   service: AdminPermissionService;
@@ -35,14 +38,20 @@ export class AdminPermissionController {
   @Inject('adminRoleService')
   roleService: AdminRoleService;
 
-  @Get('/query')
+  @Get('/query', {
+    summary: '获取权限列表',
+    description: '分页接口，查询权限列表',
+  })
   @Validate()
   async query(ctx: Context, @Query(ALL) query: QueryDTO) {
     const result = await this.service.queryAdminPermission(query);
     ctx.helper.success(result);
   }
 
-  @Get('/show')
+  @Get('/show', {
+    summary: '获取单个权限详情',
+    description: '获取权限的详细信息，包括其关联的对象',
+  })
   @Validate()
   async show(ctx: Context, @Query(ALL) query: ShowDTO) {
     const result = await this.service.getAdminPermissionById(query.id);
@@ -50,7 +59,10 @@ export class AdminPermissionController {
     ctx.helper.success(result);
   }
 
-  @Post('/create')
+  @Post('/create', {
+    summary: '创建权限',
+    description: '',
+  })
   @Validate()
   async create(ctx: Context, @Body(ALL) params: CreateDTO) {
     const result = await this.service.createAdminPermission(params);
@@ -58,7 +70,10 @@ export class AdminPermissionController {
     ctx.helper.success(result, null, 201);
   }
 
-  @Patch('/update')
+  @Patch('/update', {
+    summary: '更新权限数据',
+    description: '可更新权限一个或多个字段',
+  })
   @Validate()
   async update(ctx: Context, @Body(ALL) params: UpdateDTO) {
     // 检查权限是否存在
@@ -70,7 +85,10 @@ export class AdminPermissionController {
     ctx.helper.success(null, null, 204);
   }
 
-  @Del('/remove')
+  @Del('/remove', {
+    summary: '删除权限',
+    description: '关联关系表不会删除其中的内容，可以同时删除多个权限',
+  })
   @Validate()
   async remove(ctx: Context, @Body(ALL) params: RemoveDTO) {
     // 检查权限是否存在
