@@ -10,4 +10,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "debug.node.autoAttach": "on"
 }
