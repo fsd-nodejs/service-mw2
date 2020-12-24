@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
       mysql:
-        image: mysql:5.7
+        image: mariadb:10
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
@@ -51,7 +51,7 @@ jobs:
     - name: Verify MySQL connection from container and init data
       run: |
         apt-get update
-        apt-get install -y mysql-client
+        apt-get install -y mariadb-client
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         mysql --host mysql -uroot -ppassword shop < ./src/database/init.sql
     - run: npm install
