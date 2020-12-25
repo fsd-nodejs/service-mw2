@@ -16,7 +16,8 @@
     "meeko": "^1.8.152",
     "midway": "^2.5.5",
     "moment": "^2.29.1",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "tsconfig-paths": "^3.9.0"
   },
   "devDependencies": {
     "@midwayjs/cli": "^1.2.33",
@@ -31,7 +32,6 @@
     "mwts": "^1.0.5",
     "swagger-ui-dist": "^3.38.0",
     "ts-jest": "^26.4.4",
-    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.0"
   },
   "engines": {
