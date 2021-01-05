@@ -1,0 +1,46 @@
+{
+  "istanbul ignore next": {
+    "scope": "javascript,typescript",
+    "prefix": "istanbul.ignore-next",
+    "body": [
+      "/* istanbul ignore next */",
+    ],
+    "description": "istanbul ignore next"
+  },
+
+  "istanbul ignore if": {
+    "scope": "javascript,typescript",
+    "prefix": "istanbul.ignore-if",
+    "body": [
+      "/* istanbul ignore if */",
+    ],
+    "description": ""
+  },
+
+  "istanbul ignore else": {
+    "scope": "javascript,typescript",
+    "prefix": "istanbul.ignore-else",
+    "body": [
+      "/* istanbul ignore else */",
+    ],
+    "description": ""
+  },
+
+  "eslint disable next line": {
+    "scope": "javascript,typescript",
+    "prefix": "eslint.disable-next-line",
+    "body": [
+      "// eslint-disable-next-line",
+    ],
+    "description": ""
+  },
+
+  "eslint disable ": {
+    "scope": "javascript,typescript",
+    "prefix": "eslint.disable-all",
+    "body": [
+      "/* eslint-disable */",
+    ],
+    "description": ""
+  },
+}
