@@ -11,7 +11,7 @@ export default () => {
     if (ctx.header.authorization) {
       const [, token] = ctx.header.authorization.split(' ');
       // 解密，获取payload
-      const { payload } = ctx.app.jwt.decode(token);
+      const { payload } = ctx.app.jwt.decode<{ id: number }>(token);
 
       const { jwtAuth } = ctx.app.config;
 
