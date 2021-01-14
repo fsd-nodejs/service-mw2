@@ -29,6 +29,7 @@ describe('test/controller/home.test.ts', () => {
 
     const msg: string = response.text;
     assert(msg && msg.includes('Hello Midwayjs!'));
+    assert(/^reqId: "\d{19,}"/u.test(msg)); // 6755455236955799552
   });
 
   it('should GET /ping', async () => {

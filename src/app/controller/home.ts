@@ -14,8 +14,8 @@ export class HomeController {
 
   @(CreateApiDoc().summary('获取主页').description('需要鉴权').build())
   @Get('/')
-  async home() {
-    return 'Hello Midwayjs!';
+  async home(ctx: Context) {
+    return 'Hello Midwayjs!' + `\nreqId: "${ctx.reqId}"`;
   }
 
   @(CreateApiDoc().summary('检查连通性').description('不需要鉴权').build())
