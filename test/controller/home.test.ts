@@ -38,4 +38,14 @@ describe('test/controller/home.test.ts', () => {
     const msg: string = ret.text;
     assert(msg && msg === 'OK');
   });
+
+  it('should GET /genid_hex', async () => {
+    const response = await createHttpRequest(app)
+      .get('/genid_hex')
+      .set('Authorization', `Bearer ${currentUser.token}`)
+      .expect(200);
+
+    const msg: string = response.text;
+    assert(/^[\dA-F]{16}"/u.test(msg)); // 5DC032BEFECD8000
+  });
 });
