@@ -29,7 +29,7 @@ describe('test/controller/home.test.ts', () => {
 
     const msg: string = response.text;
     assert(msg && msg.includes('Hello Midwayjs!'));
-    assert(/^reqId: "\d{19,}"/u.test(msg)); // 6755455236955799552
+    assert(/reqId: "[1-9]\d{18}"/u.test(msg), msg); // 6755455236955799552
   });
 
   it('should GET /ping', async () => {
@@ -39,13 +39,23 @@ describe('test/controller/home.test.ts', () => {
     assert(msg && msg === 'OK');
   });
 
-  it('should GET /genid_hex', async () => {
+  it('should GET /genid', async () => {
     const response = await createHttpRequest(app)
-      .get('/genid_hex')
-      .set('Authorization', `Bearer ${currentUser.token}`)
+      .get('/genid')
       .expect(200);
 
     const msg: string = response.text;
-    assert(/^[\dA-F]{16}"/u.test(msg)); // 5DC032BEFECD8000
+    console.info('genid:', msg)
+    assert(/[1-9]\d{18}/u.test(msg)); // 6755455236955799552
   });
+
+  it('should GET /genidHex', async () => {
+    const response = await createHttpRequest(app)
+      .get('/genidHex')
+      .expect(200);
+
+    const msg: string = response.text;
+    assert(/[\da-f]{16}/u.test(msg), msg); // 5dc032befecd8000
+  });
+
 });

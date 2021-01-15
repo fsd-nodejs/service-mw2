@@ -28,9 +28,21 @@ export class HomeController {
     ctx.body = 'OK';
   }
 
-  @Get('/genid_hex')
+  @(CreateApiDoc()
+    .summary('生成雪花ID，输出bigint')
+    .description('不需要鉴权')
+    .build())
+  @Get('/genid')
+  genId(): string {
+    return this.koid.next.readBigInt64BE().toString();
+  }
+
+  @(CreateApiDoc()
+    .summary('生成雪花ID，输出HEX')
+    .description('不需要鉴权')
+    .build())
+  @Get('/genidHex')
   genIdHex(): string {
-    // const bigint = this.koid.next.readBigInt64BE()
     return this.koid.next.toString('hex');
   }
 }
