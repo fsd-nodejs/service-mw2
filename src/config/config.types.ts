@@ -1,9 +1,11 @@
 import { Jwt, JwtConfig } from '@waiting/egg-jwt';
 import { EggAppConfig, PowerPartial } from 'egg';
+import { KoidEggConfig } from 'egg-koid';
 
 export interface DefaultConfig extends PowerPartial<EggAppConfig> {
   jwt: JwtConfig;
   jwtAuth: JwtAuthMiddlewareConfig;
+  koid: KoidEggConfig;
 }
 
 /** JwtAuthMiddleware */
