@@ -8,7 +8,6 @@ import 'egg-session';
 import 'egg-i18n';
 import 'egg-multipart';
 import 'egg-security';
-import 'egg-logrotator';
 import 'egg-schedule';
 import 'egg-static';
 import 'egg-jsonp';
@@ -16,6 +15,7 @@ import 'egg-view';
 import 'midway-schedule';
 import 'egg-redis';
 import '@waiting/egg-jwt';
+import 'egg-koid';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -34,5 +34,6 @@ declare module 'egg' {
     schedulePlus?: EggPluginItem;
     redis?: EggPluginItem;
     jwt?: EggPluginItem;
+    koid?: EggPluginItem;
   }
 }
