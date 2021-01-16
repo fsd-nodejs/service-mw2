@@ -3,6 +3,11 @@ import { Context } from 'egg';
 
 export default () => {
   return async (ctx: Context, next: IMidwayWebNext): Promise<void> => {
+    /* istanbul ignore next */
+    if (!ctx.reqId) {
+      ctx.reqId = ctx.app.koid.next.readBigInt64BE().toString();
+    }
+
     try {
       await next();
       if (ctx.status === 404) {

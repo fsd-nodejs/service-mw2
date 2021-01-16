@@ -48,7 +48,7 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
       secret: '123456', // 默认密钥，生产环境一定要更改
     },
     // rule https://github.com/eggjs/egg-path-matching
-    ignore: ['/auth/login', '/ping', '/swagger-u*'],
+    ignore: ['/auth/login', '/ping', '/swagger-u*', '/genid', '/genidHex'],
   };
 
   // jwt token 校验中间件(需配合jwt使用, ignore的配置与jwt一致)
