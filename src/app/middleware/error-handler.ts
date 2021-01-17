@@ -5,7 +5,7 @@ export default () => {
   return async (ctx: Context, next: IMidwayWebNext): Promise<void> => {
     /* istanbul ignore next */
     if (!ctx.reqId) {
-      ctx.reqId = ctx.app.koid.next.readBigInt64BE().toString();
+      ctx.reqId = ctx.app.koid.nextBigint.toString();
     }
 
     try {

@@ -3,7 +3,7 @@ import * as assert from 'power-assert';
 import { Framework } from '@midwayjs/web';
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
 import { Application } from 'egg';
-import { ConfigDc, KoidEggConfig, retrieveFromId } from 'egg-koid'
+import { KoidEggConfig, retrieveFromId } from 'egg-koid'
 
 describe('test/controller/home.test.ts', () => {
   let app: Application;
@@ -52,8 +52,8 @@ describe('test/controller/home.test.ts', () => {
     const config: KoidEggConfig = app.config.koid
     const info = retrieveFromId(msg)
     console.info({info, config: config.client.koidConfig})
-    assert(info.dataCenter === (config.client.koidConfig as ConfigDc).dataCenter)
-    assert(info.worker === (config.client.koidConfig as ConfigDc).worker)
+    assert(info.dataCenter === config.client.koidConfig.dataCenter)
+    assert(info.worker === config.client.koidConfig.worker)
   });
 
   it('should GET /genidHex', async () => {
@@ -66,8 +66,8 @@ describe('test/controller/home.test.ts', () => {
 
     const config: KoidEggConfig = app.config.koid
     const info = retrieveFromId(msg)
-    assert(info.dataCenter === (config.client.koidConfig as ConfigDc).dataCenter)
-    assert(info.worker === (config.client.koidConfig as ConfigDc).worker)
+    assert(info.dataCenter === config.client.koidConfig.dataCenter)
+    assert(info.worker === config.client.koidConfig.worker)
   });
 
 });

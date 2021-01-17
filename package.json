@@ -11,7 +11,7 @@
     "@waiting/egg-jwt": "^3.0.1",
     "bcryptjs": "^2.4.3",
     "egg": "^2.29.1",
-    "egg-koid": "^2.1.2",
+    "egg-koid": "^3.0.0",
     "egg-redis": "^2.4.0",
     "egg-scripts": "^2.10.0",
     "meeko": "^1.8.154",
