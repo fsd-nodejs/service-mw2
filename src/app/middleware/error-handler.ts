@@ -18,7 +18,7 @@ async function errHandleMiddleware(ctx: Context, next: IMidwayWebNext): Promise<
 
     await next();
     if (ctx.status === 404) {
-      ctx.body = { code: 404, mssage: 'Not Found' };
+      ctx.body = { code: 404, message: 'Not Found' };
     }
   } catch (err) {
     // 所有的异常都在 app 上触发一个 error 事件，框架会记录一条错误日志
@@ -28,7 +28,7 @@ async function errHandleMiddleware(ctx: Context, next: IMidwayWebNext): Promise<
     const [message, messageStatus] = err.message?.split(' &>');
 
     let status = err.status || parseInt(messageStatus) || 500;
-    if (err.name === 'ValidationError') status = 422;
+    if (err.name === 'ValidationError' || message === 'ValidationError') status = 422;
 
     // 生产环境时 500 错误的详细错误内容不返回给客户端，因为可能包含敏感信息
     const error =
@@ -37,7 +37,7 @@ async function errHandleMiddleware(ctx: Context, next: IMidwayWebNext): Promise<
         : message;
 
     // 从 error 对象上读出各个属性，设置到响应中
-    ctx.body = { code: status, mssage: error };
+    ctx.body = { code: status, message: error };
     if (status === 422) {
       ctx.body.data = err.errors || err.details; // 兼容 midway 参数校验
     }
