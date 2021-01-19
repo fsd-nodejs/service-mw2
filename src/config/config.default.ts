@@ -77,10 +77,8 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
   config.koid = {
     client: {
       koidConfig: {
-        dataCenter: process.env.KOID_DATACENTER
-          ? +process.env.KOID_DATACENTER
-          : 0,
-        worker: process.env.KOID_WORKER ? +process.env.KOID_WORKER : 0,
+        dataCenter: 0,
+        worker: 0,
       },
     },
   };
