@@ -4,10 +4,7 @@ import { Context } from 'egg';
 export default () => {
   return async (ctx: Context, next: IMidwayWebNext): Promise<void> => {
     try {
-      /* istanbul ignore next */
-      if (!ctx.reqId) {
-        ctx.reqId = ctx.app.koid.nextBigint.toString();
-      }
+      parseRequestId(ctx);
 
       await next();
       if (ctx.status === 404) {
@@ -38,3 +35,18 @@ export default () => {
     }
   };
 };
+
+function parseRequestId(ctx: Context): void {
+  const key = 'x-request-id';
+  let reqId = ctx.get(key);
+
+  /* istanbul ignore next */
+  if (reqId) {
+    ctx.reqId = reqId;
+  } else {
+    reqId = ctx.app.koid.nextBigint.toString();
+    ctx.reqId = reqId;
+  }
+
+  ctx.set(key, reqId);
+}
