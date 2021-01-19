@@ -34,7 +34,7 @@ export class HomeController {
     .build())
   @Get('/genid')
   genId(): string {
-    return this.koid.next.readBigInt64BE().toString();
+    return this.koid.nextBigint.toString();
   }
 
   @(CreateApiDoc()

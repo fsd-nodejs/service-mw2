@@ -74,5 +74,14 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
     },
   };
 
+  config.koid = {
+    client: {
+      koidConfig: {
+        dataCenter: 0,
+        worker: 0,
+      },
+    },
+  };
+
   return config;
 };

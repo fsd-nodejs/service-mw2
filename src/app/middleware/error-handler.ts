@@ -3,12 +3,12 @@ import { Context } from 'egg';
 
 export default () => {
   return async (ctx: Context, next: IMidwayWebNext): Promise<void> => {
-    /* istanbul ignore next */
-    if (!ctx.reqId) {
-      ctx.reqId = ctx.app.koid.next.readBigInt64BE().toString();
-    }
-
     try {
+      /* istanbul ignore next */
+      if (!ctx.reqId) {
+        ctx.reqId = ctx.app.koid.nextBigint.toString();
+      }
+
       await next();
       if (ctx.status === 404) {
         ctx.body = { code: 404, mssage: 'Not Found' };

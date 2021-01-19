@@ -3,6 +3,7 @@ import * as assert from 'power-assert';
 import { Framework } from '@midwayjs/web';
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
 import { Application } from 'egg';
+import { KoidEggConfig, retrieveFromId } from 'egg-koid'
 
 describe('test/controller/home.test.ts', () => {
   let app: Application;
@@ -47,6 +48,12 @@ describe('test/controller/home.test.ts', () => {
     const msg: string = response.text;
     console.info('genid:', msg)
     assert(/[1-9]\d{18}/u.test(msg)); // 6755455236955799552
+
+    const config: KoidEggConfig = app.config.koid
+    const info = retrieveFromId(msg)
+    console.info({info, config: config.client.koidConfig})
+    assert(info.dataCenter === config.client.koidConfig.dataCenter)
+    assert(info.worker === config.client.koidConfig.worker)
   });
 
   it('should GET /genidHex', async () => {
@@ -56,6 +63,11 @@ describe('test/controller/home.test.ts', () => {
 
     const msg: string = response.text;
     assert(/[\da-f]{16}/u.test(msg), msg); // 5dc032befecd8000
+
+    const config: KoidEggConfig = app.config.koid
+    const info = retrieveFromId(msg)
+    assert(info.dataCenter === config.client.koidConfig.dataCenter)
+    assert(info.worker === config.client.koidConfig.worker)
   });
 
 });
