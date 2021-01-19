@@ -17,7 +17,7 @@ export default class AppBootHook {
   configDidLoad(): void {
     // 增加全局错误处理中间件
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    this.app.config.coreMiddleware.unshift('errorHandler');
+    this.app.config.coreMiddleware.unshift('errorHandlerMiddleware');
   }
 
   async serverDidReady(): Promise<void> {
