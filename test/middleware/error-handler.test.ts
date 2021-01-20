@@ -49,28 +49,6 @@ describe(filename, () => {
     assert(body.message === 'ValidationError')
   })
 
-  it('should parseRequestId() works', async () => {
-    const key = 'x-request-id'
-    const ctx = app.createAnonymousContext()
-    ctx.status = 200
-
-    const input = Math.random().toString()
-    assert(input.length)
-    // ctx.set(key, input) not works
-    ctx.request.headers[key] = input
-
-    const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
-    const mw = inst.resolve()
-    // @ts-expect-error
-    await mw(ctx, next)
-
-    const { status } = ctx
-    assert(status === 200)
-
-    const xReqId = ctx.response.get(key)
-    assert(xReqId === input)
-  })
-
 })
 
 

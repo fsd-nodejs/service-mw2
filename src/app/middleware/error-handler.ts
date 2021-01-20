@@ -1,21 +1,23 @@
 import { Provide } from '@midwayjs/decorator';
-import { IWebMiddleware, IMidwayWebNext, MidwayWebMiddleware } from '@midwayjs/web';
+import {
+  IWebMiddleware,
+  IMidwayWebNext,
+  MidwayWebMiddleware,
+} from '@midwayjs/web';
 import { Context } from 'egg';
-
 
 @Provide()
 export class ErrorHandlerMiddleware implements IWebMiddleware {
-
   resolve(): MidwayWebMiddleware {
-    return errHandleMiddleware
+    return errHandleMiddleware;
   }
-
 }
 
-async function errHandleMiddleware(ctx: Context, next: IMidwayWebNext): Promise<void> {
+async function errHandleMiddleware(
+  ctx: Context,
+  next: IMidwayWebNext
+): Promise<void> {
   try {
-    parseRequestId(ctx);
-
     await next();
     if (ctx.status === 404) {
       ctx.body = { code: 404, message: 'Not Found' };
@@ -28,7 +30,8 @@ async function errHandleMiddleware(ctx: Context, next: IMidwayWebNext): Promise<
     const [message, messageStatus] = err.message?.split(' &>');
 
     let status = err.status || parseInt(messageStatus) || 500;
-    if (err.name === 'ValidationError' || message === 'ValidationError') status = 422;
+    if (err.name === 'ValidationError' || message === 'ValidationError')
+      status = 422;
 
     // 生产环境时 500 错误的详细错误内容不返回给客户端，因为可能包含敏感信息
     const error =
@@ -43,20 +46,4 @@ async function errHandleMiddleware(ctx: Context, next: IMidwayWebNext): Promise<
     }
     ctx.status = status;
   }
-}
-
-
-function parseRequestId(ctx: Context): void {
-  const key = 'x-request-id';
-  let reqId = ctx.get(key);
-
-  /* istanbul ignore next */
-  if (reqId) {
-    ctx.reqId = reqId;
-  } else {
-    reqId = ctx.app.koid.nextBigint.toString();
-    ctx.reqId = reqId;
-  }
-
-  ctx.set(key, reqId);
 }
