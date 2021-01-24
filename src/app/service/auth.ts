@@ -1,7 +1,7 @@
 import { Provide, Plugin, Inject, Config } from '@midwayjs/decorator';
 import { Context } from 'egg';
 import { InjectEntityModel } from '@midwayjs/orm';
-import { Jwt, JwtConfig } from '@waiting/egg-jwt';
+import { Jwt, JwtEggConfig } from '@waiting/egg-jwt';
 import { Redis } from 'ioredis';
 import { Repository } from 'typeorm';
 
@@ -12,7 +12,7 @@ import { AdminUserModel } from '../model/admin-user';
 @Provide()
 export class AuthService {
   @Config('jwt')
-  jwtConfig: JwtConfig;
+  jwtConfig: JwtEggConfig;
 
   @Config('jwtAuth')
   jwtAuthConfig: JwtAuthMiddlewareConfig;
