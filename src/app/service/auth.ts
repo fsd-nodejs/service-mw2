@@ -34,7 +34,7 @@ export class AuthService {
    * @param {AdminUser} data 保存的数据
    * @returns {String} 生成的Token字符串
    */
-  async createAdminUserToken(data: AdminUserModel) {
+  async createAdminUserToken(data: AdminUserModel): Promise<string> {
     const token: string = this.jwt.sign(
       { id: data.id },
       this.jwtConfig.client.secret,
@@ -54,7 +54,7 @@ export class AuthService {
    * @param {String} id 管理员id
    * @returns {String} Redis中的Token
    */
-  async getAdminUserTokenById(id: string) {
+  async getAdminUserTokenById(id: string): Promise<string> {
     return this.redis.get(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
   }
 
@@ -63,7 +63,7 @@ export class AuthService {
    * @param {String} id 管理员id
    * @returns {number} 变更的数量
    */
-  async removeAdminUserTokenById(id: string) {
+  async removeAdminUserTokenById(id: string): Promise<number> {
     return this.redis.del(`${this.jwtAuthConfig.redisScope}:accessToken:${id}`);
   }
 
@@ -72,7 +72,7 @@ export class AuthService {
    * @param {String} username 登录名
    * @returns {AdminUserModel | null} 承载管理员的 Promise 对象
    */
-  async getAdminUserByUserName(username: string) {
+  async getAdminUserByUserName(username: string): Promise<AdminUserModel> {
     const user = await this.adminUserModel.findOne({
       where: {
         username,
@@ -86,7 +86,7 @@ export class AuthService {
    * @param {String} id
    * @returns {AdminUserModel} 管理员信息
    */
-  public async getAdminUserById(id: string) {
+  public async getAdminUserById(id: string): Promise<AdminUserModel> {
     const userinfo = (await this.redis.get(
       `${this.jwtAuthConfig.redisScope}:userinfo:${id}`
     )) as string;
@@ -98,7 +98,7 @@ export class AuthService {
    * @param {AdminUserModel} data 管理员数据
    * @returns {OK | null} 缓存处理结果
    */
-  async cacheAdminUser(data: AdminUserModel) {
+  async cacheAdminUser(data: AdminUserModel): Promise<'OK' | null> {
     const { id, username, name, avatar, createdAt, updatedAt } = data;
 
     const userinfo = {
@@ -123,7 +123,7 @@ export class AuthService {
    * @param {String} id 管理员id
    * @returns {number} 缓存处理结果
    */
-  async cleanAdminUserById(id: string) {
+  async cleanAdminUserById(id: string): Promise<number> {
     return this.redis.del(`${this.jwtAuthConfig.redisScope}:userinfo:${id}`);
   }
 
@@ -132,7 +132,10 @@ export class AuthService {
    * @param {Object} params 包涵username、password等参数
    * @returns {AdminUserModel | null} 承载管理员的Promise对象
    */
-  async localHandler(params: { username: string; password: string }) {
+  async localHandler(params: {
+    username: string;
+    password: string;
+  }): Promise<AdminUserModel | null> {
     // 获取管理员函数
     const getAdminUser = (username: string) => {
       return this.getAdminUserByUserName(username);
