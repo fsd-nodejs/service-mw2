@@ -14,15 +14,15 @@ export class QueryDTO {
   pageSize?: number;
 
   @CreateApiPropertyDoc('筛选字段-id')
-  @Rule(RuleType.string().trim().max(10).optional().allow(''))
+  @Rule(RuleType.string().trim().max(10).optional())
   id?: string;
 
   @CreateApiPropertyDoc('筛选字段-名称')
-  @Rule(RuleType.string().trim().max(50).optional().allow(''))
+  @Rule(RuleType.string().trim().max(50).optional())
   name?: string;
 
   @CreateApiPropertyDoc('筛选字段-标识')
-  @Rule(RuleType.string().trim().max(50).optional().allow(''))
+  @Rule(RuleType.string().trim().max(50).optional())
   slug?: string;
 
   @CreateApiPropertyDoc(
@@ -34,7 +34,6 @@ export class QueryDTO {
       .max(50)
       .regex(/^[a-zA-Z]*(_ASC|_DESC)$/)
       .optional()
-      .allow('')
   )
   sorter?: string;
 }
