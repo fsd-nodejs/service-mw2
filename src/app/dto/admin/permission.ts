@@ -14,23 +14,23 @@ export class QueryDTO {
   pageSize?: number;
 
   @CreateApiPropertyDoc('筛选字段-id')
-  @Rule(RuleType.string().trim().max(10).optional())
+  @Rule(RuleType.string().trim().max(10).optional().allow(''))
   id?: string;
 
   @CreateApiPropertyDoc('筛选字段-名称')
-  @Rule(RuleType.string().trim().max(50).optional())
+  @Rule(RuleType.string().trim().max(50).optional().allow(''))
   name?: string;
 
   @CreateApiPropertyDoc('筛选字段-标识')
-  @Rule(RuleType.string().trim().max(50).optional())
+  @Rule(RuleType.string().trim().max(50).optional().allow(''))
   slug?: string;
 
   @CreateApiPropertyDoc('筛选字段-路径')
-  @Rule(RuleType.string().trim().max(50).optional())
+  @Rule(RuleType.string().trim().max(50).optional().allow(''))
   httpPath?: string;
 
   @CreateApiPropertyDoc('筛选字段-请求方式')
-  @Rule(RuleType.string().trim().max(50).optional())
+  @Rule(RuleType.string().trim().max(50).optional().allow(''))
   httpMethod?: string;
 
   @CreateApiPropertyDoc(
@@ -40,7 +40,7 @@ export class QueryDTO {
     RuleType.string()
       .trim()
       .max(50)
-      .regex(/^[a-zA-Z]*(_ASC|_DESC)$/)
+      .regex(/^[a-zA-Z]*(_ascend|_descend)$/)
       .optional()
   )
   sorter?: string;

@@ -32,7 +32,7 @@ export class QueryDTO {
     RuleType.string()
       .trim()
       .max(50)
-      .regex(/^[a-zA-Z]*(_ASC|_DESC)$/)
+      .regex(/^[a-zA-Z]*(_ascend|_descend)$/)
       .optional()
   )
   sorter?: string;
