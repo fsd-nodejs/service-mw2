@@ -27,7 +27,7 @@ describe('test/controller/admin/user.test.ts', () => {
     const response = await createHttpRequest(app)
       .get('/admin/user/query')
       .query({
-        sorter: 'id_DESC',
+        sorter: 'id_descend',
         id: '1',
         name: 'Admin',
         username: 'admin',

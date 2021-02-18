@@ -27,7 +27,7 @@ describe('test/controller/admin/permission.test.ts', () => {
     const response = await createHttpRequest(app)
       .get('/admin/permission/query')
       .query({
-        sorter: 'id_DESC',
+        sorter: 'id_descend',
         id: '2',
         name: 'Dash',
         slug: 'dash',
