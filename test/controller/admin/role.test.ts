@@ -27,7 +27,7 @@ describe('test/controller/admin/role.test.ts', () => {
     const response = await createHttpRequest(app)
       .get('/admin/role/query')
       .query({
-        sorter: 'id_DESC',
+        sorter: 'id_descend',
         id: '1',
         name: 'Admin',
         slug: 'admin'

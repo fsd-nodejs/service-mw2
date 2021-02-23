@@ -30,7 +30,7 @@ export class AdminRoleService {
     // 排序方式
     if (sorter) {
       const [column, sort] = sorter.split('_');
-      order[column] = sort;
+      order[column] = sort.split('end')[0].toUpperCase();
     }
 
     // 模糊匹配id
