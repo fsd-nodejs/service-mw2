@@ -3,6 +3,9 @@ import { ConnectionOptions } from 'typeorm';
 
 import { DefaultConfig } from './config.types';
 
+/**
+ * 关于环境变量的配置，请查阅文档：https://www.yuque.com/midwayjs/midway_v2/eggjs#0JHun
+ */
 export default (appInfo: EggAppInfo): DefaultConfig => {
   const config = {} as DefaultConfig;
 
