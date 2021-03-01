@@ -7,6 +7,8 @@ Midway 2.x 样板工程
 [![codecov](https://codecov.io/gh/fsd-nodejs/service-mw2/branch/master/graph/badge.svg)](https://codecov.io/gh/fsd-nodejs/service-mw2)
 [![GitHub Actions status](https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg)](https://github.com/fsd-nodejs/service-mw2)
 [![codebeat badge](https://codebeat.co/badges/ed780b5a-d9e8-41a8-8bc9-8bcb3263c6ce)](https://codebeat.co/projects/github-com-fsd-nodejs-service-mw2-master)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/fsd-nodejs/service-mw2/pulls)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE)
 
 拓展阅读:
 - 配套的前端工程请移步 https://github.com/fsd-nodejs/pc 查看这个项目
