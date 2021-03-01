@@ -13,6 +13,7 @@ Midway 2.x 样板工程
 - 全栈开发文档以及规范 https://github.com/fsd-nodejs/document 查看这个项目
 - [midway2.x 深度躺坑记(持续更新)
 ](https://github.com/fsd-nodejs/service-mw2/wiki/midway2.x-%E6%B7%B1%E5%BA%A6%E8%BA%BA%E5%9D%91%E8%AE%B0(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0))
+- 代码提示 [好玩的代码提示 by waitingsong](https://github.com/fsd-nodejs/service-mw2/pull/32) (考虑到，每个人对于自定义代码提示的要求不一样，就不合并到参考了，这个PR推荐给大家)
 
 ## 项目导览 & TODO
 在这个项目中，你会看到以下基于 midway 的实践案例 (上层使用 eggjs )
