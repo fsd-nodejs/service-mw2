@@ -15,6 +15,12 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
   // add your config here
   config.middleware = ['jwtAuth'];
 
+  config.midwayFeature = {
+    // true 使用 midway-logger
+    // false 或空代表使用 egg-logger
+    replaceEggLogger: true,
+  };
+
   // 默认管理员
   config.admin = {
     username: 'admin',

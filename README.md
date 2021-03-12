@@ -7,12 +7,16 @@ Midway 2.x 样板工程
 [![codecov](https://codecov.io/gh/fsd-nodejs/service-mw2/branch/master/graph/badge.svg)](https://codecov.io/gh/fsd-nodejs/service-mw2)
 [![GitHub Actions status](https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg)](https://github.com/fsd-nodejs/service-mw2)
 [![codebeat badge](https://codebeat.co/badges/ed780b5a-d9e8-41a8-8bc9-8bcb3263c6ce)](https://codebeat.co/projects/github-com-fsd-nodejs-service-mw2-master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/70f1ddd7463d43eba9039bcb88760038)](https://app.codacy.com/gh/fsd-nodejs/service-mw2?utm_source=github.com&utm_medium=referral&utm_content=fsd-nodejs/service-mw2&utm_campaign=Badge_Grade_Settings)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/fsd-nodejs/service-mw2/pulls)
 
 拓展阅读:
 - 配套的前端工程请移步 https://github.com/fsd-nodejs/pc 查看这个项目
 - 全栈开发文档以及规范 https://github.com/fsd-nodejs/document 查看这个项目
 - [midway2.x 深度躺坑记(持续更新)
 ](https://github.com/fsd-nodejs/service-mw2/wiki/midway2.x-%E6%B7%B1%E5%BA%A6%E8%BA%BA%E5%9D%91%E8%AE%B0(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0))
+- 代码提示 [好玩的代码提示 by waitingsong](https://github.com/fsd-nodejs/service-mw2/pull/32) (考虑到，每个人对于自定义代码提示的要求不一样，就不合并到参考了，这个PR推荐给大家)
 
 ## 项目导览 & TODO
 在这个项目中，你会看到以下基于 midway 的实践案例 (上层使用 eggjs )
@@ -167,44 +171,3 @@ RabbitMQ 作用在于把统计的计算异步化，从而不影响正常的业�
 
 大致流程如下，手绘的，工具简陋，姑且看一下。
 ![IMG_5365 HEIC](https://user-images.githubusercontent.com/10667077/101478900-55a4cb00-398c-11eb-97c3-4a41195c572d.JPG)
-
-
-## 迁移API
-
-- home.ts
-- - [x] /
-- - [x] /ping
-
-- auth.ts
-- - [x] /auth/login
-- - [x] /auth/logout
-- - [x] /auth/currentUser
-
-- admin/menu.ts
-- - [x] /admin/menu/query
-- - [x] /admin/menu/show
-- - [x] /admin/menu/create
-- - [x] /admin/menu/update
-- - [x] /admin/menu/remove
-- - [x] /admin/menu/order
-
-- admin/permission.ts
-- - [x] /admin/permission/query
-- - [x] /admin/permission/show
-- - [x] /admin/permission/create
-- - [x] /admin/permission/update
-- - [x] /admin/permission/remove
-
-- admin/role.ts
-- - [x] /admin/role/query
-- - [x] /admin/role/show
-- - [x] /admin/role/create
-- - [x] /admin/role/update
-- - [x] /admin/role/remove
-
-- admin/user.ts
-- - [x] /admin/user/query
-- - [x] /admin/user/show
-- - [x] /admin/user/create
-- - [x] /admin/user/update
-- - [x] /admin/user/remove
