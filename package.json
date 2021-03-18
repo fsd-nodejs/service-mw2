@@ -9,6 +9,7 @@
     "@midwayjs/swagger": "^1.0.6",
     "@midwayjs/web": "^2.8.13",
     "@waiting/egg-jwt": "^6.0.0",
+    "@waiting/shared-core": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "egg": "^2.29.3",
     "egg-koid": "^3.3.0",
