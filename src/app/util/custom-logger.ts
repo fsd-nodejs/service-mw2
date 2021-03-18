@@ -1,6 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 // eslint-disable-next-line node/no-extraneous-import
-import { MidwayContextLogger, IMidwayLogger } from '@midwayjs/logger';
+import {
+  IMidwayLogger,
+  MidwayContextLogger,
+  MidwayTransformableInfo,
+} from '@midwayjs/logger';
 import { genISO8601String } from '@waiting/shared-core';
 import { Context, Application } from 'egg';
 
@@ -30,12 +34,19 @@ class CustomContextLogger extends MidwayContextLogger<Context> {
 
 export function customLogger(logger: IMidwayLogger, app: Application): void {
   // 格式化日志时间戳
-  logger.updateTransformableInfo(info => {
-    info.timestamp = genISO8601String();
-    return info;
-  });
+  logger.updateTransformableInfo(updateTransformableInfo);
   // 上下文日志打印请求id
   app.setContextLoggerClass(CustomContextLogger);
+}
+
+export function updateTransformableInfo(
+  info: MidwayTransformableInfo
+): MidwayTransformableInfo {
+  const ret = {
+    ...info,
+    timestamp: genISO8601String(),
+  };
+  return ret;
 }
 
 declare module 'egg' {
