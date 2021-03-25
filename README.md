@@ -1,7 +1,9 @@
-# FSD service
+# FSD Service
 <p align="center">
   <a href="https://github.com/fsd-nodejs" target="blank"><img src="https://user-images.githubusercontent.com/10667077/112448489-69363f00-8d8d-11eb-8ead-948b0d3aa897.png" width="300" alt="FSD Logo" /></a>
 </p>
+<p align="center"> FSD (Full Stack Develop) Service - <a href="https://github.com/midwayjs/midway" target="_blank">Midway.js</a> 的最佳实践</p>
+<p align="center">
 
 [![codecov](https://codecov.io/gh/fsd-nodejs/service-mw2/branch/master/graph/badge.svg)](https://codecov.io/gh/fsd-nodejs/service-mw2)
 [![GitHub Actions status](https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg)](https://github.com/fsd-nodejs/service-mw2)
@@ -10,6 +12,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/fsd-nodejs/service-mw2/pulls)
 
+</p>
 
 如果该项目对你有用，欢迎 star 👏
 
