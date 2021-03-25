@@ -1,4 +1,7 @@
 # FSD service
+<p align="center">
+  <a href="https://github.com/fsd-nodejs" target="blank"><img src="https://user-images.githubusercontent.com/10667077/112448489-69363f00-8d8d-11eb-8ead-948b0d3aa897.png" width="300" alt="FSD Logo" /></a>
+</p>
 
 如果该项目对你有用，欢迎 star 👏
 
