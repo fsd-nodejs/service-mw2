@@ -1,15 +1,18 @@
-# FSD service
+# FSD Service
+<p align="center">
+  <a href="https://github.com/fsd-nodejs" target="blank"><img src="https://user-images.githubusercontent.com/10667077/112448489-69363f00-8d8d-11eb-8ead-948b0d3aa897.png" width="300" alt="FSD Logo" /></a>
+</p>
+<p align="center"> FSD (Full Stack Develop) Service - <a href="https://github.com/midwayjs/midway" target="_blank">Midway.js</a> 的最佳实践</p>
+<p align="center">
+  <a href="https://codecov.io/gh/fsd-nodejs/service-mw2" target="_blank"><img src="https://codecov.io/gh/fsd-nodejs/service-mw2/branch/master/graph/badge.svg" alt="codecov" /></a>
+  <a href="https://github.com/fsd-nodejs/service-mw2" target="_blank"><img src="https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg" alt="GitHub Actions status" /></a>
+  <a href="https://codebeat.co/projects/github-com-fsd-nodejs-service-mw2-master" target="_blank"><img src="https://codebeat.co/badges/ed780b5a-d9e8-41a8-8bc9-8bcb3263c6ce" alt="codebeat badge" /></a>
+  <a href="https://app.codacy.com/gh/fsd-nodejs/service-mw2?utm_source=github.com&utm_medium=referral&utm_content=fsd-nodejs/service-mw2&utm_campaign=Badge_Grade_Settings" target="_blank"><img src="https://api.codacy.com/project/badge/Grade/70f1ddd7463d43eba9039bcb88760038" alt="Codacy Badge" /></a>
+  <a href="https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license" /></a>
+  <a href="https://github.com/fsd-nodejs/service-mw2/pulls" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
+</p>
 
 如果该项目对你有用，欢迎 star 👏
-
-Midway 2.x 最佳实践工程
-
-[![codecov](https://codecov.io/gh/fsd-nodejs/service-mw2/branch/master/graph/badge.svg)](https://codecov.io/gh/fsd-nodejs/service-mw2)
-[![GitHub Actions status](https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg)](https://github.com/fsd-nodejs/service-mw2)
-[![codebeat badge](https://codebeat.co/badges/ed780b5a-d9e8-41a8-8bc9-8bcb3263c6ce)](https://codebeat.co/projects/github-com-fsd-nodejs-service-mw2-master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/70f1ddd7463d43eba9039bcb88760038)](https://app.codacy.com/gh/fsd-nodejs/service-mw2?utm_source=github.com&utm_medium=referral&utm_content=fsd-nodejs/service-mw2&utm_campaign=Badge_Grade_Settings)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/fsd-nodejs/service-mw2/pulls)
 
 拓展阅读:
 - 配套的前端工程请移步 https://github.com/fsd-nodejs/pc 查看这个项目
