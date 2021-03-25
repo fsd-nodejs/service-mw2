@@ -67,6 +67,7 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
     accessTokenExpiresIn: 60 * 60 * 24 * 3, // 签名过期时间也可写
   };
 
+  // swagger文档配置
   config.swagger = {
     title: 'service-mw2',
     description: 'service-mw2 模版工程的接口定义',
@@ -83,6 +84,7 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
     },
   };
 
+  // snowflake id generator config
   config.koid = {
     client: {
       koidConfig: {

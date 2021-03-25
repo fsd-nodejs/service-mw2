@@ -2,7 +2,7 @@
 
 如果该项目对你有用，欢迎 star 👏
 
-Midway 2.x 样板工程
+Midway 2.x 最佳实践工程
 
 [![codecov](https://codecov.io/gh/fsd-nodejs/service-mw2/branch/master/graph/badge.svg)](https://codecov.io/gh/fsd-nodejs/service-mw2)
 [![GitHub Actions status](https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg)](https://github.com/fsd-nodejs/service-mw2)
@@ -19,11 +19,11 @@ Midway 2.x 样板工程
 - 代码提示 [好玩的代码提示 by waitingsong](https://github.com/fsd-nodejs/service-mw2/pull/32) (考虑到，每个人对于自定义代码提示的要求不一样，就不合并到参考了，这个PR推荐给大家)
 
 ## 项目导览 & TODO
-在这个项目中，你会看到以下基于 midway 的实践案例 (上层使用 eggjs )
+在这个项目中，你会看到以下基于 Midway 的实践案例 (上层使用 Egg.js )
 
-我们正在做以下工程例子，如果你有新的想法，可在 issue 留言，我们会征集你的意见，带来最干货的案例。
+我们正在做以下工程实践例子，如果你有新的想法，可在 issue 留言，我们会征集你的意见，带来最干货的案例。
 
-帮你扫清学习障碍，让你用起 midway 来更加得心应手，提升能效，找回编码的乐趣。
+帮你扫清学习障碍，让你用起 Midway 来更加得心应手，提升能效，找回编码的乐趣。
 
 ### 框架特性及能力应用
 
@@ -31,7 +31,7 @@ Midway 2.x 样板工程
 - [x] 依赖注入
 - [x] 参数校验和转换 （DTO 层）
 - [x] 测试 （Controller & Service 单元测试）
-- [x] swagger
+- [x] Swagger
 - [x] Database
 
 
@@ -64,11 +64,11 @@ Midway 2.x 样板工程
 
 <!-- add docs here for user -->
 
-see [midway docs][midway] for more detail.
+see [Midway docs][Midway] for more detail.
 
 ### Development
 
-先将 database 目录下到 sql 文件迁移到数据库，修改默认的config配置文件
+先将 database 目录下到 sql 文件迁移到数据库，修改默认的config配置文件(需要 Redis 和 MySQL 服务可以正常访问)
 
 ```bash
 $ npm i
