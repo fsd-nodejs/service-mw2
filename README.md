@@ -12,9 +12,9 @@
   <a href="https://github.com/fsd-nodejs/service-mw2/pulls" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
 </p>
 
-大家如果遇到什么问题，或者希望追加什么功能，或者学习内部实现，可以关注我们的仓库地址：
-(👇，点赞，分享...三连)
-https://github.com/fsd-nodejs/service-mw2
+
+大家如果遇到什么问题，或者希望追加什么功能，或者学习内部实现。
+可以关注我们的仓库地址：(点赞，分享...三连)
 
 拓展阅读:
 - 配套的前端工程请移步 https://github.com/fsd-nodejs/pc 查看这个项目
@@ -176,3 +176,17 @@ RabbitMQ 作用在于把统计的计算异步化，从而不影响正常的业�
 
 大致流程如下，手绘的，工具简陋，姑且看一下。
 ![IMG_5365 HEIC](https://user-images.githubusercontent.com/10667077/101478900-55a4cb00-398c-11eb-97c3-4a41195c572d.JPG)
+
+## 答疑
+
+群里会有热心的朋友，也会有新版本发布推送。钉钉扫码加入答疑群
+
+
+二群
+
+![](https://img.alicdn.com/imgextra/i2/O1CN01SRJO0P1YaqxhtPU2X_!!6000000003076-2-tps-305-391.png)
+
+
+一群（已满）
+
+![](https://img.alicdn.com/imgextra/i2/O1CN01ofEEAL2AEpJHbpse5_!!6000000008172-2-tps-311-401.png)
