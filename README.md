@@ -12,7 +12,9 @@
   <a href="https://github.com/fsd-nodejs/service-mw2/pulls" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
 </p>
 
-如果该项目对你有用，欢迎 star 👏
+大家如果遇到什么问题，或者希望追加什么功能，或者学习内部实现，可以关注我们的仓库地址：
+(👇，点赞，分享...三连)
+https://github.com/fsd-nodejs/service-mw2
 
 拓展阅读:
 - 配套的前端工程请移步 https://github.com/fsd-nodejs/pc 查看这个项目
