@@ -12,10 +12,6 @@
   <a href="https://github.com/fsd-nodejs/service-mw2/pulls" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
 </p>
 
-
-大家如果遇到什么问题，或者希望追加什么功能，或者学习内部实现。
-可以关注我们的仓库地址：(点赞，分享...三连)
-
 拓展阅读:
 - 配套的前端工程请移步 https://github.com/fsd-nodejs/pc 查看这个项目
 - 全栈开发文档以及规范 https://github.com/fsd-nodejs/document 查看这个项目
@@ -26,7 +22,8 @@
 ## 项目导览 & TODO
 在这个项目中，你会看到以下基于 Midway 的实践案例 (上层使用 Egg.js )
 
-我们正在做以下工程实践例子，如果你有新的想法，可在 issue 留言，我们会征集你的意见，带来最干货的案例。
+我们正在做以下工程实践例子，大家你遇到什么问题，或者希望追加什么功能，或者学习内部实现。
+可以关注我们的仓库(点赞，分享...三连)在 issue 留言，我们会征集你的意见，带来最干货的案例。
 
 帮你扫清学习障碍，让你用起 Midway 来更加得心应手，提升能效，找回编码的乐趣。
 
