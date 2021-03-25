@@ -12,6 +12,7 @@ export const jwt = {
   package: '@waiting/egg-jwt',
 };
 
+// snowflake id generator
 export const koid = {
   enable: true,
   package: 'egg-koid',
