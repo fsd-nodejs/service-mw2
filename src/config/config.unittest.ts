@@ -8,7 +8,7 @@ export const security = {
 // 数据库配置
 export const orm: ConnectionOptions = {
   type: 'mysql',
-  host: process.env.MYSQL_HOST || '192.168.10.40',
+  host: process.env.MYSQL_HOST || '192.168.11.152',
   port: +process.env.MYSQL_HOST || 3306,
   username: process.env.MYSQL_USER || 'homestead',
   password: process.env.MYSQL_PASSWORD || 'secret',
@@ -21,13 +21,13 @@ export const orm: ConnectionOptions = {
 export const redis: EggRedisOptions = {
   client: {
     port: +process.env.REDIS_PORT || 6379, // Redis port
-    host: process.env.REDIS_HOST || '192.168.10.40', // Redis host
+    host: process.env.REDIS_HOST || '192.168.11.152', // Redis host
     password: process.env.REDIS_PASSWORD || '',
     db: +process.env.REDIS_DB || 0,
   },
 };
 
 // 建议跑测试的时候关闭日志(true)，这样手动故意触发的错误，都不会显示处理。如果想看则打开(false)
-// export const logger = {
-//   disableConsoleAfterReady: true,
-// };
+export const logger = {
+  disableConsoleAfterReady: false,
+};
