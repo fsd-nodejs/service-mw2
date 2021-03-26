@@ -27,7 +27,7 @@ export const redis: EggRedisOptions = {
   },
 };
 
-// 建议跑测试的时候关闭日志(true)，这样手动故意触发的错误，都不会显示处理。如果想看则打开(false)
+// 建议跑测试的时候设置 true 屏蔽日志(true)，这样手动故意触发的错误，都不会显示处理。设置 false 则输出日志
 export const logger = {
   disableConsoleAfterReady: false,
 };
