@@ -6,6 +6,7 @@
 <p align="center">
   <a href="https://codecov.io/gh/fsd-nodejs/service-mw2" target="_blank"><img src="https://codecov.io/gh/fsd-nodejs/service-mw2/branch/master/graph/badge.svg" alt="codecov" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2" target="_blank"><img src="https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg" alt="GitHub Actions status" /></a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2.svg?type=shield"/></a>
   <a href="https://codebeat.co/projects/github-com-fsd-nodejs-service-mw2-master" target="_blank"><img src="https://codebeat.co/badges/ed780b5a-d9e8-41a8-8bc9-8bcb3263c6ce" alt="codebeat badge" /></a>
   <a href="https://app.codacy.com/gh/fsd-nodejs/service-mw2?utm_source=github.com&utm_medium=referral&utm_content=fsd-nodejs/service-mw2&utm_campaign=Badge_Grade_Settings" target="_blank"><img src="https://api.codacy.com/project/badge/Grade/70f1ddd7463d43eba9039bcb88760038" alt="Codacy Badge" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license" /></a>
@@ -18,6 +19,9 @@
 - [midway2.x 深度躺坑记(持续更新)
 ](https://github.com/fsd-nodejs/service-mw2/wiki/midway2.x-%E6%B7%B1%E5%BA%A6%E8%BA%BA%E5%9D%91%E8%AE%B0(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0))
 - 代码提示 [好玩的代码提示 by waitingsong](https://github.com/fsd-nodejs/service-mw2/pull/32) (考虑到，每个人对于自定义代码提示的要求不一样，就不合并到参考了，这个PR推荐给大家)
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2?ref=badge_large)
 
 ## 项目导览 & TODO
 在这个项目中，你会看到以下基于 Midway 的实践案例 (上层使用 Egg.js )
