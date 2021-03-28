@@ -11,6 +11,7 @@
   <a href="https://app.codacy.com/gh/fsd-nodejs/service-mw2?utm_source=github.com&utm_medium=referral&utm_content=fsd-nodejs/service-mw2&utm_campaign=Badge_Grade_Settings" target="_blank"><img src="https://api.codacy.com/project/badge/Grade/70f1ddd7463d43eba9039bcb88760038" alt="Codacy Badge" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2/pulls" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
+  <a href="https://sonarcloud.io/dashboard?id=fsd-nodejs_service-mw2" target="_blank"><img src="https://sonarcloud.io/api/project_badges/quality_gate?project=fsd-nodejs_service-mw2" alt="Sonar Cloud" /></a>
 </p>
 
 拓展阅读:
