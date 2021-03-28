@@ -21,8 +21,6 @@
 - 代码提示 [好玩的代码提示 by waitingsong](https://github.com/fsd-nodejs/service-mw2/pull/32) (考虑到，每个人对于自定义代码提示的要求不一样，就不合并到参考了，这个PR推荐给大家)
 
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2?ref=badge_large)
-
 ## 项目导览 & TODO
 在这个项目中，你会看到以下基于 Midway 的实践案例 (上层使用 Egg.js )
 
