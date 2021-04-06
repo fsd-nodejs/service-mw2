@@ -8,7 +8,7 @@ export const security = {
 // 数据库配置
 export const orm: ConnectionOptions = {
   type: 'mysql',
-  host: process.env.MYSQL_HOST || '192.168.11.152',
+  host: process.env.MYSQL_HOST || '127.0.0.1',
   port: +process.env.MYSQL_HOST || 3306,
   username: process.env.MYSQL_USER || 'homestead',
   password: process.env.MYSQL_PASSWORD || 'secret',
@@ -21,7 +21,7 @@ export const orm: ConnectionOptions = {
 export const redis: EggRedisOptions = {
   client: {
     port: +process.env.REDIS_PORT || 6379, // Redis port
-    host: process.env.REDIS_HOST || '192.168.11.152', // Redis host
+    host: process.env.REDIS_HOST || '127.0.0.1', // Redis host
     password: process.env.REDIS_PASSWORD || '',
     db: +process.env.REDIS_DB || 0,
   },
