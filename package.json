@@ -22,16 +22,22 @@
     "tsconfig-paths": "^3.9.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-angular": "^12.1.1",
     "@midwayjs/cli": "^1.2.63",
     "@midwayjs/egg-ts-helper": "^1.1.0",
     "@midwayjs/mock": "^2.10.7",
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.41",
+    "commitizen": "^4.2.3",
     "cross-env": "^6.0.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-unicorn": "^22.0.0",
+    "husky": "^6.0.0",
     "jest": "^26.6.3",
     "mwts": "^1.2.2",
+    "standard-version": "^9.2.0",
     "swagger-ui-dist": "^3.47.1",
     "ts-jest": "^26.5.5",
     "typescript": "^4.2.4"
@@ -50,7 +56,9 @@
     "lint": "mwts check",
     "lint:fix": "mwts fix",
     "ci": "npm run cov",
-    "build": "midway-bin build -c"
+    "build": "midway-bin build -c",
+    "commit": "git-cz",
+    "release": "standard-version"
   },
   "midway-bin-clean": [
     ".vscode/.tsbuildinfo",
@@ -61,5 +69,15 @@
     "url": ""
   },
   "author": "anonymous",
-  "license": "MIT"
+  "license": "MIT",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }
