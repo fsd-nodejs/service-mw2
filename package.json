@@ -1,7 +1,7 @@
 {
-  "name": "my_midway_project",
+  "name": "service-mw2",
   "version": "1.0.0",
-  "description": "{{description}}",
+  "description": "Best practices of Midway.js",
   "private": true,
   "dependencies": {
     "@midwayjs/decorator": "^2.10.7",
@@ -34,7 +34,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-unicorn": "^22.0.0",
-    "husky": "^6.0.0",
+    "husky": "^3.0.9",
     "jest": "^26.6.3",
     "mwts": "^1.2.2",
     "standard-version": "^9.2.0",
@@ -58,8 +58,7 @@
     "ci": "npm run cov",
     "build": "midway-bin build -c",
     "commit": "git-cz",
-    "release": "standard-version",
-    "prepare":"husky install"
+    "release": "standard-version"
   },
   "midway-bin-clean": [
     ".vscode/.tsbuildinfo",
