@@ -58,7 +58,8 @@
     "ci": "npm run cov",
     "build": "midway-bin build -c",
     "commit": "git-cz",
-    "release": "standard-version"
+    "release": "standard-version",
+    "prepare":"husky install"
   },
   "midway-bin-clean": [
     ".vscode/.tsbuildinfo",
