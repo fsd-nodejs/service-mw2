@@ -9,6 +9,7 @@ import { IMidwayLogger } from '@midwayjs/logger';
 import { Application } from 'egg';
 
 import { customLogger } from './app/util/custom-logger';
+import { initTracer } from './app/util/tracer';
 
 @Configuration({
   imports: [
@@ -31,6 +32,8 @@ export class ContainerConfiguration implements ILifeCycle {
   async onReady(): Promise<void> {
     // 定制化日志
     customLogger(this.logger, this.app);
+    // 初始化tracer单例
+    initTracer(this.app)
   }
 
   // 可以在这里做些停止后处理
