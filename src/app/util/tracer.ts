@@ -55,10 +55,9 @@ export class TracerManager {
   }
 
   private genSpan(name: string, parentSpan?: Span | SpanContext): Span {
-    const span = globalTracer().startSpan(name, {
+    return globalTracer().startSpan(name, {
       childOf: parentSpan ?? this.currentSpan(),
     });
-    return span;
   }
 
   @RunIfEnabled
@@ -108,8 +107,7 @@ function RunIfEnabled(
   const originalMethod = descriptor.value as (...args: unknown[]) => unknown;
   descriptor.value = function (...args: unknown[]): unknown {
     if (this.isTraceEnabled === true) {
-      const ret = originalMethod.apply(this, args);
-      return ret;
+      return originalMethod.apply(this, args);
     }
   };
   return descriptor;

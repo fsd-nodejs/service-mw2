@@ -56,7 +56,7 @@
 - [ ] 接口响应统计中间件
 - [x] 统一错误处理
 - [x] SnowFlake 雪花算法生成分布式ID
-- [x] Jaeger链路追踪
+- [x] Jaeger 链路追踪
 
 
 
@@ -159,11 +159,11 @@ $ npm stop
     }
   ```
 
-## Jaeger链路追踪
+## Jaeger 链路追踪
 
-Jaeger是[OpenTracing](https://opentracing.io/docs/)的一个实现，链路追踪是一个比较复杂的话题，关于Jaeger的具体用法请参考[它的官方文档](https://www.jaegertracing.io/docs/1.22/)
+Jaeger 是 [OpenTracing](https://opentracing.io/docs/) 的一个实现，链路追踪是一个比较复杂的话题，关于 Jaeger 的具体用法请参考[它的官方文档](https://www.jaegertracing.io/docs/1.22/)
 
-本实现基于ctx机制，结合midway的依赖注入可实现无侵入式spanContext传递
+本实现基于 ctx 机制，结合 midway 的依赖注入可实现无侵入式 spanContext 传递
 
 ## 接口响应统计中间件(设计)
 

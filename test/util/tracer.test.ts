@@ -34,7 +34,7 @@ describe(filename, () => {
     const span2Header = tracerManager.headerOfCurrentSpan()[traceHeaderKey]
     expect(span2Header?.substr(34, 16)).toEqual(span1Header?.substr(0, 16))
   })
-  it('should not works if unenabled', async () => {
+  it('should not works if disabled', async () => {
     const tracerManager = new TracerManager(false)
     tracerManager.startSpan('mySpan')
     expect(tracerManager.currentSpan()).toBeUndefined()
