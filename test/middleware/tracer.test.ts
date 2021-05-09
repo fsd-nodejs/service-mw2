@@ -37,8 +37,8 @@ describe(filename, () => {
     const mw = inst.resolve()
     // @ts-expect-error
     await mw(ctx, next)
-    const { [traceHeaderKey]: spanHeader }: { [traceHeaderKey]: string} = ctx.tracerManager.headerOfCurrentSpan()
-    const expectParentSpanId = spanHeader.substring(0, spanHeader.indexOf(':'))
+    const spanHeader = ctx.tracerManager.headerOfCurrentSpan()[traceHeaderKey]
+    const expectParentSpanId = spanHeader?.substring(0, spanHeader.indexOf(':'))
     expect(expectParentSpanId).toEqual(parentSpanId)
   })
 })
