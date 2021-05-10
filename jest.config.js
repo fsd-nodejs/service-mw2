@@ -9,4 +9,5 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   collectCoverageFrom: ['**/src/**/*.{js,ts}'],
+  testTimeout: 30000,
 };

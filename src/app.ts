@@ -15,6 +15,8 @@ export default class AppBootHook {
 
   // Config, plugin files have been loaded.
   configDidLoad(): void {
+    // 增加全局链路追踪中间件
+    this.app.config.coreMiddleware.unshift('traceMiddleware')
     // 增加全局x-request-id处理中间件
     this.app.config.coreMiddleware.unshift('requestIdMiddleware');
     // 增加全局错误处理中间件

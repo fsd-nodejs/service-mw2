@@ -39,8 +39,12 @@ jobs:
           --health-retries=3
         env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: shop 
-
+          MYSQL_DATABASE: shop
+      jaeger:
+        image: jaegertracing/all-in-one
+        ports:
+          - 6832:6832/udp
+          - 16686:16686
     strategy:
       matrix:
         node-version: [14.x]

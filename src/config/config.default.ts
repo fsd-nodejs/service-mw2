@@ -94,5 +94,16 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
     },
   };
 
+  // 链路追踪
+  config.tracer = {
+    whiteList: [],
+    tracingConfig: {
+      sampler: {
+        type: 'const',
+        param: 1,
+      },
+    },
+  };
+
   return config;
 };
