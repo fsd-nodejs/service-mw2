@@ -41,6 +41,16 @@ describe(filename, () => {
     const expectParentSpanId = spanHeader?.substring(0, spanHeader.indexOf(':'))
     expect(expectParentSpanId).toEqual(parentSpanId)
   })
+
+  it('should not works if path is in whitelist', async () => {
+    const ctx: Context = app.createAnonymousContext()
+    const inst = await ctx.requestContext.getAsync(TraceMiddleware)
+    const mw = inst.resolve()
+    ctx.path = '/untracedPath'
+    // @ts-expect-error
+    await mw(ctx, next)
+    expect(ctx.tracerManager.isTraceEnabled).toEqual(false)
+  })
 })
 
 

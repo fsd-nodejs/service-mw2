@@ -32,12 +32,16 @@ describe(filename, () => {
     const span1Header = tracerManager.headerOfCurrentSpan()[traceHeaderKey]
     tracerManager.startSpan('span2')
     const span2Header = tracerManager.headerOfCurrentSpan()[traceHeaderKey]
-    expect(span2Header?.substr(34, 16)).toEqual(span1Header?.substr(0, 16))
+    expect(span2Header?.split(':')[2]).toEqual(span1Header?.split(':')[0])
   })
   it('should not works if disabled', async () => {
     const tracerManager = new TracerManager(false)
     tracerManager.startSpan('mySpan')
     expect(tracerManager.currentSpan()).toBeUndefined()
+  })
+  it('should header be {} if no span', async () => {
+    const tracerManager = new TracerManager(false)
+    expect(tracerManager.headerOfCurrentSpan()).toMatchObject({})
   })
 })
 

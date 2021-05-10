@@ -31,3 +31,13 @@ export const redis: EggRedisOptions = {
 export const logger = {
   disableConsoleAfterReady: false,
 };
+
+export const tracer = {
+  whiteList: ['/untracedPath'],
+  tracingConfig: {
+    sampler: {
+      type: 'const',
+      param: 1,
+    },
+  },
+};
