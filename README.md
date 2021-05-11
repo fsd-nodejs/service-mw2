@@ -32,6 +32,8 @@
 
 帮你扫清学习障碍，让你用起 Midway 来更加得心应手，提升能效，找回编码的乐趣。
 
+![app](https://user-images.githubusercontent.com/10667077/117784911-9fb11600-b276-11eb-9768-de5bd4b7788b.png)
+
 ### 框架特性及能力应用
 
 - [x] 中间件
