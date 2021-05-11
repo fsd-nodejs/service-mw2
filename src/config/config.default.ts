@@ -97,11 +97,11 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
   // 链路追踪
   config.tracer = {
     whiteList: ['/favicon.ico', '/favicon.png'],
-    reqThrottleMsForPriority: 100,
+    reqThrottleMsForPriority: 150,
     tracingConfig: {
       sampler: {
         type: 'probabilistic',
-        param: 0.01,
+        param: 0.001,
       },
     },
   };
