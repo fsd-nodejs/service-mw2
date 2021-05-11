@@ -1,7 +1,9 @@
 import { Jwt, JwtEggConfig } from '@waiting/egg-jwt';
+import { NpmPkg } from '@waiting/shared-types';
 import { EggAppConfig, PowerPartial } from 'egg';
 import { KoidEggConfig } from 'egg-koid';
-import type { TracerManager } from '../app/util/tracer'
+
+import type { TracerManager } from '../app/util/tracer';
 
 export interface DefaultConfig extends PowerPartial<EggAppConfig> {
   jwt: JwtEggConfig;
@@ -24,11 +26,12 @@ declare module 'egg' {
   }
 
   interface Context {
-    tracerManager: TracerManager
+    tracerManager: TracerManager;
   }
 
   interface EggAppConfig {
     jwt: JwtEggConfig;
     jwtAuth: JwtAuthMiddlewareConfig;
+    pkgJson: NpmPkg;
   }
 }

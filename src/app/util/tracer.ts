@@ -18,7 +18,7 @@ import {
  */
 export function initTracer(app: Application): JaegerTracer {
   const config: TracingConfig = {
-    serviceName: 'my-service',
+    serviceName: app.config.pkgJson.name,
     ...app.config.tracer.tracingConfig,
   };
   const tracer = initJaegerTracer(config, {});
