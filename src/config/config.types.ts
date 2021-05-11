@@ -43,7 +43,7 @@ export interface TracerConfig {
   /** 忽略名单 */
   whiteList: string[];
   /**
-   * 采样请求处理时间（毫秒）阈值
+   * 强制采样请求处理时间（毫秒）阈值
    * 负数不采样
    */
   reqThrottleMsForPriority: number;
