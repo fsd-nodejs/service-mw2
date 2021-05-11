@@ -13,5 +13,6 @@ declare module 'egg' {
   }
   interface Context {
     reqId: string;
+    _internalError?: Error;
   }
 }
