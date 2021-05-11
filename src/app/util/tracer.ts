@@ -66,7 +66,7 @@ export class TracerManager {
   }
 
   @RunIfEnabled
-  spanLog(keyValuePairs: { [key: string]: unknown }): void {
+  spanLog(keyValuePairs: SpanLogInput): void {
     this.currentSpan()?.log(keyValuePairs);
   }
 
@@ -103,7 +103,7 @@ function RunIfEnabled(
   _target: unknown,
   _propertyKey: string,
   descriptor: TraceMgrPropDescriptor
-) {
+): TraceMgrPropDescriptor {
   const originalMethod = descriptor.value as (...args: unknown[]) => unknown;
   descriptor.value = function (...args: unknown[]): unknown {
     if (this.isTraceEnabled === true) {
@@ -111,4 +111,8 @@ function RunIfEnabled(
     }
   };
   return descriptor;
+}
+
+export interface SpanLogInput {
+  [key: string]: unknown;
 }
