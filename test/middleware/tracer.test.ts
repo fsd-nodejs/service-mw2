@@ -3,7 +3,7 @@ import { Framework } from '@midwayjs/web'
 import { basename } from '@waiting/shared-core'
 import { Application, Context } from 'egg'
 
-import { TraceMiddleware } from '../../src/app/middleware/tracer.middleware'
+import { TraceMiddleware } from '../../src/app/middleware/tracer'
 
 
 const filename = basename(__filename)
