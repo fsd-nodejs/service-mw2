@@ -7,6 +7,7 @@ import {
 import { Context } from 'egg';
 import { globalTracer, Tags, FORMAT_HTTP_HEADERS } from 'opentracing';
 
+import { TracerConfig } from '../../config/config.types';
 import { TracerLog, TracerTag } from '../../config/tracer.config';
 import { retrieveExternalNetWorkInfo } from '../util/common';
 import { SpanLogInput, TracerManager } from '../util/tracer';
@@ -79,7 +80,12 @@ function finishSpan(ctx: Context) {
     tracerManager.setSpanTag(Tags.ERROR, true);
     setLogForCustomCode(ctx, tracerManager);
   } else {
-    processPriority(ctx, tracerManager);
+    const opts: ProcessPriorityOpts = {
+      starttime: ctx.starttime,
+      trm: tracerManager,
+      tracerConfig: ctx.app.config.tracer,
+    };
+    processPriority(opts);
   }
 
   tracerManager.setSpanTag(Tags.HTTP_STATUS_CODE, status);
@@ -87,18 +93,25 @@ function finishSpan(ctx: Context) {
   tracerManager.finishSpan();
 }
 
-function processPriority(ctx: Context, trm: TracerManager): void {
-  const { reqThrottleMsForPriority: throttleMs } = ctx.app.config.tracer;
+export interface ProcessPriorityOpts {
+  starttime: number;
+  trm: TracerManager;
+  tracerConfig: TracerConfig;
+}
+function processPriority(options: ProcessPriorityOpts): true | undefined {
+  const { starttime, trm } = options;
+  const { reqThrottleMsForPriority: throttleMs } = options.tracerConfig;
 
   if (throttleMs < 0) {
     return;
   }
 
-  const cost = new Date().getTime() - ctx.starttime;
+  const cost = new Date().getTime() - starttime;
   if (cost <= throttleMs) {
     return;
   } else {
     trm.setSpanTag(Tags.SAMPLING_PRIORITY, 11);
+    return true;
   }
 }
 
