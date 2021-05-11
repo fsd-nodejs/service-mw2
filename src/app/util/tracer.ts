@@ -5,11 +5,11 @@ import {
   TracingConfig,
 } from 'jaeger-client';
 import {
-  initGlobalTracer,
-  Span,
-  globalTracer,
-  SpanContext,
   FORMAT_HTTP_HEADERS,
+  Span,
+  SpanContext,
+  initGlobalTracer,
+  globalTracer,
 } from 'opentracing';
 
 /**
