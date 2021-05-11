@@ -5,11 +5,11 @@ import {
   TracingConfig,
 } from 'jaeger-client';
 import {
-  initGlobalTracer,
-  Span,
-  globalTracer,
-  SpanContext,
   FORMAT_HTTP_HEADERS,
+  Span,
+  SpanContext,
+  initGlobalTracer,
+  globalTracer,
 } from 'opentracing';
 
 /**
@@ -18,7 +18,7 @@ import {
  */
 export function initTracer(app: Application): JaegerTracer {
   const config: TracingConfig = {
-    serviceName: 'my-service',
+    serviceName: app.config.pkgJson.name,
     ...app.config.tracer.tracingConfig,
   };
   const tracer = initJaegerTracer(config, {});
@@ -34,10 +34,10 @@ interface SpanHeader {
  * trace管理类，需初始化并挂载到ctx
  */
 export class TracerManager {
-  instanceId = Symbol(new Date().getTime().toString());
+  public readonly instanceId = Symbol(new Date().getTime().toString());
+  public readonly isTraceEnabled: boolean;
 
   private readonly spans: Span[];
-  public readonly isTraceEnabled: boolean;
 
   constructor(isTraceEnabled: boolean) {
     this.isTraceEnabled = isTraceEnabled;
@@ -66,7 +66,7 @@ export class TracerManager {
   }
 
   @RunIfEnabled
-  spanLog(keyValuePairs: { [key: string]: unknown }): void {
+  spanLog(keyValuePairs: SpanLogInput): void {
     this.currentSpan()?.log(keyValuePairs);
   }
 
@@ -103,7 +103,7 @@ function RunIfEnabled(
   _target: unknown,
   _propertyKey: string,
   descriptor: TraceMgrPropDescriptor
-) {
+): TraceMgrPropDescriptor {
   const originalMethod = descriptor.value as (...args: unknown[]) => unknown;
   descriptor.value = function (...args: unknown[]): unknown {
     if (this.isTraceEnabled === true) {
@@ -111,4 +111,8 @@ function RunIfEnabled(
     }
   };
   return descriptor;
+}
+
+export interface SpanLogInput {
+  [key: string]: unknown;
 }
