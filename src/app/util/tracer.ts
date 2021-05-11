@@ -34,10 +34,10 @@ interface SpanHeader {
  * trace管理类，需初始化并挂载到ctx
  */
 export class TracerManager {
-  instanceId = Symbol(new Date().getTime().toString());
+  public readonly instanceId = Symbol(new Date().getTime().toString());
+  public readonly isTraceEnabled: boolean;
 
   private readonly spans: Span[];
-  public readonly isTraceEnabled: boolean;
 
   constructor(isTraceEnabled: boolean) {
     this.isTraceEnabled = isTraceEnabled;
