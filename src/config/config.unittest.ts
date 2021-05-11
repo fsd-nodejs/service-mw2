@@ -1,6 +1,8 @@
 import { EggRedisOptions } from 'egg-redis';
 import { ConnectionOptions } from 'typeorm';
 
+import { TracerConfig } from './config.types';
+
 export const security = {
   csrf: false,
 };
@@ -32,12 +34,16 @@ export const logger = {
   disableConsoleAfterReady: false,
 };
 
-export const tracer = {
-  whiteList: ['/untracedPath'],
+export const tracer: TracerConfig = {
+  whiteList: ['/favicon.ico', '/favicon.png', '/untracedPath'],
+  reqThrottleMsForPriority: 0,
   tracingConfig: {
     sampler: {
       type: 'const',
       param: 1,
+    },
+    reporter: {
+      agentHost: '127.0.0.1',
     },
   },
 };

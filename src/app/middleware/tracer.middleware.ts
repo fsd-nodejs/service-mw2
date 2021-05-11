@@ -7,7 +7,9 @@ import {
 import { Context } from 'egg';
 import { globalTracer, Tags, FORMAT_HTTP_HEADERS } from 'opentracing';
 
-import { TracerManager } from '../util/tracer';
+import { TracerLog, TracerTag } from '../../config/tracer.config';
+import { retrieveExternalNetWorkInfo } from '../util/common';
+import { SpanLogInput, TracerManager } from '../util/tracer';
 
 @Provide()
 export class TraceMiddleware implements IWebMiddleware {
@@ -30,16 +32,42 @@ async function traceMiddleware(
     ctx.tracerManager = new TracerManager(false);
     return next();
   }
-  // 开启第一个span并入栈
-  ctx.tracerManager = new TracerManager(true);
-  const requestSpanCtx =
-    globalTracer().extract(FORMAT_HTTP_HEADERS, ctx.headers) ?? undefined;
-  ctx.tracerManager.startSpan(ctx.path, requestSpanCtx);
-  ctx.tracerManager.spanLog({ event: 'request-begin' });
+  startSpan(ctx);
   // 设置异常链路一定会采样
   ctx.res.once('finish', () => finishSpan(ctx));
 
   return next();
+}
+
+function startSpan(ctx: Context): void {
+  // 开启第一个span并入栈
+  const tracerManager = new TracerManager(true);
+  const requestSpanCtx =
+    globalTracer().extract(FORMAT_HTTP_HEADERS, ctx.headers) ?? undefined;
+
+  tracerManager.startSpan(ctx.path, requestSpanCtx);
+  tracerManager.setSpanTag(Tags.HTTP_METHOD, ctx.req.method ?? 'n/a');
+  ctx.reqId && tracerManager.setSpanTag(TracerTag.reqId, ctx.reqId);
+
+  const { pkgJson } = ctx.app.config;
+  tracerManager.setSpanTag(TracerTag.svcName, pkgJson.name);
+  if (pkgJson.version) {
+    tracerManager.setSpanTag(TracerTag.svcVer, pkgJson.version);
+  }
+
+  retrieveExternalNetWorkInfo().forEach(ipInfo => {
+    if (ipInfo.family === 'IPv4') {
+      tracerManager.setSpanTag(TracerTag.svcIp4, ipInfo.cidr);
+    }
+    // else {
+    //   tracerManager.setSpanTag(TracerTag.svcIp6, ipInfo.cidr)
+    // }
+  });
+
+  tracerManager.setSpanTag(Tags.PEER_HOST_IPV4, ctx.request.ip);
+  tracerManager.spanLog({ event: TracerLog.requestBegin });
+
+  ctx.tracerManager = tracerManager;
 }
 
 function finishSpan(ctx: Context) {
@@ -49,14 +77,47 @@ function finishSpan(ctx: Context) {
   if (status >= 400) {
     tracerManager.setSpanTag(Tags.SAMPLING_PRIORITY, 1);
     tracerManager.setSpanTag(Tags.ERROR, true);
-    tracerManager.spanLog({
-      event: 'error',
-      message: ctx.response.message,
-      detail: ctx._internalError,
-    });
+    setLogForCustomCode(ctx, tracerManager);
+  } else {
+    processPriority(ctx, tracerManager);
   }
 
   tracerManager.setSpanTag(Tags.HTTP_STATUS_CODE, status);
-  tracerManager.spanLog({ event: 'request-end' });
+  tracerManager.spanLog({ event: TracerLog.requestEnd });
   tracerManager.finishSpan();
+}
+
+function processPriority(ctx: Context, trm: TracerManager): void {
+  const { reqThrottleMsForPriority: throttleMs } = ctx.app.config.tracer;
+
+  if (throttleMs < 0) {
+    return;
+  }
+
+  const cost = new Date().getTime() - ctx.starttime;
+  if (cost <= throttleMs) {
+    return;
+  } else {
+    trm.setSpanTag(Tags.SAMPLING_PRIORITY, 11);
+  }
+}
+
+function setLogForCustomCode(ctx: Context, trm: TracerManager): void {
+  const input: SpanLogInput = {
+    event: TracerLog.error,
+  };
+
+  // ctx._internalError in error-handler.middleware.ts
+  if (ctx._internalError) {
+    input[TracerLog.resMsg] = ctx._internalError.message;
+
+    const { stack } = ctx._internalError;
+    if (stack) {
+      // udp limit 65k
+      // @link https://www.jaegertracing.io/docs/1.22/client-libraries/#emsgsize-and-udp-buffer-limits
+      input[TracerLog.errStack] = stack.slice(0, 50000);
+    }
+  }
+
+  trm.spanLog(input);
 }

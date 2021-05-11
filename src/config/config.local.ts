@@ -1,6 +1,8 @@
 import { EggRedisOptions } from 'egg-redis';
 import { ConnectionOptions } from 'typeorm';
 
+import { TracerConfig } from './config.types';
+
 // 数据库配置
 export const orm: ConnectionOptions = {
   type: 'mysql',
@@ -20,5 +22,19 @@ export const redis: EggRedisOptions = {
     host: '127.0.0.1', // Redis host
     password: '',
     db: 0,
+  },
+};
+
+export const tracer: TracerConfig = {
+  whiteList: ['/favicon.ico', '/favicon.png'],
+  reqThrottleMsForPriority: 10,
+  tracingConfig: {
+    sampler: {
+      type: 'probabilistic',
+      param: 1,
+    },
+    reporter: {
+      agentHost: '127.0.0.1',
+    },
   },
 };
