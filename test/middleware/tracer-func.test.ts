@@ -23,39 +23,82 @@ describe(filename, () => {
     await close(app)
   })
 
-  it('Should processPriority() works', async () => {
-    const ctx: Context = app.createAnonymousContext()
-    const inst = await ctx.requestContext.getAsync(TraceMiddleware)
-    const mw = inst.resolve()
-    // @ts-expect-error
-    await mw(ctx, next)
+  describe('Should processPriority() works', () => {
 
-    const fnName = 'processPriority'
-    const fn = mods.__get__(fnName) as (options: ProcessPriorityOpts) => true | undefined
+    it('reqThrottleMsForPriority -1', async () => {
+      const ctx: Context = app.createAnonymousContext()
+      ctx.app.config.tracer.reqThrottleMsForPriority = -1
 
-    const opts: ProcessPriorityOpts = {
-      starttime: ctx.starttime,
-      trm: ctx.tracerManager,
-      tracerConfig: ctx.app.config.tracer,
-    };
+      const inst = await ctx.requestContext.getAsync(TraceMiddleware)
+      const mw = inst.resolve()
+      // @ts-expect-error
+      await mw(ctx, next)
 
-    opts.tracerConfig.reqThrottleMsForPriority = -1
-    const ret1 = fn(opts);
-    assert(typeof ret1 === 'undefined')
+      const fnName = 'processPriority'
+      const fn = mods.__get__(fnName) as (options: ProcessPriorityOpts) => number | undefined
 
-    opts.tracerConfig.reqThrottleMsForPriority = 10000
-    const ret2 = fn(opts);
-    assert(typeof ret2 === 'undefined')
+      const opts: ProcessPriorityOpts = {
+        starttime: ctx.starttime,
+        trm: ctx.tracerManager,
+        tracerConfig: ctx.app.config.tracer,
+      }
+      const cost = fn(opts)
+      assert(typeof cost === 'undefined')
+    })
 
-    opts.tracerConfig.reqThrottleMsForPriority = 0.1
-    const ret3 = fn(opts);
-    assert(ret3 === true)
+    it('reqThrottleMsForPriority 10000', async () => {
+      const ctx: Context = app.createAnonymousContext()
+      ctx.app.config.tracer.reqThrottleMsForPriority = 10000
 
-    opts.tracerConfig.reqThrottleMsForPriority = 0
-    const ret4 = fn(opts);
-    assert(ret4 === true)
+      const inst = await ctx.requestContext.getAsync(TraceMiddleware)
+      const mw = inst.resolve()
+      // @ts-expect-error
+      await mw(ctx, next)
+
+      const fnName = 'processPriority'
+      const fn = mods.__get__(fnName) as (options: ProcessPriorityOpts) => number | undefined
+
+      const opts: ProcessPriorityOpts = {
+        starttime: ctx.starttime,
+        trm: ctx.tracerManager,
+        tracerConfig: ctx.app.config.tracer,
+      }
+      const cost = fn(opts)
+      console.log({
+        cost,
+        starttime: ctx.starttime,
+        reqThrottleMsForPriority: ctx.app.config.tracer.reqThrottleMsForPriority,
+      })
+      assert(cost < ctx.app.config.tracer.reqThrottleMsForPriority)
+    })
+
+    it('reqThrottleMsForPriority zero', async () => {
+      const ctx: Context = app.createAnonymousContext()
+      ctx.app.config.tracer.reqThrottleMsForPriority = 0
+
+      const inst = await ctx.requestContext.getAsync(TraceMiddleware)
+      const mw = inst.resolve()
+      // @ts-expect-error
+      await mw(ctx, next)
+
+      const fnName = 'processPriority'
+      const fn = mods.__get__(fnName) as (options: ProcessPriorityOpts) => number | undefined
+
+      const opts: ProcessPriorityOpts = {
+        starttime: ctx.starttime,
+        trm: ctx.tracerManager,
+        tracerConfig: ctx.app.config.tracer,
+      }
+      const cost = fn(opts)
+      console.log({
+        cost,
+        starttime: ctx.starttime,
+        reqThrottleMsForPriority: ctx.app.config.tracer.reqThrottleMsForPriority,
+      })
+      assert(cost >= ctx.app.config.tracer.reqThrottleMsForPriority)
+    })
+
   })
-
 })
 
 
