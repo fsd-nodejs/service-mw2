@@ -12,6 +12,8 @@ import {
   globalTracer,
 } from 'opentracing';
 
+import { TraceHeaderKey } from '../../config/tracer.config';
+
 /**
  * 初始化tracer单例
  * @param app
@@ -27,7 +29,7 @@ export function initTracer(app: Application): JaegerTracer {
 }
 
 interface SpanHeader {
-  'uber-trace-id'?: string;
+  [TraceHeaderKey]?: string;
 }
 
 /**
