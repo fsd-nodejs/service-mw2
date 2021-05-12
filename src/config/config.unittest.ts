@@ -35,7 +35,13 @@ export const logger = {
 };
 
 export const tracer: TracerConfig = {
-  whiteList: ['/favicon.ico', '/favicon.png', '/untracedPath'],
+  whiteList: [
+    '/favicon.ico',
+    '/favicon.png',
+    '/untracedPath',
+    '',
+    /\/unitTest[\d.]+/u,
+  ],
   reqThrottleMsForPriority: 0,
   tracingConfig: {
     sampler: {

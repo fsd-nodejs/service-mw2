@@ -19,7 +19,7 @@ describe(filename, () => {
     await close(app)
   })
 
-  it('should works', async () => {
+  it('Should work', async () => {
     const ctx: Context = app.createAnonymousContext()
     const inst = await ctx.requestContext.getAsync(TraceMiddleware)
     const mw = inst.resolve()
@@ -29,7 +29,7 @@ describe(filename, () => {
     expect(span).toBeTruthy()
   })
 
-  it('should works with parent span', async () => {
+  it('Should work with parent span', async () => {
     const ctx: Context = app.createAnonymousContext()
     const parentSpanId = '123'
     ctx.request.headers[TraceHeaderKey] = `${parentSpanId}:${parentSpanId}:0:1`
@@ -42,7 +42,7 @@ describe(filename, () => {
     expect(expectParentSpanId).toEqual(parentSpanId)
   })
 
-  it('should not works if path is in whitelist', async () => {
+  it('Should work if path not match whitelist string', async () => {
     const ctx: Context = app.createAnonymousContext()
     const inst = await ctx.requestContext.getAsync(TraceMiddleware)
     const mw = inst.resolve()
@@ -50,6 +50,26 @@ describe(filename, () => {
     // @ts-expect-error
     await mw(ctx, next)
     expect(ctx.tracerManager.isTraceEnabled).toEqual(false)
+  })
+
+  it('Should work if path match whitelist regexp', async () => {
+    const ctx: Context = app.createAnonymousContext()
+    const inst = await ctx.requestContext.getAsync(TraceMiddleware)
+    const mw = inst.resolve()
+    ctx.path = '/unitTest' + Math.random().toString()
+    // @ts-expect-error
+    await mw(ctx, next)
+    expect(ctx.tracerManager.isTraceEnabled).toEqual(false)
+  })
+
+  it('Should work if path not match whitelist regexp', async () => {
+    const ctx: Context = app.createAnonymousContext()
+    const inst = await ctx.requestContext.getAsync(TraceMiddleware)
+    const mw = inst.resolve()
+    ctx.path = '/unittest' + Math.random().toString()
+    // @ts-expect-error
+    await mw(ctx, next)
+    expect(ctx.tracerManager.isTraceEnabled).toEqual(true)
   })
 })
 
