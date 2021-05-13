@@ -1,4 +1,3 @@
-
 export enum TracerTag {
   dbName = 'db',
   dbClient = 'db.client',
@@ -37,3 +36,5 @@ export enum TracerLog {
   errMsg = 'err.msg',
   errStack = 'err.stack',
 }
+
+export const TraceHeaderKey = 'uber-trace-id';

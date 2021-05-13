@@ -5,6 +5,7 @@ import { basename } from '@waiting/shared-core'
 import { Application } from 'egg'
 
 import { TracerManager } from '../../src/app/util/tracer'
+import { TraceHeaderKey } from '../../src/config/tracer.config'
 
 
 const filename = basename(__filename)
@@ -26,12 +27,11 @@ describe(filename, () => {
     expect(tracerManager.currentSpan()).toBeUndefined()
   })
   it('new span should be child of preceding span', async () => {
-    const traceHeaderKey = 'uber-trace-id'
     const tracerManager = new TracerManager(true)
     tracerManager.startSpan('span1')
-    const span1Header = tracerManager.headerOfCurrentSpan()[traceHeaderKey]
+    const span1Header = tracerManager.headerOfCurrentSpan()[TraceHeaderKey]
     tracerManager.startSpan('span2')
-    const span2Header = tracerManager.headerOfCurrentSpan()[traceHeaderKey]
+    const span2Header = tracerManager.headerOfCurrentSpan()[TraceHeaderKey]
     expect(span2Header?.split(':')[2]).toEqual(span1Header?.split(':')[0])
   })
   it('should not works if disabled', async () => {
