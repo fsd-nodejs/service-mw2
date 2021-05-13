@@ -80,4 +80,6 @@ jobs:
 #       with:
 #         token: ${{secrets.CODECOV_TOKEN}}
 #         file: ./coverage/coverage-final.json
+    - name: Run codacy-coverage-reporter
+      uses: codacy/codacy-coverage-reporter-action@v1
       
