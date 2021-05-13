@@ -7,7 +7,7 @@
   <a href="https://codecov.io/gh/fsd-nodejs/service-mw2" target="_blank"><img src="https://codecov.io/gh/fsd-nodejs/service-mw2/branch/master/graph/badge.svg" alt="codecov" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2" target="_blank"><img src="https://github.com/fsd-nodejs/service-mw2/workflows/Node.js%20CI/badge.svg" alt="GitHub Actions status" /></a>
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2.svg?type=shield"/></a>
-  <a href="https://codebeat.co/projects/github-com-fsd-nodejs-service-mw2-master" target="_blank"><img src="https://codebeat.co/badges/ed780b5a-d9e8-41a8-8bc9-8bcb3263c6ce" alt="codebeat badge" /></a>
+  <a href="https://codebeat.co/projects/github-com-fsd-nodejs-service-mw2-master-cfc93c67-b6d6-41eb-9fda-bd80523e44fa"><img alt="codebeat badge" src="https://codebeat.co/badges/8fc0ebcc-24c9-4b3b-8b43-57b4d9dff9c5" /></a>
   <a href="https://app.codacy.com/gh/fsd-nodejs/service-mw2?utm_source=github.com&utm_medium=referral&utm_content=fsd-nodejs/service-mw2&utm_campaign=Badge_Grade_Settings" target="_blank"><img src="https://api.codacy.com/project/badge/Grade/70f1ddd7463d43eba9039bcb88760038" alt="Codacy Badge" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2/pulls" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
