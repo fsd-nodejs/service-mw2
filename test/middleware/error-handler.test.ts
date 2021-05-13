@@ -42,7 +42,7 @@ describe(filename, () => {
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
     const mw = inst.resolve()
     // @ts-expect-error
-    await mw(ctx, nextThrowError('ValidationError'))
+    await mw(ctx, nextThrowError)
 
     const { status, body } = ctx
     assert(status === 422, status.toString())
@@ -57,7 +57,7 @@ describe(filename, () => {
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
     const mw = inst.resolve()
     // @ts-expect-error
-    await mw(ctx, nextThrowError('Server Error', 500))
+    await mw(ctx, nextThrowError500)
     const { body, status } = ctx
     assert(status === 500)
     assert(body.message === 'Internal Server Error')
@@ -69,7 +69,10 @@ async function next(): Promise<void> {
   return void 0
 }
 
-async function nextThrowError(message, status): Promise<void> {
-  throw new MyError(message, status)
+async function nextThrowError(): Promise<void> {
+  throw new MyError('ValidationError')
 }
 
+async function nextThrowError500(): Promise<void> {
+  throw new MyError('Server Error', 500)
+}
