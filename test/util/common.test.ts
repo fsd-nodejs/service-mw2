@@ -10,7 +10,6 @@ describe(filename, () => {
   it('Should retrieveExternalNetWorkInfo works', async () => {
     const infoList = retrieveExternalNetWorkInfo()
     assert(infoList.length > 0)
-    console.log({ infoList })
   })
 })
 

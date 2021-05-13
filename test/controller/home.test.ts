@@ -46,12 +46,10 @@ describe('test/controller/home.test.ts', () => {
       .expect(200);
 
     const msg: string = response.text;
-    // console.info('genid:', msg)
     assert(/[1-9]\d{18}/u.test(msg)); // 6755455236955799552
 
     const config: KoidEggConfig = app.config.koid
     const info = retrieveFromId(msg)
-    // console.info({info, config: config.client.koidConfig})
     assert(info.dataCenter === config.client.koidConfig.dataCenter)
     assert(info.worker === config.client.koidConfig.worker)
   });

@@ -43,6 +43,11 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
+      console.log({
+        cost,
+        starttime: ctx.starttime,
+        reqThrottleMsForPriority: ctx.app.config.tracer.reqThrottleMsForPriority,
+      })
       assert(typeof cost === 'undefined')
     })
 
@@ -64,11 +69,6 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      console.log({
-        cost,
-        starttime: ctx.starttime,
-        reqThrottleMsForPriority: ctx.app.config.tracer.reqThrottleMsForPriority,
-      })
       assert(cost < ctx.app.config.tracer.reqThrottleMsForPriority)
     })
 
@@ -90,11 +90,6 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      console.log({
-        cost,
-        starttime: ctx.starttime,
-        reqThrottleMsForPriority: ctx.app.config.tracer.reqThrottleMsForPriority,
-      })
       assert(cost >= ctx.app.config.tracer.reqThrottleMsForPriority)
     })
 
