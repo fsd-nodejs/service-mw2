@@ -49,6 +49,20 @@ describe(filename, () => {
     assert(body.message === 'ValidationError')
   })
 
+
+  it('should 500 works', async () => {
+    const ctx = app.createAnonymousContext()
+    ctx.status = 500
+    ctx.app.config.env = 'prod'
+    const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
+    const mw = inst.resolve()
+    // @ts-expect-error
+    await mw(ctx, next)
+
+    const { body, status } = ctx
+    assert(status === 500)
+    assert(body.message === 'Internal Server Error')
+  })
 })
 
 
