@@ -58,7 +58,7 @@ describe(filename, () => {
     const mw = inst.resolve()
     // @ts-expect-error
     await mw(ctx, next)
-
+    console.log(ctx.body)
     const { body, status } = ctx
     assert(status === 500)
     assert(body.message === 'Internal Server Error')
