@@ -101,10 +101,8 @@ export interface ProcessPriorityOpts {
 function processPriority(options: ProcessPriorityOpts): number | undefined {
   const { starttime, trm } = options;
   const { reqThrottleMsForPriority: throttleMs } = options.tracerConfig;
-  console.log('throttleMs: ', throttleMs === -1);
   if (throttleMs < 0) {
-    console.log('throttleMs: ', throttleMs);
-    return;
+    return undefined;
   }
 
   const cost = new Date().getTime() - starttime;
