@@ -52,7 +52,7 @@ describe(filename, () => {
 
   it('should 500 works', async () => {
     const ctx = app.createAnonymousContext()
-    ctx.status = 500
+    ctx.status = 200
     ctx.app.config.env = 'prod'
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
     const mw = inst.resolve()
