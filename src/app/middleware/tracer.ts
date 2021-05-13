@@ -29,7 +29,7 @@ async function traceMiddleware(
   next: IMidwayWebNext
 ): Promise<unknown> {
   // 白名单内的路由不会被追踪
-  if (ctx.app.config.tracer.whiteList.includes(ctx.path)) {
+  if (pathMatched(ctx.path, ctx.app.config.tracer.whiteList)) {
     ctx.tracerManager = new TracerManager(false);
     return next();
   }
@@ -131,4 +131,16 @@ function setLogForCustomCode(ctx: Context, trm: TracerManager): void {
   }
 
   trm.spanLog(input);
+}
+
+function pathMatched(path: string, rules: TracerConfig['whiteList']): boolean {
+  return rules.some(rule => {
+    if (!rule) {
+      return;
+    } else if (typeof rule === 'string') {
+      return rule === path;
+    } else {
+      return rule.test(path);
+    }
+  });
 }

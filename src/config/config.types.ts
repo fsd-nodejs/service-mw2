@@ -6,11 +6,7 @@ import { TracingConfig } from 'jaeger-client';
 
 import type { TracerManager } from '../app/util/tracer';
 
-export interface DefaultConfig extends PowerPartial<EggAppConfig> {
-  jwt: JwtEggConfig;
-  jwtAuth: JwtAuthMiddlewareConfig;
-  koid: KoidEggConfig;
-}
+export type DefaultConfig = PowerPartial<EggAppConfig>;
 
 /** JwtAuthMiddleware */
 export interface JwtAuthMiddlewareConfig {
@@ -31,9 +27,11 @@ declare module 'egg' {
   }
 
   interface EggAppConfig {
+    admin: Record<string, string>;
     coreMiddleware: string[];
     jwt: JwtEggConfig;
     jwtAuth: JwtAuthMiddlewareConfig;
+    koid: KoidEggConfig;
     pkgJson: NpmPkg;
     tracer: TracerConfig;
   }
@@ -41,7 +39,7 @@ declare module 'egg' {
 
 export interface TracerConfig {
   /** 忽略名单 */
-  whiteList: string[];
+  whiteList: (string | RegExp)[];
   /**
    * 强制采样请求处理时间（毫秒）阈值
    * 负数不采样
