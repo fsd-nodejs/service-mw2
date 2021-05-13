@@ -57,8 +57,7 @@ describe(filename, () => {
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
     const mw = inst.resolve()
     // @ts-expect-error
-    await mw(ctx, next)
-    console.log(ctx.body)
+    await mw(ctx, nextThrowError)
     const { body, status } = ctx
     assert(status === 500)
     assert(body.message === 'Internal Server Error')
