@@ -100,17 +100,14 @@ export interface ProcessPriorityOpts {
 }
 function processPriority(options: ProcessPriorityOpts): number | undefined {
   const { starttime, trm } = options;
-  const { reqThrottleMsForPriority: throttleMs } = options.tracerConfig;
-
-  if (throttleMs < 0) {
-    return;
+  const { reqThrottleMsForPriority: throttleMs = 0 } = options.tracerConfig;
+  if (throttleMs >= 0) {
+    const cost = new Date().getTime() - starttime;
+    if (cost >= throttleMs) {
+      trm.setSpanTag(Tags.SAMPLING_PRIORITY, 11);
+    }
+    return cost;
   }
-
-  const cost = new Date().getTime() - starttime;
-  if (cost >= throttleMs) {
-    trm.setSpanTag(Tags.SAMPLING_PRIORITY, 11);
-  }
-  return cost;
 }
 
 function setLogForCustomCode(ctx: Context, trm: TracerManager): void {

@@ -27,7 +27,7 @@ describe(filename, () => {
 
     it('reqThrottleMsForPriority -1', async () => {
       const ctx: Context = app.createAnonymousContext()
-      ctx.app.config.tracer.reqThrottleMsForPriority = -1
+      ctx.app.config.tracer.reqThrottleMsForPriority = -100
 
       const inst = await ctx.requestContext.getAsync(TraceMiddleware)
       const mw = inst.resolve()
@@ -64,11 +64,6 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      console.log({
-        cost,
-        starttime: ctx.starttime,
-        reqThrottleMsForPriority: ctx.app.config.tracer.reqThrottleMsForPriority,
-      })
       assert(cost < ctx.app.config.tracer.reqThrottleMsForPriority)
     })
 
@@ -90,11 +85,6 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      console.log({
-        cost,
-        starttime: ctx.starttime,
-        reqThrottleMsForPriority: ctx.app.config.tracer.reqThrottleMsForPriority,
-      })
       assert(cost >= ctx.app.config.tracer.reqThrottleMsForPriority)
     })
 
