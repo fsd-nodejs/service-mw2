@@ -13,8 +13,7 @@ jobs:
   build:
 
     runs-on: ${{ matrix.os }}
-    
-    
+
     # Docker Hub image that `container-job` executes in
     container: node:10.18-jessie
 
@@ -87,4 +86,3 @@ jobs:
         # or
         # api-token: ${{ secrets.CODACY_API_TOKEN }}
         coverage-reports: ./coverage/clover.xml
-      
