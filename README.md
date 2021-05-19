@@ -11,6 +11,7 @@
   <a href="https://www.codacy.com/gh/fsd-nodejs/service-mw2/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fsd-nodejs/service-mw2&amp;utm_campaign=Badge_Grade" target="_blank"><img src="https://app.codacy.com/project/badge/Grade/29ee6a723e3b45df918f7c7f2fee1dda" alt="Codacy Badge" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2/pulls" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
+  <a href="https://bestpractices.coreinfrastructure.org/projects/4881"><img src="https://bestpractices.coreinfrastructure.org/projects/4881/badge"></a>
 </p>
 <p align="center">
   <a href="https://sonarcloud.io/dashboard?id=fsd-nodejs_service-mw2" target="_blank"><img src="https://sonarcloud.io/api/project_badges/quality_gate?project=fsd-nodejs_service-mw2" alt="Sonar Cloud" /></a>
