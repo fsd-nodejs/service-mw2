@@ -26,7 +26,7 @@ describe('test/service/role.test.ts', () => {
       current: 1,
     };
     const { total } = await roleService.queryAdminRole(queryParams);
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminRole >should get role list and query by id', async () => {
@@ -43,7 +43,7 @@ describe('test/service/role.test.ts', () => {
       id: list[0].id,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminRole >should get role list and query by name', async () => {
@@ -60,7 +60,7 @@ describe('test/service/role.test.ts', () => {
       name: list[0].name,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminRole >should get role list and query by slug', async () => {
@@ -77,7 +77,7 @@ describe('test/service/role.test.ts', () => {
       slug: list[0].slug,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#createAdminRole >should created role', async () => {
@@ -92,7 +92,7 @@ describe('test/service/role.test.ts', () => {
     };
     const role = await roleService.createAdminRole(params);
 
-    assert(role);
+    assert.ok(role);
     currentRole = role;
   });
 
@@ -119,7 +119,7 @@ describe('test/service/role.test.ts', () => {
     );
     const role = await roleService.getAdminRoleById(currentRole.id);
 
-    assert(role);
+    assert.ok(role);
   });
 
   it('#updateAdminRole >should update role', async () => {
@@ -134,7 +134,7 @@ describe('test/service/role.test.ts', () => {
       permissions: ['2'],
       slug: 'fakeSlug2'
     });
-    assert(affected);
+    assert.ok(affected);
   });
 
   it('#removeAdminRoleByIds >should remove role', async () => {
@@ -143,7 +143,7 @@ describe('test/service/role.test.ts', () => {
     );
     const { id } = currentRole;
     const total = await roleService.removeAdminRoleByIds([id]);
-    assert(total);
+    assert.ok(total);
   });
 
   it('#createAdminRole >should created role, no permission', async () => {
@@ -157,6 +157,6 @@ describe('test/service/role.test.ts', () => {
     };
     const role = await roleService.createAdminRole(params);
 
-    assert(role);
+    assert.ok(role);
   });
 });

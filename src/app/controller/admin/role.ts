@@ -83,7 +83,7 @@ export class AdminRoleController {
     await this.service.checkRoleExists([params.id]);
 
     const { affected } = await this.service.updateAdminRole(params);
-    assert(affected, new MyError('更新失败，请检查', 400));
+    assert.ok(affected, new MyError('更新失败，请检查', 400));
 
     ctx.helper.success(null, null, 204);
   }
@@ -98,7 +98,7 @@ export class AdminRoleController {
     await this.service.checkRoleExists(params.ids);
 
     const total = await this.service.removeAdminRoleByIds(params.ids);
-    assert(total, new MyError('删除失败，请检查', 400));
+    assert.ok(total, new MyError('删除失败，请检查', 400));
 
     ctx.helper.success(null, null, 204);
   }

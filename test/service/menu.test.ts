@@ -26,7 +26,7 @@ describe('test/service/menu.test.ts', () => {
       current: 1,
     };
     const { total } = await menuService.queryAdminMenu(queryParams);
-    assert(total);
+    assert.ok(total);
   });
 
   it('#createAdminMenu >should created menu', async () => {
@@ -43,7 +43,7 @@ describe('test/service/menu.test.ts', () => {
     };
     const menu = await menuService.createAdminMenu(params);
 
-    assert(menu);
+    assert.ok(menu);
     currentMenu = menu;
   });
 
@@ -53,7 +53,7 @@ describe('test/service/menu.test.ts', () => {
     );
     const menu = await menuService.getAdminMenuById(currentMenu.id);
 
-    assert(menu);
+    assert.ok(menu);
   });
 
   it('#updateAdminMenu >should update menu', async () => {
@@ -70,7 +70,7 @@ describe('test/service/menu.test.ts', () => {
       roles: [],
       permissionId: '2',
     });
-    assert(affected);
+    assert.ok(affected);
   });
 
   it('#removeAdminMenuByIds >should remove menu', async () => {
@@ -79,7 +79,7 @@ describe('test/service/menu.test.ts', () => {
     );
     const { id } = currentMenu;
     const total = await menuService.removeAdminMenuByIds([id]);
-    assert(total);
+    assert.ok(total);
   });
 
   it('#orderAdminMemu >should order menu', async () => {

@@ -28,7 +28,7 @@
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-angular": "^12.1.1",
     "@midwayjs/cli": "^1.2.63",
-    "@midwayjs/egg-ts-helper": "^1.1.0",
+    "@midwayjs/egg-ts-helper": "^1.2.0",
     "@midwayjs/mock": "^2.10.7",
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.41",

@@ -36,7 +36,7 @@ describe('test/controller/admin/permission.test.ts', () => {
       })
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
-    assert(response.body.data.total);
+    assert.ok(response.body.data.total);
   });
 
   it('should get /admin/permission/show ', async () => {
@@ -44,7 +44,7 @@ describe('test/controller/admin/permission.test.ts', () => {
       .get('/admin/permission/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
-    assert(response.body.data.total);
+    assert.ok(response.body.data.total);
     const { list } = response.body.data;
     const response2 = await createHttpRequest(app)
       .get('/admin/permission/show')
@@ -68,7 +68,7 @@ describe('test/controller/admin/permission.test.ts', () => {
       .type('form')
       .send(params)
       .expect(201);
-    assert(response.body.data);
+    assert.ok(response.body.data);
     currentPermission = response.body.data;
   });
 

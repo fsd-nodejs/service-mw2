@@ -102,7 +102,7 @@ export class AdminUserController {
     await this.permissionService.checkPermissionExists(permissions);
 
     const { affected } = await this.service.updateAdminUser(params);
-    assert(affected, new MyError('更新失败，请检查', 400));
+    assert.ok(affected, new MyError('更新失败，请检查', 400));
 
     ctx.helper.success(null, null, 204);
   }
@@ -117,7 +117,7 @@ export class AdminUserController {
     await this.service.checkUserExists(params.ids);
 
     const total = await this.service.removeAdminUserByIds(params.ids);
-    assert(total, new MyError('删除失败，请检查', 400));
+    assert.ok(total, new MyError('删除失败，请检查', 400));
 
     ctx.helper.success(null, null, 204);
   }

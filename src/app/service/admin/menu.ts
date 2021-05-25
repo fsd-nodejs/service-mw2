@@ -88,7 +88,7 @@ export class AdminMenuService {
     if (newRoles) {
       const oldRoles = menu.roles.map(item => item.id);
       // 对比角色变更差异
-      const [increase, decrease]: [any[], any[]] = this.ctx.helper.arrayDiff(
+      const [increase, decrease] = this.ctx.helper.arrayDiff(
         newRoles,
         oldRoles
       );

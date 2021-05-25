@@ -140,7 +140,7 @@ export class AdminUserService {
     if (newRoles) {
       const oldRoles = user.roles.map(item => item.id);
       // 对比角色变更差异
-      const [increase, decrease]: [any[], any[]] = this.ctx.helper.arrayDiff(
+      const [increase, decrease] = this.ctx.helper.arrayDiff(
         newRoles,
         oldRoles
       );
@@ -164,7 +164,7 @@ export class AdminUserService {
     if (newPermissions) {
       const oldPermissions = user.permissions.map(item => item.id);
       // 对比权限变更差异
-      const [increase, decrease]: [any[], any[]] = this.ctx.helper.arrayDiff(
+      const [increase, decrease] = this.ctx.helper.arrayDiff(
         newPermissions,
         oldPermissions
       );

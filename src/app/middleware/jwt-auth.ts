@@ -21,7 +21,10 @@ export default () => {
       );
 
       // 验证是否为最新的token
-      assert(token === redisToken, new MyError('Authentication Failed', 401));
+      assert.ok(
+        token === redisToken,
+        new MyError('Authentication Failed', 401)
+      );
 
       const userinfo = await ctx.app.redis.get(
         `${jwtAuth.redisScope}:userinfo:${payload.id}`

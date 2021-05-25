@@ -4,6 +4,7 @@ import {
   IMidwayLogger,
   MidwayContextLogger,
   MidwayTransformableInfo,
+  // eslint-disable-next-line node/no-extraneous-import
 } from '@midwayjs/logger';
 import { genISO8601String } from '@waiting/shared-core';
 import { Context, Application } from 'egg';

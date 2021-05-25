@@ -1,5 +1,4 @@
 import * as assert from 'power-assert';
-
 import { Framework } from '@midwayjs/web';
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
 import { Application } from 'egg';
@@ -28,7 +27,7 @@ describe('test/controller/admin/menu.test.ts', () => {
       .get('/admin/menu/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
-    assert(response.body.data.total);
+    assert.ok(response.body.data.total);
   });
 
   it('should get /admin/menu/show ', async () => {
@@ -36,7 +35,7 @@ describe('test/controller/admin/menu.test.ts', () => {
       .get('/admin/menu/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
-    assert(response.body.data.total);
+    assert.ok(response.body.data.total);
     const { list } = response.body.data;
     const response2 = await createHttpRequest(app)
       .get('/admin/menu/show')
@@ -60,7 +59,7 @@ describe('test/controller/admin/menu.test.ts', () => {
       .type('form')
       .send(params)
       .expect(201);
-    assert(response.body.data);
+    assert.ok(response.body.data);
     currentMenu = response.body.data;
   });
 

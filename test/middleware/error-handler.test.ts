@@ -32,8 +32,8 @@ describe(filename, () => {
     await mw(ctx, next)
 
     const { body, status } = ctx
-    assert(status === 404)
-    assert(body.message === 'Not Found')
+    assert.ok(status === 404)
+    assert.ok(body.message === 'Not Found')
   })
 
   it('should 422 works', async () => {
@@ -45,8 +45,8 @@ describe(filename, () => {
     await mw(ctx, nextThrowError)
 
     const { status, body } = ctx
-    assert(status === 422, status.toString())
-    assert(body.message === 'ValidationError')
+    assert.ok(status === 422, status.toString())
+    assert.ok(body.message === 'ValidationError')
   })
 
 
@@ -59,8 +59,8 @@ describe(filename, () => {
     // @ts-expect-error
     await mw(ctx, nextThrowError500)
     const { body, status } = ctx
-    assert(status === 500)
-    assert(body.message === 'Internal Server Error')
+    assert.ok(status === 500)
+    assert.ok(body.message === 'Internal Server Error')
   })
 })
 

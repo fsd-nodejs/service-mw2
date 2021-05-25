@@ -1,4 +1,4 @@
-import * as assert from 'assert'
+import * as assert from 'power-assert'
 
 import { createApp, close } from '@midwayjs/mock'
 import { Framework } from '@midwayjs/web'
@@ -43,7 +43,7 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      assert(typeof cost === 'undefined')
+      assert.ok(typeof cost === 'undefined')
     })
 
     it('reqThrottleMsForPriority 10000', async () => {
@@ -64,7 +64,7 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      assert(cost < ctx.app.config.tracer.reqThrottleMsForPriority)
+      assert.ok(cost < ctx.app.config.tracer.reqThrottleMsForPriority)
     })
 
     it('reqThrottleMsForPriority zero', async () => {
@@ -85,7 +85,7 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      assert(cost >= ctx.app.config.tracer.reqThrottleMsForPriority)
+      assert.ok(cost >= ctx.app.config.tracer.reqThrottleMsForPriority)
     })
 
   })
