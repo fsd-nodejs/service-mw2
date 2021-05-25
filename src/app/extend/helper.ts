@@ -26,7 +26,8 @@ moment.locale('zh-cn');
 module.exports = {
   /**
    * 密文转hash
-   * @param str 需要加密的内容
+   * @method Helper#bhash
+   * @param {String} str 需要加密的内容
    * @returns {String} 密文
    */
   bhash(str: string) {
@@ -34,8 +35,8 @@ module.exports = {
   },
   /**
    * hash是否正确
-   * @param str 需要匹配的内容
-   * @param hash hash值
+   * @param {String} str 需要匹配的内容
+   * @param {String} hash hash值
    * @returns {Boolean} 是否匹配
    */
   bcompare(str: string, hash: string) {
@@ -57,9 +58,15 @@ module.exports = {
   },
   /**
    * 处理成功响应
-   * @param result
-   * @param message
-   * @param status
+   * @method Helper#success
+   * @param {any} result Return data, Default null
+   * @param {String} message Error message, Default '请求成功'
+   * @param {Number} status Status code, Default '200'
+   *
+   * @example
+   * ```js
+   * ctx.helper.success({}, null, 201);
+   * ```
    */
   success(result = null, message = '请求成功', status = 200) {
     this.ctx.body = {
