@@ -18,7 +18,7 @@ declare module 'egg' {
   interface IHelper {
     /**
      * 密文转hash
-     * @method Helper#bhash
+     * @function Helper#bhash
      * @param {String} str 需要加密的内容
      * @returns {String} 密文
      */
@@ -34,7 +34,7 @@ declare module 'egg' {
 
     /**
      * 对比两个数组差异
-     * @method Helper#arrayDiff
+     * @function Helper#arrayDiff
      * @param {(string | number)[]} arrA 数组A
      * @param {(string | number)[]} arrB 数组B
      * @returns {[increase:  (string | number)[], decrease:  (string | number)[]]} [increase, decrease]
@@ -45,7 +45,7 @@ declare module 'egg' {
     ) => [increase: (string | number)[], decrease: (string | number)[]];
     /**
      * 处理成功响应
-     * @method Helper#success
+     * @function Helper#success
      * @param {any} result Return data, Default null
      * @param {String} message Error message, Default '请求成功'
      * @param {Number} status Status code, Default '200'
