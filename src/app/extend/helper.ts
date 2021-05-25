@@ -44,7 +44,10 @@ module.exports = {
 
   /**
    * 对比两个数组差异
-   * @returns {[increase: any[], decrease[any]]}
+   * @method Helper#arrayDiff
+   * @param {(string | number)[]} arrA 数组A
+   * @param {(string | number)[]} arrB 数组B
+   * @returns {[increase:  (string | number)[], decrease:  (string | number)[]]} [increase, decrease]
    */
   arrayDiff(arrA: any[], arrB: any[]) {
     const intersect = meeko.array.intersect(arrA, arrB);
@@ -54,7 +57,6 @@ module.exports = {
   },
   /**
    * 处理成功响应
-   * @param ctx
    * @param result
    * @param message
    * @param status
