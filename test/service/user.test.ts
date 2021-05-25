@@ -27,7 +27,7 @@ describe('test/service/user.test.ts', () => {
       current: 1,
     };
     const { total } = await userService.queryAdminUser(queryParams);
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminUser >should get user list and query by id', async () => {
@@ -44,7 +44,7 @@ describe('test/service/user.test.ts', () => {
       id: list[0].id,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminUser >should get user list and query by name', async () => {
@@ -61,7 +61,7 @@ describe('test/service/user.test.ts', () => {
       name: list[0].name,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminUser >should get user list and query by username', async () => {
@@ -78,7 +78,7 @@ describe('test/service/user.test.ts', () => {
       username: list[0].username,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#createAdminUser >should created user', async () => {
@@ -95,7 +95,7 @@ describe('test/service/user.test.ts', () => {
     };
     const user = await userService.createAdminUser(params);
 
-    assert(user);
+    assert.ok(user);
     currentUser = user;
   });
 
@@ -122,7 +122,7 @@ describe('test/service/user.test.ts', () => {
     );
     const user = await userService.getAdminUserById(currentUser.id);
 
-    assert(user);
+    assert.ok(user);
   });
 
   it('#updateAdminUser >should update user', async () => {
@@ -139,7 +139,7 @@ describe('test/service/user.test.ts', () => {
       roles: [],
       permissions: [],
     });
-    assert(affected);
+    assert.ok(affected);
   });
 
   it('#removeAdminUserByIds >should remove user', async () => {
@@ -148,7 +148,7 @@ describe('test/service/user.test.ts', () => {
     );
     const { id } = currentUser;
     const total = await userService.removeAdminUserByIds([id]);
-    assert(total);
+    assert.ok(total);
   });
 
   it('#createAdminUser >should created user, no role, no permission', async () => {
@@ -163,6 +163,6 @@ describe('test/service/user.test.ts', () => {
     };
     const user = await userService.createAdminUser(params);
 
-    assert(user);
+    assert.ok(user);
   });
 });

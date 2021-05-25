@@ -20,7 +20,7 @@ describe('test/service/authService.test.ts', () => {
       'authService'
     );
     const user = await authService.getAdminUserByUserName('admin');
-    assert(user);
+    assert.ok(user);
     assert.deepEqual(user?.username, 'admin');
   });
 
@@ -39,7 +39,7 @@ describe('test/service/authService.test.ts', () => {
     );
     const params = { username: 'admin', password: 'admin' };
     const user = await authService.localHandler(params);
-    assert(user);
+    assert.ok(user);
     assert.deepEqual(user?.username, params.username);
   });
 
@@ -68,9 +68,9 @@ describe('test/service/authService.test.ts', () => {
       'authService'
     );
     const user = await authService.getAdminUserByUserName('admin');
-    assert(user);
+    assert.ok(user);
     const token = user && (await authService.createAdminUserToken(user));
-    assert(token);
+    assert.ok(token);
   });
 
   it('#getAdminUserTokenById >should get token from redis', async () => {
@@ -78,9 +78,9 @@ describe('test/service/authService.test.ts', () => {
       'authService'
     );
     const user = await authService.getAdminUserByUserName('admin');
-    assert(user);
+    assert.ok(user);
     const token = user && (await authService.getAdminUserTokenById(user.id));
-    assert(token);
+    assert.ok(token);
   });
 
   it('#removeAdminUserTokenById >should remove token from redis', async () => {
@@ -88,10 +88,10 @@ describe('test/service/authService.test.ts', () => {
       'authService'
     );
     const user = await authService.getAdminUserByUserName('admin');
-    assert(user);
+    assert.ok(user);
     const removed =
       user && (await authService.removeAdminUserTokenById(user.id));
-    assert(removed);
+    assert.ok(removed);
   });
 
   it('#cacheAdminUser >should get OK when cached user to redis', async () => {
@@ -99,7 +99,7 @@ describe('test/service/authService.test.ts', () => {
       'authService'
     );
     const user = await authService.getAdminUserByUserName('admin');
-    assert(user);
+    assert.ok(user);
     const cached = user && (await authService.cacheAdminUser(user));
     assert.deepEqual(cached, 'OK');
   });
@@ -109,9 +109,9 @@ describe('test/service/authService.test.ts', () => {
       'authService'
     );
     const user = await authService.getAdminUserByUserName('admin');
-    assert(user);
+    assert.ok(user);
     const userinfo = user && (await authService.getAdminUserById(user.id));
-    assert(userinfo);
+    assert.ok(userinfo);
     assert.deepEqual(userinfo?.username, user?.username);
   });
 
@@ -120,8 +120,8 @@ describe('test/service/authService.test.ts', () => {
       'authService'
     );
     const user = await authService.getAdminUserByUserName('admin');
-    assert(user);
+    assert.ok(user);
     const removed = user && (await authService.cleanAdminUserById(user.id));
-    assert(removed);
+    assert.ok(removed);
   });
 });

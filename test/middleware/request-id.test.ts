@@ -32,15 +32,15 @@ describe(filename, () => {
     await mw(ctx, next)
 
     const { status, reqId } = ctx
-    assert(status === 200)
-    assert(reqId && reqId.length)
+    assert.ok(status === 200)
+    assert.ok(reqId && reqId.length)
     const info = retrieveFromId(reqId)
-    assert(typeof info.dataCenter === 'number')
-    assert(typeof info.worker === 'number')
-    assert(typeof info.timestamp === 'number')
+    assert.ok(typeof info.dataCenter === 'number')
+    assert.ok(typeof info.worker === 'number')
+    assert.ok(typeof info.timestamp === 'number')
 
     const xReqId = ctx.response.get(key)
-    assert(xReqId === reqId)
+    assert.ok(xReqId === reqId)
   })
 
   it('should works with existing x-request-id header', async () => {
@@ -49,7 +49,7 @@ describe(filename, () => {
     ctx.status = 200
 
     const input = Math.random().toString()
-    assert(input.length)
+    assert.ok(input.length)
     // ctx.set(key, input) not works
     ctx.request.headers[key] = input
 
@@ -59,10 +59,10 @@ describe(filename, () => {
     await mw(ctx, next)
 
     const { status } = ctx
-    assert(status === 200)
+    assert.ok(status === 200)
 
     const xReqId = ctx.response.get(key)
-    assert(xReqId === input)
+    assert.ok(xReqId === input)
   })
 
 })

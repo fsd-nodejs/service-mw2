@@ -9,7 +9,7 @@ const filename = basename(__filename)
 describe(filename, () => {
   it('Should retrieveExternalNetWorkInfo works', async () => {
     const infoList = retrieveExternalNetWorkInfo()
-    assert(infoList.length > 0)
+    assert.ok(infoList.length > 0)
   })
 })
 

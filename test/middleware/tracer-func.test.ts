@@ -43,7 +43,7 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      assert(typeof cost === 'undefined')
+      assert.ok(typeof cost === 'undefined')
     })
 
     it('reqThrottleMsForPriority 10000', async () => {
@@ -64,7 +64,7 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      assert(cost < ctx.app.config.tracer.reqThrottleMsForPriority)
+      assert.ok(cost < ctx.app.config.tracer.reqThrottleMsForPriority)
     })
 
     it('reqThrottleMsForPriority zero', async () => {
@@ -85,7 +85,7 @@ describe(filename, () => {
         tracerConfig: ctx.app.config.tracer,
       }
       const cost = fn(opts)
-      assert(cost >= ctx.app.config.tracer.reqThrottleMsForPriority)
+      assert.ok(cost >= ctx.app.config.tracer.reqThrottleMsForPriority)
     })
 
   })

@@ -29,15 +29,15 @@ describe('test/controller/home.test.ts', () => {
       .expect(200);
 
     const msg: string = response.text;
-    assert(msg && msg.includes('Hello Midwayjs!'));
-    assert(/reqId: "[1-9]\d{18}"/u.test(msg), msg); // 6755455236955799552
+    assert.ok(msg && msg.includes('Hello Midwayjs!'));
+    assert.ok(/reqId: "[1-9]\d{18}"/u.test(msg), msg); // 6755455236955799552
   });
 
   it('should GET /ping', async () => {
     const ret = await createHttpRequest(app).get('/ping').expect(200);
 
     const msg: string = ret.text;
-    assert(msg && msg === 'OK');
+    assert.ok(msg && msg === 'OK');
   });
 
   it('should GET /genid', async () => {
@@ -46,12 +46,12 @@ describe('test/controller/home.test.ts', () => {
       .expect(200);
 
     const msg: string = response.text;
-    assert(/[1-9]\d{18}/u.test(msg)); // 6755455236955799552
+    assert.ok(/[1-9]\d{18}/u.test(msg)); // 6755455236955799552
 
     const config: KoidEggConfig = app.config.koid
     const info = retrieveFromId(msg)
-    assert(info.dataCenter === config.client.koidConfig.dataCenter)
-    assert(info.worker === config.client.koidConfig.worker)
+    assert.ok(info.dataCenter === config.client.koidConfig.dataCenter)
+    assert.ok(info.worker === config.client.koidConfig.worker)
   });
 
   it('should GET /genidHex', async () => {
@@ -60,12 +60,12 @@ describe('test/controller/home.test.ts', () => {
       .expect(200);
 
     const msg: string = response.text;
-    assert(/[\da-f]{16}/u.test(msg), msg); // 5dc032befecd8000
+    assert.ok(/[\da-f]{16}/u.test(msg), msg); // 5dc032befecd8000
 
     const config: KoidEggConfig = app.config.koid
     const info = retrieveFromId(msg)
-    assert(info.dataCenter === config.client.koidConfig.dataCenter)
-    assert(info.worker === config.client.koidConfig.worker)
+    assert.ok(info.dataCenter === config.client.koidConfig.dataCenter)
+    assert.ok(info.worker === config.client.koidConfig.worker)
   });
 
 });

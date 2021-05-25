@@ -34,7 +34,7 @@ describe('test/controller/admin/user.test.ts', () => {
       })
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
-    assert(response.body.data.total);
+    assert.ok(response.body.data.total);
   });
 
   it('should get /admin/user/show ', async () => {
@@ -42,7 +42,7 @@ describe('test/controller/admin/user.test.ts', () => {
       .get('/admin/user/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
-    assert(response.body.data.total);
+    assert.ok(response.body.data.total);
     const { list } = response.body.data;
     const response2 = await createHttpRequest(app)
       .get('/admin/user/show')
@@ -67,7 +67,7 @@ describe('test/controller/admin/user.test.ts', () => {
       .type('form')
       .send(params)
       .expect(201);
-    assert(response.body.data);
+    assert.ok(response.body.data);
     currentAdminUser = response.body.data;
   });
 

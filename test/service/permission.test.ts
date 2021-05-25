@@ -26,7 +26,7 @@ describe('test/service/permission.test.ts', () => {
       current: 1,
     };
     const { total } = await permissionService.queryAdminPermission(queryParams);
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminPermission >should get permission list and sorter by id asc', async () => {
@@ -62,7 +62,7 @@ describe('test/service/permission.test.ts', () => {
       id: list[0].id,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminPermission >should get permission list and query by name', async () => {
@@ -79,7 +79,7 @@ describe('test/service/permission.test.ts', () => {
       name: list[0].name,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminPermission >should get permission list and query by slug', async () => {
@@ -96,7 +96,7 @@ describe('test/service/permission.test.ts', () => {
       slug: list[0].slug,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminPermission >should get permission list and query by httpPath', async () => {
@@ -113,7 +113,7 @@ describe('test/service/permission.test.ts', () => {
       httpPath: list[0].httpPath,
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#queryAdminPermission >should get permission list and query by httpMethod', async () => {
@@ -130,7 +130,7 @@ describe('test/service/permission.test.ts', () => {
       httpMethod: list[0].httpMethod[0],
     });
 
-    assert(total);
+    assert.ok(total);
   });
 
   it('#createAdminPermission >should created permission', async () => {
@@ -145,7 +145,7 @@ describe('test/service/permission.test.ts', () => {
     };
     const permission = await permissionService.createAdminPermission(params);
 
-    assert(permission);
+    assert.ok(permission);
     currentPermission = permission;
   });
 
@@ -157,7 +157,7 @@ describe('test/service/permission.test.ts', () => {
       currentPermission.id
     );
 
-    assert(permission);
+    assert.ok(permission);
   });
 
   it('#updateAdminPermission >should update permission', async () => {
@@ -172,7 +172,7 @@ describe('test/service/permission.test.ts', () => {
       slug: 'fakeSlug',
       httpMethod: ['GET']
     });
-    assert(affected);
+    assert.ok(affected);
   });
 
   it('#removeAdminPermissionByIds >should remove permission', async () => {
@@ -181,6 +181,6 @@ describe('test/service/permission.test.ts', () => {
     >('adminPermissionService');
     const { id } = currentPermission;
     const total = await permissionService.removeAdminPermissionByIds([id]);
-    assert(total);
+    assert.ok(total);
   });
 });

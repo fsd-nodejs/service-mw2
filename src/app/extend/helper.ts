@@ -68,7 +68,7 @@ export = {
    * ctx.helper.success({}, null, 201);
    * ```
    */
-  success(result = null, message = '请求成功', status = 200) {
+  success(this: any, result = null, message = '请求成功', status = 200) {
     this.ctx.body = {
       code: status,
       message,
