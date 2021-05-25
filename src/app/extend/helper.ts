@@ -23,7 +23,7 @@ moment.locale('zh-cn');
 //   list: T[]
 // }
 
-module.exports = {
+export = {
   /**
    * 密文转hash
    * @method Helper#bhash
@@ -50,7 +50,7 @@ module.exports = {
    * @param {(string | number)[]} arrB 数组B
    * @returns {[increase:  (string | number)[], decrease:  (string | number)[]]} [increase, decrease]
    */
-  arrayDiff(arrA: any[], arrB: any[]) {
+  arrayDiff(arrA: (string | number)[], arrB: (string | number)[]) {
     const intersect = meeko.array.intersect(arrA, arrB);
     const increase = meeko.array.except(arrA, intersect);
     const decrease = meeko.array.except(arrB, intersect);

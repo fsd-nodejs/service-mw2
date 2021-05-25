@@ -1,4 +1,4 @@
-import * as assert from 'assert'
+import * as assert from 'power-assert'
 import { basename } from '@waiting/shared-core'
 
 import { retrieveExternalNetWorkInfo } from '../../src/app/util/common'

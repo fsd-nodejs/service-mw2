@@ -97,7 +97,7 @@ export class AdminMenuController {
     await this.permissionService.checkPermissionExists([params.permissionId]);
 
     const { affected } = await this.service.updateAdminMenu(params);
-    assert(affected, new MyError('更新失败，请检查', 400));
+    assert.ok(affected, new MyError('更新失败，请检查', 400));
 
     ctx.helper.success(null, null, 204);
   }
@@ -113,7 +113,7 @@ export class AdminMenuController {
 
     const total = await this.service.removeAdminMenuByIds(params.ids);
 
-    assert(total, new MyError('删除失败，请检查', 400));
+    assert.ok(total, new MyError('删除失败，请检查', 400));
 
     ctx.helper.success(null, null, 204);
   }

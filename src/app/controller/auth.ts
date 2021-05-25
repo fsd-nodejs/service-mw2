@@ -50,7 +50,7 @@ export class AuthController {
     const existAdmiUser = await this.service.localHandler(params);
 
     // 判断管理员是否存在
-    assert(
+    assert.ok(
       existAdmiUser !== null,
       new MyError('这些凭据与我们的记录不符', 400)
     );

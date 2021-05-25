@@ -1,4 +1,4 @@
-import * as assert from 'assert'
+import * as assert from 'power-assert'
 
 import { createApp, close } from '@midwayjs/mock'
 import { Framework } from '@midwayjs/web'
