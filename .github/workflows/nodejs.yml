@@ -79,10 +79,10 @@ jobs:
 #       with:
 #         token: ${{secrets.CODECOV_TOKEN}}
 #         file: ./coverage/coverage-final.json
-    - name: Run codacy-coverage-reporter
-      uses: codacy/codacy-coverage-reporter-action@v1
-      with:
-        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-        # or
-        # api-token: ${{ secrets.CODACY_API_TOKEN }}
-        coverage-reports: ./coverage/clover.xml
+#     - name: Run codacy-coverage-reporter
+#       uses: codacy/codacy-coverage-reporter-action@v1
+#       with:
+#         project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+#         # or
+#         # api-token: ${{ secrets.CODACY_API_TOKEN }}
+#         coverage-reports: ./coverage/clover.xml
