@@ -55,8 +55,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-        
-    - uses: actions/checkout@v2
 
     - uses: gtadam/mysql-deploy-action@v1
       with:
@@ -65,7 +63,7 @@ jobs:
         DATABASE_NAME: shop
         DATABASE_USERNAME: root
         DATABASE_PASSWORD: password
-        DATABASE_SCRIPT: './src/database/init.sql
+        DATABASE_SCRIPT: ./src/database/init.sql
 
 #     - name: Verify MySQL connection from container and init data
 #       run: |
