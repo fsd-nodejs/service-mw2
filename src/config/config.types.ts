@@ -4,8 +4,6 @@ import { EggAppConfig, PowerPartial } from 'egg';
 import { KoidEggConfig } from 'egg-koid';
 import { TracingConfig } from 'jaeger-client';
 
-import type { TracerManager } from '../app/util/tracer';
-
 export type DefaultConfig = PowerPartial<EggAppConfig>;
 
 /** JwtAuthMiddleware */
@@ -22,10 +20,6 @@ declare module 'egg' {
     jwt: Jwt;
   }
 
-  interface Context {
-    tracerManager: TracerManager;
-  }
-
   interface EggAppConfig {
     admin: Record<string, string>;
     coreMiddleware: string[];
@@ -33,7 +27,6 @@ declare module 'egg' {
     jwtAuth: JwtAuthMiddlewareConfig;
     koid: KoidEggConfig;
     pkgJson: NpmPkg;
-    tracer: TracerConfig;
   }
 }
 

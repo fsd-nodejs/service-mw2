@@ -96,12 +96,17 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
 
   // 链路追踪
   config.tracer = {
+    enableMiddleWare: true,
+    // using app/middleware/error-handler.ts
+    enableCatchError: false,
+    isLogginInputQuery: true,
+    isLoggingOutputBody: true,
     whiteList: ['/favicon.ico', '/favicon.png'],
     reqThrottleMsForPriority: 150,
     tracingConfig: {
       sampler: {
         type: 'probabilistic',
-        param: 0.001,
+        param: 0.0001,
       },
     },
   };

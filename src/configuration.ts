@@ -6,14 +6,15 @@ import { App, Configuration, Logger } from '@midwayjs/decorator';
 import * as swagger from '@midwayjs/swagger';
 import { ILifeCycle } from '@midwayjs/core';
 import { IMidwayLogger } from '@midwayjs/logger';
+import { NpmPkg } from '@waiting/shared-types';
 import { Application } from 'egg';
-import { JaegerTracer } from 'jaeger-client';
+import * as jaeger from 'midway-component-jaeger';
 
 import { customLogger } from './app/util/custom-logger';
-import { initTracer } from './app/util/tracer';
 
 @Configuration({
   imports: [
+    jaeger,
     '@midwayjs/orm', // 加载 orm 组件
     // 加载swagger组件
     {
@@ -29,19 +30,32 @@ export class ContainerConfiguration implements ILifeCycle {
   @Logger()
   readonly logger: IMidwayLogger;
 
-  private tracer: JaegerTracer;
-
   // 启动前处理
   async onReady(): Promise<void> {
+    this.app.config.pkgJson = this.app.config.pkg as NpmPkg;
+
     // 定制化日志
     customLogger(this.logger, this.app);
-    // 初始化tracer单例
-    this.tracer = initTracer(this.app);
+
+    // const coreMiddlewareArr = this.app.getConfig('coreMiddleware') as string[]
+    const coreMiddlewareArr = this.app.config.coreMiddleware as string[];
+
+    // 增加全局错误处理中间件（确保在最前）
+    coreMiddlewareArr.splice(0, 0, 'errorHandlerMiddleware');
+
+    // 增加全局x-request-id处理中间件
+    coreMiddlewareArr.splice(1, 0, 'requestIdMiddleware');
+
+    const { pkgJson } = this.app.config;
+    const info = {
+      pkgName: pkgJson.name,
+      pkgVersion: pkgJson.version,
+    };
+    // eslint-disable-next-line no-console
+    console.log('✅ Your APP launched', info);
   }
 
   // 可以在这里做些停止后处理
-  async onStop(): Promise<void> {
-    // 关闭tracer单例
-    this.tracer.close();
-  }
+  // async onStop(): Promise<void> {
+  // }
 }
