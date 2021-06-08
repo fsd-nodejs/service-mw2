@@ -2,7 +2,7 @@
   "files.exclude": {
     "logs": true,
     "run": true,
-    "package-lock.json": true,
+    "package-lock.json": false,
     "node_modules": false,
     "coverage": true,
     "dist": true
