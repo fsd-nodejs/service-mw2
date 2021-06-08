@@ -18,8 +18,6 @@ export default class AppBootHook {
   configDidLoad(): void {
     this.app.config.pkgJson = { ...this.app.config.pkg } as NpmPkg;
 
-    // 增加全局链路追踪中间件
-    this.app.config.coreMiddleware.unshift('traceMiddleware');
     // 增加全局x-request-id处理中间件
     this.app.config.coreMiddleware.unshift('requestIdMiddleware');
     // 增加全局错误处理中间件
