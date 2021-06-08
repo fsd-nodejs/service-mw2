@@ -1,6 +1,6 @@
 # Changelog
 
-阶段性更新，同时优化 Github Actions CI 运行的速度，增加了 node_modules 的缓存
+阶段性更新，同时优化 Github Actions CI 运行的速度，增加了 node_modules 的缓存，如果依赖有更新，旧缓存会失效。缓存有效期为7天。check >> [Github Actions Cache](https://docs.github.com/cn/actions/guides/caching-dependencies-to-speed-up-workflows?query=cache.outputs.cache-hit#)
 
 mysql 切换至 mysql-deploy-action 做数据初始化，数据初始化速度从30s+ 缩减至 4s
 
