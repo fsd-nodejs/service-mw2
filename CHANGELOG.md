@@ -1,6 +1,8 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+阶段性更新，同时优化 Github Actions CI 运行的速度，增加了 node_modules 的缓存
+
+mysql 切换至 mysql-deploy-action 做数据初始化，数据初始化速度从30s+ 缩减至 4s
 
 ## 1.1.0 (2021-06-08)
 
