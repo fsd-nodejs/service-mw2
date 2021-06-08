@@ -57,12 +57,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
         
     - uses: actions/checkout@v2
-    - uses: shogo82148/actions-setup-mysql@v1
+
+    - uses: gtadam/mysql-deploy-action@v1
       with:
-        mysql-version: '5.7'
-    - run: |
-        mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
-        mysql --host mysql -uroot -ppassword shop < ./src/database/init.sql
+        DATABASE_HOST: mysql
+        DATABASE_PORT: 3306
+        DATABASE_NAME: shop
+        DATABASE_USERNAME: root
+        DATABASE_PASSWORD: password
+        DATABASE_SCRIPT: './src/database/init.sql
 
 #     - name: Verify MySQL connection from container and init data
 #       run: |
