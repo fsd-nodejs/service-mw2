@@ -12,6 +12,7 @@
   <a href="https://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license" /></a>
   <a href="https://github.com/fsd-nodejs/service-mw2/pulls" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
   <a href="https://bestpractices.coreinfrastructure.org/projects/4881"><img src="https://bestpractices.coreinfrastructure.org/projects/4881/badge"></a>
+  <a href="https://gitpod.io/#https://github.com/fsd-nodejs/service-mw2"><img src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod" alt="Gitpod Ready-to-Code"></a>
 </p>
 <p align="center">
   <a href="https://sonarcloud.io/dashboard?id=fsd-nodejs_service-mw2" target="_blank"><img src="https://sonarcloud.io/api/project_badges/quality_gate?project=fsd-nodejs_service-mw2" alt="Sonar Cloud" /></a>
