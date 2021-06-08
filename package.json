@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-angular": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@midwayjs/cli": "^1.2.68",
     "@midwayjs/egg-ts-helper": "^1.2.0",
     "@midwayjs/mock": "^2.10.15",
@@ -71,9 +71,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/fsd-nodejs/service-mw2"
   },
-  "author": "anonymous",
+  "author": "FSD Node.js Group",
   "license": "MIT",
   "config": {
     "commitizen": {
