@@ -1,7 +1,6 @@
 import { Jwt, JwtEggConfig } from '@waiting/egg-jwt';
 import { NpmPkg } from '@waiting/shared-types';
 import { EggAppConfig, PowerPartial } from 'egg';
-import { KoidEggConfig } from 'egg-koid';
 
 export type DefaultConfig = PowerPartial<EggAppConfig>;
 
@@ -24,7 +23,6 @@ declare module 'egg' {
     coreMiddleware: string[];
     jwt: JwtEggConfig;
     jwtAuth: JwtAuthMiddlewareConfig;
-    koid: KoidEggConfig;
     pkgJson: NpmPkg;
   }
 }

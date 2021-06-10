@@ -3,7 +3,8 @@ import * as assert from 'power-assert';
 import { Framework } from '@midwayjs/web';
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
 import { Application } from 'egg';
-import { KoidEggConfig, retrieveFromId } from 'egg-koid'
+import { KoidComponent } from 'midway-component-koid'
+
 
 describe('test/controller/home.test.ts', () => {
   let app: Application;
@@ -30,7 +31,7 @@ describe('test/controller/home.test.ts', () => {
 
     const msg: string = response.text;
     assert.ok(msg && msg.includes('Hello Midwayjs!'));
-    assert.ok(/reqId: "[1-9]\d{18}"/u.test(msg), msg); // 6755455236955799552
+    assert.ok(/reqId: "[1-9]\d{9,18}"/u.test(msg), msg); // 6755455236955799552
   });
 
   it('should GET /ping', async () => {
@@ -46,12 +47,14 @@ describe('test/controller/home.test.ts', () => {
       .expect(200);
 
     const msg: string = response.text;
-    assert.ok(/[1-9]\d{18}/u.test(msg)); // 6755455236955799552
+    assert.ok(/[1-9]\d{9,18}/u.test(msg)); // 6755455236955799552
 
-    const config: KoidEggConfig = app.config.koid
-    const info = retrieveFromId(msg)
-    assert.ok(info.dataCenter === config.client.koidConfig.dataCenter)
-    assert.ok(info.worker === config.client.koidConfig.worker)
+    const ctx = app.createAnonymousContext()
+    const koid = await ctx.requestContext.getAsync(KoidComponent)
+
+    const info = koid.retrieveFromId(msg)
+    assert.ok(info.dataCenter === koid.config.dataCenter)
+    assert.ok(info.worker === koid.config.worker)
   });
 
   it('should GET /genidHex', async () => {
@@ -60,12 +63,14 @@ describe('test/controller/home.test.ts', () => {
       .expect(200);
 
     const msg: string = response.text;
-    assert.ok(/[\da-f]{16}/u.test(msg), msg); // 5dc032befecd8000
+    assert.ok(/[\dxa-f]{16}/u.test(msg), msg); // 5dc032befecd8000, 02a5f26eb5197000
 
-    const config: KoidEggConfig = app.config.koid
-    const info = retrieveFromId(msg)
-    assert.ok(info.dataCenter === config.client.koidConfig.dataCenter)
-    assert.ok(info.worker === config.client.koidConfig.worker)
+    const ctx = app.createAnonymousContext()
+    const koid = await ctx.requestContext.getAsync(KoidComponent)
+
+    const info = koid.retrieveFromId(msg)
+    assert.ok(info.dataCenter === koid.config.dataCenter)
+    assert.ok(info.worker === koid.config.worker)
   });
 
 });

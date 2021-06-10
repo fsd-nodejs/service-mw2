@@ -5,6 +5,8 @@ import {
   MidwayWebMiddleware,
 } from '@midwayjs/web';
 import { Context } from 'egg';
+import { HeadersKey } from 'midway-component-jaeger';
+import { KoidComponent } from 'midway-component-koid';
 
 @Provide()
 export class RequestIdMiddleware implements IWebMiddleware {
@@ -17,13 +19,14 @@ async function requestIdMiddleware(
   ctx: Context,
   next: IMidwayWebNext
 ): Promise<void> {
-  const key = 'x-request-id';
+  const key = HeadersKey.reqId;
   let reqId = ctx.get(key);
 
   if (reqId) {
     ctx.reqId = reqId;
   } else {
-    reqId = ctx.app.koid.nextBigint.toString();
+    const koid = await ctx.requestContext.getAsync(KoidComponent);
+    reqId = koid.idGenerator.toString();
     ctx.reqId = reqId;
   }
 

@@ -85,13 +85,12 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
   };
 
   // snowflake id generator config
+  // '2020-01-01T00:00:00Z'
+  const epoch = 1577836800000;
   config.koid = {
-    client: {
-      koidConfig: {
-        dataCenter: 0,
-        worker: 0,
-      },
-    },
+    dataCenter: 0,
+    worker: 0,
+    epoch,
   };
 
   return config;
