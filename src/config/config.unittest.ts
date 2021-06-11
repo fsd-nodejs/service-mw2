@@ -1,5 +1,6 @@
 import { EggRedisOptions } from 'egg-redis';
-import { TracerConfig } from 'midway-component-jaeger';
+import { TracerConfig, defaultTracerConfig } from 'midway-component-jaeger';
+import { Config as KoidConfig } from 'midway-component-koid';
 import { ConnectionOptions } from 'typeorm';
 
 export const security = {
@@ -34,11 +35,7 @@ export const logger = {
 };
 
 export const tracer: TracerConfig = {
-  enableMiddleWare: true,
-  // using app/middleware/error-handler.ts
-  enableCatchError: false,
-  isLogginInputQuery: true,
-  isLoggingOutputBody: true,
+  ...defaultTracerConfig,
   whiteList: [
     '/favicon.ico',
     '/favicon.png',
@@ -46,7 +43,6 @@ export const tracer: TracerConfig = {
     '',
     /\/unitTest[\d.]+/u,
   ],
-  reqThrottleMsForPriority: 0,
   tracingConfig: {
     sampler: {
       type: 'const',
@@ -56,4 +52,11 @@ export const tracer: TracerConfig = {
       agentHost: '127.0.0.1',
     },
   },
+};
+
+const epoch = 1577836800000;
+export const koid: KoidConfig = {
+  dataCenter: 12,
+  worker: 23,
+  epoch,
 };

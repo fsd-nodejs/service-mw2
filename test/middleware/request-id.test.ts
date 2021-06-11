@@ -4,7 +4,8 @@
 import { createApp, close } from '@midwayjs/mock'
 import { Framework } from '@midwayjs/web'
 import { Application } from 'egg'
-import { retrieveFromId } from 'egg-koid'
+import { KoidComponent } from 'midway-component-koid'
+import { HeadersKey } from 'midway-component-jaeger';
 import * as assert from 'power-assert';
 
 import { RequestIdMiddleware } from '../../src/app/middleware/request-id'
@@ -23,7 +24,7 @@ describe(filename, () => {
   })
 
   it('should works', async () => {
-    const key = 'x-request-id'
+    const key = HeadersKey.reqId
     const ctx = app.createAnonymousContext()
     ctx.status = 200
     const inst = await ctx.requestContext.getAsync(RequestIdMiddleware)
@@ -34,7 +35,9 @@ describe(filename, () => {
     const { status, reqId } = ctx
     assert.ok(status === 200)
     assert.ok(reqId && reqId.length)
-    const info = retrieveFromId(reqId)
+
+    const koid = await ctx.requestContext.getAsync(KoidComponent)
+    const info = koid.retrieveFromId(reqId)
     assert.ok(typeof info.dataCenter === 'number')
     assert.ok(typeof info.worker === 'number')
     assert.ok(typeof info.timestamp === 'number')
@@ -44,7 +47,7 @@ describe(filename, () => {
   })
 
   it('should works with existing x-request-id header', async () => {
-    const key = 'x-request-id'
+    const key = HeadersKey.reqId
     const ctx = app.createAnonymousContext()
     ctx.status = 200
 

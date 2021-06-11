@@ -1,5 +1,3 @@
-import type { Koid } from 'egg-koid';
-
 /**
  * @description User-Service parameters
  */
@@ -8,9 +6,6 @@ export interface IUserOptions {
 }
 
 declare module 'egg' {
-  interface Application {
-    koid: Koid;
-  }
   interface Context {
     reqId: string;
     _internalError?: Error;

@@ -12,15 +12,8 @@ export const jwt = {
   package: '@waiting/egg-jwt',
 };
 
-// snowflake id generator
-export const koid = {
-  enable: true,
-  package: 'egg-koid',
-};
-
 export default {
   static: true, // default is true
   redis,
   jwt,
-  koid,
 } as EggPlugin;

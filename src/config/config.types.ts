@@ -1,8 +1,6 @@
 import { Jwt, JwtEggConfig } from '@waiting/egg-jwt';
 import { NpmPkg } from '@waiting/shared-types';
 import { EggAppConfig, PowerPartial } from 'egg';
-import { KoidEggConfig } from 'egg-koid';
-import { TracingConfig } from 'jaeger-client';
 
 export type DefaultConfig = PowerPartial<EggAppConfig>;
 
@@ -25,18 +23,6 @@ declare module 'egg' {
     coreMiddleware: string[];
     jwt: JwtEggConfig;
     jwtAuth: JwtAuthMiddlewareConfig;
-    koid: KoidEggConfig;
     pkgJson: NpmPkg;
   }
-}
-
-export interface TracerConfig {
-  /** 忽略名单 */
-  whiteList: (string | RegExp)[];
-  /**
-   * 强制采样请求处理时间（毫秒）阈值
-   * 负数不采样
-   */
-  reqThrottleMsForPriority: number;
-  tracingConfig: TracingConfig;
 }

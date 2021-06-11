@@ -85,30 +85,12 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
   };
 
   // snowflake id generator config
+  // '2020-01-01T00:00:00Z'
+  const epoch = 1577836800000;
   config.koid = {
-    client: {
-      koidConfig: {
-        dataCenter: 0,
-        worker: 0,
-      },
-    },
-  };
-
-  // 链路追踪
-  config.tracer = {
-    enableMiddleWare: true,
-    // using app/middleware/error-handler.ts
-    enableCatchError: false,
-    isLogginInputQuery: true,
-    isLoggingOutputBody: true,
-    whiteList: ['/favicon.ico', '/favicon.png'],
-    reqThrottleMsForPriority: 150,
-    tracingConfig: {
-      sampler: {
-        type: 'probabilistic',
-        param: 0.0001,
-      },
-    },
+    dataCenter: 0,
+    worker: 0,
+    epoch,
   };
 
   return config;

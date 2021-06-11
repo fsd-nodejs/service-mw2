@@ -1,5 +1,5 @@
 import { EggRedisOptions } from 'egg-redis';
-import { TracerConfig } from 'midway-component-jaeger';
+import { TracerConfig, defaultTracerConfig } from 'midway-component-jaeger';
 import { ConnectionOptions } from 'typeorm';
 
 // 数据库配置
@@ -25,12 +25,9 @@ export const redis: EggRedisOptions = {
 };
 
 export const tracer: TracerConfig = {
-  enableMiddleWare: true,
-  enableCatchError: false,
-  isLogginInputQuery: true,
-  isLoggingOutputBody: true,
-  whiteList: ['/favicon.ico', '/favicon.png'],
-  reqThrottleMsForPriority: 150,
+  ...defaultTracerConfig,
+  loggingOutputBody: true,
+  reqThrottleMsForPriority: 10,
   tracingConfig: {
     sampler: {
       type: 'probabilistic',

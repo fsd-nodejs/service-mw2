@@ -9,12 +9,14 @@ import { IMidwayLogger } from '@midwayjs/logger';
 import { NpmPkg } from '@waiting/shared-types';
 import { Application } from 'egg';
 import * as jaeger from 'midway-component-jaeger';
+import * as koid from 'midway-component-koid';
 
 import { customLogger } from './app/util/custom-logger';
 
 @Configuration({
   imports: [
     jaeger,
+    koid,
     '@midwayjs/orm', // 加载 orm 组件
     // 加载swagger组件
     {
