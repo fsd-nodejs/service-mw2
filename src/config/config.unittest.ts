@@ -1,5 +1,5 @@
 import { EggRedisOptions } from 'egg-redis';
-import { TracerConfig } from 'midway-component-jaeger';
+import { TracerConfig, defaultTracerConfig } from 'midway-component-jaeger';
 import { ConnectionOptions } from 'typeorm';
 
 export const security = {
@@ -34,11 +34,8 @@ export const logger = {
 };
 
 export const tracer: TracerConfig = {
-  enableMiddleWare: true,
-  // using app/middleware/error-handler.ts
-  enableCatchError: false,
-  isLogginInputQuery: true,
-  isLoggingOutputBody: true,
+  ...defaultTracerConfig,
+  loggingOutputBody: true,
   whiteList: [
     '/favicon.ico',
     '/favicon.png',
