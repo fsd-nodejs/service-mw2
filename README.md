@@ -92,10 +92,15 @@
 
 查看 [Midway docs](https://midwayjs.org/) 获取更多信息.
 
-允许该项目需要以下环境支持
+运行该项目需要以下环境支持
 - Mysql
 - Redis
+- Jeager
 
+目前该项目已经集成 Docker 环境，按以下步骤可以自动配置以上依赖。[docker-compose](https://docs.docker.com/compose/compose-file/compose-file-v3/) 相关文档请查看这里
+
+- 1.确保机器已经安装 Docker。
+- 2.在项目目录运行 `docker-compose up -d`
 
 ### Development
 

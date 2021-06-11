@@ -17,7 +17,6 @@ import 'egg-view';
 import 'midway-schedule';
 import 'egg-redis';
 import '@waiting/egg-jwt';
-import 'egg-koid';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -36,6 +35,5 @@ declare module 'egg' {
     schedulePlus?: EggPluginItem;
     redis?: EggPluginItem;
     jwt?: EggPluginItem;
-    koid?: EggPluginItem;
   }
 }
