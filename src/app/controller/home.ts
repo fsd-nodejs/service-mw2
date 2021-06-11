@@ -1,8 +1,8 @@
-import { Controller, Get, Provide, Plugin } from '@midwayjs/decorator';
+import { Controller, Get, Inject, Provide, Plugin } from '@midwayjs/decorator';
 import { CreateApiDoc } from '@midwayjs/swagger';
 import { Jwt } from '@waiting/egg-jwt';
 import { Context } from 'egg';
-import type { Koid } from 'egg-koid';
+import { KoidComponent } from 'midway-component-koid';
 
 @Provide()
 @Controller('/', {
@@ -13,8 +13,8 @@ export class HomeController {
   @Plugin()
   jwt: Jwt;
 
-  @Plugin()
-  koid: Koid;
+  @Inject()
+  readonly koid: KoidComponent;
 
   @(CreateApiDoc().summary('获取主页').description('需要鉴权').build())
   @Get('/')
@@ -37,7 +37,7 @@ export class HomeController {
     .build())
   @Get('/genid')
   genId(): string {
-    return this.koid.nextBigint.toString();
+    return this.koid.idGenerator.toString();
   }
 
   @(CreateApiDoc()
@@ -46,6 +46,6 @@ export class HomeController {
     .build())
   @Get('/genidHex')
   genIdHex(): string {
-    return this.koid.next.toString('hex');
+    return this.koid.nextHex;
   }
 }
