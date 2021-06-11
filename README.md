@@ -101,6 +101,7 @@
 
 - 1.确保机器已经安装 Docker。
 - 2.在项目目录运行 `docker-compose up -d`
+- 3.停止服务 `docker-compose down`
 
 ### Development
 
