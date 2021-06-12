@@ -15,4 +15,4 @@ github:
     # add a label once the prebuild is ready to pull requests (defaults to false)
     addLabel: prebuilt-in-gitpod
 tasks:
-  - init: docker-compose up && npm install
+  - init: docker-compose up -d && npm install
