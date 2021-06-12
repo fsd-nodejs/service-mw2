@@ -5,6 +5,11 @@ services:
     image: redis:6.2.4
     ports:
       - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
   mysql:
     image: mysql:5.7
     ports:
@@ -12,6 +17,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: shop_development
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -uroot -ppassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
   jaeger:
     image: jaegertracing/all-in-one:1.23.0
     ports:
