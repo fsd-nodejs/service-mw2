@@ -73,11 +73,11 @@ jobs:
       with:
         # npm cache files are stored in `~/.npm` on Linux/macOS
         path: node_modules
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+        key: ${{ runner.os }}-${{ node-version }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+          ${{ runner.os }}-${{ node-version }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-${{ node-version }}-build-
+          ${{ runner.os }}-${{ node-version }}-
 
     - name: Install Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
