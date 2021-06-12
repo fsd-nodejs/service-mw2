@@ -103,6 +103,12 @@
 - 2.在项目目录运行 `docker-compose up -d`
 - 3.停止服务 `docker-compose down`
 
+
+如果没有数据库 GUI 工具，可按照下面步骤进行数据库初始化
+- `$ docker ps` // 查看容器ID
+- `$ docker exec -it <mysql 容器 ID> /bin/bash` // 进入容器
+- `$ mysql shop_development < /data/database/init.sql  -uroot -ppassword` // 初始化数据库
+
 ### Development
 
 先将 database 目录下到 sql 文件迁移到数据库，修改默认的config配置文件

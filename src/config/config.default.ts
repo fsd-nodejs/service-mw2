@@ -67,11 +67,11 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
     accessTokenExpiresIn: 60 * 60 * 24 * 3, // 签名过期时间也可写
   };
 
-  // swagger文档配置
+  // swagger文档配置，默认地址 http://127.0.0.1:7001/swagger-ui/index.html
   config.swagger = {
     title: 'service-mw2',
     description: 'service-mw2 模版工程的接口定义',
-    version: '1.0.0',
+    version: '1.1.0',
     termsOfService: 'https://github.com/fsd-nodejs/service-mw2',
     contact: {
       name: 'tkvern',

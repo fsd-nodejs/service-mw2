@@ -14,7 +14,7 @@ export const orm: ConnectionOptions = {
   logging: true,
 };
 
-// redis配置
+// redis 配置
 export const redis: EggRedisOptions = {
   client: {
     port: 6379, // Redis port
@@ -24,6 +24,7 @@ export const redis: EggRedisOptions = {
   },
 };
 
+// jaeger 配置 默认访问地址http://localhost:16686/
 export const tracer: TracerConfig = {
   ...defaultTracerConfig,
   loggingOutputBody: true,
