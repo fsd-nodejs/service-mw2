@@ -17,6 +17,7 @@ services:
     # 如果需要mysql持久化，则打开注释，会保存数据，重启镜像不会丢失
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./src/database:/data/database
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: shop_development
