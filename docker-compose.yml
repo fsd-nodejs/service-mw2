@@ -6,7 +6,7 @@ services:
     ports:
       - 6379:6379
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ['CMD', 'redis-cli', 'ping']
       interval: 10s
       timeout: 5s
       retries: 3
@@ -14,11 +14,14 @@ services:
     image: mysql:5.7
     ports:
       - 3306:3306
+    # 如果需要mysql持久化，则打开注释，会保存数据，重启镜像不会丢失
+    volumes:
+      - ./mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: shop_development
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -uroot -ppassword"]
+      test: ['CMD-SHELL', 'mysqladmin ping -uroot -ppassword']
       interval: 10s
       timeout: 5s
       retries: 3
