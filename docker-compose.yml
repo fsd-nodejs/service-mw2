@@ -10,14 +10,17 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    volumes:
+      - ./.docker/redis/data/:/data
+
   mysql:
     image: mysql:5.7
     ports:
       - 3306:3306
     # 如果需要mysql持久化，则打开注释，会保存数据，重启镜像不会丢失
     volumes:
-      - ./mysql:/var/lib/mysql
-      - ./src/database:/data/database
+      - ./.docker/mysql:/var/lib/mysql
+      - ./src/database:/data/database # 挂在本地sql文件到容器
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: shop_development
@@ -31,3 +34,12 @@ services:
     ports:
       - 6832:6832/udp
       - 16686:16686
+  rabbitmq:
+    image: rabbitmq:3.8.18-beta.1
+    ports:
+      - 5672:5672
+      - 15672:15672
+    # 如果需要rabbitmq持久化，则打开注释，会保存数据，重启镜像不会丢失
+    volumes:
+      - ./.docker/rabbitmq/data/:/var/lib/rabbitmq
+      - ./.docker/rabbitmq/log/:/var/log/rabbitmq
