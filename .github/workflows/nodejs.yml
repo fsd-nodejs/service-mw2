@@ -44,6 +44,11 @@ jobs:
         ports:
           - 6832:6832/udp
           - 16686:16686
+      rabbitmq:
+        image: rabbitmq:3.8.18-beta.1
+        ports:
+        - 5672:5672
+        - 15672:15672
     strategy:
       matrix:
         node-version: [14.x]
