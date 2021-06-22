@@ -3,6 +3,8 @@ import { TracerConfig, defaultTracerConfig } from 'midway-component-jaeger';
 import { Config as KoidConfig } from 'midway-component-koid';
 import { ConnectionOptions } from 'typeorm';
 
+import { RabbitmqConfig } from './config.types';
+
 export const security = {
   csrf: false,
 };
@@ -59,4 +61,9 @@ export const koid: KoidConfig = {
   dataCenter: 12,
   worker: 23,
   epoch,
+};
+
+// rabbitmq 基本配置
+export const rabbitmq: RabbitmqConfig = {
+  url: 'amqp://rabbitmq',
 };
