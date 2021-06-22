@@ -64,7 +64,8 @@
 |                        | 跨域 CORS | ✅ |
 | **微服务** |  | |
 |                        | gRPC | |
-|                        | RabbitMQ | |
+|                        | RabbitMQ (生产者) | ✅ |
+|                        | RabbitMQ (消费者) | |
 |                        | Consul | |
 | **WebSocket** |  | |
 |                        | SocketIO | |
