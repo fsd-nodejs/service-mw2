@@ -93,5 +93,10 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
     epoch,
   };
 
+  // rabbitmq 基本配置 默认管理界面 http://127.0.0.1:15672/ (这个项目只包含生产者的代码)
+  config.rabbitmq = {
+    url: 'amqp://localhost',
+  };
+
   return config;
 };

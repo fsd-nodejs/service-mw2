@@ -4,6 +4,8 @@ import { Jwt } from '@waiting/egg-jwt';
 import { Context } from 'egg';
 import { KoidComponent } from 'midway-component-koid';
 
+import { RabbitmqService } from '../service/rabbitmq';
+
 @Provide()
 @Controller('/', {
   tagName: '默认的接口',
@@ -15,6 +17,9 @@ export class HomeController {
 
   @Inject()
   readonly koid: KoidComponent;
+
+  @Inject()
+  rabbitmqService: RabbitmqService;
 
   @(CreateApiDoc().summary('获取主页').description('需要鉴权').build())
   @Get('/')
@@ -47,5 +52,14 @@ export class HomeController {
   @Get('/genidHex')
   genIdHex(): string {
     return this.koid.nextHex;
+  }
+
+  @Get('/sendToQueue')
+  async sendToQueue(ctx: Context) {
+    const res = await this.rabbitmqService.sendToQueue(
+      'my-queue',
+      'hello world'
+    );
+    ctx.helper.success(res);
   }
 }

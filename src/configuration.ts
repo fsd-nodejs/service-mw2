@@ -48,6 +48,9 @@ export class ContainerConfiguration implements ILifeCycle {
     // 增加全局x-request-id处理中间件
     coreMiddlewareArr.splice(1, 0, 'requestIdMiddleware');
 
+    // 需要显式在 app 启动时用 getAsync() 的方式进行触发，否则该类只有在首次被业务逻辑调用的时候才能初始化
+    await this.app.getApplicationContext().getAsync('rabbitmqService');
+
     const { pkgJson } = this.app.config;
     const info = {
       pkgName: pkgJson.name,
