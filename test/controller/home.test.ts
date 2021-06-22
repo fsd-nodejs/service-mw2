@@ -71,6 +71,7 @@ describe('test/controller/home.test.ts', () => {
   it('should GET /sendToQueue', async () => {
     const response = await createHttpRequest(app)
       .get('/sendToQueue')
+      .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
     assert.ok(response.body.data);
   });

@@ -49,7 +49,7 @@ export class RabbitmqService {
    * @returns
    */
   public async sendToQueue(queueName: string, data: any) {
-    return await this.channel.sendToQueue(queueName, Buffer.from(data), {
+    return this.channel.sendToQueue(queueName, Buffer.from(data), {
       // RabbitMQ关闭时，消息会被保存到磁盘
       persistent: true,
     });
