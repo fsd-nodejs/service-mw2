@@ -12,22 +12,22 @@ import { AdminUserModel } from '../model/admin-user';
 @Provide()
 export class AuthService {
   @Config('jwt')
-  jwtConfig: JwtEggConfig;
+  private jwtConfig: JwtEggConfig;
 
   @Config('jwtAuth')
-  jwtAuthConfig: JwtAuthMiddlewareConfig;
+  private jwtAuthConfig: JwtAuthMiddlewareConfig;
 
   @Inject()
-  ctx: Context;
+  private ctx: Context;
 
   @InjectEntityModel(AdminUserModel)
-  adminUserModel: Repository<AdminUserModel>;
+  private adminUserModel: Repository<AdminUserModel>;
 
   @Plugin()
-  jwt: Jwt;
+  private jwt: Jwt;
 
   @Plugin()
-  redis: Redis;
+  private redis: Redis;
 
   /**
    * 生成Token(会缓存到Redis中)

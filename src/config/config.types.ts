@@ -13,16 +13,28 @@ export interface JwtAuthMiddlewareConfig {
   redisScope: string;
 }
 
+export interface RabbitmqConfig {
+  /** mq 地址 */
+  url: string;
+}
+
 declare module 'egg' {
+  /**
+   * 增加挂载在 ctx.app.xxx 上的对象 TS 申明
+   */
   interface Application {
     jwt: Jwt;
   }
 
+  /**
+   * config 配置文件的 TS 声明
+   */
   interface EggAppConfig {
     admin: Record<string, string>;
     coreMiddleware: string[];
     jwt: JwtEggConfig;
     jwtAuth: JwtAuthMiddlewareConfig;
     pkgJson: NpmPkg;
+    rabbitmq: RabbitmqConfig;
   }
 }
