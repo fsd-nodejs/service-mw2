@@ -3,8 +3,7 @@ import * as assert from 'power-assert';
 import { Framework } from '@midwayjs/web';
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
 import { Application } from 'egg';
-import { KoidComponent } from 'midway-component-koid'
-
+import { KoidComponent } from 'midway-component-koid';
 
 describe('test/controller/home.test.ts', () => {
   let app: Application;
@@ -42,35 +41,37 @@ describe('test/controller/home.test.ts', () => {
   });
 
   it('should GET /genid', async () => {
-    const response = await createHttpRequest(app)
-      .get('/genid')
-      .expect(200);
+    const response = await createHttpRequest(app).get('/genid').expect(200);
 
     const msg: string = response.text;
     assert.ok(/[1-9]\d{9,18}/u.test(msg)); // 6755455236955799552
 
-    const ctx = app.createAnonymousContext()
-    const koid = await ctx.requestContext.getAsync(KoidComponent)
+    const ctx = app.createAnonymousContext();
+    const koid = await ctx.requestContext.getAsync(KoidComponent);
 
-    const info = koid.retrieveFromId(msg)
-    assert.ok(info.dataCenter === koid.config.dataCenter)
-    assert.ok(info.worker === koid.config.worker)
+    const info = koid.retrieveFromId(msg);
+    assert.ok(info.dataCenter === koid.config.dataCenter);
+    assert.ok(info.worker === koid.config.worker);
   });
 
   it('should GET /genidHex', async () => {
-    const response = await createHttpRequest(app)
-      .get('/genidHex')
-      .expect(200);
+    const response = await createHttpRequest(app).get('/genidHex').expect(200);
 
     const msg: string = response.text;
     assert.ok(/[\dxa-f]{16}/u.test(msg), msg); // 5dc032befecd8000, 02a5f26eb5197000
 
-    const ctx = app.createAnonymousContext()
-    const koid = await ctx.requestContext.getAsync(KoidComponent)
+    const ctx = app.createAnonymousContext();
+    const koid = await ctx.requestContext.getAsync(KoidComponent);
 
-    const info = koid.retrieveFromId(msg)
-    assert.ok(info.dataCenter === koid.config.dataCenter)
-    assert.ok(info.worker === koid.config.worker)
+    const info = koid.retrieveFromId(msg);
+    assert.ok(info.dataCenter === koid.config.dataCenter);
+    assert.ok(info.worker === koid.config.worker);
   });
 
+  it('should GET /sendToQueue', async () => {
+    const response = await createHttpRequest(app)
+      .get('/sendToQueue')
+      .expect(200);
+    assert.ok(response.body.data);
+  });
 });
