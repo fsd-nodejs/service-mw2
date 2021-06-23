@@ -1,8 +1,23 @@
 # Changelog
 
-阶段性更新，同时优化 Github Actions CI 运行的速度，增加了 node_modules 的缓存，如果依赖有更新，旧缓存会失效。缓存有效期为7天。check >> [Github Actions Cache](https://docs.github.com/cn/actions/guides/caching-dependencies-to-speed-up-workflows?query=cache.outputs.cache-hit#)
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-mysql 切换至 mysql-deploy-action 做数据初始化，数据初始化速度从30s+ 缩减至 4s
+## [1.2.0](https://github.com/fsd-nodejs/service-mw2/compare/v1.1.0...v1.2.0) (2021-06-23)
+
+
+### Features
+
+* 增加 rabbitmq 生产者支持 ([8cab1ea](https://github.com/fsd-nodejs/service-mw2/commit/8cab1eae8b9be556d51b1de85f758d36f76137db))
+* add docker support for development dependencies ([67379ab](https://github.com/fsd-nodejs/service-mw2/commit/67379abd891c8dfa1780248b5403e73377b976b4))
+* add gitpod dockerfile config ([bdb6523](https://github.com/fsd-nodejs/service-mw2/commit/bdb65232ad6bf6c166c98317cbd59726fdc3673f))
+* support on rabbitmq ([55bf7cb](https://github.com/fsd-nodejs/service-mw2/commit/55bf7cb8b67829896b08cf04b9c87433ec3287d6))
+* **koid:** using midway-component-koid instead of egg plugin of koid ([b60d029](https://github.com/fsd-nodejs/service-mw2/commit/b60d029244200f9102d2e5611197255fa18f3a7e))
+
+
+### Bug Fixes
+
+* config.unittest.ts of jaeger config ([7e1cdf4](https://github.com/fsd-nodejs/service-mw2/commit/7e1cdf44964a22292ff3ca0eb5a7fa32480e92e3))
+* deamon exec gitpod ([af062a2](https://github.com/fsd-nodejs/service-mw2/commit/af062a21b7f1e3d667613d1f473578b742ad7e35))
 
 ## 1.1.0 (2021-06-08)
 
