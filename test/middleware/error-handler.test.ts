@@ -5,7 +5,7 @@ import { createApp, close } from '@midwayjs/mock'
 import { Framework } from '@midwayjs/web'
 import * as assert from 'power-assert';
 
-import { Application } from '../../src/interface';
+import { Application, Context } from '../../src/interface';
 import { ErrorHandlerMiddleware } from '../../src/app/middleware/error-handler'
 import MyError from '../../src/app/util/my-error'
 
@@ -24,7 +24,7 @@ describe(filename, () => {
 
 
   it('should 404 works', async () => {
-    const ctx = app.createAnonymousContext()
+    const ctx = app.createAnonymousContext() as Context<any>
     ctx.status = 404
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
     const mw = inst.resolve()
@@ -37,7 +37,7 @@ describe(filename, () => {
   })
 
   it('should 422 works', async () => {
-    const ctx = app.createAnonymousContext()
+    const ctx = app.createAnonymousContext() as Context<any>
     ctx.status = 200
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
     const mw = inst.resolve()
@@ -51,7 +51,7 @@ describe(filename, () => {
 
 
   it('should 500 works', async () => {
-    const ctx = app.createAnonymousContext()
+    const ctx = app.createAnonymousContext() as Context<any>
     ctx.status = 200
     ctx.app.config.env = 'prod'
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
