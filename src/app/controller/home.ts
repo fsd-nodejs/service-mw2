@@ -2,7 +2,7 @@ import { Controller, Get, Inject, Provide, Plugin } from '@midwayjs/decorator';
 import { CreateApiDoc } from '@midwayjs/swagger';
 import { Jwt } from '@waiting/egg-jwt';
 import { Context } from 'egg';
-import { KoidComponent } from 'midway-component-koid';
+import { KoidComponent } from '@mw-components/koid';
 
 import { RabbitmqService } from '../service/rabbitmq';
 

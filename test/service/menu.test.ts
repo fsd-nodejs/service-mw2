@@ -2,7 +2,8 @@ import * as assert from 'power-assert';
 
 import { Framework } from '@midwayjs/web';
 import { createApp, close } from '@midwayjs/mock';
-import { Application } from 'egg';
+
+import { Application, Context } from '../../src/interface';
 import { AdminMenuService } from '../../src/app/service/admin/menu';
 
 describe('test/service/menu.test.ts', () => {
@@ -30,7 +31,7 @@ describe('test/service/menu.test.ts', () => {
   });
 
   it('#createAdminMenu >should created menu', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const menuService = await ctx.requestContext.getAsync<AdminMenuService>(
       'adminMenuService'
     );
@@ -57,7 +58,7 @@ describe('test/service/menu.test.ts', () => {
   });
 
   it('#updateAdminMenu >should update menu', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const menuService = await ctx.requestContext.getAsync<AdminMenuService>(
       'adminMenuService'
     );

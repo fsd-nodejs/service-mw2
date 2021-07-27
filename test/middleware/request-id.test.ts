@@ -3,11 +3,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { createApp, close } from '@midwayjs/mock'
 import { Framework } from '@midwayjs/web'
-import { Application } from 'egg'
-import { KoidComponent } from 'midway-component-koid'
-import { HeadersKey } from 'midway-component-jaeger';
+import { KoidComponent } from '@mw-components/koid'
+import { HeadersKey } from '@mw-components/jaeger';
 import * as assert from 'power-assert';
 
+import { Application } from '../../src/interface';
 import { RequestIdMiddleware } from '../../src/app/middleware/request-id'
 
 

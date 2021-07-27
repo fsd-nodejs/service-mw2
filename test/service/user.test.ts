@@ -2,8 +2,8 @@ import * as assert from 'power-assert';
 
 import { Framework } from '@midwayjs/web';
 import { createApp, close } from '@midwayjs/mock';
-import { Application } from 'egg';
 
+import { Application, Context } from '../../src/interface';
 import { AdminUserService } from '../../src/app/service/admin/user';
 
 describe('test/service/user.test.ts', () => {
@@ -82,7 +82,7 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#createAdminUser >should created user', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const userService = await ctx.requestContext.getAsync<AdminUserService>(
       'adminUserService'
     );
@@ -126,7 +126,7 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#updateAdminUser >should update user', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const userService = await ctx.requestContext.getAsync<AdminUserService>(
       'adminUserService'
     );
@@ -152,7 +152,7 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#createAdminUser >should created user, no role, no permission', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const userService = await ctx.requestContext.getAsync<AdminUserService>(
       'adminUserService'
     );

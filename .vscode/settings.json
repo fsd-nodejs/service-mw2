@@ -12,4 +12,5 @@
   },
   "debug.node.autoAttach": "on",
   "debug.javascript.usePreviewAutoAttach": false,
+  "git.ignoreLimitWarning": true,
 }

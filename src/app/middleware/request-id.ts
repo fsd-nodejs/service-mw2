@@ -5,8 +5,8 @@ import {
   MidwayWebMiddleware,
 } from '@midwayjs/web';
 import { Context } from 'egg';
-import { HeadersKey } from 'midway-component-jaeger';
-import { KoidComponent } from 'midway-component-koid';
+import { HeadersKey } from '@mw-components/jaeger';
+import { KoidComponent } from '@mw-components/koid';
 
 @Provide()
 export class RequestIdMiddleware implements IWebMiddleware {
