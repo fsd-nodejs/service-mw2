@@ -1,5 +1,5 @@
 import { EggRedisOptions } from 'egg-redis';
-import { TracerConfig, defaultTracerConfig } from 'midway-component-jaeger';
+import { TracerConfig, defaultTracerConfig } from '@mw-components/jaeger';
 import { ConnectionOptions } from 'typeorm';
 
 // 数据库配置
@@ -27,8 +27,7 @@ export const redis: EggRedisOptions = {
 // jaeger 配置 默认访问地址http://localhost:16686/
 export const tracer: TracerConfig = {
   ...defaultTracerConfig,
-  loggingOutputBody: true,
-  reqThrottleMsForPriority: 10,
+  whiteList: ['/favicon.ico', '/favicon.png', '/ping', '/metrics'],
   tracingConfig: {
     sampler: {
       type: 'probabilistic',

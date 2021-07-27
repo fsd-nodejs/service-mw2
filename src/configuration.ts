@@ -8,8 +8,8 @@ import { ILifeCycle } from '@midwayjs/core';
 import { IMidwayLogger } from '@midwayjs/logger';
 import { NpmPkg } from '@waiting/shared-types';
 import { Application } from 'egg';
-import * as jaeger from 'midway-component-jaeger';
-import * as koid from 'midway-component-koid';
+import * as jaeger from '@mw-components/jaeger';
+import * as koid from '@mw-components/koid';
 
 import { customLogger } from './app/util/custom-logger';
 

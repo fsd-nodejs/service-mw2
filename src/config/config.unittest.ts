@@ -1,6 +1,6 @@
 import { EggRedisOptions } from 'egg-redis';
-import { TracerConfig, defaultTracerConfig } from 'midway-component-jaeger';
-import { Config as KoidConfig } from 'midway-component-koid';
+import { TracerConfig, defaultTracerConfig } from '@mw-components/jaeger';
+import { Config as KoidConfig } from '@mw-components/koid';
 import { ConnectionOptions } from 'typeorm';
 
 import { RabbitmqConfig } from './config.types';
@@ -41,6 +41,8 @@ export const tracer: TracerConfig = {
   whiteList: [
     '/favicon.ico',
     '/favicon.png',
+    '/ping',
+    '/metrics',
     '/untracedPath',
     '',
     /\/unitTest[\d.]+/u,

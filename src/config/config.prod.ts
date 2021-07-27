@@ -1,8 +1,9 @@
-import { TracerConfig, defaultTracerConfig } from 'midway-component-jaeger';
+import { TracerConfig, defaultTracerConfig } from '@mw-components/jaeger';
 
 export const tracer: TracerConfig = {
   ...defaultTracerConfig,
-  reqThrottleMsForPriority: 200,
+  reqThrottleMsForPriority: 1000,
+  whiteList: ['/favicon.ico', '/favicon.png', '/ping', '/metrics'],
   tracingConfig: {
     sampler: {
       type: 'probabilistic',
