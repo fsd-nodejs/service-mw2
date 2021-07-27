@@ -2,7 +2,8 @@ import * as assert from 'power-assert';
 
 import { Framework } from '@midwayjs/web';
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
-import { Application } from 'egg';
+
+import { Application } from '../../../src/interface';
 
 describe('test/controller/admin/role.test.ts', () => {
   let app: Application;

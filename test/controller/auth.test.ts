@@ -1,6 +1,7 @@
 import { Framework } from '@midwayjs/web';
 import { createApp, close, createHttpRequest } from '@midwayjs/mock';
-import { Application } from 'egg';
+
+import { Application } from '../../src/interface';
 
 describe('test/controller/auth.test.ts', () => {
   let app: Application;

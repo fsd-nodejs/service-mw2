@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { createApp, close } from '@midwayjs/mock'
 import { Framework } from '@midwayjs/web'
-import { Application } from 'egg'
 import * as assert from 'power-assert';
 
+import { Application } from '../../src/interface';
 import { ErrorHandlerMiddleware } from '../../src/app/middleware/error-handler'
 import MyError from '../../src/app/util/my-error'
 

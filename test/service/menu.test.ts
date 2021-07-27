@@ -2,7 +2,8 @@ import * as assert from 'power-assert';
 
 import { Framework } from '@midwayjs/web';
 import { createApp, close } from '@midwayjs/mock';
-import { Application } from 'egg';
+
+import { Application } from '../../src/interface';
 import { AdminMenuService } from '../../src/app/service/admin/menu';
 
 describe('test/service/menu.test.ts', () => {
