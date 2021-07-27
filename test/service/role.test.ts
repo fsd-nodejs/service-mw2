@@ -3,7 +3,7 @@ import * as assert from 'power-assert';
 import { Framework } from '@midwayjs/web';
 import { createApp, close } from '@midwayjs/mock';
 
-import { Application } from '../../src/interface';
+import { Application, Context } from '../../src/interface';
 import { AdminRoleService } from '../../src/app/service/admin/role';
 
 describe('test/service/role.test.ts', () => {
@@ -82,7 +82,7 @@ describe('test/service/role.test.ts', () => {
   });
 
   it('#createAdminRole >should created role', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const roleService = await ctx.requestContext.getAsync<AdminRoleService>(
       'adminRoleService'
     );
@@ -124,7 +124,7 @@ describe('test/service/role.test.ts', () => {
   });
 
   it('#updateAdminRole >should update role', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const roleService = await ctx.requestContext.getAsync<AdminRoleService>(
       'adminRoleService'
     );
@@ -148,7 +148,7 @@ describe('test/service/role.test.ts', () => {
   });
 
   it('#createAdminRole >should created role, no permission', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const roleService = await ctx.requestContext.getAsync<AdminRoleService>(
       'adminRoleService'
     );

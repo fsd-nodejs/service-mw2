@@ -3,7 +3,7 @@ import * as assert from 'power-assert';
 import { Framework } from '@midwayjs/web';
 import { createApp, close } from '@midwayjs/mock';
 
-import { Application } from '../../src/interface';
+import { Application, Context } from '../../src/interface';
 import { AuthService } from '../../src/app/service/auth';
 
 describe('test/service/authService.test.ts', () => {
@@ -34,7 +34,7 @@ describe('test/service/authService.test.ts', () => {
   });
 
   it('#localHandler >should get exists user and password is passed', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const authService = await ctx.requestContext.getAsync<AuthService>(
       'authService'
     );
@@ -45,7 +45,7 @@ describe('test/service/authService.test.ts', () => {
   });
 
   it('#localHandler >should get null when user not exists', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const authService = await ctx.requestContext.getAsync<AuthService>(
       'authService'
     );
@@ -55,7 +55,7 @@ describe('test/service/authService.test.ts', () => {
   });
 
   it('#localHandler >should get null when user password not equal', async () => {
-    const ctx = app.mockContext();
+    const ctx = app.mockContext() as Context;
     const authService = await ctx.requestContext.getAsync<AuthService>(
       'authService'
     );
