@@ -30,7 +30,9 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@midwayjs/cli": "^1.2.74",
+    "@midwayjs/cli-plugin-faas": "^1.2.76",
     "@midwayjs/egg-ts-helper": "^1.2.0",
+    "@midwayjs/fcli-plugin-fc": "^1.2.76",
     "@midwayjs/mock": "^2.11.6",
     "@types/amqplib": "^0.8.1",
     "@types/jest": "^26.0.24",
@@ -66,12 +68,21 @@
     "ci": "npm run cov",
     "build": "midway-bin build -c",
     "commit": "git-cz",
-    "release": "standard-version"
+    "release": "standard-version",
+    "deploy": "midway-bin deploy"
   },
   "midway-bin-clean": [
     ".vscode/.tsbuildinfo",
     "dist"
   ],
+  "midway-integration": {
+    "lifecycle": {
+      "before:package:cleanup": "npm run build"
+    }
+  },
+  "egg": {
+    "framework": "@midwayjs/web"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/fsd-nodejs/service-mw2"
