@@ -18,9 +18,8 @@
     "pretty": true,
     "skipLibCheck": true,
     "stripInternal": true,
-    "target": "ES2018",
-    "typeRoots": ["./typings", "./node_modules/@types"],
-    "types" : ["jest", "node"]
+    "target": "ES2015",
+    "typeRoots": ["./typings", "./node_modules/@types"]
   },
   "exclude": ["dist", "node_modules", "test"]
 }
