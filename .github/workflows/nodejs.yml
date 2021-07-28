@@ -69,7 +69,7 @@ jobs:
         DATABASE_NAME: shop
         DATABASE_USERNAME: root
         DATABASE_PASSWORD: password
-        DATABASE_SCRIPT: ./src/database/init.sql
+        DATABASE_SCRIPT: ./database/init.sql
 
     - name: Cache node modules
       uses: actions/cache@v2
