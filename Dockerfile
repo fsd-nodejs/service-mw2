@@ -16,4 +16,4 @@ COPY --from=BUILD_IMAGE /home /home
 
 EXPOSE 7001
 
-ENTRYPOINT ["npm", "run", "online"]
+ENTRYPOINT ["node", "bootstrap.js"]

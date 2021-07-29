@@ -41,6 +41,7 @@ Resources:
           REDIS_DB: '1'
           REDIS_HOST: 10.0.0.228
           REDIS_PORT: '6379'
+          NODE_ENV: 'production'
         InstanceType: e1
         InstanceLifecycleConfig:
           PreFreeze:
