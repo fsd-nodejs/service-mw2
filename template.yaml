@@ -1,0 +1,43 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  service-mw2:
+    Type: 'Aliyun::Serverless::Service'
+    app_index:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Initializer: index.initializer
+        Handler: index.handler
+        Runtime: custom-container
+        CodeUri: .
+        Timeout: 10
+        InitializationTimeout: 10
+        MemorySize: 128
+        InstanceConcurrency: 1
+        CAPort: 7001
+        CustomContainerConfig: # 容器镜像配置
+          # Sample image value: registry-vpc.cn-shenzhen.aliyuncs.com/fc-demo/nodejs-express:v0.1  使用同地域的VPC镜像地址加速
+          Image: 'registry.cn-shenzhen.aliyuncs.com/service-mw2/midway:1.0.9'
+          Command: '["npm run online"]'
+      Events:
+        http-app_index:
+          Type: HTTP
+          Properties:
+            AuthType: ANONYMOUS
+            Methods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+              - PATCH
+  midway_auto_domain:
+    Type: 'Aliyun::Serverless::CustomDomain'
+    Properties:
+      DomainName: Auto
+      Protocol: HTTP
+      RouteConfig:
+        routes:
+          /*:
+            serviceName: service-mw2
+            functionName: app_index
