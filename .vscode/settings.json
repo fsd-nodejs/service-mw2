@@ -5,7 +5,7 @@
     "package-lock.json": false,
     "node_modules": false,
     "coverage": true,
-    "dist": true
+    "dist": false
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

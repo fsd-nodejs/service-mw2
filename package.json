@@ -4,6 +4,7 @@
   "description": "Best practices of Midway.js",
   "private": true,
   "dependencies": {
+    "@midwayjs/bootstrap": "^2.11.6",
     "@midwayjs/decorator": "^2.11.5",
     "@midwayjs/orm": "^2.11.6",
     "@midwayjs/swagger": "^1.0.7",

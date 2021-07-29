@@ -3,27 +3,62 @@ Transform: 'Aliyun::Serverless-2018-04-03'
 Resources:
   service-mw2:
     Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: 测试serverless的服务
+      Role: 'acs:ram::1591526048690788:role/aliyunfcdefaultrole'
+      LogConfig:
+        Project: service-mw2
+        Logstore: service-mw2
+        EnableRequestMetrics: true
+      VpcConfig:
+        VpcId: vpc-wz9je35dho09vagpuawl9
+        VSwitchIds:
+          - vsw-wz9w8z1jkwnsr3eedgsnv
+        SecurityGroupId: sg-wz9egg8kg0g6dkf89sp9
+      TracingConfig: Enable
+      InternetAccess: true
     app_index:
       Type: 'Aliyun::Serverless::Function'
       Properties:
         Initializer: index.initializer
+        InitializationTimeout: 30
         Handler: index.handler
         Runtime: custom-container
-        CodeUri: .
-        Timeout: 10
-        InitializationTimeout: 10
-        MemorySize: 128
-        InstanceConcurrency: 1
+        Timeout: 30
+        MemorySize: 256
+        EnvironmentVariables:
+          LD_LIBRARY_PATH: >-
+            /code/.fun/root/usr/local/lib:/code/.fun/root/usr/lib:/code/.fun/root/usr/lib/x86_64-linux-gnu:/code/.fun/root/usr/lib64:/code/.fun/root/lib:/code/.fun/root/lib/x86_64-linux-gnu:/code/.fun/root/python/lib/python2.7/site-packages:/code/.fun/root/python/lib/python3.6/site-packages:/code:/code/lib:/usr/local/lib
+          MYSQL_DATABASE: service-mw2
+          MYSQL_HOST: 10.0.0.228
+          MYSQL_PASSWORD: XPPYP6NGHXmyTBM6
+          MYSQL_PORT: '3306'
+          MYSQL_USER: service-mw2
+          NODE_PATH: '/code/node_modules:/usr/local/lib/node_modules'
+          PATH: >-
+            /code/.fun/root/usr/local/bin:/code/.fun/root/usr/local/sbin:/code/.fun/root/usr/bin:/code/.fun/root/usr/sbin:/code/.fun/root/sbin:/code/.fun/root/bin:/code:/code/node_modules/.bin:/code/.fun/python/bin:/code/.fun/node_modules/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:/bin
+          PYTHONUSERBASE: /code/.fun/python
+          REDIS_DB: '1'
+          REDIS_HOST: 10.0.0.228
+          REDIS_PORT: '6379'
+        InstanceType: e1
+        InstanceLifecycleConfig:
+          PreFreeze:
+            Handler: ''
+            Timeout: 3
+          PreStop:
+            Handler: ''
+            Timeout: 3
         CAPort: 7001
-        CustomContainerConfig: # 容器镜像配置
-          # Sample image value: registry-vpc.cn-shenzhen.aliyuncs.com/fc-demo/nodejs-express:v0.1  使用同地域的VPC镜像地址加速
-          Image: 'registry.cn-shenzhen.aliyuncs.com/service-mw2/midway:1.0.9'
-          Command: '["npm run online"]'
+        CustomContainerConfig:
+          Args: ''
+          Command: ''
+          Image: 'registry.cn-shenzhen.aliyuncs.com/service-mw2/midway:1.0.11'
       Events:
         http-app_index:
           Type: HTTP
           Properties:
-            AuthType: ANONYMOUS
+            AuthType: anonymous
             Methods:
               - GET
               - PUT
@@ -31,13 +66,3 @@ Resources:
               - DELETE
               - HEAD
               - PATCH
-  midway_auto_domain:
-    Type: 'Aliyun::Serverless::CustomDomain'
-    Properties:
-      DomainName: Auto
-      Protocol: HTTP
-      RouteConfig:
-        routes:
-          /*:
-            serviceName: service-mw2
-            functionName: app_index

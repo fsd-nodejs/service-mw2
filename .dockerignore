@@ -18,3 +18,4 @@ docs
 .serverless
 .git/
 database/
+template.yaml
