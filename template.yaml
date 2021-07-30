@@ -54,7 +54,7 @@ Resources:
         CustomContainerConfig:
           Args: ''
           Command: ''
-          Image: 'registry.cn-shenzhen.aliyuncs.com/service-mw2/midway:1.0.12'
+          Image: 'registry.cn-shenzhen.aliyuncs.com/service-mw2/midway:1.0.13'
       Events:
         http-app_index:
           Type: HTTP
