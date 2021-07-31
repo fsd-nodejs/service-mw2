@@ -14,6 +14,6 @@ WORKDIR /home
 
 COPY --from=BUILD_IMAGE /home /home
 
-EXPOSE 7001
+EXPOSE 9000
 
 ENTRYPOINT ["node", "bootstrap.js"]

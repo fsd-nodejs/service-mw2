@@ -50,11 +50,11 @@ Resources:
           PreStop:
             Handler: ''
             Timeout: 3
-        CAPort: 7001
+        CAPort: 9000
         CustomContainerConfig:
           Args: ''
           Command: ''
-          Image: 'registry.cn-shenzhen.aliyuncs.com/service-mw2/midway:1.0.13'
+          Image: 'registry.cn-shenzhen.aliyuncs.com/service-mw2/midway:1.0.14'
       Events:
         http-app_index:
           Type: HTTP
