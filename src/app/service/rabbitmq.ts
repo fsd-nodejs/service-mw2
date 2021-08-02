@@ -10,7 +10,7 @@ import {
 import * as amqp from 'amqp-connection-manager';
 import { Channel, Connection } from 'amqplib';
 
-import { RabbitmqConfig } from '@/config/config.types';
+import { RabbitmqConfig } from '../../config/config.types';
 
 @Autoload()
 @Scope(ScopeEnum.Singleton) // Singleton 单例，全局唯一（进程级别）
