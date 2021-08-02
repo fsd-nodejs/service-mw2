@@ -20,7 +20,7 @@
     "stripInternal": true,
     "target": "ES2020",
     "typeRoots": ["./typings", "./node_modules/@types"],
-    "types" : ["jest", "node"]
+    // "types" : ["jest", "node"]
   },
   "exclude": ["dist", "node_modules", "test"]
 }

@@ -5,7 +5,7 @@ import { Jwt, JwtEggConfig } from '@waiting/egg-jwt';
 import { Redis } from 'ioredis';
 import { Repository } from 'typeorm';
 
-import { JwtAuthMiddlewareConfig } from '@/config/config.types';
+import { JwtAuthMiddlewareConfig } from '../../config/config.types';
 
 import { AdminUserModel } from '../model/admin-user';
 
