@@ -1,7 +1,10 @@
 import * as assert from 'assert';
 
 import { IMidwayWebNext } from '@midwayjs/web';
+import { JwtComponent } from '@mw-components/jwt';
 import { Context } from 'egg';
+
+import { JwtUser } from '@/interface';
 
 import MyError from '../util/my-error';
 
@@ -9,9 +12,12 @@ import MyError from '../util/my-error';
 export default () => {
   return async (ctx: Context, next: IMidwayWebNext): Promise<void> => {
     if (ctx.header.authorization) {
+      const container = ctx.app.getApplicationContext();
+      const jwt = await container.getAsync(JwtComponent);
+
       const [, token] = ctx.header.authorization.split(' ');
       // 解密，获取payload
-      const { payload } = ctx.app.jwt.decode<{ id: number }>(token);
+      const { payload } = jwt.decode<JwtUser>(token);
 
       const { jwtAuth } = ctx.app.config;
 

@@ -50,23 +50,6 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
     },
   };
 
-  // jwt配置
-  config.jwt = {
-    enable: true,
-    client: {
-      secret: '123456', // 默认密钥，生产环境一定要更改
-    },
-    // rule https://github.com/eggjs/egg-path-matching
-    ignore: ['/auth/login', '/ping', '/swagger-u*', '/genid', '/genidHex'],
-  };
-
-  // jwt token 校验中间件(需配合jwt使用, ignore的配置与jwt一致)
-  config.jwtAuth = {
-    ignore: config.jwt.ignore,
-    redisScope: 'admin', // redis的作用域前缀
-    accessTokenExpiresIn: 60 * 60 * 24 * 3, // 签名过期时间也可写
-  };
-
   // swagger文档配置，默认地址 http://127.0.0.1:7001/swagger-ui/index.html
   config.swagger = {
     title: 'service-mw2',
