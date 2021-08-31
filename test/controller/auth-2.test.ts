@@ -9,7 +9,7 @@ const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
 describe(filename, () => {
   let app: Application;
-  let currentUser;
+  // let currentUser;
 
   beforeAll(async () => {
     app = await createApp<Framework>();

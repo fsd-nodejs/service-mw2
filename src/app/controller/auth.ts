@@ -49,7 +49,7 @@ export class AuthController {
     // 后续可能有多种登录方式
     const existAdmiUser = await this.service.localHandler(params);
 
-    // 判断管理员存在
+    // 检查管理员存在
     assert.ok(existAdmiUser, new MyError('管理员不存在', 400));
 
     // 生成Token
