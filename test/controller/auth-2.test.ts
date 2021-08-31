@@ -19,7 +19,7 @@ describe(filename, () => {
     await close(app);
   });
 
-  it('should POST /auth/login by wrong username and password', async () => {
+  it.only('should POST /auth/login by wrong username and password', async () => {
     const response = await createHttpRequest(app)
       .post('/auth/login')
       .type('form')
