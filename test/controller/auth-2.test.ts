@@ -19,7 +19,7 @@ describe(filename, () => {
     await close(app);
   });
 
-  it.only('should POST /auth/login by wrong username and password', async () => {
+  it('should POST /auth/login by wrong username and password', async () => {
     const response = await createHttpRequest(app)
       .post('/auth/login')
       .type('form')
@@ -31,31 +31,31 @@ describe(filename, () => {
     expect(response.body.code).toBe(400);
   });
 
-  it('should POST /auth/login by wrong username', async () => {
-    const response = await createHttpRequest(app)
-      .post('/auth/login')
-      .type('form')
-      .send({
-        username: 'fakename',
-        password: '123456',
-      })
-      .expect(400);
-    expect(response.body.code).toBe(400);
-  });
+  // it('should POST /auth/login by wrong username', async () => {
+  //   const response = await createHttpRequest(app)
+  //     .post('/auth/login')
+  //     .type('form')
+  //     .send({
+  //       username: 'fakename',
+  //       password: '123456',
+  //     })
+  //     .expect(400);
+  //   expect(response.body.code).toBe(400);
+  // });
 
-  it('should POST /auth/login by wrong input', async () => {
-    const response = await createHttpRequest(app)
-      .post('/auth/login')
-      .type('form')
-      .expect(422);
-    expect(response.body.code).toBe(422);
-  });
+  // it('should POST /auth/login by wrong input', async () => {
+  //   const response = await createHttpRequest(app)
+  //     .post('/auth/login')
+  //     .type('form')
+  //     .expect(422);
+  //   expect(response.body.code).toBe(422);
+  // });
 
-  it('should GET 404', async () => {
-    const response = await createHttpRequest(app)
-      .get('/auth/currentUsersss')
-      .set('Authorization', `Bearer ${currentUser.token}`)
-      .expect(404);
-    expect(response.body.code).toBe(404);
-  });
+  // it('should GET 404', async () => {
+  //   const response = await createHttpRequest(app)
+  //     .get('/auth/currentUsersss')
+  //     .set('Authorization', `Bearer ${currentUser.token}`)
+  //     .expect(404);
+  //   expect(response.body.code).toBe(404);
+  // });
 });
