@@ -25,7 +25,7 @@ describe(filename, () => {
 
 
   it('should GET /', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest
@@ -39,7 +39,7 @@ describe(filename, () => {
   });
 
   it('should GET /ping', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest } = testConfig
 
     assert(currentUser.token)
     const ret = await httpRequest.get('/ping').expect(200);
@@ -83,7 +83,7 @@ describe(filename, () => {
   });
 
   it('should GET /sendToQueue', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest
