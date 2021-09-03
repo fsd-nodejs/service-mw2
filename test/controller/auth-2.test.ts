@@ -1,4 +1,5 @@
 import { relative } from 'path';
+import assert from 'assert';
 
 import { testConfig } from '../root.config'
 
@@ -18,7 +19,8 @@ describe(filename, () => {
         password: '123456',
       })
       .expect(400);
-    expect(response.body.code).toBe(400);
+
+    assert(response.body.code === 400);
   });
 
   it('should POST /auth/login by wrong username', async () => {
@@ -32,7 +34,8 @@ describe(filename, () => {
         password: '123456',
       })
       .expect(400);
-    expect(response.body.code).toBe(400);
+
+    assert(response.body.code === 400);
   });
 
   it('should POST /auth/login by wrong input', async () => {
@@ -42,7 +45,8 @@ describe(filename, () => {
       .post('/auth/login')
       .type('form')
       .expect(422);
-    expect(response.body.code).toBe(422);
+
+    assert(response.body.code === 422);
   });
 
   it('should GET 404', async () => {
@@ -52,6 +56,7 @@ describe(filename, () => {
       .get('/auth/currentUsersss')
       .set('Authorization', `Bearer fake`)
       .expect(404);
-    expect(response.body.code).toBe(404);
+
+    assert(response.body.code === 404);
   });
 });
