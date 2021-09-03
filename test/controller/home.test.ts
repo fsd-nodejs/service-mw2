@@ -8,10 +8,9 @@ import { testConfig } from '../root.config'
 const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
 describe(filename, () => {
-  let currentUser: any;
 
   it('should GET /', async () => {
-    const { httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest
@@ -25,7 +24,7 @@ describe(filename, () => {
   });
 
   it('should GET /ping', async () => {
-    const { httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const ret = await httpRequest.get('/ping').expect(200);
@@ -35,7 +34,7 @@ describe(filename, () => {
   });
 
   it('should GET /genid', async () => {
-    const { app, httpRequest } = testConfig
+    const { app, httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest.get('/genid').expect(200);
@@ -52,7 +51,7 @@ describe(filename, () => {
   });
 
   it('should GET /genidHex', async () => {
-    const { app, httpRequest } = testConfig
+    const { app, httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest.get('/genidHex').expect(200);
@@ -69,7 +68,7 @@ describe(filename, () => {
   });
 
   it('should GET /sendToQueue', async () => {
-    const { httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest

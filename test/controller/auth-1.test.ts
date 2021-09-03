@@ -32,6 +32,18 @@ describe(filename, () => {
     assert(response.body.code === 200);
   });
 
+  it('should GET 404 with valid token', async () => {
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response = await httpRequest
+      .get('/auth/currentUserNotFound')
+      .set('Authorization', `Bearer ${currentUser.token}`)
+      .expect(404);
+
+    assert(response.body.code === 404);
+  });
+
   it('should GET /auth/logout', async () => {
     const { httpRequest, currentUser } = testConfig
 
@@ -48,6 +60,12 @@ describe(filename, () => {
     const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
+
+    await httpRequest
+      .get('/auth/logout')
+      .set('Authorization', `Bearer ${currentUser.token}`)
+      .expect(200);
+
     const response = await httpRequest
       .get('/auth/currentUser')
       .set('Authorization', `Bearer ${currentUser.token}`)
@@ -56,15 +74,4 @@ describe(filename, () => {
     assert(response.body.code === 401);
   });
 
-  it('should GET 404 with valid token', async () => {
-    const { httpRequest, currentUser } = testConfig
-
-    assert(currentUser.token)
-    const response = await httpRequest
-      .get('/auth/currentUsersss')
-      .set('Authorization', `Bearer ${currentUser.token}`)
-      .expect(404);
-
-    assert(response.body.code === 404);
-  });
 });

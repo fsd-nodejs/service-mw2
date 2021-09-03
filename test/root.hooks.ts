@@ -39,6 +39,11 @@ export const mochaHooks = async () => {
       testConfig.host = url
 
       assert(! testConfig.currentUser)
+    },
+
+    beforeEach: async () => {
+      const { app } = testConfig
+
       const response = await testConfig.httpRequest
         .post('/auth/login')
         .type('form')
@@ -48,9 +53,6 @@ export const mochaHooks = async () => {
       assert(testConfig.currentUser)
       assert(typeof testConfig.currentUser.token === 'string')
       assert(testConfig.currentUser.token.length)
-    },
-
-    beforeEach: async () => {
     },
 
     afterEach: async () => {
