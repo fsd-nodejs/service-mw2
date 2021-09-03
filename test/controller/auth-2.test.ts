@@ -49,14 +49,4 @@ describe(filename, () => {
     assert(response.body.code === 422);
   });
 
-  it('should GET 404', async () => {
-    const { httpRequest } = testConfig
-
-    const response = await httpRequest
-      .get('/auth/currentUsersss')
-      .set('Authorization', `Bearer fake`)
-      .expect(404);
-
-    assert(response.body.code === 404);
-  });
 });
