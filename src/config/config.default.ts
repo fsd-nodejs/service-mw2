@@ -13,7 +13,7 @@ export default (appInfo: EggAppInfo): DefaultConfig => {
   config.keys = appInfo.name + '_1602294995416_4568';
 
   // add your config here
-  config.middleware = ['jwtAuth'];
+  config.middleware = ['authMiddleware'];
 
   config.midwayFeature = {
     // true 使用 midway-logger
