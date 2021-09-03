@@ -24,7 +24,7 @@ describe(filename, () => {
   });
 
   it('should get /admin/menu/query ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest
@@ -35,7 +35,7 @@ describe(filename, () => {
   });
 
   it('should get /admin/menu/show ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest
@@ -55,7 +55,7 @@ describe(filename, () => {
   });
 
   it('should post /admin/menu/create ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest } = testConfig
 
     assert(currentUser.token)
     const params = {
@@ -75,7 +75,7 @@ describe(filename, () => {
   });
 
   it('should patch /admin/menu/update ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest } = testConfig
 
     assert(currentUser.token)
     const params = {
@@ -95,7 +95,7 @@ describe(filename, () => {
   });
 
   it('should delete /admin/menu/remove ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest } = testConfig
 
     assert(currentUser.token)
     const params = {
@@ -111,7 +111,7 @@ describe(filename, () => {
   });
 
   it('should order /admin/menu/order ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest } = testConfig
 
     assert(currentUser.token)
     const response1 = await httpRequest
