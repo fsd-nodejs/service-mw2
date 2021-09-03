@@ -1,7 +1,7 @@
 import { relative } from 'path';
 import assert from 'assert';
 
-import { testConfig } from '../root.config';
+import { testConfig } from '../../root.config';
 
 
 const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
