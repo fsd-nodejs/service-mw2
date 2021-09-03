@@ -16,6 +16,9 @@ export interface TestConfig {
   httpRequest: SuperTest<supertest.Test>
   jwt: JwtComponent
   next: IMidwayKoaNext
+  currentUser?: {
+    token: string
+  }
 }
 const next: IMidwayKoaNext = async () => { return }
 export const testConfig = {

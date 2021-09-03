@@ -1,30 +1,16 @@
 import { relative } from 'path';
 import assert from 'assert';
 
-import { testConfig } from '../../root.config'
+import { testConfig } from '../../root.config';
 
 
 const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
 describe(filename, () => {
-  let currentUser: any;
   let currentMenu: any;
 
-  beforeAll(async () => {
-    const { app, httpRequest } = testConfig
-
-    assert(! currentUser.token)
-    const response = await httpRequest
-      .post('/auth/login')
-      .type('form')
-      .send(app.config.admin)
-      .expect(200);
-    currentUser = response.body.data;
-    assert(currentUser.token)
-  });
-
   it('should get /admin/menu/query ', async () => {
-    const { httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest
@@ -35,7 +21,7 @@ describe(filename, () => {
   });
 
   it('should get /admin/menu/show ', async () => {
-    const { httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest
@@ -55,7 +41,7 @@ describe(filename, () => {
   });
 
   it('should post /admin/menu/create ', async () => {
-    const { httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const params = {
@@ -75,7 +61,7 @@ describe(filename, () => {
   });
 
   it('should patch /admin/menu/update ', async () => {
-    const { httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const params = {
@@ -95,7 +81,7 @@ describe(filename, () => {
   });
 
   it('should delete /admin/menu/remove ', async () => {
-    const { httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const params = {
@@ -111,7 +97,7 @@ describe(filename, () => {
   });
 
   it('should order /admin/menu/order ', async () => {
-    const { httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const response1 = await httpRequest

@@ -3,6 +3,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import 'tsconfig-paths/register'
 
+import assert from 'assert';
+
 import { createApp, close, createHttpRequest } from '@midwayjs/mock'
 import { Framework } from '@midwayjs/web'
 import { JwtComponent } from '@mw-components/jwt'
@@ -35,6 +37,17 @@ export const mochaHooks = async () => {
 
       const { url } = testConfig.httpRequest.get('/')
       testConfig.host = url
+
+      assert(! testConfig.currentUser)
+      const response = await testConfig.httpRequest
+        .post('/auth/login')
+        .type('form')
+        .send(app.config.admin)
+        .expect(200)
+      testConfig.currentUser = response.body.data
+      assert(testConfig.currentUser)
+      assert(typeof testConfig.currentUser.token === 'string')
+      assert(testConfig.currentUser.token.length)
     },
 
     beforeEach: async () => {

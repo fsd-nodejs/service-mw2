@@ -10,20 +10,6 @@ const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 describe(filename, () => {
   let currentUser: any;
 
-  beforeAll(async () => {
-    const { app, httpRequest } = testConfig
-
-    assert(! currentUser.token)
-    const response = await httpRequest
-      .post('/auth/login')
-      .type('form')
-      .send(app.config.admin)
-      .expect(200);
-    currentUser = response.body.data;
-    assert(currentUser.token)
-  });
-
-
   it('should GET /', async () => {
     const { httpRequest } = testConfig
 

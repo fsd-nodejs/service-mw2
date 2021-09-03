@@ -7,24 +7,10 @@ import { testConfig } from '../../root.config';
 const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
 describe(filename, () => {
-  let currentUser: any;
   let currentPermission: any;
 
-  beforeAll(async () => {
-    const { app, httpRequest } = testConfig
-
-    assert(! currentUser.token)
-    const response = await httpRequest
-      .post('/auth/login')
-      .type('form')
-      .send(app.config.admin)
-      .expect(200);
-    currentUser = response.body.data;
-    assert(currentUser.token)
-  });
-
   it('should get /admin/permission/query ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest
@@ -43,7 +29,7 @@ describe(filename, () => {
   });
 
   it('should get /admin/permission/show ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const response = await httpRequest
@@ -62,7 +48,7 @@ describe(filename, () => {
   });
 
   it('should post /admin/permission/create ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const params = {
@@ -82,7 +68,7 @@ describe(filename, () => {
   });
 
   it('should patch /admin/permission/update ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const params = {
@@ -99,7 +85,7 @@ describe(filename, () => {
   });
 
   it('should delete /admin/permission/remove ', async () => {
-    const { app, httpRequest } = testConfig
+    const { httpRequest, currentUser } = testConfig
 
     assert(currentUser.token)
     const params = {
