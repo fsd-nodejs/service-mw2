@@ -26,7 +26,10 @@ export class RabbitmqService {
   @Init()
   async connect() {
     // 创建连接
-    this.connection = await amqp.connect(this.rabbitmq.url);
+    // @FIXME type assert
+    this.connection = (await amqp.connect(
+      this.rabbitmq.url
+    )) as unknown as Connection;
 
     // 创建 channel
     this.channel = await this.connection.createChannel();

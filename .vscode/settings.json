@@ -1,16 +1,4 @@
 {
-  "files.exclude": {
-    "logs": true,
-    "run": true,
-    "package-lock.json": false,
-    "node_modules": false,
-    "coverage": true,
-    "dist": true
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
   "debug.node.autoAttach": "on",
-  "debug.javascript.usePreviewAutoAttach": false,
-  "git.ignoreLimitWarning": true,
+  "debug.javascript.usePreviewAutoAttach": false
 }

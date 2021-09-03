@@ -14,10 +14,10 @@ export const security = {
 // 数据库配置
 export const orm: ConnectionOptions = {
   type: 'mysql',
-  host: process.env.MYSQL_HOST || '127.0.0.1',
+  host: process.env.MYSQL_HOST || '192.168.1.248',
   port: +process.env.MYSQL_HOST || 3306,
   username: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || 'password',
+  password: process.env.MYSQL_PASSWORD || 'mysqlabc123',
   database: process.env.MYSQL_DATABASE || 'shop_development',
   synchronize: false,
   logging: false,
@@ -27,7 +27,7 @@ export const orm: ConnectionOptions = {
 export const redis: EggRedisOptions = {
   client: {
     port: +process.env.REDIS_PORT || 6379, // Redis port
-    host: process.env.REDIS_HOST || '127.0.0.1', // Redis host
+    host: process.env.REDIS_HOST || '192.168.1.248', // Redis host
     password: process.env.REDIS_PASSWORD || '',
     db: +process.env.REDIS_DB || 0,
   },
@@ -55,7 +55,7 @@ export const tracer: TracerConfig = {
       param: 1,
     },
     reporter: {
-      agentHost: '127.0.0.1',
+      agentHost: '192.168.1.248',
     },
   },
 };
