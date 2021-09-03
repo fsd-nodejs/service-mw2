@@ -6,7 +6,7 @@ import { testConfig } from '../root.config'
 
 const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
-describe.skip(filename, () => {
+describe(filename, () => {
   let currentUser;
 
   it('should POST /auth/login by correct username and password', async () => {
