@@ -72,7 +72,7 @@ export class AuthService {
         username,
       },
     });
-    console.log('user:::::::::::::', user)
+    console.log(`user:::::::::::::${username}:`, user)
     return user;
   }
 
