@@ -68,7 +68,7 @@
     "test": "midway-bin test --ts --forceExit",
     "test:mocha": "cross-env MIDWAY_SERVER_ENV=unittest mocha --parallel=false",
     "cov": "midway-bin cov --ts --forceExit",
-    "cov:mocha": "cross-env MIDWAY_SERVER_ENV=unittest TS_NODE_TYPE_CHECK=false TS_NODE_TRANSPILE_ONLY=true mocha --parallel=false",
+    "cov:mocha": "cross-env MIDWAY_SERVER_ENV=unittest TS_NODE_TYPE_CHECK=false TS_NODE_TRANSPILE_ONLY=true nyc mocha --parallel=false",
     "lint": "mwts check",
     "lint:fix": "mwts fix",
     "ci": "npm run cov",
