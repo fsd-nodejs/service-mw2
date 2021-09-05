@@ -120,6 +120,7 @@
     "reporter": [
       "html",
       "json",
+      "text",
       "text-summary"
     ],
     "all": true
