@@ -14,7 +14,7 @@ describe(filename, () => {
     const authService = await container.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('admin');
     assert.ok(user);
-    assert(user && user.username === 'admin');
+    assert.deepEqual(user && user.username, 'admin');
   });
 
   it('#getAdminUserTokenById >should get null when user not exists', async () => {
