@@ -1,4 +1,4 @@
-import { relative } from 'path';
+#getAdminUserByUserNameimport { relative } from 'path';
 import assert from 'assert';
 
 import { testConfig } from '../root.config';
@@ -11,9 +11,7 @@ describe(filename, () => {
   it('#getAdminUserByUserName >should get exists user', async () => {
     const { container } = testConfig
 
-    const authService = await container.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await container.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('admin');
     assert.ok(user);
     assert.deepEqual(user?.username, 'admin');
@@ -22,9 +20,7 @@ describe(filename, () => {
   it('#getAdminUserTokenById >should get null when user not exists', async () => {
     const { container } = testConfig
 
-    const authService = await container.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await container.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('fakeAdmin');
     assert.deepEqual(user, null);
   });
@@ -34,9 +30,7 @@ describe(filename, () => {
     // const ctx = app.mockContext() as Context;
     const ctx = app.createAnonymousContext();
 
-    const authService = await ctx.requestContext.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await ctx.requestContext.getAsync(AuthService);
     const params = { username: 'admin', password: 'admin' };
     const user = await authService.localHandler(params);
     assert.ok(user);
@@ -47,9 +41,7 @@ describe(filename, () => {
     const { app } = testConfig
     const ctx = app.createAnonymousContext();
 
-    const authService = await ctx.requestContext.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await ctx.requestContext.getAsync(AuthService);
     const params = { username: 'fakeAdmin', password: 'admin' };
     const user = await authService.localHandler(params);
     assert.deepEqual(user, null);
@@ -59,9 +51,7 @@ describe(filename, () => {
     const { app } = testConfig
     const ctx = app.createAnonymousContext();
 
-    const authService = await ctx.requestContext.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await ctx.requestContext.getAsync(AuthService);
     const params = { username: 'admin', password: '123456' };
     const user = await authService.localHandler(params);
     assert.deepEqual(user, null);
@@ -70,9 +60,7 @@ describe(filename, () => {
   it('#createAdminUserToken >should created token to redis', async () => {
     const { app } = testConfig
 
-    const authService = await app.applicationContext.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await app.applicationContext.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('admin');
     assert.ok(user);
     const token = user && (await authService.createAdminUserToken(user));
@@ -82,9 +70,7 @@ describe(filename, () => {
   it('#getAdminUserTokenById >should get token from redis', async () => {
     const { app } = testConfig
 
-    const authService = await app.applicationContext.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await app.applicationContext.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('admin');
     assert.ok(user);
     const token = user && (await authService.getAdminUserTokenById(user.id));
@@ -94,9 +80,7 @@ describe(filename, () => {
   it('#removeAdminUserTokenById >should remove token from redis', async () => {
     const { app } = testConfig
 
-    const authService = await app.applicationContext.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await app.applicationContext.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('admin');
     assert.ok(user);
     const removed =
@@ -107,9 +91,7 @@ describe(filename, () => {
   it('#cacheAdminUser >should get OK when cached user to redis', async () => {
     const { app } = testConfig
 
-    const authService = await app.applicationContext.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await app.applicationContext.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('admin');
     assert.ok(user);
     const cached = user && (await authService.cacheAdminUser(user));
@@ -119,9 +101,7 @@ describe(filename, () => {
   it('#getAdminUserById >should get userinfo from redis', async () => {
     const { app } = testConfig
 
-    const authService = await app.applicationContext.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await app.applicationContext.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('admin');
     assert.ok(user);
     const userinfo = user && (await authService.getAdminUserById(user.id));
@@ -132,9 +112,7 @@ describe(filename, () => {
   it('#cleanAdminUserById >should remove userinfo from redis', async () => {
     const { app } = testConfig
 
-    const authService = await app.applicationContext.getAsync<AuthService>(
-      'authService'
-    );
+    const authService = await app.applicationContext.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('admin');
     assert.ok(user);
     const removed = user && (await authService.cleanAdminUserById(user.id));
