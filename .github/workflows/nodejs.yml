@@ -90,7 +90,7 @@ jobs:
 
     - name: Run Tests
       # run: npm run ci
-      run: npm run test:mocha
+      run: npm run cov:mocha
       env:
         CI: true
         # mysql

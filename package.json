@@ -49,6 +49,7 @@
     "mocha": "^9.1.0",
     "mocha-lcov-reporter": "1",
     "mwts": "^1.2.2",
+    "nyc": "^15.1.0",
     "rewire": "^5.0.0",
     "standard-version": "^9.3.1",
     "swagger-ui-dist": "^3.51.1",
@@ -67,6 +68,7 @@
     "test": "midway-bin test --ts --forceExit",
     "test:mocha": "cross-env MIDWAY_SERVER_ENV=unittest mocha --parallel=false",
     "cov": "midway-bin cov --ts --forceExit",
+    "cov:mocha": "cross-env MIDWAY_SERVER_ENV=unittest TS_NODE_TYPE_CHECK=false TS_NODE_TRANSPILE_ONLY=true mocha --parallel=false",
     "lint": "mwts check",
     "lint:fix": "mwts fix",
     "ci": "npm run cov",
@@ -93,5 +95,33 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "nyc": {
+    "include": [
+      "src/*.ts",
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      ".githooks",
+      "node_modules*",
+      "**/src/bin",
+      "**/src/domain.ts",
+      "**/src/interface.ts",
+      "**/dist",
+      "**/node_modules*",
+      "**/test",
+      "**/test*",
+      "**/*.d.ts",
+      "**/*.js"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "reporter": [
+      "html",
+      "json",
+      "text-summary"
+    ],
+    "all": true
   }
 }
