@@ -17,7 +17,7 @@ describe(filename, () => {
     assert.deepStrictEqual(user.username, 'admin');
   });
 
-  it('#getAdminUserTokenById >should get null when user not exists', async () => {
+  it.only('#getAdminUserTokenById >should get null when user not exists', async () => {
     const { container } = testConfig
 
     const authService = await container.getAsync(AuthService);
