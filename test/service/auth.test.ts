@@ -27,7 +27,6 @@ describe(filename, () => {
 
   it('#localHandler >should get exists user and password is passed', async () => {
     const { app } = testConfig
-    // const ctx = app.mockContext() as Context;
     const ctx = app.createAnonymousContext();
 
     const authService = await ctx.requestContext.getAsync(AuthService);

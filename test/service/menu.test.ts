@@ -89,6 +89,7 @@ describe(filename, () => {
 
     const newMenu = await menuService.getAdminMenuById(list[0].id);
 
+    assert.ok(newMenu)
     assert.deepEqual(newMenu.order, newList[0].order);
 
     const sortList = list.map((item, index) => {
