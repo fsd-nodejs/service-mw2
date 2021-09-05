@@ -22,7 +22,7 @@ describe(filename, () => {
 
     const authService = await container.getAsync(AuthService);
     const user = await authService.getAdminUserByUserName('fakeAdmin');
-    assert(user === null);
+    assert.deepStrictEqual(user, null);
   });
 
   it('#localHandler >should get exists user and password is passed', async () => {
@@ -34,7 +34,7 @@ describe(filename, () => {
     const params = { username: 'admin', password: 'admin' };
     const user = await authService.localHandler(params);
     assert.ok(user);
-    assert(user && user.username === params.username);
+    assert.deepStrictEqual(user.username, params.username);
   });
 
   it('#localHandler >should get null when user not exists', async () => {
@@ -44,7 +44,7 @@ describe(filename, () => {
     const authService = await ctx.requestContext.getAsync(AuthService);
     const params = { username: 'fakeAdmin', password: 'admin' };
     const user = await authService.localHandler(params);
-    assert(user === null);
+    assert.deepStrictEqual(user, null);
   });
 
   it('#localHandler >should get null when user password not equal', async () => {
@@ -54,7 +54,7 @@ describe(filename, () => {
     const authService = await ctx.requestContext.getAsync(AuthService);
     const params = { username: 'admin', password: '123456' };
     const user = await authService.localHandler(params);
-    assert(user === null);
+    assert.deepStrictEqual(user, null);
   });
 
   it('#createAdminUserToken >should created token to redis', async () => {
@@ -95,7 +95,7 @@ describe(filename, () => {
     const user = await authService.getAdminUserByUserName('admin');
     assert.ok(user);
     const cached = user && (await authService.cacheAdminUser(user));
-    assert(cached === 'OK');
+    assert.deepStrictEqual(cached, 'OK');
   });
 
   it('#getAdminUserById >should get userinfo from redis', async () => {
@@ -106,7 +106,7 @@ describe(filename, () => {
     assert.ok(user);
     const userinfo = user && (await authService.getAdminUserById(user.id));
     assert.ok(userinfo);
-    assert(userinfo && user && userinfo.username === user.username);
+    assert.deepStrictEqual(userinfo.username, user.username);
   });
 
   it('#cleanAdminUserById >should remove userinfo from redis', async () => {
