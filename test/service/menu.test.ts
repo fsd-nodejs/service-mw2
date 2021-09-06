@@ -11,8 +11,10 @@ describe(filename, () => {
   let currentMenu: any;
 
   it('#queryAdminMenu >should get menu list total > 0', async () => {
-    const { container } = testConfig
-    const menuService = await container.getAsync(AdminMenuService);
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -22,8 +24,10 @@ describe(filename, () => {
   });
 
   it('#createAdminMenu >should created menu', async () => {
-    const { container } = testConfig
-    const menuService = await container.getAsync(AdminMenuService);
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const params = {
       parentId: '0',
       title: 'fakeTitle',
@@ -38,8 +42,10 @@ describe(filename, () => {
   });
 
   it('#getAdminMenuById >should get menu by id', async () => {
-    const { container } = testConfig
-    const menuService = await container.getAsync(AdminMenuService);
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const menu = await menuService.getAdminMenuById(currentMenu.id);
 
     assert.ok(menu);
