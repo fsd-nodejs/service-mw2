@@ -17,7 +17,7 @@ export const orm: ConnectionOptions = {
   host: process.env.MYSQL_HOST || '127.0.0.1',
   port: +process.env.MYSQL_HOST || 3306,
   username: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || 'mysqlabc123',
+  password: process.env.MYSQL_PASSWORD || 'password',
   database: process.env.MYSQL_DATABASE || 'shop_development',
   synchronize: false,
   logging: false,
