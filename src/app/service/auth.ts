@@ -1,9 +1,10 @@
 import { Provide, Plugin, Inject, Config } from '@midwayjs/decorator';
-import { Context } from 'egg';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { JwtComponent } from '@mw-components/jwt';
 import { Redis } from 'ioredis';
 import { Repository } from 'typeorm';
+
+import { Context } from '@/interface';
 
 import { JwtAuthMiddlewareConfig } from '../../config/config.types';
 import { AdminUserModel } from '../model/admin-user';

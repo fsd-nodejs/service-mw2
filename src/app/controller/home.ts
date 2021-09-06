@@ -1,8 +1,9 @@
 import { Controller, Get, Inject, Provide } from '@midwayjs/decorator';
 import { CreateApiDoc } from '@midwayjs/swagger';
 import { JwtComponent } from '@mw-components/jwt';
-import { Context } from 'egg';
 import { KoidComponent } from '@mw-components/koid';
+
+import { Context } from '@/interface';
 
 import { RabbitmqService } from '../service/rabbitmq';
 

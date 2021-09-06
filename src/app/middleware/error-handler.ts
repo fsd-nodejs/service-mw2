@@ -4,7 +4,8 @@ import {
   IMidwayWebNext,
   MidwayWebMiddleware,
 } from '@midwayjs/web';
-import { Context } from 'egg';
+
+import { Context } from '@/interface';
 
 import MyError from '../util/my-error';
 

@@ -7,7 +7,8 @@ import {
   // eslint-disable-next-line node/no-extraneous-import
 } from '@midwayjs/logger';
 import { genISO8601String } from '@waiting/shared-core';
-import { Context, Application } from 'egg';
+
+import { Application, Context } from '@/interface';
 
 class CustomContextLogger extends MidwayContextLogger<Context> {
   formatContextLabel() {
