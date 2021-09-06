@@ -46,8 +46,10 @@ describe(filename, () => {
   });
 
   it('#updateAdminMenu >should update menu', async () => {
-    const { container } = testConfig
-    const menuService = await container.getAsync(AdminMenuService);
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const { id } = currentMenu;
     const { affected } = await menuService.updateAdminMenu({
       id,
@@ -61,16 +63,20 @@ describe(filename, () => {
   });
 
   it('#removeAdminMenuByIds >should remove menu', async () => {
-    const { container } = testConfig
-    const menuService = await container.getAsync(AdminMenuService);
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const { id } = currentMenu;
     const total = await menuService.removeAdminMenuByIds([id]);
     assert.ok(total);
   });
 
   it('#orderAdminMemu >should order menu', async () => {
-    const { container } = testConfig
-    const menuService = await container.getAsync(AdminMenuService);
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const queryParams = {
       pageSize: 1000,
       current: 1,
