@@ -55,7 +55,7 @@ export const tracer: TracerConfig = {
       param: 1,
     },
     reporter: {
-      agentHost: '192.168.1.248',
+      agentHost: '127.0.0.1',
     },
   },
 };

@@ -34,10 +34,10 @@ export const jwtAuth: JwtAuthMiddlewareConfig = {
 // 数据库配置
 export const orm: ConnectionOptions = {
   type: 'mysql',
-  host: '192.168.1.248',
+  host: '127.0.0.1',
   port: 3306,
   username: 'root',
-  password: 'mysqlabc123',
+  password: 'password',
   database: 'shop_development',
   synchronize: false,
   logging: true,
@@ -47,7 +47,7 @@ export const orm: ConnectionOptions = {
 export const redis: EggRedisOptions = {
   client: {
     port: 6379, // Redis port
-    host: '192.168.1.248', // Redis host
+    host: '127.0.0.1', // Redis host
     password: '',
     db: 0,
   },
@@ -63,7 +63,7 @@ export const tracer: TracerConfig = {
       param: 1,
     },
     reporter: {
-      agentHost: '192.168.1.248',
+      agentHost: '127.0.0.1',
     },
   },
 };
