@@ -18,6 +18,7 @@ export interface IUserOptions {
 }
 
 export { TracerLog } from '@mw-components/jaeger';
+export { NpmPkg } from '@waiting/shared-types';
 
 declare module '@midwayjs/core' {
   interface Context {
