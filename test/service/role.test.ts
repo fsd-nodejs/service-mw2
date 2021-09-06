@@ -75,10 +75,10 @@ describe(filename, () => {
   });
 
   it('#createAdminRole >should created role', async () => {
-    // const ctx = app.mockContext() as Context;
-    const { container } = testConfig
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext();
 
-    const roleService = await container.getAsync(AdminRoleService);
+    const roleService = await ctx.requestContext.getAsync(AdminRoleService);
     const params = {
       name: 'fakeName',
       slug: 'fakeSlug',
@@ -117,10 +117,10 @@ describe(filename, () => {
   });
 
   it('#updateAdminRole >should update role', async () => {
-    // const ctx = app.mockContext() as Context;
-    const { container } = testConfig
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext();
 
-    const roleService = await container.getAsync(AdminRoleService);
+    const roleService = await ctx.requestContext.getAsync(AdminRoleService);
     const { id } = currentRole;
     const { affected } = await roleService.updateAdminRole({
       id,
@@ -141,10 +141,10 @@ describe(filename, () => {
   });
 
   it('#createAdminRole >should created role, no permission', async () => {
-    // const ctx = app.mockContext() as Context;
-    const { container } = testConfig
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext();
 
-    const roleService = await container.getAsync(AdminRoleService);
+    const roleService = await ctx.requestContext.getAsync(AdminRoleService);
     const params = {
       name: 'fakeName3',
       slug: 'fakeSlug3',
