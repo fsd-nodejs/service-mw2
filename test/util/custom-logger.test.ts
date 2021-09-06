@@ -46,8 +46,7 @@ describe(filename, () => {
     // '2021-03-17T19:47:28.123+08:00
     const needle = new RegExp(`${d1}T${d2}:\\d{2}:\\d{2}\\.\\d{3}${dif}${off1}:${off2}\\s`, 'ug')
     const ret = matchISO8601ContentTimes(join(logsDir, fileLogName), needle)
-    expect(ret).toEqual(3)
-
+    assert.strictEqual(ret, 3)
   })
 
 })
