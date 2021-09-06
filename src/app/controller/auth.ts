@@ -11,7 +11,8 @@ import {
   ALL,
 } from '@midwayjs/decorator';
 import { CreateApiDoc } from '@midwayjs/swagger';
-import { Context } from 'egg';
+
+import { Context } from '@/interface';
 
 import { AuthService } from '../service/auth';
 import { LoginDTO } from '../dto/auth';
