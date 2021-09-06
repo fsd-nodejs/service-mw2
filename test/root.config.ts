@@ -1,3 +1,5 @@
+import { join } from 'path';
+
 import { IMidwayKoaNext } from '@midwayjs/koa'
 import { JwtComponent } from '@mw-components/jwt'
 import supertest, { SuperTest } from 'supertest'
@@ -16,6 +18,7 @@ export interface TestConfig {
   httpRequest: SuperTest<supertest.Test>
   jwt: JwtComponent
   next: IMidwayKoaNext
+  logsDir: string
   currentUser?: {
     token: string
   }
@@ -23,5 +26,6 @@ export interface TestConfig {
 const next: IMidwayKoaNext = async () => { return }
 export const testConfig = {
   next,
+  logsDir: join(__dirname, 'logs'),
 } as TestConfig
 

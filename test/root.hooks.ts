@@ -10,6 +10,7 @@ import { Framework } from '@midwayjs/web'
 import { JwtComponent } from '@mw-components/jwt'
 
 import { testConfig } from './root.config'
+import { removeFileOrDir } from './util/util'
 
 
 /**
@@ -62,6 +63,7 @@ export const mochaHooks = async () => {
       if (testConfig.app) {
         await close(testConfig.app)
       }
+      removeFileOrDir(testConfig.logsDir).catch(() => { void 0 })
     },
   }
 
