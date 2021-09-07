@@ -95,34 +95,5 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
-  },
-  "nyc": {
-    "include": [
-      "src/*.ts",
-      "src/**/*.ts"
-    ],
-    "exclude": [
-      ".githooks",
-      "node_modules*",
-      "**/src/bin",
-      "**/src/domain.ts",
-      "**/src/interface.ts",
-      "**/dist",
-      "**/node_modules*",
-      "**/test",
-      "**/test*",
-      "**/*.d.ts",
-      "**/*.js"
-    ],
-    "extension": [
-      ".ts"
-    ],
-    "reporter": [
-      "html",
-      "json",
-      "text",
-      "text-summary"
-    ],
-    "all": true
   }
 }
