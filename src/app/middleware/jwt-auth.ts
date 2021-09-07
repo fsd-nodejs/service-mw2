@@ -7,7 +7,7 @@ import { IMidwayWebNext, Context } from '../../interface';
 import MyError from '../util/my-error';
 
 @Provide()
-export class AuthMiddleware implements IWebMiddleware {
+export class JwtAuth implements IWebMiddleware {
   resolve(): MidwayWebMiddleware {
     return authMiddleware;
   }
