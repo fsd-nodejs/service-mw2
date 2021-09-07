@@ -13,7 +13,8 @@ import {
   Body,
   Del,
 } from '@midwayjs/decorator';
-import { Context } from 'egg';
+
+import { Context } from '@/interface';
 
 import { AdminMenuService } from '../../service/admin/menu';
 import { AdminRoleService } from '../../service/admin/role';

@@ -6,10 +6,11 @@ import { App, Configuration, Logger } from '@midwayjs/decorator';
 import * as swagger from '@midwayjs/swagger';
 import { ILifeCycle } from '@midwayjs/core';
 import { IMidwayLogger } from '@midwayjs/logger';
-import { NpmPkg } from '@waiting/shared-types';
-import { Application } from 'egg';
 import * as jaeger from '@mw-components/jaeger';
+import * as jwt from '@mw-components/jwt';
 import * as koid from '@mw-components/koid';
+
+import { Application, NpmPkg } from '@/interface';
 
 import { customLogger } from './app/util/custom-logger';
 
@@ -17,6 +18,7 @@ import { customLogger } from './app/util/custom-logger';
   imports: [
     jaeger,
     koid,
+    jwt,
     '@midwayjs/orm', // 加载 orm 组件
     // 加载swagger组件
     {

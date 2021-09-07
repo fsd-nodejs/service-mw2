@@ -4,7 +4,8 @@ import {
   IMidwayWebNext,
   MidwayWebMiddleware,
 } from '@midwayjs/web';
-import { Context } from 'egg';
+
+import { Context } from '@/interface';
 
 import MyError from '../util/my-error';
 
@@ -16,7 +17,7 @@ export class ErrorHandlerMiddleware implements IWebMiddleware {
 }
 
 async function errHandleMiddleware(
-  ctx: Context,
+  ctx: Context<any>,
   next: IMidwayWebNext
 ): Promise<void> {
   try {

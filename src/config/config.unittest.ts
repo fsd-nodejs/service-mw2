@@ -5,6 +5,8 @@ import { ConnectionOptions } from 'typeorm';
 
 import { RabbitmqConfig } from './config.types';
 
+export { jwtConfig, jwtMiddlewareConfig, jwtAuth } from './config.local';
+
 export const security = {
   csrf: false,
 };

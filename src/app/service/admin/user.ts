@@ -1,9 +1,10 @@
 import * as assert from 'assert';
 
 import { Provide, Inject } from '@midwayjs/decorator';
-import { Context } from 'egg';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, Like, In } from 'typeorm';
+
+import { Context } from '@/interface';
 
 import { AdminUserModel } from '../../model/admin-user';
 import { AdminRoleModel } from '../../model/admin-role';

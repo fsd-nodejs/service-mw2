@@ -1,38 +1,45 @@
 import * as assert from 'assert';
 
-import { IMidwayWebNext } from '@midwayjs/web';
-import { Context } from 'egg';
+import { Provide } from '@midwayjs/decorator';
+import { IWebMiddleware, MidwayWebMiddleware } from '@midwayjs/web';
 
+import { IMidwayWebNext, Context } from '../../interface';
 import MyError from '../util/my-error';
 
-// jwt auth
-export default () => {
-  return async (ctx: Context, next: IMidwayWebNext): Promise<void> => {
-    if (ctx.header.authorization) {
-      const [, token] = ctx.header.authorization.split(' ');
-      // 解密，获取payload
-      const { payload } = ctx.app.jwt.decode<{ id: number }>(token);
+@Provide()
+export class JwtAuth implements IWebMiddleware {
+  resolve(): MidwayWebMiddleware {
+    return authMiddleware;
+  }
+}
 
-      const { jwtAuth } = ctx.app.config;
+async function authMiddleware(
+  ctx: Context,
+  next: IMidwayWebNext
+): Promise<void> {
+  if (!ctx.currentUser) {
+    ctx.currentUser = {};
+  }
 
-      // redisToken不存在表示token已过期
-      const redisToken = await ctx.app.redis.get(
-        `${jwtAuth.redisScope}:accessToken:${payload.id}`
-      );
+  if (ctx.jwtState.user) {
+    const { user } = ctx.jwtState;
+    const { jwtAuth } = ctx.app.config;
 
-      // 验证是否为最新的token
-      assert.ok(
-        token === redisToken,
-        new MyError('Authentication Failed', 401)
-      );
+    // redisToken不存在表示token已过期
+    const redisToken = await ctx.app.redis.get(
+      `${jwtAuth.redisScope}:accessToken:${user.id}`
+    );
 
-      const userinfo = await ctx.app.redis.get(
-        `${jwtAuth.redisScope}:userinfo:${payload.id}`
-      );
+    const [, token] = ctx.header.authorization.split(' ');
+    // 验证是否为最新的token
+    assert.ok(token === redisToken, new MyError('Authentication Failed', 401));
 
-      ctx.currentUser = JSON.parse(userinfo);
-    }
+    const userinfo = await ctx.app.redis.get(
+      `${jwtAuth.redisScope}:userinfo:${user.id}`
+    );
 
-    await next();
-  };
-};
+    ctx.currentUser = JSON.parse(userinfo);
+  }
+
+  return next();
+}

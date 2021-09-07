@@ -13,7 +13,8 @@ import {
   Validate,
   Body,
 } from '@midwayjs/decorator';
-import { Context } from 'egg';
+
+import { Context } from '@/interface';
 
 import { AdminUserService } from '../../service/admin/user';
 import {

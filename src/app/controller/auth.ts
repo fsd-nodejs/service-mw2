@@ -11,7 +11,8 @@ import {
   ALL,
 } from '@midwayjs/decorator';
 import { CreateApiDoc } from '@midwayjs/swagger';
-import { Context } from 'egg';
+
+import { Context } from '@/interface';
 
 import { AuthService } from '../service/auth';
 import { LoginDTO } from '../dto/auth';
@@ -49,11 +50,8 @@ export class AuthController {
     // 后续可能有多种登录方式
     const existAdmiUser = await this.service.localHandler(params);
 
-    // 判断管理员是否存在
-    assert.ok(
-      existAdmiUser !== null,
-      new MyError('这些凭据与我们的记录不符', 400)
-    );
+    // 检查管理员存在
+    assert.ok(existAdmiUser, new MyError('管理员不存在', 400));
 
     // 生成Token
     const token = await this.service.createAdminUserToken(existAdmiUser);

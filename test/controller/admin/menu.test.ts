@@ -1,30 +1,19 @@
-import * as assert from 'power-assert';
-import { Framework } from '@midwayjs/web';
-import { createApp, close, createHttpRequest } from '@midwayjs/mock';
+import { relative } from 'path';
+import assert from 'assert';
 
-import { Application } from '../../../src/interface';
+import { testConfig } from '../../root.config';
 
-describe('test/controller/admin/menu.test.ts', () => {
-  let app: Application;
-  let currentUser: any;
+
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
+
+describe(filename, () => {
   let currentMenu: any;
-  beforeAll(async () => {
-    app = await createApp<Framework>();
-
-    const response = await createHttpRequest(app)
-      .post('/auth/login')
-      .type('form')
-      .send(app.config.admin)
-      .expect(200);
-    currentUser = response.body.data;
-  });
-
-  afterAll(async () => {
-    await close(app);
-  });
 
   it('should get /admin/menu/query ', async () => {
-    const response = await createHttpRequest(app)
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response = await httpRequest
       .get('/admin/menu/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
@@ -32,13 +21,17 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should get /admin/menu/show ', async () => {
-    const response = await createHttpRequest(app)
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response = await httpRequest
       .get('/admin/menu/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
     assert.ok(response.body.data.total);
+
     const { list } = response.body.data;
-    const response2 = await createHttpRequest(app)
+    const response2 = await httpRequest
       .get('/admin/menu/show')
       .query({
         id: list[0].id,
@@ -48,13 +41,16 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should post /admin/menu/create ', async () => {
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
     const params = {
       title: 'fakeTitle',
       uri: 'fakeUri',
       roles: ['1'],
       permissionId: '1',
     };
-    const response = await createHttpRequest(app)
+    const response = await httpRequest
       .post('/admin/menu/create')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')
@@ -65,6 +61,9 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should patch /admin/menu/update ', async () => {
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
     const params = {
       id: currentMenu.id,
       title: 'fakeTitle2',
@@ -72,7 +71,7 @@ describe('test/controller/admin/menu.test.ts', () => {
       roles: ['1'],
       permissionId: '2',
     };
-    const response = await createHttpRequest(app)
+    const response = await httpRequest
       .patch('/admin/menu/update')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')
@@ -82,10 +81,13 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should delete /admin/menu/remove ', async () => {
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
     const params = {
       ids: [currentMenu.id],
     };
-    const response = await createHttpRequest(app)
+    const response = await httpRequest
       .del('/admin/menu/remove')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')
@@ -95,7 +97,10 @@ describe('test/controller/admin/menu.test.ts', () => {
   });
 
   it('should order /admin/menu/order ', async () => {
-    const response1 = await createHttpRequest(app)
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response1 = await httpRequest
       .get('/admin/menu/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
@@ -108,7 +113,7 @@ describe('test/controller/admin/menu.test.ts', () => {
       };
     });
 
-    const response2 = await createHttpRequest(app)
+    const response2 = await httpRequest
       .post('/admin/menu/order')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')

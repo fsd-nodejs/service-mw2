@@ -1,3 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import {
+  IMidwayWebApplication as Application,
+  IMidwayWebContext as Context,
+  IMidwayWebNext,
+} from '@midwayjs/web';
+import { JwtState } from '@mw-components/jwt';
+
+export { Application, Context, IMidwayWebNext };
+
+export { IMidwayContainer } from '@midwayjs/core';
+
 /**
  * @description User-Service parameters
  */
@@ -5,21 +17,17 @@ export interface IUserOptions {
   uid: number;
 }
 
-// declare module 'egg' {
-//   interface Context {
-//     reqId: string;
-//     _internalError?: Error;
-//   }
-// }
+export { TracerLog } from '@mw-components/jaeger';
+export { NpmPkg } from '@waiting/shared-types';
+
 declare module '@midwayjs/core' {
   interface Context {
     reqId: string;
     _internalError?: Error;
+    jwtState: JwtState<JwtUser>;
   }
 }
 
-export { TracerLog } from '@mw-components/jaeger';
-export {
-  IMidwayWebApplication as Application,
-  IMidwayWebContext as Context,
-} from '@midwayjs/web';
+export interface JwtUser {
+  id: string;
+}
