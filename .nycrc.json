@@ -16,9 +16,6 @@
     "**/*.d.ts",
     "**/*.js"
   ],
-  "extension": [
-    ".ts"
-  ],
   "reporter": [
     "html",
     "json",
