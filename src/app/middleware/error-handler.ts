@@ -17,7 +17,7 @@ export class ErrorHandlerMiddleware implements IWebMiddleware {
 }
 
 async function errHandleMiddleware(
-  ctx: Context,
+  ctx: Context<any>,
   next: IMidwayWebNext
 ): Promise<void> {
   try {
