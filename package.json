@@ -23,7 +23,6 @@
     "midway": "^2.13.2",
     "moment": "^2.29.1",
     "mysql2": "^2.2.5",
-    "opentracing": "^0.14.5",
     "tsconfig-paths": "^3.10.1",
     "typeorm": "^0.2.36"
   },
