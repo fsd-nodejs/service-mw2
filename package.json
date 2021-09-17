@@ -33,6 +33,7 @@
     "@midwayjs/egg-ts-helper": "^1.2.1",
     "@midwayjs/mock": "^2.13.2",
     "@types/amqplib": "^0.8.1",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.4.10",
     "@types/rewire": "^2.5.28",
     "commitizen": "^4.2.4",
