@@ -230,3 +230,4 @@ RabbitMQ 作用在于把统计的计算异步化，从而不影响正常的业�
 我们的代码使用 [MIT](http://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE) 协议，请放心使用。
 
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2?ref=badge_large" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2.svg?type=large"/></a>
+
