@@ -183,6 +183,13 @@ $ open http://localhost:7001/
 Jaeger 是 [OpenTracing](https://opentracing.io/docs/) 的一个实现，链路追踪是一个比较复杂的话题，关于 Jaeger 的具体用法请参考[它的官方文档](https://www.jaegertracing.io/docs/1.22/)
 
 本实现基于 ctx 机制，结合 midway 的依赖注入可实现无侵入式 spanContext 传递
+- 默认实现接口级别的采样
+- 若需小颗粒度采样，可手动管理 span
+  ```ts
+  ctx.tracerManager.startSpan('SpanName1')
+  await doSomethine()
+  ctx.tracerManager.finishSpan() // 别忘记关闭
+  ```
 
 ## 接口响应统计中间件(设计)
 
