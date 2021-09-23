@@ -82,6 +82,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-${{ matrix.node-version }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-${{ matrix.node-version }}-build-
+          ${{ runner.os }}-${{ matrix.node-version }}-
 
     - name: Install Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
