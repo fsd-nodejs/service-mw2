@@ -1,4 +1,13 @@
 {
-  "debug.node.autoAttach": "on",
-  "debug.javascript.usePreviewAutoAttach": false
+  "files.exclude": {
+    "logs": true,
+    "run": true,
+    "package-lock.json": false,
+    "node_modules": false,
+    "coverage": true,
+    "dist": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 }

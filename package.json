@@ -4,6 +4,8 @@
   "description": "Best practices of Midway.js",
   "private": true,
   "dependencies": {
+    "@midwayjs/bootstrap": "^2.12.0",
+    "@waiting/egg-jwt": "^6.2.0",
     "@midwayjs/decorator": "^2.13.2",
     "@midwayjs/orm": "^2.13.2",
     "@midwayjs/swagger": "^1.1.0",
@@ -18,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "egg": "^2.30.0",
     "egg-redis": "^2.4.0",
+    "opentracing": "^0.14.5",
     "egg-scripts": "^2.15.1",
     "meeko": "^1.8.166",
     "midway": "^2.13.2",
@@ -29,6 +32,9 @@
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@midwayjs/cli-plugin-faas": "^1.2.77",
+    "@midwayjs/fcli-plugin-fc": "^1.2.77",
+    "@types/jest": "^26.0.24",
     "@midwayjs/cli": "^1.2.83",
     "@midwayjs/egg-ts-helper": "^1.2.1",
     "@midwayjs/mock": "^2.13.2",
@@ -43,6 +49,7 @@
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-unicorn": "^34.0.1",
     "husky": "^7.0.1",
+    "jest": "^27.0.6",
     "espower-typescript": "10",
     "intelli-espower-loader": "1",
     "mocha": "^9.1.0",
@@ -51,6 +58,7 @@
     "rewire": "^5.0.0",
     "standard-version": "^9.3.1",
     "swagger-ui-dist": "^3.51.1",
+    "ts-jest": "^27.0.4",
     "typescript": "^4.3.5"
   },
   "engines": {
@@ -58,6 +66,7 @@
   },
   "scripts": {
     "start": "egg-scripts start --daemon --title=midway-server-my_midway_project --framework=midway",
+    "online": "egg-scripts start --title=midway-server-my_midway_project --framework=midway",
     "stop": "egg-scripts stop --title=midway-server-my_midway_project",
     "start_build": "npm run build && cross-env NODE_ENV=development midway-bin dev",
     "dev": "cross-env ets && cross-env NODE_ENV=local midway-bin dev --ts",
@@ -71,12 +80,21 @@
     "ci": "npm run cov",
     "build": "midway-bin build -c",
     "commit": "git-cz",
-    "release": "standard-version"
+    "release": "standard-version",
+    "deploy": "midway-bin deploy"
   },
   "midway-bin-clean": [
     ".vscode/.tsbuildinfo",
     "dist"
   ],
+  "midway-integration": {
+    "lifecycle": {
+      "before:package:cleanup": "npm run build"
+    }
+  },
+  "egg": {
+    "framework": "@midwayjs/web"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/fsd-nodejs/service-mw2"

@@ -20,7 +20,7 @@ services:
     # 如果需要mysql持久化，则打开注释，会保存数据，重启镜像不会丢失
     volumes:
       - ./.docker/mysql:/var/lib/mysql
-      - ./src/database:/data/database # 挂在本地sql文件到容器
+      - ./database:/data/database # 挂在本地sql文件到容器
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: shop_development

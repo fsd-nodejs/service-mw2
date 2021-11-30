@@ -30,7 +30,7 @@ describe(filename, () => {
     const ret = await httpRequest.get('/ping').expect(200);
 
     const msg: string = ret.text;
-    assert.ok(msg && msg === 'OK');
+    assert.ok(msg && msg.includes('OK'));
   });
 
   it('should GET /genid', async () => {

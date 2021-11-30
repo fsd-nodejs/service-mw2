@@ -16,4 +16,6 @@ run/
 docs
 .docker/
 .serverless
-.fun
+.git/
+database/
+template.yaml

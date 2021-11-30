@@ -34,7 +34,7 @@ export class HomeController {
   @(CreateApiDoc().summary('检查连通性').description('不需要鉴权').build())
   @Get('/ping')
   async ping(ctx: Context) {
-    ctx.body = 'OK';
+    ctx.body = `OK, runtime is: Node.js ${process.version}`;
   }
 
   @(CreateApiDoc()
