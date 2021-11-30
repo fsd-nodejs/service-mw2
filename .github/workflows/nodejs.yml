@@ -77,7 +77,7 @@ jobs:
         cache-name: cache-node-modules
       with:
         # npm cache files are stored in `~/.npm` on Linux/macOS
-        path: node_modules
+        path: ~/.npm
         key: ${{ runner.os }}-${{ matrix.node-version }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
         restore-keys: |
           ${{ runner.os }}-${{ matrix.node-version }}-build-${{ env.cache-name }}-
@@ -85,11 +85,11 @@ jobs:
           ${{ runner.os }}-${{ matrix.node-version }}-
 
     - name: Install Dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
       run: npm install
 
     - name: Run Tests
-      run: npm run ci
+      # run: npm run ci
+      run: npm run cov:mocha
       env:
         CI: true
         # mysql

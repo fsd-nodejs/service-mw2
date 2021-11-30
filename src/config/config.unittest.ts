@@ -5,6 +5,8 @@ import { ConnectionOptions } from 'typeorm';
 
 import { RabbitmqConfig } from './config.types';
 
+export { jwtConfig, jwtMiddlewareConfig, jwtAuth } from './config.local';
+
 export const security = {
   csrf: false,
 };
@@ -13,7 +15,7 @@ export const security = {
 export const orm: ConnectionOptions = {
   type: 'mysql',
   host: process.env.MYSQL_HOST || '127.0.0.1',
-  port: +process.env.MYSQL_HOST || 3306,
+  port: +process.env.MYSQL_PORT || 3306,
   username: process.env.MYSQL_USER || 'root',
   password: process.env.MYSQL_PASSWORD || 'password',
   database: process.env.MYSQL_DATABASE || 'shop_development',

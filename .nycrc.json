@@ -1,0 +1,26 @@
+{
+  "include": [
+    "src/*.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    ".githooks",
+    "node_modules*",
+    "**/src/bin",
+    "**/src/domain.ts",
+    "**/src/interface.ts",
+    "**/dist",
+    "**/node_modules*",
+    "**/test",
+    "**/test*",
+    "**/*.d.ts",
+    "**/*.js"
+  ],
+  "reporter": [
+    "html",
+    "json",
+    "text",
+    "text-summary"
+  ],
+  "all": true
+}

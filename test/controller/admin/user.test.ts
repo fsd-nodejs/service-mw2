@@ -1,31 +1,19 @@
-import * as assert from 'power-assert';
+import { relative } from 'path';
+import assert from 'assert';
 
-import { Framework } from '@midwayjs/web';
-import { createApp, close, createHttpRequest } from '@midwayjs/mock';
+import { testConfig } from '../../root.config';
 
-import { Application } from '../../../src/interface';
 
-describe('test/controller/admin/user.test.ts', () => {
-  let app: Application;
-  let currentUser: any;
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
+
+describe(filename, () => {
   let currentAdminUser: any;
-  beforeAll(async () => {
-    app = await createApp<Framework>();
-
-    const response = await createHttpRequest(app)
-      .post('/auth/login')
-      .type('form')
-      .send(app.config.admin)
-      .expect(200);
-    currentUser = response.body.data;
-  });
-
-  afterAll(async () => {
-    await close(app);
-  });
 
   it('should get /admin/user/query ', async () => {
-    const response = await createHttpRequest(app)
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response = await httpRequest
       .get('/admin/user/query')
       .query({
         sorter: 'id_descend',
@@ -39,13 +27,17 @@ describe('test/controller/admin/user.test.ts', () => {
   });
 
   it('should get /admin/user/show ', async () => {
-    const response = await createHttpRequest(app)
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response = await httpRequest
       .get('/admin/user/query')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
     assert.ok(response.body.data.total);
     const { list } = response.body.data;
-    const response2 = await createHttpRequest(app)
+
+    const response2 = await httpRequest
       .get('/admin/user/show')
       .query({
         id: list[0].id,
@@ -55,6 +47,9 @@ describe('test/controller/admin/user.test.ts', () => {
   });
 
   it('should post /admin/user/create ', async () => {
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
     const params = {
       name: 'fakeName',
       username: 'fakeUserName',
@@ -62,7 +57,7 @@ describe('test/controller/admin/user.test.ts', () => {
       roles: ['1'],
       permissions: ['1'],
     };
-    const response = await createHttpRequest(app)
+    const response = await httpRequest
       .post('/admin/user/create')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')
@@ -73,6 +68,9 @@ describe('test/controller/admin/user.test.ts', () => {
   });
 
   it('should patch /admin/user/update ', async () => {
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
     const params = {
       id: currentAdminUser.id,
       name: 'fakeName2',
@@ -81,7 +79,7 @@ describe('test/controller/admin/user.test.ts', () => {
       roles: ['1'],
       permissions: ['1'],
     };
-    const response = await createHttpRequest(app)
+    const response = await httpRequest
       .patch('/admin/user/update')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')
@@ -91,10 +89,13 @@ describe('test/controller/admin/user.test.ts', () => {
   });
 
   it('should delete /admin/user/remove ', async () => {
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
     const params = {
       ids: [currentAdminUser.id],
     };
-    const response = await createHttpRequest(app)
+    const response = await httpRequest
       .del('/admin/user/remove')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .type('form')

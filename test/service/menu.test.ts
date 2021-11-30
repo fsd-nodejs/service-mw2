@@ -1,27 +1,20 @@
-import * as assert from 'power-assert';
+import { relative } from 'path';
+import assert from 'assert';
 
-import { Framework } from '@midwayjs/web';
-import { createApp, close } from '@midwayjs/mock';
-
-import { Application, Context } from '../../src/interface';
+import { testConfig } from '../root.config';
 import { AdminMenuService } from '../../src/app/service/admin/menu';
 
-describe('test/service/menu.test.ts', () => {
-  let app: Application;
+
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
+
+describe(filename, () => {
   let currentMenu: any;
 
-  beforeAll(async () => {
-    app = await createApp<Framework>();
-  });
-
-  afterAll(async () => {
-    await close(app);
-  });
-
   it('#queryAdminMenu >should get menu list total > 0', async () => {
-    const menuService = await app.applicationContext.getAsync<AdminMenuService>(
-      'adminMenuService'
-    );
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -31,10 +24,10 @@ describe('test/service/menu.test.ts', () => {
   });
 
   it('#createAdminMenu >should created menu', async () => {
-    const ctx = app.mockContext() as Context;
-    const menuService = await ctx.requestContext.getAsync<AdminMenuService>(
-      'adminMenuService'
-    );
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const params = {
       parentId: '0',
       title: 'fakeTitle',
@@ -49,19 +42,20 @@ describe('test/service/menu.test.ts', () => {
   });
 
   it('#getAdminMenuById >should get menu by id', async () => {
-    const menuService = await app.applicationContext.getAsync<AdminMenuService>(
-      'adminMenuService'
-    );
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const menu = await menuService.getAdminMenuById(currentMenu.id);
 
     assert.ok(menu);
   });
 
   it('#updateAdminMenu >should update menu', async () => {
-    const ctx = app.mockContext() as Context;
-    const menuService = await ctx.requestContext.getAsync<AdminMenuService>(
-      'adminMenuService'
-    );
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const { id } = currentMenu;
     const { affected } = await menuService.updateAdminMenu({
       id,
@@ -75,18 +69,20 @@ describe('test/service/menu.test.ts', () => {
   });
 
   it('#removeAdminMenuByIds >should remove menu', async () => {
-    const menuService = await app.applicationContext.getAsync<AdminMenuService>(
-      'adminMenuService'
-    );
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const { id } = currentMenu;
     const total = await menuService.removeAdminMenuByIds([id]);
     assert.ok(total);
   });
 
   it('#orderAdminMemu >should order menu', async () => {
-    const menuService = await app.applicationContext.getAsync<AdminMenuService>(
-      'adminMenuService'
-    );
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext()
+
+    const menuService = await ctx.requestContext.getAsync(AdminMenuService);
     const queryParams = {
       pageSize: 1000,
       current: 1,
@@ -105,7 +101,8 @@ describe('test/service/menu.test.ts', () => {
 
     const newMenu = await menuService.getAdminMenuById(list[0].id);
 
-    assert.deepEqual(newMenu?.order, newList[0].order);
+    assert.ok(newMenu)
+    assert.deepEqual(newMenu.order, newList[0].order);
 
     const sortList = list.map((item, index) => {
       return {

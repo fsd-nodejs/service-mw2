@@ -1,30 +1,27 @@
 import { Provide, Plugin, Inject, Config } from '@midwayjs/decorator';
-import { Context } from 'egg';
 import { InjectEntityModel } from '@midwayjs/orm';
-import { Jwt, JwtEggConfig } from '@waiting/egg-jwt';
+import { JwtComponent } from '@mw-components/jwt';
 import { Redis } from 'ioredis';
 import { Repository } from 'typeorm';
 
-import { JwtAuthMiddlewareConfig } from '@/config/config.types';
+import { Context } from '@/interface';
 
+import { JwtAuthMiddlewareConfig } from '../../config/config.types';
 import { AdminUserModel } from '../model/admin-user';
 
 @Provide()
 export class AuthService {
-  @Config('jwt')
-  private jwtConfig: JwtEggConfig;
+  @Inject()
+  private ctx: Context;
+
+  @Inject('jwt:jwtComponent')
+  jwt: JwtComponent;
 
   @Config('jwtAuth')
   private jwtAuthConfig: JwtAuthMiddlewareConfig;
 
-  @Inject()
-  private ctx: Context;
-
   @InjectEntityModel(AdminUserModel)
   private adminUserModel: Repository<AdminUserModel>;
-
-  @Plugin()
-  private jwt: Jwt;
 
   @Plugin()
   private redis: Redis;
@@ -35,11 +32,9 @@ export class AuthService {
    * @returns {String} 生成的Token字符串
    */
   async createAdminUserToken(data: AdminUserModel): Promise<string> {
-    const token: string = this.jwt.sign(
-      { id: data.id },
-      this.jwtConfig.client.secret,
-      { expiresIn: this.jwtAuthConfig.accessTokenExpiresIn }
-    );
+    const token: string = this.jwt.sign({ id: data.id }, '', {
+      expiresIn: this.jwtAuthConfig.accessTokenExpiresIn,
+    });
     await this.redis.set(
       `${this.jwtAuthConfig.redisScope}:accessToken:${data.id}`,
       token,

@@ -19,7 +19,8 @@
     "skipLibCheck": true,
     "stripInternal": true,
     "target": "ES2020",
-    "typeRoots": ["./typings", "./node_modules/@types"]
+    "typeRoots": ["./typings", "./node_modules/@types"],
+    // "types" : ["jest", "node"]
   },
   "exclude": ["dist", "node_modules", "test"]
 }

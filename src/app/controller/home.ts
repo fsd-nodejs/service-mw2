@@ -1,8 +1,9 @@
-import { Controller, Get, Inject, Provide, Plugin } from '@midwayjs/decorator';
+import { Controller, Get, Inject, Provide } from '@midwayjs/decorator';
 import { CreateApiDoc } from '@midwayjs/swagger';
-import { Jwt } from '@waiting/egg-jwt';
-import { Context } from 'egg';
+import { JwtComponent } from '@mw-components/jwt';
 import { KoidComponent } from '@mw-components/koid';
+
+import { Context } from '@/interface';
 
 import { RabbitmqService } from '../service/rabbitmq';
 
@@ -12,8 +13,8 @@ import { RabbitmqService } from '../service/rabbitmq';
   description: '包含连通性接口、鉴权验证接口',
 })
 export class HomeController {
-  @Plugin()
-  jwt: Jwt;
+  @Inject('jwt:jwtComponent')
+  jwt: JwtComponent;
 
   @Inject()
   readonly koid: KoidComponent;

@@ -1,26 +1,23 @@
+import { relative, join } from 'path';
 import {
   clearAllLoggers,
   createFileLogger,
 } from '@midwayjs/logger'
-import { basename, join } from '@waiting/shared-core'
+import assert from 'assert';
+
+import { testConfig } from '../root.config';
 
 import { updateTransformableInfo } from '../../src/app/util/custom-logger'
 
 import { removeFileOrDir, sleep, matchISO8601ContentTimes, getCurrentDateString } from './util'
 
 
-const filename = basename(__filename)
-
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
 describe(filename, () => {
-  const logsDir = join(__dirname, 'logs')
-
-  afterAll(() => {
-    removeFileOrDir(logsDir).catch(() => { void 0 })
-  })
-
 
   it('should dynamic change info data', async () => {
+    const { logsDir } = testConfig
     clearAllLoggers()
     await removeFileOrDir(logsDir)
 
@@ -49,8 +46,7 @@ describe(filename, () => {
     // '2021-03-17T19:47:28.123+08:00
     const needle = new RegExp(`${d1}T${d2}:\\d{2}:\\d{2}\\.\\d{3}${dif}${off1}:${off2}\\s`, 'ug')
     const ret = matchISO8601ContentTimes(join(logsDir, fileLogName), needle)
-    expect(ret).toEqual(3)
-
+    assert.strictEqual(ret, 3)
   })
 
 })

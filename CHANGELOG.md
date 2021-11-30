@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/fsd-nodejs/service-mw2/compare/v1.2.0...v1.3.0) (2021-09-13)
+
+
+### Features
+
+* **jwt:** update jwt plugin ([#93](https://github.com/fsd-nodejs/service-mw2/issues/93)) ([6d378b0](https://github.com/fsd-nodejs/service-mw2/commit/6d378b0af383c5889f67adfac53f872390547688))
+
+
+### Bug Fixes
+
+* rename HOST to PORT ([#101](https://github.com/fsd-nodejs/service-mw2/issues/101)) ([1c1e8ec](https://github.com/fsd-nodejs/service-mw2/commit/1c1e8ecf2a2d96868cd047e21b890b31ff1579f1))
+
 ## [1.2.0](https://github.com/fsd-nodejs/service-mw2/compare/v1.1.0...v1.2.0) (2021-06-23)
 
 

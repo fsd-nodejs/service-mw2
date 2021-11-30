@@ -1,27 +1,19 @@
-import * as assert from 'power-assert';
+import { relative } from 'path';
+import assert from 'assert';
 
-import { Framework } from '@midwayjs/web';
-import { createApp, close } from '@midwayjs/mock';
-
-import { Application, Context } from '../../src/interface';
+import { testConfig } from '../root.config';
 import { AdminUserService } from '../../src/app/service/admin/user';
 
-describe('test/service/user.test.ts', () => {
-  let app: Application;
+
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
+
+describe(filename, () => {
   let currentUser: any;
 
-  beforeAll(async () => {
-    app = await createApp<Framework>();
-  });
-
-  afterAll(async () => {
-    await close(app);
-  });
-
   it('#queryAdminUser >should get user list total > 0', async () => {
-    const userService = await app.applicationContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { container } = testConfig
+
+    const userService = await container.getAsync(AdminUserService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -31,9 +23,9 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#queryAdminUser >should get user list and query by id', async () => {
-    const userService = await app.applicationContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { container } = testConfig
+
+    const userService = await container.getAsync(AdminUserService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -48,9 +40,9 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#queryAdminUser >should get user list and query by name', async () => {
-    const userService = await app.applicationContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { container } = testConfig
+
+    const userService = await container.getAsync(AdminUserService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -65,9 +57,9 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#queryAdminUser >should get user list and query by username', async () => {
-    const userService = await app.applicationContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { container } = testConfig
+
+    const userService = await container.getAsync(AdminUserService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -82,10 +74,10 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#createAdminUser >should created user', async () => {
-    const ctx = app.mockContext() as Context;
-    const userService = await ctx.requestContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext();
+
+    const userService = await ctx.requestContext.getAsync(AdminUserService);
     const params = {
       name: 'fakeName3',
       username: 'fakeUserName3',
@@ -100,9 +92,9 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#queryAdminUser >should get user list and sorter by id asc', async () => {
-    const userService = await app.applicationContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { container } = testConfig
+
+    const userService = await container.getAsync(AdminUserService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -117,19 +109,19 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#getAdminUserById >should get user by id', async () => {
-    const userService = await app.applicationContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { container } = testConfig
+
+    const userService = await container.getAsync(AdminUserService);
     const user = await userService.getAdminUserById(currentUser.id);
 
     assert.ok(user);
   });
 
   it('#updateAdminUser >should update user', async () => {
-    const ctx = app.mockContext() as Context;
-    const userService = await ctx.requestContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext();
+
+    const userService = await ctx.requestContext.getAsync(AdminUserService);
     const { id } = currentUser;
     const { affected } = await userService.updateAdminUser({
       id,
@@ -143,19 +135,19 @@ describe('test/service/user.test.ts', () => {
   });
 
   it('#removeAdminUserByIds >should remove user', async () => {
-    const userService = await app.applicationContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { container } = testConfig
+
+    const userService = await container.getAsync(AdminUserService);
     const { id } = currentUser;
     const total = await userService.removeAdminUserByIds([id]);
     assert.ok(total);
   });
 
   it('#createAdminUser >should created user, no role, no permission', async () => {
-    const ctx = app.mockContext() as Context;
-    const userService = await ctx.requestContext.getAsync<AdminUserService>(
-      'adminUserService'
-    );
+    const { app } = testConfig
+    const ctx = app.createAnonymousContext();
+
+    const userService = await ctx.requestContext.getAsync(AdminUserService);
     const params = {
       name: 'fakeName5',
       username: 'fakeUserName5',

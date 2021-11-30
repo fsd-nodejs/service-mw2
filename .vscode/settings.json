@@ -10,7 +10,4 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "debug.node.autoAttach": "on",
-  "debug.javascript.usePreviewAutoAttach": false,
-  "git.ignoreLimitWarning": true,
 }

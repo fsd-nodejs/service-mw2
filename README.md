@@ -30,62 +30,62 @@
 **所有代码均已经过工程师的测试请放心使用!!!**
 
 
-| 能力栏目                 | 名称                                   | 进度 |
-| :------------------------------------- | ---- | :--: |
-| **概述** |      |      |
-|                        | 控制器(Controller) | ✅ |
-|                        | 服务和注入 | ✅ |
-|                        | 请求、响应和应用 | ✅ |
-|                        | Web 中间件 | ✅ |
-|                        | 启动和部署 | ✅ |
-| **基础能力** |  | |
-|                        | 依赖注入 | ✅ |
-|                        | 运行环境 | ✅ |
-|                        | 多环境配置 | ✅ |
-|                        | 参数校验和转换 | ✅ |
-|                        | 生命周期 | ✅ |
-|                        | 使用组件 | ✅ |
-|                        | 日志 | ✅ |
-|                        | 本地调试 | ✅ |
-|                        | 测试 | ✅ |
-| **增强** |  | |
-|                        | 代码流程控制 | |
-|                        | 方法拦截器（切面） | |
-|                        | 缓存（Cache）(目前直接使用 Redis) | ✅ |
-|                        | Database（TypeORM) | ✅ |
-|                        | MongoDB | |
-|                        | Swagger | ✅ |
-| **一体化研发** |  | |
-|                        | 开发一体化项目 | |
-|                        | 非 Serverless 环境使用一体化 | |
-| **Web技术** |  | |
-|                        | Cookies | |
-|                        | Session | |
-|                        | 跨域 CORS | ✅ |
-| **微服务** |  | |
-|                        | gRPC | |
-|                        | RabbitMQ (生产者) | ✅ |
-|                        | RabbitMQ (消费者) | |
-|                        | Consul | |
-| **WebSocket** |  | |
-|                        | SocketIO | |
-| **常用能力** |  | |
-|                        | Admin 登录 | ✅ |
-|                        | 普通用户登录-账户密码 | |
-|                        | OAuth 2.0 | |
-|                        | 日志监控 | |
-|                        | 本地上传文件服务 | |
-|                        | 鉴权中间件 | ✅ |
-|                        | 接口响应统计中间件 | ✅ |
-|                        | 统一错误处理 | ✅ |
-|                        | SnowFlake 雪花算法生成分布式ID | ✅ |
-|                        | Jaeger 链路追踪 | ✅ |
-| **业务能力** |                                        |      |
-|                | 权限管理                                 |  ✅   |
-|                | 角色管理                                 |  ✅   |
-|                | 管理员管理                               |  ✅   |
-|                | 菜单管理                                 |  ✅   |
-|                | 日志(操作日志，记录管理用户的实际操作) | ✅ |
+| 能力栏目       | 名称                                   | 进度  |
+| :------------- | -------------------------------------- | :---: |
+| **概述**       |                                        |       |
+|                | 控制器(Controller)                     |   ✓   |
+|                | 服务和注入                             |   ✓   |
+|                | 请求、响应和应用                       |   ✓   |
+|                | Web 中间件                             |   ✓   |
+|                | 启动和部署                             |   ✓   |
+| **基础能力**   |                                        |       |
+|                | 依赖注入                               |   ✓   |
+|                | 运行环境                               |   ✓   |
+|                | 多环境配置                             |   ✓   |
+|                | 参数校验和转换                         |   ✓   |
+|                | 生命周期                               |   ✓   |
+|                | 使用组件                               |   ✓   |
+|                | 日志                                   |   ✓   |
+|                | 本地调试                               |   ✓   |
+|                | 测试                                   |   ✓   |
+| **增强**       |                                        |       |
+|                | 代码流程控制                           |       |
+|                | 方法拦截器（切面）                     |       |
+|                | 缓存（Cache）(目前直接使用 Redis)      |   ✓   |
+|                | Database（TypeORM)                     |   ✓   |
+|                | MongoDB                                |       |
+|                | Swagger                                |   ✓   |
+| **一体化研发** |                                        |       |
+|                | 开发一体化项目                         |       |
+|                | 非 Serverless 环境使用一体化           |       |
+| **Web技术**    |                                        |       |
+|                | Cookies                                |       |
+|                | Session                                |       |
+|                | 跨域 CORS                              |   ✓   |
+| **微服务**     |                                        |       |
+|                | gRPC                                   |       |
+|                | RabbitMQ (生产者)                      |   ✓   |
+|                | RabbitMQ (消费者)                      |       |
+|                | Consul                                 |       |
+| **WebSocket**  |                                        |       |
+|                | SocketIO                               |       |
+| **常用能力**   |                                        |       |
+|                | Admin 登录                             |   ✓   |
+|                | 普通用户登录-账户密码                  |       |
+|                | OAuth 2.0                              |       |
+|                | 日志监控                               |       |
+|                | 本地上传文件服务                       |       |
+|                | 鉴权中间件                             |   ✓   |
+|                | 接口响应统计中间件                     |   ✓   |
+|                | 统一错误处理                           |   ✓   |
+|                | SnowFlake 雪花算法生成分布式ID         |   ✓   |
+|                | Jaeger 链路追踪                        |   ✓   |
+| **业务能力**   |                                        |       |
+|                | 权限管理                               |   ✓   |
+|                | 角色管理                               |   ✓   |
+|                | 管理员管理                             |   ✓   |
+|                | 菜单管理                               |   ✓   |
+|                | 日志(操作日志，记录管理用户的实际操作) |   ✓   |
 
 
 
@@ -183,6 +183,13 @@ $ open http://localhost:7001/
 Jaeger 是 [OpenTracing](https://opentracing.io/docs/) 的一个实现，链路追踪是一个比较复杂的话题，关于 Jaeger 的具体用法请参考[它的官方文档](https://www.jaegertracing.io/docs/1.22/)
 
 本实现基于 ctx 机制，结合 midway 的依赖注入可实现无侵入式 spanContext 传递
+- 默认实现接口级别的采样
+- 若需小颗粒度采样，可手动管理 span
+  ```ts
+  ctx.tracerManager.startSpan('SpanName1')
+  await doSomethine()
+  ctx.tracerManager.finishSpan() // 别忘记关闭
+  ```
 
 ## 接口响应统计中间件(设计)
 
@@ -202,6 +209,20 @@ RabbitMQ 作用在于把统计的计算异步化，从而不影响正常的业�
 
 大致流程如下，手绘的，工具简陋，姑且看一下。
 ![IMG_5365 HEIC](https://user-images.githubusercontent.com/10667077/101478900-55a4cb00-398c-11eb-97c3-4a41195c572d.JPG)
+
+
+## Test 单元测试
+
+单元测试框架采用 [Mocha](https://mochajs.org/) ，
+支持对 case 进行 `.skip()` `.only()` 的随意**组合**以及**快速**实现，
+适合在包含复杂、耦合的业务项目场景
+
+注意事项：
+- 单测文件不支持 `nullish` 链式操作符，比如
+  ```ts
+  assert(res?.body) // 不支持
+  assert(res && res.body) // 可行
+  ```
 
 
 ## 拓展阅读
@@ -230,3 +251,4 @@ RabbitMQ 作用在于把统计的计算异步化，从而不影响正常的业�
 我们的代码使用 [MIT](http://github.com/fsd-nodejs/service-mw2/blob/master/LICENSE) 协议，请放心使用。
 
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2?ref=badge_large" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffsd-nodejs%2Fservice-mw2.svg?type=large"/></a>
+

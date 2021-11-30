@@ -1,30 +1,19 @@
-import * as assert from 'power-assert';
-
-import { Framework } from '@midwayjs/web';
-import { createApp, close, createHttpRequest } from '@midwayjs/mock';
+import { relative } from 'path';
+import assert from 'assert';
 import { KoidComponent } from '@mw-components/koid';
 
-import { Application } from '../../src/interface';
+import { testConfig } from '../root.config'
 
-describe('test/controller/home.test.ts', () => {
-  let app: Application;
-  let currentUser: any;
-  beforeAll(async () => {
-    app = await createApp<Framework>();
-    const response = await createHttpRequest(app)
-      .post('/auth/login')
-      .type('form')
-      .send(app.config.admin)
-      .expect(200);
-    currentUser = response.body.data;
-  });
 
-  afterAll(async () => {
-    await close(app);
-  });
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
+
+describe(filename, () => {
 
   it('should GET /', async () => {
-    const response = await createHttpRequest(app)
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response = await httpRequest
       .get('/')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);
@@ -35,14 +24,20 @@ describe('test/controller/home.test.ts', () => {
   });
 
   it('should GET /ping', async () => {
-    const ret = await createHttpRequest(app).get('/ping').expect(200);
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const ret = await httpRequest.get('/ping').expect(200);
 
     const msg: string = ret.text;
     assert.ok(msg && msg.includes('OK'));
   });
 
   it('should GET /genid', async () => {
-    const response = await createHttpRequest(app).get('/genid').expect(200);
+    const { app, httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response = await httpRequest.get('/genid').expect(200);
 
     const msg: string = response.text;
     assert.ok(/[1-9]\d{9,18}/u.test(msg)); // 6755455236955799552
@@ -56,7 +51,10 @@ describe('test/controller/home.test.ts', () => {
   });
 
   it('should GET /genidHex', async () => {
-    const response = await createHttpRequest(app).get('/genidHex').expect(200);
+    const { app, httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response = await httpRequest.get('/genidHex').expect(200);
 
     const msg: string = response.text;
     assert.ok(/[\dxa-f]{16}/u.test(msg), msg); // 5dc032befecd8000, 02a5f26eb5197000
@@ -70,7 +68,10 @@ describe('test/controller/home.test.ts', () => {
   });
 
   it('should GET /sendToQueue', async () => {
-    const response = await createHttpRequest(app)
+    const { httpRequest, currentUser } = testConfig
+
+    assert(currentUser.token)
+    const response = await httpRequest
       .get('/sendToQueue')
       .set('Authorization', `Bearer ${currentUser.token}`)
       .expect(200);

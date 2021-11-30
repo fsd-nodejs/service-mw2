@@ -1,31 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { createApp, close } from '@midwayjs/mock'
-import { Framework } from '@midwayjs/web'
+
+import { relative } from 'path';
+import assert from 'assert';
+
+import { testConfig } from '../root.config';
 import { KoidComponent } from '@mw-components/koid'
 import { HeadersKey } from '@mw-components/jaeger';
-import * as assert from 'power-assert';
 
-import { Application } from '../../src/interface';
 import { RequestIdMiddleware } from '../../src/app/middleware/request-id'
+import { Context } from '../../src/interface'
 
 
-const filename = 'request-id.middleware.ts'
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
 describe(filename, () => {
-  let app: Application
-
-  beforeAll(async () => {
-    app = await createApp<Framework>()
-  })
-  afterAll(async () => {
-    await close(app)
-  })
-
   it('should works', async () => {
+    const { app, next } = testConfig
+    const ctx = app.createAnonymousContext() as Context<any>
+
     const key = HeadersKey.reqId
-    const ctx = app.createAnonymousContext()
     ctx.status = 200
     const inst = await ctx.requestContext.getAsync(RequestIdMiddleware)
     const mw = inst.resolve()
@@ -47,8 +42,10 @@ describe(filename, () => {
   })
 
   it('should works with existing x-request-id header', async () => {
+    const { app, next } = testConfig
+    const ctx = app.createAnonymousContext() as Context<any>
+
     const key = HeadersKey.reqId
-    const ctx = app.createAnonymousContext()
     ctx.status = 200
 
     const input = Math.random().toString()
@@ -69,9 +66,4 @@ describe(filename, () => {
   })
 
 })
-
-
-async function next(): Promise<void> {
-  return void 0
-}
 

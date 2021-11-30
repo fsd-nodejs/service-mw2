@@ -1,30 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-var-requires */
-import { createApp, close } from '@midwayjs/mock'
-import { Framework } from '@midwayjs/web'
-import * as assert from 'power-assert';
+import { relative } from 'path';
+import assert from 'assert';
 
-import { Application, Context } from '../../src/interface';
-import { ErrorHandlerMiddleware } from '../../src/app/middleware/error-handler'
-import MyError from '../../src/app/util/my-error'
+import { testConfig } from '../root.config';
+
+import { ErrorHandlerMiddleware } from '../../src/app/middleware/error-handler';
+import MyError from '../../src/app/util/my-error';
+import { Context } from '../../src/interface'
 
 
-const filename = 'err-handler.middleware.ts'
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
 describe(filename, () => {
-  let app: Application
-
-  beforeAll(async () => {
-    app = await createApp<Framework>()
-  })
-  afterAll(async () => {
-    await close(app)
-  })
-
-
   it('should 404 works', async () => {
+    const { app, next } = testConfig
     const ctx = app.createAnonymousContext() as Context<any>
+
     ctx.status = 404
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
     const mw = inst.resolve()
@@ -37,7 +27,9 @@ describe(filename, () => {
   })
 
   it('should 422 works', async () => {
+    const { app } = testConfig
     const ctx = app.createAnonymousContext() as Context<any>
+
     ctx.status = 200
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
     const mw = inst.resolve()
@@ -51,7 +43,9 @@ describe(filename, () => {
 
 
   it('should 500 works', async () => {
+    const { app } = testConfig
     const ctx = app.createAnonymousContext() as Context<any>
+
     ctx.status = 200
     ctx.app.config.env = 'prod'
     const inst = await ctx.requestContext.getAsync(ErrorHandlerMiddleware)
@@ -65,9 +59,6 @@ describe(filename, () => {
 })
 
 
-async function next(): Promise<void> {
-  return void 0
-}
 
 async function nextThrowError(): Promise<void> {
   throw new MyError('ValidationError')

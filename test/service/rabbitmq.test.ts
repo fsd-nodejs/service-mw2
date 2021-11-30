@@ -1,26 +1,17 @@
-import * as assert from 'power-assert';
+import { relative } from 'path';
+import assert from 'assert';
 
-import { Framework } from '@midwayjs/web';
-import { createApp, close } from '@midwayjs/mock';
-
-import { Application } from '../../src/interface';
+import { testConfig } from '../root.config';
 import { RabbitmqService } from '../../src/app/service/rabbitmq';
 
-describe('test/service/rabbitmq.test.ts', () => {
-  let app: Application;
 
-  beforeAll(async () => {
-    app = await createApp<Framework>();
-  });
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
-  afterAll(async () => {
-    await close(app);
-  });
-
+describe(filename, () => {
   it('#sendToQueue >send message "hello world"', async () => {
-    const rabbitmqService = await app.applicationContext.getAsync<RabbitmqService>(
-      'rabbitmqService'
-    );
+    const { container } = testConfig
+
+    const rabbitmqService = await container.getAsync(RabbitmqService);
     const res = await rabbitmqService.sendToQueue('my-queue', 'hello world');
     assert.ok(res);
   });

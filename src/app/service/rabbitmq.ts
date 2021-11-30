@@ -10,7 +10,7 @@ import {
 import * as amqp from 'amqp-connection-manager';
 import { Channel, Connection } from 'amqplib';
 
-import { RabbitmqConfig } from '@/config/config.types';
+import { RabbitmqConfig } from '../../config/config.types';
 
 @Autoload()
 @Scope(ScopeEnum.Singleton) // Singleton 单例，全局唯一（进程级别）
@@ -26,7 +26,10 @@ export class RabbitmqService {
   @Init()
   async connect() {
     // 创建连接
-    this.connection = await amqp.connect(this.rabbitmq.url);
+    // @FIXME type assert
+    this.connection = (await amqp.connect(
+      this.rabbitmq.url
+    )) as unknown as Connection;
 
     // 创建 channel
     this.channel = await this.connection.createChannel();

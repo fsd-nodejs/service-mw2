@@ -1,27 +1,20 @@
-import * as assert from 'power-assert';
 
-import { Framework } from '@midwayjs/web';
-import { createApp, close } from '@midwayjs/mock';
+import { relative } from 'path';
+import assert from 'assert';
 
-import { Application } from '../../src/interface';
+import { testConfig } from '../root.config';
 import { AdminPermissionService } from '../../src/app/service/admin/permission';
 
-describe('test/service/permission.test.ts', () => {
-  let app: Application;
+
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
+
+describe(filename, () => {
   let currentPermission: any;
 
-  beforeAll(async () => {
-    app = await createApp<Framework>();
-  });
-
-  afterAll(async () => {
-    await close(app);
-  });
-
   it('#queryAdminPermission >should get permission list total > 0', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -31,9 +24,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#queryAdminPermission >should get permission list and sorter by id asc', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -50,9 +43,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#queryAdminPermission >should get permission list and query by id', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -67,9 +60,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#queryAdminPermission >should get permission list and query by name', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -84,9 +77,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#queryAdminPermission >should get permission list and query by slug', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -101,9 +94,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#queryAdminPermission >should get permission list and query by httpPath', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -118,9 +111,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#queryAdminPermission >should get permission list and query by httpMethod', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const queryParams = {
       pageSize: 10,
       current: 1,
@@ -135,9 +128,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#createAdminPermission >should created permission', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const params = {
       name: 'fakeName',
       slug: 'fakeSlug',
@@ -151,9 +144,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#getAdminPermissionById >should get permission by id', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const permission = await permissionService.getAdminPermissionById(
       currentPermission.id
     );
@@ -162,9 +155,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#updateAdminPermission >should update permission', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const { id } = currentPermission;
     const { affected } = await permissionService.updateAdminPermission({
       id,
@@ -177,9 +170,9 @@ describe('test/service/permission.test.ts', () => {
   });
 
   it('#removeAdminPermissionByIds >should remove permission', async () => {
-    const permissionService = await app.applicationContext.getAsync<
-      AdminPermissionService
-    >('adminPermissionService');
+    const { container } = testConfig
+
+    const permissionService = await container.getAsync(AdminPermissionService);
     const { id } = currentPermission;
     const total = await permissionService.removeAdminPermissionByIds([id]);
     assert.ok(total);

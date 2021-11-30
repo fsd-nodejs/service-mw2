@@ -1,10 +1,10 @@
-import * as assert from 'power-assert'
-import { basename } from '@waiting/shared-core'
+import { relative } from 'path';
+import assert from 'assert';
 
 import { retrieveExternalNetWorkInfo } from '../../src/app/util/common'
 
 
-const filename = basename(__filename)
+const filename = relative(process.cwd(), __filename).replace(/\\/ug, '/')
 
 describe(filename, () => {
   it('Should retrieveExternalNetWorkInfo works', async () => {
